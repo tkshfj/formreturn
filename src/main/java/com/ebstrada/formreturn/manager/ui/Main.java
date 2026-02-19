@@ -2164,8 +2164,18 @@ public class Main extends JFrame {
                 };
             }
         };
+        configureXStreamSecurity(xs);
         return xs;
 
+    }
+
+    private static void configureXStreamSecurity(XStream xs) {
+        xs.allowTypesByWildcard(new String[] {
+            "com.ebstrada.formreturn.**",
+            "com.swingsane.preferences.model.**",
+            "java.util.**",
+            "java.awt.**"
+        });
     }
 
     public void addDesktopPopupComponent(JPanel tabPanel) {

@@ -24,6 +24,9 @@ import com.ebstrada.formreturn.server.preferences.ServerPreferencesManager;
 
 public class DatabaseInstance {
 
+    private static final java.util.regex.Pattern VALID_IDENTIFIER =
+        java.util.regex.Pattern.compile("^[A-Za-z][A-Za-z0-9_]{0,127}$");
+
     private String embeddedDriver = "org.apache.derby.jdbc.EmbeddedDriver";
 
     private String databaseName = "";
@@ -31,6 +34,24 @@ public class DatabaseInstance {
     private String systemPassword = ServerPreferencesManager.getSystemPassword();
 
     private static final Logger logger = Logger.getLogger(DatabaseInstance.class);
+
+    private static void validateIdentifier(String value, String name)
+        throws DatabaseInstanceException {
+        if (value == null || !VALID_IDENTIFIER.matcher(value).matches()) {
+            throw new DatabaseInstanceException(
+                "Invalid " + name + ": must start with a letter and contain only "
+                    + "letters, digits, or underscores (max 128 chars).");
+        }
+    }
+
+    private static void validatePassword(String value) throws DatabaseInstanceException {
+        if (value == null || value.isEmpty()) {
+            throw new DatabaseInstanceException("Password must not be empty.");
+        }
+        if (value.contains("'")) {
+            throw new DatabaseInstanceException("Password must not contain single quotes.");
+        }
+    }
 
     public DatabaseInstance(String databaseName) {
         setDatabaseName(databaseName);
@@ -330,6 +351,9 @@ public class DatabaseInstance {
                 Localizer.localize("Server", "CannotChangeSystemPasswordMessage"));
         }
 
+        validateIdentifier(username.trim(), "username");
+        validatePassword(password.trim());
+
         try {
 
             conn = getConnection();
@@ -375,6 +399,8 @@ public class DatabaseInstance {
             throw new DatabaseInstanceException(
                 Localizer.localize("Server", "CannotRemoveSystemUserMessage"));
         }
+
+        validateIdentifier(username.trim(), "username");
 
         try {
 
@@ -441,7 +467,8 @@ public class DatabaseInstance {
         boolean isSuccess = false;
         Connection conn = null;
 
-        // TODO: first check for existing users.. throw error if already exists
+        validateIdentifier(username.trim(), "username");
+        validatePassword(password.trim());
 
         try {
 
@@ -656,8 +683,9 @@ public class DatabaseInstance {
         }
         rs.close();
 
+        String sanitizedPassword = systemPassword.replace("'", "''");
         s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.user.formreturn', '"
-            + systemPassword + "')");
+            + sanitizedPassword + "')");
         s.executeUpdate("CALL SYSCS_UTIL.SYSCS_SET_USER_ACCESS('formreturn','FULLACCESS')");
         s.executeUpdate(
             "CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.database.fullAccessUsers', 'formreturn')");

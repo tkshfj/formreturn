@@ -172,7 +172,7 @@ public class Main implements NoObfuscation {
     }
 
     public static XStream createXStream() {
-        return new XStream(new DomDriver("UTF-8")) {
+        XStream xs = new XStream(new DomDriver("UTF-8")) {
             @Override protected MapperWrapper wrapMapper(MapperWrapper next) {
                 return new MapperWrapper(next) {
                     @Override
@@ -185,6 +185,13 @@ public class Main implements NoObfuscation {
                 };
             }
         };
+        xs.allowTypesByWildcard(new String[] {
+            "com.ebstrada.formreturn.**",
+            "com.swingsane.preferences.model.**",
+            "java.util.**",
+            "java.awt.**"
+        });
+        return xs;
     }
 
     public void loadPreferences() throws CorruptPreferencesException {

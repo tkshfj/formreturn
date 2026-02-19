@@ -349,6 +349,15 @@ public class DocumentPackage {
                 fileName = fileName.replace('\\', '/') + "";
             }
             tempFile = new File(tempDirName, fileName);
+
+            // Zip Slip protection: ensure the resolved path is within the temp directory
+            String canonicalTempDir = new File(tempDirName).getCanonicalPath() + File.separator;
+            String canonicalTarget = tempFile.getCanonicalPath();
+            if (!canonicalTarget.startsWith(canonicalTempDir)) {
+                throw new IOException(
+                    "Zip entry is outside of the target directory: " + zipEntry.getName());
+            }
+
             File parentFile = tempFile.getParentFile();
             parentFile.mkdirs();
             tfos = new FileOutputStream(tempFile);
