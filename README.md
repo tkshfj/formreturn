@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="logo" src="https://raw.githubusercontent.com/rquast/formreturn/master/etc/media/splashscreen.svg">
+  <img alt="logo" src="https://raw.githubusercontent.com/rquast/formreturn/main/etc/media/splashscreen.svg">
 </p>
 
 # FormReturn
