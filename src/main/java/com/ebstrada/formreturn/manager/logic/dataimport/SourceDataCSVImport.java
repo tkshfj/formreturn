@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVParserBuilder;
+import com.opencsv.exceptions.CsvValidationException;
 
 import com.ebstrada.formreturn.manager.persistence.jpa.DataSet;
 import com.ebstrada.formreturn.manager.persistence.jpa.Record;
@@ -67,6 +68,8 @@ public class SourceDataCSVImport {
 
         } catch (FileNotFoundException ex) {
             throw ex;
+        } catch (CsvValidationException ex) {
+            throw new IOException("CSV validation error", ex);
         } catch (IOException ex) {
             throw ex;
         } finally {

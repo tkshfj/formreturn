@@ -11,6 +11,7 @@ import java.util.HashMap;
 import javax.persistence.EntityManager;
 
 import org.apache.log4j.Logger;
+import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
@@ -34,7 +35,7 @@ public abstract class FolderMonitorJob extends TaskSchedulerJob {
         super();
     }
 
-    public void createJob(Class<?> clazz) {
+    @Override public void createJob(Class<? extends Job> clazz) {
         super.createJob(clazz);
         job.getJobDataMap().put("sourceDirectory",
             ((FolderMonitorJobPreferences) preferences).getSourceDirectory());

@@ -24,6 +24,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.quartz.Job;
 import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
@@ -351,7 +352,7 @@ public class ExportJob extends TaskSchedulerJob {
 
     }
 
-    public void createJob(Class<?> clazz) {
+    @Override public void createJob(Class<? extends Job> clazz) {
         super.createJob(clazz);
         job.getJobDataMap()
             .put("exportOptions", ((ExportJobPreferences) preferences).getExportOptions());

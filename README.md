@@ -30,8 +30,11 @@ It also includes a **server/daemon component** (Derby + Quartz) with scanner int
 Typical work in this repository includes:
 
 - maintenance updates while keeping **Java 8 compatibility**,
+- **security hardening** (XStream deserialization, Zip Slip, SQL injection fixes),
+- **code quality** (resource leak fixes, deprecation cleanup, API migrations),
 - bug fixes and usability improvements,
 - workflow and report/export refinements,
+- **dependency management** (vendored legacy JARs, missing transitive dependency fixes),
 - build/packaging adjustments needed for our environment.
 
 We aim to keep changes targeted and upstream-friendly whenever possible.
@@ -98,9 +101,24 @@ apt install nsis
 
 ### Vendored dependencies
 
-Legacy dependencies not available on Maven Central (JAI, TWAIN, SwingSane, Batik, JSPF) are vendored in the `repository/` directory as a local file-based Maven repository. No external custom Maven repository is required — the build is fully self-contained.
+Legacy dependencies not available on Maven Central are vendored in the `repository/` directory as a local file-based Maven repository. No external custom Maven repository is required — the build is fully self-contained.
 
-After cloning, run `mvn dependency:resolve -U` to populate your local Maven cache (`~/.m2/repository`). This is needed for IDE support (e.g., VS Code Java extension).
+Vendored artifacts:
+
+| Artifact | Source |
+| --- | --- |
+| JAI Core / Codec (`javax.media`) | OSGeo |
+| JAI ImageIO Core / JPEG2000 (`net.java.dev.jai-imageio`) | JitPack |
+| IJ ImageIO (`net.sf.ij.jaiio`) | SourceForge |
+| TWAIN (`uk.co.mmscomputing`) | SourceForge |
+| SwingSane (`com.swingsane`) | JitPack |
+| Batik All (`org.apache.batik`) | Maven Central (`org.apache.xmlgraphics`) |
+| JSPF Core (`net.xeoh.jspf`) | Korpling/HU-Berlin |
+| ImageJ (`gov.nih.imagej`) | Maven Central |
+
+> **Note:** Some vendored artifacts use non-canonical groupIds in `pom.xml` (e.g., `org.apache.batik` instead of `org.apache.xmlgraphics` for batik-all, `net.xeoh.jspf` instead of `net.xeoh.plugins` for jspf-core). Do not change these without updating all references.
+
+After cloning, run `mvn dependency:resolve -U` to populate your local Maven cache (`~/.m2/repository`). This is needed for IDE support (e.g., VS Code Java extension). If Maven shows cached 403 errors, delete `*.lastUpdated` files from the relevant `~/.m2/repository` subdirectories.
 
 ---
 
@@ -122,27 +140,44 @@ Tests use **JUnit 4**, but they live in a **non-standard directory**: `test/main
 
 Key libraries and their current versions:
 
-| Library          |   Version | Purpose                     |
-| ---------------- | --------: | --------------------------- |
-| Apache OpenJPA   |     2.4.3 | JPA persistence provider    |
-| Apache Derby     | 10.14.2.0 | Embedded/networked database |
-| Apache FOP       |       2.9 | XSL-FO to PDF rendering     |
-| Apache PDFBox    |    2.0.32 | PDF handling                |
-| Apache Batik     |      1.17 | SVG rendering               |
-| Quartz Scheduler |     2.3.2 | Background job scheduling   |
-| XStream          |    1.4.20 | XML serialization           |
-| Gson             |    2.11.0 | JSON support                |
-| OpenCSV          |       5.9 | CSV import/export           |
-| reload4j         |    1.2.25 | Logging (Log4j 1.x fork)    |
-| SLF4J            |    1.7.36 | Logging facade              |
-| Commons IO       |    2.16.1 | File/IO utilities           |
-| Commons Lang3    |    3.14.0 | Language utilities          |
-| Commons Codec    |    1.17.1 | Encoding utilities          |
-| Commons Daemon   |     1.4.0 | Unix daemon support         |
-| Xerces           |    2.12.2 | XML parsing                 |
-| JUnit            |    4.13.2 | Testing                     |
+| Library | Version | Purpose |
+| --- | ---: | --- |
+| Apache OpenJPA | 2.4.3 | JPA persistence provider |
+| Apache Derby | 10.14.2.0 | Embedded/networked database |
+| Apache FOP | 2.9 | XSL-FO to PDF rendering |
+| Apache PDFBox | 2.0.32 | PDF handling |
+| Apache Batik | 1.17 | SVG rendering |
+| Avalon Framework | 4.3 / 4.2.0 | Configuration API (barcode4j/FOP) |
+| xml-apis-ext | 1.3.04 | W3C SVG DOM interfaces |
+| Quartz Scheduler | 2.3.2 | Background job scheduling |
+| XStream | 1.4.20 | XML serialization |
+| Gson | 2.11.0 | JSON support |
+| OpenCSV | 5.9 | CSV import/export |
+| JFreeSane | 0.95 | SANE scanner protocol client |
+| Barcode4j | 2.1 | Barcode generation |
+| reload4j | 1.2.25 | Logging (Log4j 1.x fork) |
+| SLF4J | 1.7.36 | Logging facade |
+| Commons IO | 2.16.1 | File/IO utilities |
+| Commons Lang3 | 3.14.0 | Language utilities |
+| Commons Codec | 1.17.1 | Encoding utilities |
+| Commons Daemon | 1.4.0 | Unix daemon support |
+| Xerces | 2.12.2 | XML parsing |
+| JUnit | 4.13.2 | Testing |
 
 **Note:** Derby 10.14.2.0 is the last Derby release compatible with Java 8. Other dependencies are kept at the latest versions that still support Java 8.
+
+---
+
+## Security and code quality improvements
+
+This fork includes targeted hardening beyond the upstream codebase:
+
+- **XStream deserialization** — restricted allowed types to prevent arbitrary object instantiation
+- **Zip Slip** — validated archive entry paths during extraction to block directory traversal
+- **SQL injection** — replaced string-concatenated queries with parameterized JPA queries
+- **Resource leaks** — ensured streams, connections, and entity managers are properly closed (try-with-resources)
+- **Deprecated API removal** — replaced Guava `Files.createTempDir()` with `java.nio.file.Files`, migrated Batik and Quartz APIs to current versions
+- **OpenCSV 5.x** — added handling for new checked exceptions (`CsvValidationException`, `CsvException`)
 
 ---
 

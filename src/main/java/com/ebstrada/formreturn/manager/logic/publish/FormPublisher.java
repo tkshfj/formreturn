@@ -14,7 +14,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.apache.batik.util.CleanerThread;
+
 import org.apache.pdfbox.io.MemoryUsageSetting;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 
@@ -142,9 +142,8 @@ public class FormPublisher {
     }
 
     private void cleanUp() {
-        // this exits the batik cleaner thread
-        // developed from patch - https://issues.apache.org/bugzilla/show_bug.cgi?id=48771
-        CleanerThread.THREAD.exit();
+        // Batik 1.17 CleanerThread is a daemon thread that cleans up automatically
+        // No explicit exit needed (old Batik THREAD.exit() API was removed)
     }
 
     public void exportPublication() throws Exception {

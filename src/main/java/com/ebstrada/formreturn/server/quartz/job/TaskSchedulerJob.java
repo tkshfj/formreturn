@@ -39,7 +39,7 @@ public abstract class TaskSchedulerJob implements Job {
 
     protected final String GUID = (new RandomGUID()).toString();
 
-    protected Class<?> clazz;
+    protected Class<? extends Job> clazz;
 
     private static final Logger logger = Logger.getLogger(TaskSchedulerJob.class);
 
@@ -68,7 +68,7 @@ public abstract class TaskSchedulerJob implements Job {
         }
     }
 
-    public void createJob(Class<?> clazz) {
+    public void createJob(Class<? extends Job> clazz) {
 
         this.clazz = clazz;
 

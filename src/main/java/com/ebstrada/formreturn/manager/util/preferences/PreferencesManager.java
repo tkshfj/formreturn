@@ -45,7 +45,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.PublicationP
 import com.ebstrada.formreturn.manager.util.preferences.persistence.SoftwareUpdatePreferences;
 import com.ebstrada.formreturn.manager.util.preferences.persistence.ScannerPreferences;
 import com.ebstrada.formreturn.manager.util.preferences.persistence.SwingSanePreferencesImpl;
-import com.google.common.io.Files;
+import java.nio.file.Files;
 import com.swingsane.preferences.ISwingSanePreferences;
 import com.thoughtworks.xstream.XStream;
 
@@ -71,7 +71,15 @@ public class PreferencesManager {
 
     private static File workingDirectory;
 
-    private static final File tmpDir = Files.createTempDir();
+    private static final File tmpDir = createTempDir();
+
+    private static File createTempDir() {
+        try {
+            return Files.createTempDirectory("formreturn").toFile();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create temp directory", e);
+        }
+    }
 
     public PreferencesManager() {
     }

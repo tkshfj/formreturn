@@ -874,7 +874,7 @@ public class PublicationSettingsDialog extends JDialog {
         });
     }
 
-    private void importAnswerKey(CSVReader reader) throws IOException {
+    private void importAnswerKey(CSVReader reader) throws IOException, com.opencsv.exceptions.CsvException {
 
         List<String[]> lines = reader.readAll();
         for (String[] line : lines) {

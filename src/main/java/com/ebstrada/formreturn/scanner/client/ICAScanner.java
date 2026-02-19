@@ -19,7 +19,7 @@ import javax.jms.Message;
 
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.util.Misc;
-import com.google.common.io.Files;
+import java.nio.file.Files;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.internal.LinkedTreeMap;
@@ -43,7 +43,15 @@ public class ICAScanner {
     private Thread acquireThread;
     private Process process;
 
-    private static File tempDirectory = Files.createTempDir();
+    private static File tempDirectory = createTempDir();
+
+    private static File createTempDir() {
+        try {
+            return Files.createTempDirectory("formreturn-ica").toFile();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create temp directory", e);
+        }
+    }
 
     public static ICAScanner getDevice() {
 

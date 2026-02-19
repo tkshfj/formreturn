@@ -1,5 +1,7 @@
 target
 .idea
+/com/
+/org/
 *.iml
 *OpenJDK*tar.gz
 *OpenJDK*zip

@@ -133,7 +133,7 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
     }
 
     private void addSchedulerListener(Scheduler scheduler) throws SchedulerException {
-        scheduler.addSchedulerListener(new TaskListSchedulerListener());
+        scheduler.getListenerManager().addSchedulerListener(new TaskListSchedulerListener());
     }
 
     private void logError(Exception ex) {

@@ -49,6 +49,7 @@ import javax.swing.table.DefaultTableModel;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVParserBuilder;
+import com.opencsv.exceptions.CsvValidationException;
 
 import com.ebstrada.formreturn.api.messaging.ProcessingStatusDialog;
 import com.ebstrada.formreturn.manager.gef.base.Globals;
@@ -574,6 +575,8 @@ public class ImportRecordsDialog extends JDialog {
                         rowNumber++;
                     }
 
+                } catch (CsvValidationException ex) {
+                    com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
                 } catch (IOException ex) {
                     com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
                 }
@@ -712,8 +715,9 @@ public class ImportRecordsDialog extends JDialog {
             dtm.setDataVector(dataVector, columnNamesVector);
             csvPreviewTable.setModel(dtm);
             csvPreviewTable.getTableHeader().setReorderingAllowed(false);
+        } catch (CsvValidationException e) {
+            com.ebstrada.formreturn.manager.util.Misc.printStackTrace(e);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             com.ebstrada.formreturn.manager.util.Misc.printStackTrace(e);
         }
 
