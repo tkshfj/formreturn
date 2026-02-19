@@ -30,8 +30,10 @@ import javax.swing.text.Document;
 
 import org.apache.openjpa.persistence.RollbackException;
 
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.CSVWriter;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVWriter;
 
 import com.ebstrada.formreturn.api.messaging.ProcessingStatusDialog;
 import com.ebstrada.formreturn.manager.gef.base.Globals;
@@ -841,9 +843,13 @@ public class PublicationSettingsDialog extends JDialog {
                 try {
                     CSVFile = selectAnswerKeyImportFile();
                     if (CSVFile != null) {
-                        reader = new CSVReader(
-                            new InputStreamReader(new FileInputStream(CSVFile), "UTF-8"),
-                            ",".charAt(0), "\"".charAt(0));
+                        reader = new CSVReaderBuilder(
+                            new InputStreamReader(new FileInputStream(CSVFile), "UTF-8"))
+                            .withCSVParser(new CSVParserBuilder()
+                                .withSeparator(",".charAt(0))
+                                .withQuoteChar("\"".charAt(0))
+                                .build())
+                            .build();
                         importAnswerKey(reader);
                         String message =
                             Localizer.localize("UICDM", "AnswerKeyFileImportedMessage");
@@ -1002,7 +1008,9 @@ public class PublicationSettingsDialog extends JDialog {
                     if (CSVFile != null) {
                         writer = new CSVWriter(
                             new OutputStreamWriter(new FileOutputStream(CSVFile), "UTF-8"),
-                            ",".charAt(0), "\"".charAt(0));
+                            ",".charAt(0), "\"".charAt(0),
+                            CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                            CSVWriter.DEFAULT_LINE_END);
                         exportAnswerKey(writer);
                         String message = Localizer.localize("UICDM", "AnswerKeyFileSavedMessage");
                         String caption = Localizer.localize("UICDM", "SuccessTitle");

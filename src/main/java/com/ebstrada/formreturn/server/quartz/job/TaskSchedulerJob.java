@@ -4,10 +4,18 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
-import org.quartz.CronTrigger;
+import org.quartz.CronExpression;
+import org.quartz.CronScheduleBuilder;
+import org.quartz.DisallowConcurrentExecution;
+import org.quartz.Job;
+import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
-import org.quartz.StatefulJob;
+import org.quartz.PersistJobDataAfterExecution;
+import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+import org.quartz.Trigger.TriggerState;
+import org.quartz.impl.triggers.CronTriggerImpl;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.util.RandomGUID;
@@ -15,15 +23,17 @@ import com.ebstrada.formreturn.server.preferences.persistence.TaskSchedulerJobPr
 import com.ebstrada.formreturn.server.quartz.ITriggerTypes;
 import com.ebstrada.formreturn.server.quartz.PauseAwareSimpleTrigger;
 
-public abstract class TaskSchedulerJob implements StatefulJob {
+@DisallowConcurrentExecution
+@PersistJobDataAfterExecution
+public abstract class TaskSchedulerJob implements Job {
 
     protected JobDetail job;
 
-    protected int state;
+    protected TriggerState state;
 
     protected PauseAwareSimpleTrigger simpleTrigger;
 
-    protected CronTrigger cronTrigger;
+    protected Trigger cronTrigger;
 
     protected TaskSchedulerJobPreferences preferences;
 
@@ -63,8 +73,10 @@ public abstract class TaskSchedulerJob implements StatefulJob {
         this.clazz = clazz;
 
         if (job == null) {
-            job = new JobDetail(GUID, GUID + "Group", clazz);
-            job.setDescription(preferences.getDescription());
+            job = JobBuilder.newJob(clazz)
+                .withIdentity(GUID, GUID + "Group")
+                .withDescription(preferences.getDescription())
+                .build();
         }
         switch (getTriggerType()) {
 
@@ -73,8 +85,8 @@ public abstract class TaskSchedulerJob implements StatefulJob {
                     simpleTrigger =
                         new PauseAwareSimpleTrigger(GUID + "Trigger", GUID + "TriggerGroup");
                     long ctime = System.currentTimeMillis();
-                    simpleTrigger.setJobName(job.getName());
-                    simpleTrigger.setJobGroup(job.getGroup());
+                    simpleTrigger.setJobName(GUID);
+                    simpleTrigger.setJobGroup(GUID + "Group");
                     simpleTrigger.setStartTime(new Date(ctime));
                     simpleTrigger.setRepeatInterval(preferences.getInterval());
                     simpleTrigger.setRepeatCount(PauseAwareSimpleTrigger.REPEAT_INDEFINITELY);
@@ -85,14 +97,13 @@ public abstract class TaskSchedulerJob implements StatefulJob {
             case ITriggerTypes.CRON_TRIGGER:
                 if (cronTrigger == null) {
                     try {
-                        cronTrigger = new CronTrigger(GUID + "Trigger", GUID + "TriggerGroup");
-                        long ctime = System.currentTimeMillis();
-                        cronTrigger.setJobName(job.getName());
-                        cronTrigger.setJobGroup(job.getGroup());
-                        cronTrigger.setStartTime(new Date(ctime));
-                        cronTrigger.setPriority(Trigger.DEFAULT_PRIORITY);
-                        cronTrigger.setCronExpression(preferences.getCronExpression());
-                    } catch (ParseException e) {
+                        cronTrigger = TriggerBuilder.newTrigger()
+                            .withIdentity(GUID + "Trigger", GUID + "TriggerGroup")
+                            .startAt(new Date(System.currentTimeMillis()))
+                            .withPriority(Trigger.DEFAULT_PRIORITY)
+                            .withSchedule(CronScheduleBuilder.cronSchedule(preferences.getCronExpression()))
+                            .build();
+                    } catch (Exception e) {
                         logger.warn(e.getLocalizedMessage(), e);
                     }
                 }
@@ -102,23 +113,22 @@ public abstract class TaskSchedulerJob implements StatefulJob {
 
     public Trigger rescheduleJob(TaskSchedulerJobPreferences jobPreferences) throws ParseException {
         this.preferences = jobPreferences;
-        job.setDescription(preferences.getDescription());
         long ctime = System.currentTimeMillis();
         switch (getTriggerType()) {
             case ITriggerTypes.CRON_TRIGGER:
-                CronTrigger ct = new CronTrigger(GUID + "Trigger", GUID + "TriggerGroup");
-                ct.setJobName(job.getName());
-                ct.setJobGroup(job.getGroup());
-                ct.setStartTime(new Date(ctime));
-                ct.setPriority(Trigger.DEFAULT_PRIORITY);
-                ct.setCronExpression(this.preferences.getCronExpression());
+                Trigger ct = TriggerBuilder.newTrigger()
+                    .withIdentity(GUID + "Trigger", GUID + "TriggerGroup")
+                    .startAt(new Date(ctime))
+                    .withPriority(Trigger.DEFAULT_PRIORITY)
+                    .withSchedule(CronScheduleBuilder.cronSchedule(this.preferences.getCronExpression()))
+                    .build();
                 return ct;
             default:
             case ITriggerTypes.SIMPLE_TRIGGER:
                 PauseAwareSimpleTrigger nt =
                     new PauseAwareSimpleTrigger(GUID + "Trigger", GUID + "TriggerGroup");
-                nt.setJobName(job.getName());
-                nt.setJobGroup(job.getGroup());
+                nt.setJobName(GUID);
+                nt.setJobGroup(GUID + "Group");
                 nt.setStartTime(new Date(ctime));
                 nt.setRepeatInterval(preferences.getInterval());
                 nt.setRepeatCount(PauseAwareSimpleTrigger.REPEAT_INDEFINITELY);
@@ -142,35 +152,39 @@ public abstract class TaskSchedulerJob implements StatefulJob {
     public void setTrigger(Trigger trigger) {
         if (trigger instanceof PauseAwareSimpleTrigger) {
             this.simpleTrigger = (PauseAwareSimpleTrigger) trigger;
-        } else if (trigger instanceof CronTrigger) {
-            this.cronTrigger = (CronTrigger) trigger;
+        } else {
+            this.cronTrigger = trigger;
         }
     }
 
-    public int getState() {
+    public TriggerState getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(TriggerState state) {
         this.state = state;
     }
 
-    public String getStateString(int state) {
+    public String getStateString(TriggerState state) {
+
+        if (state == null) {
+            return Localizer.localize("Server", "StateNotRunningText");
+        }
 
         switch (state) {
-            case Trigger.STATE_BLOCKED:
-            case Trigger.STATE_NORMAL:
+            case BLOCKED:
+            case NORMAL:
                 return Localizer.localize("Server", "StateNormalText");
 
-            case Trigger.STATE_PAUSED:
+            case PAUSED:
                 return Localizer.localize("Server", "StatePausedText");
 
-            case Trigger.STATE_ERROR:
+            case ERROR:
                 return Localizer.localize("Server", "StateErrorText");
 
-            case Trigger.STATE_COMPLETE:
+            case COMPLETE:
                 return Localizer.localize("Server", "StateCompleteText");
-            case Trigger.STATE_NONE:
+            case NONE:
                 return Localizer.localize("Server", "StateNotRunningText");
             default:
                 return Localizer.localize("Server", "StateNotRunningText");

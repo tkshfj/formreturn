@@ -24,7 +24,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
@@ -33,9 +32,8 @@ import org.apache.log4j.Logger;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.StatefulJob;
 
-import au.com.bytecode.opencsv.CSVWriter;
+import com.opencsv.CSVWriter;
 
 import com.ebstrada.formreturn.api.messaging.MessageNotification;
 import com.ebstrada.formreturn.manager.logic.export.ExportOptions;
@@ -53,7 +51,7 @@ import com.ebstrada.formreturn.server.ServerGUI;
 import com.ebstrada.formreturn.server.preferences.persistence.ExportJobPreferences;
 import com.ebstrada.formreturn.server.preferences.persistence.TaskSchedulerJobPreferences;
 
-public class ExportJob extends TaskSchedulerJob implements StatefulJob {
+public class ExportJob extends TaskSchedulerJob {
 
     private static final Logger logger = Logger.getLogger(ExportJob.class);
 
@@ -143,7 +141,9 @@ public class ExportJob extends TaskSchedulerJob implements StatefulJob {
                     writer = new CSVWriter(
                         new OutputStreamWriter(new FileOutputStream(fileStr), "UTF-8"),
                         getDelimiterCharacter(csvep.getDelimiterType()),
-                        getQuoteCharacter(csvep.getQuotesType()));
+                        getQuoteCharacter(csvep.getQuotesType()),
+                        CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                        CSVWriter.DEFAULT_LINE_END);
                     CSVExporter csve = new CSVExporter(csvep, exportOptions.getFilters(),
                         exportOptions.getPublicationIds(), entityManager);
                     csve.write(writer, quartzMessageNotification);
@@ -151,7 +151,9 @@ public class ExportJob extends TaskSchedulerJob implements StatefulJob {
                         statsWriter = new CSVWriter(new OutputStreamWriter(
                             new FileOutputStream(exportOptions.getCsvStatsFile()), "UTF-8"),
                             getDelimiterCharacter(csvep.getDelimiterType()),
-                            getQuoteCharacter(csvep.getQuotesType()));
+                            getQuoteCharacter(csvep.getQuotesType()),
+                            CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                            CSVWriter.DEFAULT_LINE_END);
                         csve.writeStats(statsWriter, quartzMessageNotification);
                     }
                 } catch (org.apache.openjpa.persistence.PersistenceException pe) {
@@ -302,10 +304,8 @@ public class ExportJob extends TaskSchedulerJob implements StatefulJob {
                     filters);
             DOMSource domSource = xmle.getDomSource(messageNotification);
 
-            FopFactory fopFactory = FopFactory.newInstance();
-            Configuration cfg = Misc.getFOPConfiguration();
-            fopFactory.setUserConfig(cfg);
-            fopFactory.setStrictValidation(false);
+            FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI(),
+                new ByteArrayInputStream(Misc.getFOPConfiguration().getBytes("UTF-8")));
 
             FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
 
@@ -408,7 +408,6 @@ public class ExportJob extends TaskSchedulerJob implements StatefulJob {
     protected void stop(JobExecutionContext jobExecutionContext, Exception ex)
         throws JobExecutionException {
         JobExecutionException jee = new JobExecutionException(ex);
-        jee.setErrorCode(JobExecutionException.ERR_UNSPECIFIED);
         jee.setUnscheduleAllTriggers(true);
         throw jee;
     }

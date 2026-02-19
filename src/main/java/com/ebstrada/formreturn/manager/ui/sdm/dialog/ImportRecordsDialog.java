@@ -46,7 +46,9 @@ import javax.swing.WindowConstants;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 
-import au.com.bytecode.opencsv.CSVReader;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.CSVParserBuilder;
 
 import com.ebstrada.formreturn.api.messaging.ProcessingStatusDialog;
 import com.ebstrada.formreturn.manager.gef.base.Globals;
@@ -527,12 +529,19 @@ public class ImportRecordsDialog extends JDialog {
                     String quotechar = QUOTES[quoteTypeComboBox.getSelectedIndex()][0];
                     if (quotechar.length() > 0) {
                         reader =
-                            new CSVReader(new UnicodeReader(new FileInputStream(CSVFile), "UTF-8"),
-                                separator.charAt(0), quotechar.charAt(0));
+                            new CSVReaderBuilder(new UnicodeReader(new FileInputStream(CSVFile), "UTF-8"))
+                                .withCSVParser(new CSVParserBuilder()
+                                    .withSeparator(separator.charAt(0))
+                                    .withQuoteChar(quotechar.charAt(0))
+                                    .build())
+                                .build();
                     } else {
                         reader =
-                            new CSVReader(new UnicodeReader(new FileInputStream(CSVFile), "UTF-8"),
-                                separator.charAt(0));
+                            new CSVReaderBuilder(new UnicodeReader(new FileInputStream(CSVFile), "UTF-8"))
+                                .withCSVParser(new CSVParserBuilder()
+                                    .withSeparator(separator.charAt(0))
+                                    .build())
+                                .build();
                     }
                 } catch (FileNotFoundException ex) {
                     com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
@@ -661,11 +670,18 @@ public class ImportRecordsDialog extends JDialog {
             String separator = SEPARATORS[delimiterTypeComboBox.getSelectedIndex()][0];
             String quotechar = QUOTES[quoteTypeComboBox.getSelectedIndex()][0];
             if (quotechar.length() > 0) {
-                reader = new CSVReader(new UnicodeReader(new FileInputStream(CSVFile), "UTF-8"),
-                    separator.charAt(0), quotechar.charAt(0));
+                reader = new CSVReaderBuilder(new UnicodeReader(new FileInputStream(CSVFile), "UTF-8"))
+                    .withCSVParser(new CSVParserBuilder()
+                        .withSeparator(separator.charAt(0))
+                        .withQuoteChar(quotechar.charAt(0))
+                        .build())
+                    .build();
             } else {
-                reader = new CSVReader(new UnicodeReader(new FileInputStream(CSVFile), "UTF-8"),
-                    separator.charAt(0));
+                reader = new CSVReaderBuilder(new UnicodeReader(new FileInputStream(CSVFile), "UTF-8"))
+                    .withCSVParser(new CSVParserBuilder()
+                        .withSeparator(separator.charAt(0))
+                        .build())
+                    .build();
             }
         } catch (FileNotFoundException e) {
             com.ebstrada.formreturn.manager.util.Misc.printStackTrace(e);

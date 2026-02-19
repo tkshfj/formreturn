@@ -41,7 +41,7 @@ import javax.swing.border.TitledBorder;
 import com.ebstrada.formreturn.manager.ui.component.*;
 
 import org.apache.log4j.Logger;
-import org.quartz.CronTrigger;
+import org.quartz.CronExpression;
 
 import com.ebstrada.formreturn.api.task.JobPlugin;
 import com.ebstrada.formreturn.manager.gef.base.Globals;
@@ -120,9 +120,8 @@ import com.ebstrada.formreturn.server.quartz.ITriggerTypes;
         if (pollTriggerRadioButton.isSelected()) {
             return true;
         }
-        CronTrigger cronTrigger = new CronTrigger();
         try {
-            cronTrigger.setCronExpression(getCronExpression());
+            new CronExpression(getCronExpression());
             return true;
         } catch (ParseException e) {
             Misc.showExceptionMsg(getRootPane().getTopLevelAncestor(), e);

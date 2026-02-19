@@ -10,10 +10,12 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import org.quartz.JobDetail;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerListener;
 import org.quartz.Trigger;
+import org.quartz.TriggerKey;
 import org.quartz.UnableToInterruptJobException;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
@@ -49,7 +51,7 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
             updateJobState();
         }
 
-        @Override public void jobUnscheduled(String triggerName, String triggerGroup) {
+        @Override public void jobUnscheduled(TriggerKey triggerKey) {
             updateJobState();
         }
 
@@ -57,11 +59,19 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
             updateJobState();
         }
 
-        @Override public void triggersPaused(String triggerName, String triggerGroup) {
+        @Override public void triggerPaused(TriggerKey triggerKey) {
             updateJobState();
         }
 
-        @Override public void triggersResumed(String triggerName, String triggerGroup) {
+        @Override public void triggersPaused(String triggerGroup) {
+            updateJobState();
+        }
+
+        @Override public void triggerResumed(TriggerKey triggerKey) {
+            updateJobState();
+        }
+
+        @Override public void triggersResumed(String triggerGroup) {
             updateJobState();
         }
 
@@ -69,15 +79,23 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
             updateJobState();
         }
 
-        @Override public void jobDeleted(String jobName, String groupName) {
+        @Override public void jobDeleted(JobKey jobKey) {
             updateJobState();
         }
 
-        @Override public void jobsPaused(String jobName, String jobGroup) {
+        @Override public void jobPaused(JobKey jobKey) {
             updateJobState();
         }
 
-        @Override public void jobsResumed(String jobName, String jobGroup) {
+        @Override public void jobsPaused(String jobGroup) {
+            updateJobState();
+        }
+
+        @Override public void jobResumed(JobKey jobKey) {
+            updateJobState();
+        }
+
+        @Override public void jobsResumed(String jobGroup) {
             updateJobState();
         }
 
@@ -91,10 +109,16 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
             updateJobState();
         }
 
+        @Override public void schedulerStarting() {
+        }
+
         @Override public void schedulerShutdown() {
         }
 
         @Override public void schedulerShuttingdown() {
+        }
+
+        @Override public void schedulingDataCleared() {
         }
 
     }
@@ -122,8 +146,9 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
         try {
             ArrayList<TaskSchedulerJob> jobList = taskScheduler.getJobList();
             for (TaskSchedulerJob job : jobList) {
-                int state = taskScheduler.getScheduler()
-                    .getTriggerState(job.getGUID() + "Trigger", job.getGUID() + "TriggerGroup");
+                Trigger.TriggerState state = taskScheduler.getScheduler()
+                    .getTriggerState(TriggerKey.triggerKey(
+                        job.getGUID() + "Trigger", job.getGUID() + "TriggerGroup"));
                 job.setState(state);
             }
             updateTaskList();

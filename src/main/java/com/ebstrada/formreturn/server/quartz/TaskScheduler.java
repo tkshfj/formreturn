@@ -1,16 +1,20 @@
 package com.ebstrada.formreturn.server.quartz;
 
-import org.quartz.JobExecutionContext;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
+import org.quartz.TriggerKey;
 import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.matchers.GroupMatcher;
+import org.quartz.JobExecutionContext;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.server.preferences.ServerPreferencesManager;
@@ -103,8 +107,11 @@ public class TaskScheduler {
     }
 
     public void stopJob(TaskSchedulerJob job) throws SchedulerException {
-        scheduler.unscheduleJob(job.getJob().getName(), job.getJob().getGroup());
-        scheduler.deleteJob(job.getJob().getName(), job.getJob().getGroup());
+        TriggerKey triggerKey = TriggerKey.triggerKey(
+            job.getJob().getKey().getName(), job.getJob().getKey().getGroup());
+        JobKey jobKey = job.getJob().getKey();
+        scheduler.unscheduleJob(triggerKey);
+        scheduler.deleteJob(jobKey);
     }
 
     public void removeJob(TaskSchedulerJob job) throws Exception {
@@ -162,10 +169,10 @@ public class TaskScheduler {
     }
 
     public void startJob(TaskSchedulerJob job) throws SchedulerException {
-        job.getTrigger().setStartTime(new Date(System.currentTimeMillis()));
-        String groupName[] = scheduler.getJobNames(job.getGUID() + "Group");
-        if (groupName != null && groupName.length > 0) {
-            scheduler.deleteJob(job.getGUID(), job.getGUID() + "Group");
+        Set<JobKey> jobKeys = scheduler.getJobKeys(
+            GroupMatcher.jobGroupEquals(job.getGUID() + "Group"));
+        if (jobKeys != null && jobKeys.size() > 0) {
+            scheduler.deleteJob(JobKey.jobKey(job.getGUID(), job.getGUID() + "Group"));
         }
         scheduler.scheduleJob(job.getJob(), job.getTrigger());
     }
@@ -178,7 +185,8 @@ public class TaskScheduler {
         throws SchedulerException, ParseException {
         TaskSchedulerJobPreferences oldprefs = job.getPreferences();
         Trigger nt = job.rescheduleJob(jobPreferences);
-        scheduler.rescheduleJob(job.getGUID() + "Trigger", job.getGUID() + "TriggerGroup", nt);
+        scheduler.rescheduleJob(
+            TriggerKey.triggerKey(job.getGUID() + "Trigger", job.getGUID() + "TriggerGroup"), nt);
         job.setTrigger(nt);
         replaceJobPreferences(oldprefs, jobPreferences);
     }

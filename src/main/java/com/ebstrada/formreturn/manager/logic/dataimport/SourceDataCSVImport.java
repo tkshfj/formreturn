@@ -10,7 +10,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import au.com.bytecode.opencsv.CSVReader;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.CSVParserBuilder;
 
 import com.ebstrada.formreturn.manager.persistence.jpa.DataSet;
 import com.ebstrada.formreturn.manager.persistence.jpa.Record;
@@ -35,9 +37,18 @@ public class SourceDataCSVImport {
             ucr = new UnicodeReader(fis, "UTF-8");
 
             if (quotechar.length() > 0) {
-                reader = new CSVReader(ucr, separator.charAt(0), quotechar.charAt(0));
+                reader = new CSVReaderBuilder(ucr)
+                    .withCSVParser(new CSVParserBuilder()
+                        .withSeparator(separator.charAt(0))
+                        .withQuoteChar(quotechar.charAt(0))
+                        .build())
+                    .build();
             } else {
-                reader = new CSVReader(ucr, separator.charAt(0));
+                reader = new CSVReaderBuilder(ucr)
+                    .withCSVParser(new CSVParserBuilder()
+                        .withSeparator(separator.charAt(0))
+                        .build())
+                    .build();
             }
 
             String[] nextLine;

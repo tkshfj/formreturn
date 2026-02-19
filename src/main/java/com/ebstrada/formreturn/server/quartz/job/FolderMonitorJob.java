@@ -67,7 +67,6 @@ public abstract class FolderMonitorJob extends TaskSchedulerJob {
     protected void stop(JobExecutionContext jobExecutionContext, Exception ex)
         throws JobExecutionException {
         JobExecutionException jee = new JobExecutionException(ex);
-        jee.setErrorCode(JobExecutionException.ERR_UNSPECIFIED);
         jee.setUnscheduleAllTriggers(true);
         throw jee;
     }

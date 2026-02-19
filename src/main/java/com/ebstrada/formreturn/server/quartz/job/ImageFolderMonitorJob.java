@@ -16,7 +16,6 @@ import org.apache.openjpa.lib.jdbc.ReportingSQLException;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.StatefulJob;
 
 import com.ebstrada.formreturn.manager.persistence.jpa.IncomingImage;
 import com.ebstrada.formreturn.manager.util.Misc;
@@ -25,7 +24,7 @@ import com.ebstrada.formreturn.server.Main;
 import com.ebstrada.formreturn.server.ServerGUI;
 import com.ebstrada.formreturn.server.preferences.persistence.TaskSchedulerJobPreferences;
 
-public class ImageFolderMonitorJob extends FolderMonitorJob implements StatefulJob {
+public class ImageFolderMonitorJob extends FolderMonitorJob {
 
     private static final Logger logger = Logger.getLogger(ImageFolderMonitorJob.class);
 

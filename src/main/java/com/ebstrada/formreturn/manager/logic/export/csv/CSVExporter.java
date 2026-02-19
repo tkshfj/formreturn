@@ -10,7 +10,7 @@ import java.util.Vector;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import au.com.bytecode.opencsv.CSVWriter;
+import com.opencsv.CSVWriter;
 
 import com.ebstrada.formreturn.api.messaging.MessageNotification;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;

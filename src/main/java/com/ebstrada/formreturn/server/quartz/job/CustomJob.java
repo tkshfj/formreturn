@@ -3,11 +3,10 @@ package com.ebstrada.formreturn.server.quartz.job;
 import org.apache.log4j.Logger;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.StatefulJob;
 
 import com.ebstrada.formreturn.server.preferences.persistence.CustomJobPreferences;
 
-public class CustomJob extends TaskSchedulerJob implements StatefulJob {
+public class CustomJob extends TaskSchedulerJob {
 
     private static final Logger logger = Logger.getLogger(CustomJob.class);
 
@@ -21,7 +20,7 @@ public class CustomJob extends TaskSchedulerJob implements StatefulJob {
     }
 
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println(jobExecutionContext.getJobDetail().getFullName());
+        System.out.println(jobExecutionContext.getJobDetail().getKey().toString());
     }
 
 }

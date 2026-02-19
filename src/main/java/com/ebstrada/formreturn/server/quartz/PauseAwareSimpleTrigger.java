@@ -2,9 +2,9 @@ package com.ebstrada.formreturn.server.quartz;
 
 import java.util.Date;
 
-import org.quartz.SimpleTrigger;
+import org.quartz.impl.triggers.SimpleTriggerImpl;
 
-public class PauseAwareSimpleTrigger extends SimpleTrigger {
+public class PauseAwareSimpleTrigger extends SimpleTriggerImpl {
 
     private static final long serialVersionUID = 1L;
 

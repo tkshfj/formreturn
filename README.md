@@ -58,3 +58,31 @@ mvn clean package
 ```
 In the "installer/target" directory, this will create a Mac "app", a windows exe installer and a Linux jar installer.
 
+---
+
+## Dependencies
+
+Key libraries and their current versions:
+
+| Library | Version | Purpose |
+|---|---|---|
+| Apache OpenJPA | 2.4.3 | JPA persistence provider |
+| Apache Derby | 10.14.2.0 | Embedded/networked database |
+| Apache FOP | 2.9 | XSL-FO to PDF rendering |
+| Apache PDFBox | 2.0.32 | PDF handling |
+| Apache Batik | 1.17 | SVG rendering |
+| Quartz Scheduler | 2.3.2 | Background job scheduling |
+| XStream | 1.4.20 | XML serialization |
+| Gson | 2.11.0 | JSON support |
+| OpenCSV | 5.9 | CSV import/export |
+| reload4j | 1.2.25 | Logging (Log4j 1.x fork) |
+| SLF4J | 1.7.36 | Logging facade |
+| Commons IO | 2.16.1 | File/IO utilities |
+| Commons Lang3 | 3.14.0 | Language utilities |
+| Commons Codec | 1.17.1 | Encoding utilities |
+| Commons Daemon | 1.4.0 | Unix daemon support |
+| Xerces | 2.12.2 | XML parsing |
+| JUnit | 4.13.2 | Testing |
+
+Note: Derby 10.14.2.0 is the last version compatible with Java 8. All other dependencies have been updated to the latest versions supporting Java 8.
+

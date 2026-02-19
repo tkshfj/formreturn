@@ -63,8 +63,6 @@ import javax.swing.colorchooser.AbstractColorChooserPanel;
 import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
 
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.DefaultConfiguration;
 import org.apache.commons.io.FileUtils;
 import org.apache.openjpa.persistence.RollbackException;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -1107,24 +1105,17 @@ public class Misc {
         return out;
     }
 
-    public static Configuration getFOPConfiguration() {
-
-        DefaultConfiguration fop = new DefaultConfiguration("fop");
-        DefaultConfiguration renderers = new DefaultConfiguration("renderers");
-        fop.addChild(renderers);
-
-        DefaultConfiguration renderer = new DefaultConfiguration("renderer");
-        renderer.addAttribute("mime", "application/pdf");
-        renderers.addChild(renderer);
-
-        DefaultConfiguration fonts = new DefaultConfiguration("fonts");
-        renderer.addChild(fonts);
-
-        DefaultConfiguration autoDetect = new DefaultConfiguration("auto-detect");
-        fonts.addChild(autoDetect);
-
-        return fop;
-
+    public static String getFOPConfiguration() {
+        return "<?xml version=\"1.0\"?>\n"
+            + "<fop version=\"1.0\">\n"
+            + "  <renderers>\n"
+            + "    <renderer mime=\"application/pdf\">\n"
+            + "      <fonts>\n"
+            + "        <auto-detect/>\n"
+            + "      </fonts>\n"
+            + "    </renderer>\n"
+            + "  </renderers>\n"
+            + "</fop>";
     }
 
     public static boolean matchRegex(String regexFilter, String str) {

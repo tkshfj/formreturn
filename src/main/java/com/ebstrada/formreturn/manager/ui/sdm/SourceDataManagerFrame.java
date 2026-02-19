@@ -16,7 +16,7 @@ import javax.persistence.Query;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import au.com.bytecode.opencsv.CSVWriter;
+import com.opencsv.CSVWriter;
 
 import com.ebstrada.formreturn.api.messaging.ProcessingStatusDialog;
 import com.ebstrada.formreturn.manager.gef.base.Globals;

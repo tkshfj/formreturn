@@ -10,13 +10,12 @@ import org.apache.log4j.Logger;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.SchedulerException;
-import org.quartz.StatefulJob;
 
 import com.ebstrada.formreturn.server.ServerGUI;
 import com.ebstrada.formreturn.server.dialog.VacuumingDialog;
 import com.ebstrada.formreturn.server.preferences.persistence.TaskSchedulerJobPreferences;
 
-public class VacuumJob extends TaskSchedulerJob implements StatefulJob {
+public class VacuumJob extends TaskSchedulerJob {
 
     private static final Logger logger = Logger.getLogger(VacuumJob.class);
 

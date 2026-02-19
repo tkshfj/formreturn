@@ -31,13 +31,12 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
-import au.com.bytecode.opencsv.CSVWriter;
+import com.opencsv.CSVWriter;
 
 import com.ebstrada.formreturn.api.messaging.MessageNotification;
 import com.ebstrada.formreturn.api.messaging.ProcessingStatusDialog;
 import com.ebstrada.formreturn.manager.ui.component.*;
 
-import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
@@ -1015,7 +1014,9 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
                     writer = new CSVWriter(
                         new OutputStreamWriter(new FileOutputStream(csvFileStr), "UTF-8"),
                         getDelimiterCharacter(csvep.getDelimiterType()),
-                        getQuoteCharacter(csvep.getQuotesType()));
+                        getQuoteCharacter(csvep.getQuotesType()),
+                        CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                        CSVWriter.DEFAULT_LINE_END);
                     CSVExporter csve =
                         new CSVExporter(csvep, exportOptions.getFilters(), publicationIds,
                             entityManager);
@@ -1024,7 +1025,9 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
                         statsWriter = new CSVWriter(new OutputStreamWriter(
                             new FileOutputStream(exportOptions.getCsvStatsFile()), "UTF-8"),
                             getDelimiterCharacter(csvep.getDelimiterType()),
-                            getQuoteCharacter(csvep.getQuotesType()));
+                            getQuoteCharacter(csvep.getQuotesType()),
+                            CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                            CSVWriter.DEFAULT_LINE_END);
                         csve.writeStats(statsWriter, processingStatusDialog);
                     }
                 } catch (org.apache.openjpa.persistence.PersistenceException pe) {
@@ -1116,10 +1119,8 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
                     filters);
             DOMSource domSource = xmle.getDomSource(messageNotification);
 
-            FopFactory fopFactory = FopFactory.newInstance();
-            Configuration cfg = Misc.getFOPConfiguration();
-            fopFactory.setUserConfig(cfg);
-            fopFactory.setStrictValidation(false);
+            FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI(),
+                new ByteArrayInputStream(Misc.getFOPConfiguration().getBytes("UTF-8")));
 
             FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
 
