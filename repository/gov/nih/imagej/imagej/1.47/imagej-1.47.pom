@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>gov.nih.imagej</groupId>
+  <artifactId>imagej</artifactId>
+  <version>1.47</version>
+  <packaging>jar</packaging>
+
+  <name>ImageJ</name>
+  <description>Image processing and analysis framework. Allows the user to
+  record/replay macros and can be extended using plug-ins.</description>
+  <url>http://imagej.nih.gov/ij/</url>
+
+  <organization>
+    <name>Research Services Branch, National Institutes of Health</name>
+    <url>http://rsbweb.nih.gov/</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>Public Domain</name>
+      <url>http://creativecommons.org/licenses/publicdomain/</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>wayne</id>
+      <name>Wayne Rasband</name>
+      <email>wayne@codon.nih.gov</email>
+    </developer>
+  </developers>
+
+  <mailingLists>
+    <mailingList>
+      <name>imagej</name>
+      <subscribe>https://list.nih.gov/archives/imagej.html</subscribe>
+      <unsubscribe>https://list.nih.gov/archives/imagej.html</unsubscribe>
+      <archive>https://list.nih.gov/archives/imagej.html</archive>
+    </mailingList>
+  </mailingLists>
+
+  <scm>
+    <connection>not available</connection>
+    <url>http://imagej.nih.gov/ij/download/src/ij147v-src.zip</url>
+  </scm>
+</project>

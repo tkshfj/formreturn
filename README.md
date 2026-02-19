@@ -96,11 +96,11 @@ Artifacts are created under `installer/target/`, typically including:
 apt install nsis
 ```
 
-### Maven repository note
+### Vendored dependencies
 
-Some dependencies are configured to be fetched from:
+Legacy dependencies not available on Maven Central (JAI, TWAIN, SwingSane, Batik, JSPF) are vendored in the `repository/` directory as a local file-based Maven repository. No external custom Maven repository is required — the build is fully self-contained.
 
-* `http://maven.formreturn.com/`
+After cloning, run `mvn dependency:resolve -U` to populate your local Maven cache (`~/.m2/repository`). This is needed for IDE support (e.g., VS Code Java extension).
 
 ---
 

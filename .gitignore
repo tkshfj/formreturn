@@ -1,5 +1,4 @@
 target
-repository
 .idea
 *.iml
 *OpenJDK*tar.gz

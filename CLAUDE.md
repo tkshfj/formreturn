@@ -68,7 +68,12 @@ The root `pom.xml` and `installer/pom.xml` are **separate Maven projects** (not 
 - **Apache FOP 2.9** — PDF generation via XSL-FO; factory created with `FopFactory.newInstance(URI, InputStream)`
 - **OpenCSV 5.9** — CSV import/export; uses `CSVReaderBuilder`/`CSVParserBuilder` pattern (package: `com.opencsv`)
 - **reload4j 1.2.25** — Logging (maintained fork of Log4j 1.x, same `org.apache.log4j` package)
-- **Custom Maven repo**: `http://maven.formreturn.com/maven2` hosts legacy deps (JAI, TWAIN, SwingSane)
+- **Vendored local repo**: Legacy deps (JAI, TWAIN, SwingSane, Batik, JSPF) not available on Maven Central are vendored in `repository/` as a file-based Maven repository. The remote `http://maven.formreturn.com/maven2` is commented out in `pom.xml` since it is behind Cloudflare and unreachable. Note: some vendored artifacts use non-canonical groupIds (e.g., `org.apache.batik:batik-all` instead of the canonical `org.apache.xmlgraphics`, `net.xeoh.jspf:jspf-core` instead of `net.xeoh.plugins`) — do not change these without updating all references
+
+### Git
+
+- Only one branch: `main` (no `master`)
+- Only one remote: `origin` (`git@github.com:tkshfj/formreturn.git`)
 
 ### i18n
 

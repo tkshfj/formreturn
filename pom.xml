@@ -117,7 +117,6 @@
 	</build>
 
 	<repositories>
-		<!--
 		<repository>
 			<id>project-repository</id>
 			<releases>
@@ -129,7 +128,7 @@
 			</snapshots>
 			<url>file://${basedir}/repository</url>
 		</repository>
-		-->
+		<!--
 		<repository>
 			<id>maven.formreturn.com</id>
 			<releases>
@@ -141,6 +140,7 @@
 			</snapshots>
 			<url>http://maven.formreturn.com/maven2</url>
 		</repository>
+		-->
 	</repositories>
 
 	<dependencies>
