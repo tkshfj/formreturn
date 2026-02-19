@@ -6,11 +6,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-import java.util.StringTokenizer;
-import java.util.Vector;
 
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
 import com.ebstrada.formreturn.manager.util.NoObfuscation;

@@ -1,8 +1,5 @@
 package com.ebstrada.formreturn.server.preferences.persistence;
 
-import java.util.Locale;
-
-import com.ebstrada.formreturn.manager.gef.font.FontLocaleUtil;
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.ebstrada.formreturn.manager.util.preferences.persistence.FolderMonitorPreferences;

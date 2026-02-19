@@ -14,12 +14,8 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
-
-import org.jdesktop.swingx.*;
 
 import com.ebstrada.formreturn.manager.gef.presentation.FigCheckbox;
-import com.ebstrada.formreturn.manager.gef.presentation.FigText;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.RestoreMarkAreaPresetStyleDialog;

@@ -17,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
-import com.ebstrada.formreturn.manager.ui.component.*;
 import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.manager.util.preferences.PreferencesManager;
 
@@ -35,8 +34,6 @@ public class AboutDialog extends JDialog implements ClipboardOwner {
         aboutDialogTabbedPane.setTitleAt(2, Localizer.localize("UI", "ThirdPartyLicensesTabTitle"));
         getRootPane().setDefaultButton(closeButton);
     }
-
-
 
     public AboutDialog(Dialog owner) {
         super(owner);

@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -115,7 +114,6 @@ public class ProcessingQueueModel {
         };
         dtm.addColumn("ID");
         dtm.addColumn(Localizer.localize("UI", "ProcessingQueueUnprocessedImageNameColumnName"));
-
 
         EntityManager entityManager = Main.getInstance().getJPAConfiguration().getEntityManager();
 
@@ -321,6 +319,5 @@ public class ProcessingQueueModel {
         }
         return false;
     }
-
 
 }

@@ -13,7 +13,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.presentation.FigBarcode;
-import com.ebstrada.formreturn.manager.gef.presentation.FigCircle;
 import com.ebstrada.formreturn.manager.gef.presentation.FigImage;
 import com.ebstrada.formreturn.manager.gef.presentation.FigText;
 import com.ebstrada.formreturn.manager.gef.presentation.Handle;

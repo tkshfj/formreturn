@@ -38,8 +38,6 @@ import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.UIManager;
-
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 
 /**

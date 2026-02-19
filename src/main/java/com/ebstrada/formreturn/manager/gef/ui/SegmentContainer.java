@@ -2,7 +2,6 @@ package com.ebstrada.formreturn.manager.gef.ui;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.ebstrada.formreturn.manager.persistence.xstream.Document;
 import com.ebstrada.formreturn.manager.util.NoObfuscation;

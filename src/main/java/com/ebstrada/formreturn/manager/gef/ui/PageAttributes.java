@@ -2,11 +2,9 @@ package com.ebstrada.formreturn.manager.gef.ui;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.io.Serializable;
 
 import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.ebstrada.formreturn.manager.util.RandomGUID;
-import com.ebstrada.formreturn.manager.util.graph.GraphUtils;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 public class PageAttributes implements NoObfuscation {

@@ -1,6 +1,5 @@
 package com.ebstrada.formreturn.manager.ui.tab;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -113,7 +112,6 @@ public class DefaultDesktopTabbedPaneComponent extends JPanel {
             g2.dispose();
         }
     }
-
 
     private final static MouseListener buttonMouseListener = new MouseAdapter() {
         public void mouseEntered(MouseEvent e) {

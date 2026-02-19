@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.swing.*;
@@ -21,7 +20,6 @@ import com.ebstrada.formreturn.manager.gef.base.Globals;
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.presentation.FigBarcode;
 import com.ebstrada.formreturn.manager.gef.presentation.FigSegment;
-import com.ebstrada.formreturn.manager.gef.presentation.FigSegmentArea;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.logic.publish.FormPublisher;
 import com.ebstrada.formreturn.manager.logic.publish.FormPublisherException;
@@ -165,7 +163,6 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
             publicationsTableFilterPanel.updatePageNumbers();
         }
     }
-
 
     public void refresh(boolean updatePageNumbers, TableFilterPanel tableFilterPanel) {
 

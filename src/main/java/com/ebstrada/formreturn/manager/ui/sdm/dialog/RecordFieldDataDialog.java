@@ -3,7 +3,6 @@ package com.ebstrada.formreturn.manager.ui.sdm.dialog;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -19,12 +18,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.Document;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
-import com.ebstrada.formreturn.manager.logic.jpa.RecordController;
 import com.ebstrada.formreturn.manager.logic.jpa.SourceTextController;
 import com.ebstrada.formreturn.manager.persistence.jpa.DataSet;
 import com.ebstrada.formreturn.manager.persistence.jpa.Record;
 import com.ebstrada.formreturn.manager.persistence.jpa.SourceField;
-import com.ebstrada.formreturn.manager.persistence.jpa.SourceImage;
 import com.ebstrada.formreturn.manager.persistence.jpa.SourceText;
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.sdm.SourceDataManagerFrame;
@@ -101,7 +98,6 @@ public class RecordFieldDataDialog extends JDialog {
         }
 
     }
-
 
     private class MarkValuesCaretListener implements CaretListener {
         public void caretUpdate(CaretEvent e) {

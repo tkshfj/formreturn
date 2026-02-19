@@ -16,7 +16,6 @@ import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.presentation.FigSegment;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.FigSegmentSetup;
-import org.jdesktop.swingx.*;
 
 public class FigSegmentPanel extends EditorPanel {
 

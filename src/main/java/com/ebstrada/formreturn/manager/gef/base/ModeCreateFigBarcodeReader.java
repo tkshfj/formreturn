@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.presentation.FigBarcodeReader;
-import com.ebstrada.formreturn.manager.ui.frame.EditorFrame;
 
 public class ModeCreateFigBarcodeReader extends ModeCreate {
 

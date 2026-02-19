@@ -4,14 +4,11 @@ import java.awt.*;
 import java.net.URL;
 import java.util.Locale;
 
-import javax.swing.*;
-
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.*;
 

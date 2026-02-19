@@ -7,7 +7,6 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -21,13 +20,10 @@ import java.awt.font.TextLayout;
 import java.io.File;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import sun.font.Font2D;
 
 import com.ebstrada.formreturn.manager.gef.font.CachedFont;
 import com.ebstrada.formreturn.manager.gef.font.CachedFontManager;
@@ -35,7 +31,6 @@ import com.ebstrada.formreturn.manager.gef.persistence.ExportAttributes;
 import com.ebstrada.formreturn.manager.gef.properties.PropCategoryManager;
 import com.ebstrada.formreturn.manager.gef.undo.Memento;
 import com.ebstrada.formreturn.manager.gef.undo.UndoManager;
-import com.ebstrada.formreturn.manager.logic.publish.PDFDocumentExporter;
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.TextPropertyDialog;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorMultiPanel;

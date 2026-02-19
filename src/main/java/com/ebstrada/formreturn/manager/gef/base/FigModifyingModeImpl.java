@@ -8,7 +8,6 @@ import java.util.Map;
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.ui.PageAttributes;
 import com.ebstrada.formreturn.manager.gef.undo.UndoManager;
-import com.ebstrada.formreturn.manager.ui.Main;
 
 /**
  * This is the default implementation for all Modes that are manipulating the
@@ -176,7 +175,6 @@ public class FigModifyingModeImpl extends ModeImpl implements FigModifyingMode {
         }
         return currentPageAttributes.getCroppedWidth();
     }
-
 
     public boolean isFigX1InPageBoundary(int x1) {
         PageAttributes currentPageAttributes = editor.getPageAttributes();

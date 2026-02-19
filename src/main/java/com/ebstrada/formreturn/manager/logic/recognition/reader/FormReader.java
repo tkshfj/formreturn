@@ -44,7 +44,6 @@ import com.ebstrada.formreturn.manager.persistence.jpa.Form;
 import com.ebstrada.formreturn.manager.persistence.jpa.FormPage;
 import com.ebstrada.formreturn.manager.persistence.jpa.FragmentBarcode;
 import com.ebstrada.formreturn.manager.persistence.jpa.FragmentOmr;
-import com.ebstrada.formreturn.manager.persistence.jpa.Log;
 import com.ebstrada.formreturn.manager.persistence.jpa.ProcessedImage;
 import com.ebstrada.formreturn.manager.persistence.jpa.Publication;
 import com.ebstrada.formreturn.manager.persistence.jpa.Record;
@@ -922,7 +921,6 @@ public class FormReader {
 
         }
 
-
     }
 
     public ArrayList<FigSegmentArea> reprocessForm() throws FormReaderException {
@@ -1164,7 +1162,6 @@ public class FormReader {
                         entityManager.persist(fragmentBarcode);
 
                     }
-
 
                 }
 
@@ -1437,7 +1434,6 @@ public class FormReader {
         return this.segmentBoundaries;
     }
 
-
     public FormRecognitionStructure getFormRecognitionStructure() {
         return this.formRecognitionStructure;
     }
@@ -1566,8 +1562,6 @@ public class FormReader {
                                 }
 
                             }
-
-
 
                         }
 

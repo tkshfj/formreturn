@@ -6,11 +6,9 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.font.GlyphVector;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,14 +19,12 @@ import org.apache.commons.logging.LogFactory;
 
 import com.ebstrada.formreturn.manager.gef.font.CachedFontManager;
 import com.ebstrada.formreturn.manager.gef.graph.presentation.JGraph;
-import com.ebstrada.formreturn.manager.gef.persistence.ExportAttributes;
 import com.ebstrada.formreturn.manager.gef.ui.DocumentAttributes;
 import com.ebstrada.formreturn.manager.gef.ui.PageAttributes;
 import com.ebstrada.formreturn.manager.gef.undo.UndoManager;
 import com.ebstrada.formreturn.manager.gef.undo.memento.CheckboxMemento;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.logic.recognition.structure.CheckBoxRecognitionStructure;
-import com.ebstrada.formreturn.manager.logic.recognition.structure.FormRecognitionStructure;
 import com.ebstrada.formreturn.manager.logic.recognition.structure.OMRMatrix;
 import com.ebstrada.formreturn.manager.logic.recognition.structure.OMRRecognitionStructure;
 import com.ebstrada.formreturn.manager.logic.recognition.structure.SegmentRecognitionStructure;
@@ -38,7 +34,6 @@ import com.ebstrada.formreturn.manager.ui.editor.panel.EditorMultiPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigCheckboxMultiPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigCheckboxPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
-import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -215,7 +210,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
                 }
 
-
             }
         }
 
@@ -366,7 +360,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
         _w = (boxWidth * columnCount) + (horizontalSpace * (columnCount - 1)) + (padding * 2);
         _h = (boxHeight * rowCount) + (verticalSpace * (rowCount - 1)) + (padding * 2);
-
 
         if ((getWidth() + _x) > croppedWidth) {
             setX(croppedWidth - getWidth());

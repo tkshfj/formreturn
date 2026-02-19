@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
@@ -341,7 +340,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     public SegmentContainer getSegmentContainer() {
         return segmentContainer;
     }
-
 
     public void newSegmentAreaGUID() {
         segmentAreaGUID = (new RandomGUID()).toString();

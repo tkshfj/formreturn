@@ -21,7 +21,6 @@ import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.ColorChooser;
 import com.ebstrada.formreturn.manager.util.Swatch;
-import org.jdesktop.swingx.*;
 
 public class FigTextMultiPanel extends EditorMultiPanel {
 
@@ -262,7 +261,6 @@ public class FigTextMultiPanel extends EditorMultiPanel {
             backgroundColorButton.setIcon(errorIcon);
         }
 
-
         if (!foregroundDiffers) {
             foregroundColorButton.setText(Localizer.localize("UI", "TextAreasTextColorButtonText"));
             foregroundColorButton.setToolTipText(null);
@@ -402,7 +400,6 @@ public class FigTextMultiPanel extends EditorMultiPanel {
         fontSizeComboBox.setSelectedItem(Float.valueOf(getFontSize()));
         updateUI();
     }
-
 
     private float getFontSize() throws Exception {
         if (selectedElements == null || selectedElements.size() <= 0) {

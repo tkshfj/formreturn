@@ -13,7 +13,6 @@ import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.ColorChooser;
 import com.ebstrada.formreturn.manager.util.Swatch;
-import org.jdesktop.swingx.*;
 
 public class FigRectPanel extends EditorPanel {
 

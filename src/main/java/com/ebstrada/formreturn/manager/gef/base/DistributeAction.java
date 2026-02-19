@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.undo.UndoableAction;
-import com.ebstrada.formreturn.manager.gef.util.Localizer;
 
 /**
  * A Cmd to align 2 or more objects relative to each other.

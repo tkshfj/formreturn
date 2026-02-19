@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.cdm.CapturedDataManagerFrame;
-import org.jdesktop.swingx.*;
 
 public class FormPagesPropertiesPanel extends CDMPanel {
 

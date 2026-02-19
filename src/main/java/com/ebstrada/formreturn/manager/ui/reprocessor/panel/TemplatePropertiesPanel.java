@@ -8,8 +8,6 @@ import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.reprocessor.frame.ReprocessorFrame;
 
-import org.jdesktop.swingx.*;
-
 public class TemplatePropertiesPanel extends ReprocessorPanel {
 
     private static final long serialVersionUID = 1L;

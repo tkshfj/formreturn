@@ -18,14 +18,12 @@ import org.krysalis.barcode4j.BarcodeDimension;
 import org.krysalis.barcode4j.BarcodeGenerator;
 import org.krysalis.barcode4j.output.java2d.Java2DCanvasProvider;
 
-import com.ebstrada.formreturn.manager.gef.base.Layer;
 import com.ebstrada.formreturn.manager.gef.graph.MutableGraphSupport;
 import com.ebstrada.formreturn.manager.gef.ui.PageAttributes;
 import com.ebstrada.formreturn.manager.gef.undo.Memento;
 import com.ebstrada.formreturn.manager.gef.undo.UndoManager;
 import com.ebstrada.formreturn.manager.gef.undo.memento.FigAddMemento;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
-import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigBarcodePanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
 import com.ebstrada.formreturn.manager.util.BarcodeCreator;
@@ -88,7 +86,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         this.revalidate = true;
         resetBarcode();
     }
-
 
     public boolean isAllowFormIDBarcode() {
         return allowFormIDBarcode;
@@ -161,7 +158,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
             UndoManager.getInstance().startChain();
             UndoManager.getInstance().addMemento(memento);
 
-
         }
 
         setBarcodeType(newBarcodeType);
@@ -219,7 +215,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
             throw (e);
         }
     }
-
 
     private void renderInvalidBarcode() throws IOException {
 	/*

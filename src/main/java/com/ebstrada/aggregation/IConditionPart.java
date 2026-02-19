@@ -1,6 +1,5 @@
 package com.ebstrada.aggregation;
 
-import com.ebstrada.aggregation.Selection;
 import com.ebstrada.aggregation.exception.InvalidRulePartException;
 
 public interface IConditionPart {

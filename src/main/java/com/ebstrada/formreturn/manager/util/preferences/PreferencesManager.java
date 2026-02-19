@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -224,7 +223,6 @@ public class PreferencesManager {
 
     }
 
-
     public static String[] getDatabaseList() {
 
         ArrayList<String> databaseList = new ArrayList<String>();
@@ -421,7 +419,6 @@ public class PreferencesManager {
                     .createObjectInputStream(new InputStreamReader(fis, "UTF-8"));
             }
             formReturnPreferences = ((FormReturnPreferences) s.readObject());
-
 
             if (s != null) {
                 s.close();

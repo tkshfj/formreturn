@@ -18,8 +18,6 @@ import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.reprocessor.dialog.SegmentStencilEditorDialog;
 import com.ebstrada.formreturn.manager.ui.reprocessor.frame.ReprocessorFrame;
 
-import org.jdesktop.swingx.*;
-
 public class FigSegmentAreaPanel extends ReprocessorPanel {
 
     private static final long serialVersionUID = 1L;
@@ -62,8 +60,6 @@ public class FigSegmentAreaPanel extends ReprocessorPanel {
             }
         });
     }
-
-
 
     private void restoreSegmentStencilComboBox() {
 
@@ -117,7 +113,6 @@ public class FigSegmentAreaPanel extends ReprocessorPanel {
 
     }
 
-
     public void setSegmentArea(Long segmentId) {
         if ((selectedElement == null) || !(selectedElement instanceof FigSegmentArea)) {
             return;
@@ -132,7 +127,6 @@ public class FigSegmentAreaPanel extends ReprocessorPanel {
         fsa.setFragmentPadding(reprocessorFrame.getFragmentPadding());
         fsa.damage();
     }
-
 
     private boolean isCurrentStencilIndex(long segmentId) {
         if ((selectedElement == null) || !(selectedElement instanceof FigSegmentArea)) {
@@ -227,7 +221,6 @@ public class FigSegmentAreaPanel extends ReprocessorPanel {
         contentPane.add(panel1);
         // //GEN-END:initComponents
     }
-
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY
     // //GEN-BEGIN:variables

@@ -8,7 +8,6 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.Reader;
-import com.google.zxing.multi.GenericMultipleBarcodeReader;
 import com.google.zxing.oned.Code128Reader;
 import com.google.zxing.oned.Code39Reader;
 import com.google.zxing.oned.EAN13Reader;

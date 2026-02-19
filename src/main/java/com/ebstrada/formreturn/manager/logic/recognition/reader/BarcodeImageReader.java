@@ -1,13 +1,11 @@
 package com.ebstrada.formreturn.manager.logic.recognition.reader;
 
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Vector;
 
 import com.ebstrada.formreturn.manager.logic.recognition.structure.BarcodeRecognitionStructure;
-import com.ebstrada.formreturn.manager.util.image.ImageUtil;
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.GlobalHistogramBinarizer;

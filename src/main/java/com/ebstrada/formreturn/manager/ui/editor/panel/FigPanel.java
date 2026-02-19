@@ -20,8 +20,6 @@ import com.ebstrada.formreturn.manager.gef.base.Globals;
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.ui.PageAttributes;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
-import com.ebstrada.formreturn.manager.ui.Main;
-import org.jdesktop.swingx.*;
 
 public class FigPanel extends EditorPanel {
 

@@ -1,16 +1,12 @@
 package com.ebstrada.formreturn.manager.gef.util;
 
 import java.awt.Toolkit;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 import javax.swing.KeyStroke;

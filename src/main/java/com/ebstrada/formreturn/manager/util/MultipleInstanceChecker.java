@@ -8,8 +8,6 @@ import java.io.StringWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import com.ebstrada.formreturn.manager.ui.Main;
-
 /**
  * Helper class to avoid running more than one concurrent instance of a Java
  * program.
@@ -45,7 +43,6 @@ public class MultipleInstanceChecker {
     private ServerSocket serverSocket;
     private Window window;
     private boolean shutdown;
-
 
     public static class TerminalServerReqistryCheck {
 
@@ -91,7 +88,6 @@ public class MultipleInstanceChecker {
         }
 
     }
-
 
     /**
      * Create a MultipleInstanceChecker.

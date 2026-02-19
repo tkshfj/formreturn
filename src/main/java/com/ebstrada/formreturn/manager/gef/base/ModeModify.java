@@ -7,16 +7,13 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
 import java.util.List;
 
 import com.ebstrada.formreturn.manager.gef.graph.GraphModel;
 import com.ebstrada.formreturn.manager.gef.graph.MutableGraphSupport;
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.presentation.Handle;
-import com.ebstrada.formreturn.manager.gef.ui.PageAttributes;
 import com.ebstrada.formreturn.manager.gef.undo.UndoManager;
-import com.ebstrada.formreturn.manager.ui.Main;
 
 /**
  * A Mode to process events from the Editor when the user is modifying a Fig.

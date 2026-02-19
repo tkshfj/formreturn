@@ -17,7 +17,6 @@ import javax.print.attribute.standard.Media;
 import javax.print.attribute.standard.MediaSizeName;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.*;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.persistence.jpa.IncomingImage;
@@ -179,7 +178,6 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
         }
 
         ScannerPreferences scannerPreferences = PreferencesManager.getScannerPreferences();
-
 
         for (String size : pageSizes) {
             pageSizeComboBox.addItem(size);
@@ -984,7 +982,6 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
         }
 
     }
-
 
     private void updateMemoryImageSize(Info info) {
 

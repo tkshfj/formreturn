@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.ebstrada.formreturn.manager.logic.export.filter.Filter;
 import com.ebstrada.formreturn.manager.logic.export.image.ImageExportPreferences;
-import com.ebstrada.formreturn.manager.logic.export.stats.StatisticMap;
 import com.ebstrada.formreturn.manager.logic.export.xml.XMLExportPreferences;
 import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPreferences;

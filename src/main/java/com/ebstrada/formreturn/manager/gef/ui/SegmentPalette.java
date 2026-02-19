@@ -1,17 +1,11 @@
 package com.ebstrada.formreturn.manager.gef.ui;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.JToggleButton;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.plaf.basic.BasicButtonUI;
-import javax.swing.plaf.basic.BasicToggleButtonUI;
 
-import com.ebstrada.formreturn.manager.gef.base.ModeCreateFigBarcode;
 import com.ebstrada.formreturn.manager.gef.base.ModeCreateFigBarcodeForSegment;
 import com.ebstrada.formreturn.manager.gef.base.ModeCreateFigBarcodeReader;
 import com.ebstrada.formreturn.manager.gef.base.ModeCreateFigCheckbox;

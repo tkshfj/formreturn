@@ -7,9 +7,7 @@ import javax.swing.JToggleButton;
 import com.ebstrada.formreturn.manager.gef.base.ModeCreateFigSegmentArea;
 import com.ebstrada.formreturn.manager.gef.base.ModeSelect;
 import com.ebstrada.formreturn.manager.gef.base.SetModeAction;
-import com.ebstrada.formreturn.manager.gef.presentation.FigSegmentArea;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
-import com.ebstrada.formreturn.manager.ui.reprocessor.frame.ReprocessorFrame;
 
 public class ReprocessPalette extends Palette {
 

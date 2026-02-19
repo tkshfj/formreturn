@@ -17,8 +17,6 @@ import com.ebstrada.formreturn.manager.ui.sdm.persistence.JDBCProfile;
 import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.ebstrada.formreturn.manager.util.graph.SizeAttributes;
 import com.ebstrada.formreturn.manager.util.graph.SizePresets;
-import com.swingsane.preferences.ISwingSanePreferences;
-import com.swingsane.preferences.SwingSanePreferencesImpl;
 import com.swingsane.preferences.model.ApplicationPreferences;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -402,7 +400,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                     presetFormSizeAttributePair[((SizeAttributes.LANDSCAPE - 1))].getHeight());
                 landscapeSizeAttributes.setName(
                     presetFormSizeAttributePair[((SizeAttributes.LANDSCAPE - 1))].getName());
-
 
                 cloneSizeAttributes[(SizeAttributes.PORTRAIT - 1)] = portraitSizeAttributes;
                 cloneSizeAttributes[(SizeAttributes.LANDSCAPE - 1)] = landscapeSizeAttributes;

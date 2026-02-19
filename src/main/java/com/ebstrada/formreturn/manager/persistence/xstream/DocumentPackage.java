@@ -7,7 +7,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,7 +14,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -28,7 +26,6 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 import com.ebstrada.formreturn.manager.gef.base.Globals;
-import com.ebstrada.formreturn.manager.gef.base.Layer;
 import com.ebstrada.formreturn.manager.gef.graph.presentation.JGraph;
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.presentation.FigImage;
@@ -39,8 +36,6 @@ import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.util.RandomGUID;
 import com.ebstrada.formreturn.manager.util.preferences.PreferencesManager;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 
 public class DocumentPackage {
 
@@ -442,6 +437,5 @@ public class DocumentPackage {
     public String getGUID() {
         return GUID;
     }
-
 
 }

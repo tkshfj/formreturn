@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
-import javax.swing.border.EmptyBorder;
 
 import com.ebstrada.formreturn.manager.gef.base.ModeCreateFigBarcode;
 import com.ebstrada.formreturn.manager.gef.base.ModeCreateFigCircle;

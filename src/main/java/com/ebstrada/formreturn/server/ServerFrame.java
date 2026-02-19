@@ -4,29 +4,22 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Vector;
 
-import javax.persistence.EntityManager;
 import javax.swing.*;
 import javax.swing.border.*;
 
 import org.apache.log4j.Logger;
 import org.quartz.SchedulerException;
 
-import com.ebstrada.formreturn.server.Main;
 import com.ebstrada.formreturn.manager.ui.component.*;
 import com.ebstrada.formreturn.manager.ui.dialog.AboutDialog;
-import com.ebstrada.formreturn.server.ServerGUI;
 import com.ebstrada.formreturn.manager.gef.font.FontLocalesImpl;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.persistence.JPAConfiguration;
-import com.ebstrada.formreturn.manager.persistence.jpa.IncomingImage;
 import com.ebstrada.formreturn.manager.util.AvailableLanguages;
 import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.manager.util.OSXAdapter;
 import com.ebstrada.formreturn.manager.util.TemplateFormPageID;
-import com.ebstrada.formreturn.manager.util.image.ImageUtil;
 import com.ebstrada.formreturn.manager.util.preferences.persistence.FormProcessorPreferences;
 import com.ebstrada.formreturn.server.component.*;
 import com.ebstrada.formreturn.server.derby.DatabaseServer;

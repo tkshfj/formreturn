@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.persistence.EntityManager;
@@ -206,7 +205,6 @@ public class FormPageDataModel extends AbstractDataModel {
             Number countResult = (Number) query.getSingleResult();
             setSize(countResult.intValue());
 
-
             String sql =
                 "SELECT FORM.PUBLICATION_ID, FORM_PAGE.FORM_PAGE_ID, FORM_PAGE.FORM_ID, FORM_PAGE.FORM_PAGE_NUMBER, FORM_PAGE.AGGREGATE_MARK, FORM_PAGE.ERROR_COUNT, FORM_PAGE.PROCESSED_TIME FROM FORM_PAGE LEFT JOIN FORM ON FORM_PAGE.FORM_ID = FORM.FORM_ID WHERE FORM.RECORD_ID IS NOT NULL";
 
@@ -236,7 +234,6 @@ public class FormPageDataModel extends AbstractDataModel {
                 double aggregateMark = obj[4] == null ? 0 : (Double) obj[4];
                 long errorCount = obj[5] == null ? 0 : (Long) obj[5];
                 Timestamp processedTimeStamp = (Timestamp) obj[6];
-
 
                 String processedTime = Localizer.localize("UICDM", "NotYetProcessedMessage");
                 long processedTimestamp = 0;
@@ -490,6 +487,5 @@ public class FormPageDataModel extends AbstractDataModel {
         }
 
     }
-
 
 }

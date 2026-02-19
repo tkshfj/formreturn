@@ -24,13 +24,11 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Reader;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
-import com.google.zxing.ResultMetadataType;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.common.BitArray;
 
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -178,7 +176,6 @@ private void whiteOutIgnoreAreas(int rowNumber, BitArray row, Vector<Rectangle2D
       int maxLines = height; // Look at the whole image, not just the center
       int rowNumber = 0;
       for (rowNumber = (Integer) hints.get(DecodeHintType.SKIP_TO_ROW); rowNumber < maxLines; rowNumber += 2) {
-
 
 	  // Estimate black point for this row and load it:
 	  try {

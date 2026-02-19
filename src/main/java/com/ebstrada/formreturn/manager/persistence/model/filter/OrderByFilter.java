@@ -1,8 +1,6 @@
 package com.ebstrada.formreturn.manager.persistence.model.filter;
 
 import com.ebstrada.formreturn.manager.persistence.model.AbstractDataModel;
-import com.ebstrada.formreturn.manager.util.Misc;
-
 
 public class OrderByFilter {
 

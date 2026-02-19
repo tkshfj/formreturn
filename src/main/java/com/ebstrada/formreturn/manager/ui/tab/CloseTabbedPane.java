@@ -10,10 +10,8 @@ import java.util.EventListener;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.TabbedPaneUI;
@@ -61,7 +59,6 @@ public class CloseTabbedPane extends JTabbedPane {
         return paneUI.isCloseEnabled();
     }
 
-
     /**
      * Override JTabbedPane method. Does nothing.
      */
@@ -88,7 +85,6 @@ public class CloseTabbedPane extends JTabbedPane {
     public void setCloseIcon(boolean b) {
         paneUI.setCloseIcon(b);
     }
-
 
     /**
      * Detaches the <code>index</code> tab in a seperate frame. When the frame

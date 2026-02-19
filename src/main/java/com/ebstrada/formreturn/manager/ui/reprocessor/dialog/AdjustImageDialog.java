@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.beans.*;
 
 import javax.swing.*;
 import javax.swing.border.*;

@@ -15,7 +15,6 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import com.ebstrada.formreturn.server.ServerGUI;
 import com.ebstrada.formreturn.server.preferences.persistence.FolderMonitorJobPreferences;
 import com.ebstrada.formreturn.server.preferences.persistence.TaskSchedulerJobPreferences;
 
@@ -78,7 +77,6 @@ public abstract class FolderMonitorJob extends TaskSchedulerJob {
         jee.setUnscheduleAllTriggers(true);
         throw jee;
     }
-
 
     // check if the file is still being updated, do not process if it is
     protected boolean isFileComplete(File imageFile, HashMap<String, Long> recentFileTimes) {

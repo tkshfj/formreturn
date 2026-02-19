@@ -3,7 +3,6 @@ package com.ebstrada.formreturn.manager.logic.publish;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import java.util.HashMap;
 
 import com.ebstrada.formreturn.manager.gef.graph.presentation.JGraph;
 import com.ebstrada.formreturn.manager.gef.ui.PageAttributes;
@@ -32,7 +31,6 @@ public class Graphics2DDocumentExporter {
         if (formRenderer == null) {
 
             formRenderer = new FormRenderer();
-
 
             formRenderer.setWorkingDirName(graph.getDocumentPackage().getWorkingDirName());
             formRenderer.setPageAttributes(currentPageAttributes);

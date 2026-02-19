@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.ebstrada.formreturn.api.messaging.MessageNotification;
-import com.ebstrada.formreturn.api.messaging.ProcessingStatusDialog;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.persistence.jpa.Publication;
 import com.ebstrada.formreturn.manager.ui.Main;

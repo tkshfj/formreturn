@@ -1,11 +1,8 @@
 package com.ebstrada.formreturn.server.dialog;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dialog;
-import java.awt.Dimension;
-import java.awt.FileDialog;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
 import javax.swing.*;
@@ -46,7 +42,6 @@ import org.quartz.CronExpression;
 import com.ebstrada.formreturn.api.task.JobPlugin;
 import com.ebstrada.formreturn.manager.gef.base.Globals;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
-import com.ebstrada.formreturn.manager.ui.filefilter.FilenameExtensionFilter;
 import com.ebstrada.formreturn.manager.ui.filefilter.ExtensionFileFilter;
 import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.server.quartz.ITriggerTypes;

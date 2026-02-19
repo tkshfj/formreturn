@@ -1,11 +1,8 @@
 package com.ebstrada.formreturn.manager.ui.editor.panel;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 import org.jdesktop.swingx.JXTaskPane;
-
-import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 
 public abstract class EditorMultiPanel extends JXTaskPane {
 

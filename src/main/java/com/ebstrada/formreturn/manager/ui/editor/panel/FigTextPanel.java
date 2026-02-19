@@ -26,7 +26,6 @@ import com.ebstrada.formreturn.manager.ui.editor.dialog.ColorChooser;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.EmbeddedNoticeDialog;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.TextPropertyDialog;
 import com.ebstrada.formreturn.manager.util.Swatch;
-import org.jdesktop.swingx.*;
 
 public class FigTextPanel extends EditorPanel {
 

@@ -7,7 +7,6 @@ import java.awt.Stroke;
 
 import com.ebstrada.formreturn.manager.gef.properties.PropCategoryManager;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigRRectPanel;
-import com.ebstrada.formreturn.manager.ui.editor.panel.FigRectPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
 import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;

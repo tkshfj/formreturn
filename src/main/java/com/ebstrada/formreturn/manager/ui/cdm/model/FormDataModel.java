@@ -1,7 +1,6 @@
 package com.ebstrada.formreturn.manager.ui.cdm.model;
 
 import java.util.List;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.persistence.EntityManager;

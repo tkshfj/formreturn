@@ -9,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
-import com.ebstrada.formreturn.manager.persistence.jpa.DataSet;
 import com.ebstrada.formreturn.manager.persistence.jpa.Record;
 import com.ebstrada.formreturn.manager.persistence.jpa.SourceField;
 import com.ebstrada.formreturn.manager.persistence.jpa.SourceText;
@@ -17,7 +16,6 @@ import com.ebstrada.formreturn.manager.persistence.model.AbstractDataModel;
 import com.ebstrada.formreturn.manager.persistence.model.filter.OrderByFilter;
 import com.ebstrada.formreturn.manager.persistence.model.filter.SearchFilter;
 import com.ebstrada.formreturn.manager.ui.Main;
-import com.ebstrada.formreturn.manager.util.Misc;
 
 public class RecordDataModel extends AbstractDataModel {
 

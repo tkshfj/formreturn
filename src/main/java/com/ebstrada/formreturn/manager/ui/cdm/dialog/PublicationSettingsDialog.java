@@ -8,14 +8,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
 import javax.persistence.EntityManager;
@@ -27,8 +25,6 @@ import javax.swing.event.CaretListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.text.Document;
-
-import org.apache.openjpa.persistence.RollbackException;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -53,7 +49,6 @@ import com.ebstrada.formreturn.manager.persistence.jpa.FragmentBarcode;
 import com.ebstrada.formreturn.manager.persistence.jpa.FragmentOmr;
 import com.ebstrada.formreturn.manager.persistence.jpa.Grading;
 import com.ebstrada.formreturn.manager.persistence.jpa.GradingRule;
-import com.ebstrada.formreturn.manager.persistence.jpa.IncomingImage;
 import com.ebstrada.formreturn.manager.persistence.jpa.Publication;
 import com.ebstrada.formreturn.manager.persistence.jpa.PublicationXSL;
 import com.ebstrada.formreturn.manager.persistence.jpa.Segment;
@@ -70,10 +65,8 @@ import com.ebstrada.formreturn.manager.ui.filefilter.FilenameExtensionFilter;
 import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.manager.util.RandomGUID;
 import com.ebstrada.formreturn.manager.util.TemplateFormPageID;
-import com.ebstrada.formreturn.manager.util.image.ImageUtil;
 import com.ebstrada.formreturn.manager.util.preferences.PreferencesManager;
 import com.ebstrada.formreturn.manager.util.preferences.persistence.PublicationPreferences;
-
 
 public class PublicationSettingsDialog extends JDialog {
 
@@ -185,7 +178,6 @@ public class PublicationSettingsDialog extends JDialog {
 
     }
 
-
     private class MarkValuesCaretListener implements CaretListener {
         public void caretUpdate(CaretEvent e) {
             JTextField source = (JTextField) e.getSource();
@@ -213,7 +205,6 @@ public class PublicationSettingsDialog extends JDialog {
     }
 
     public TableModel getFormStructureModel() throws Exception {
-
 
         DefaultTableModel dtm = new DefaultTableModel() {
 
@@ -432,7 +423,6 @@ public class PublicationSettingsDialog extends JDialog {
         }
 
     }
-
 
     private void saveXSLTemplateProperties() {
         EntityManager entityManager = Main.getInstance().getJPAConfiguration().getEntityManager();
@@ -1322,7 +1312,6 @@ public class PublicationSettingsDialog extends JDialog {
             // throws exception
             publication.setTemplateFile(Misc.getBytesFromFile(templateFile));
 
-
             // DELETE TEMPLATE FILE
             templateFile.delete();
 
@@ -2103,7 +2092,6 @@ public class PublicationSettingsDialog extends JDialog {
     private void saveXSLReportChangesButtonActionPerformed(ActionEvent e) {
         saveXSLTemplateProperties();
     }
-
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents

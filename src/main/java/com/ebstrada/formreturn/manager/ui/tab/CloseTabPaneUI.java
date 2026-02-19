@@ -24,15 +24,11 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
-import java.awt.Label;
 import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.Shape;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ContainerEvent;
@@ -43,18 +39,15 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -78,7 +71,6 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import javax.swing.text.View;
 
 import com.ebstrada.formreturn.manager.ui.Main;
-
 
 /**
  * UI for <code>CloseAndMaxTabbedPane</code>.
@@ -568,8 +560,6 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         int cropx = 0;
         int cropy = 0;
 
-
-
         if (g instanceof Graphics2D) {
             g2 = (Graphics2D) g;
 
@@ -825,9 +815,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     private static class LeftAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -837,9 +825,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     private static class UpAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -849,9 +835,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     private static class DownAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -861,9 +845,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     private static class NextAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -873,9 +855,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     private static class PreviousAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -885,9 +865,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     private static class PageUpAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -902,9 +880,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     private static class PageDownAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -919,9 +895,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     private static class RequestFocusAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -930,9 +904,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     private static class RequestFocusForVisibleAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -942,9 +914,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     /**
      * Selects a tab in the JTabbedPane based on the String of the action
@@ -973,9 +943,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     ;
-
 
     private static class ScrollTabsForwardAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
@@ -995,7 +963,6 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     private static class ScrollTabsBackwardAction extends AbstractAction {
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = null;
@@ -1013,7 +980,6 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
 
         }
     }
-
 
     /**
      * This inner class is marked &quot;public&quot; due to a compiler bug. This
@@ -1211,7 +1177,6 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     private class ScrollableTabSupport implements ChangeListener {
         public ScrollableTabViewport viewport;
 
@@ -1317,14 +1282,12 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
 
     }
 
-
     private class ScrollableTabViewport extends JViewport implements UIResource {
         public ScrollableTabViewport() {
             super();
             setScrollMode(SIMPLE_SCROLL_MODE);
         }
     }
-
 
     private class ScrollableTabPanel extends JPanel implements UIResource {
         public ScrollableTabPanel() {
@@ -1360,7 +1323,6 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-
     protected class ScrollableTabButton extends BasicArrowButton
         implements UIResource, SwingConstants {
         public ScrollableTabButton(int direction) {
@@ -1376,7 +1338,6 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
 
     }
-
 
     /**
      * This inner class is marked &quot;public&quot; due to a compiler bug. This
@@ -1397,7 +1358,6 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
             }
         }
     }
-
 
     /**
      * This inner class is marked &quot;public&quot; due to a compiler bug. This
@@ -1567,7 +1527,6 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
 
     }
-
 
     class MyMouseMotionListener implements MouseMotionListener {
 

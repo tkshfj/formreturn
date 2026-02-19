@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.sdm.SourceDataManagerFrame;
-import org.jdesktop.swingx.*;
 
 public class TablePropertiesPanel extends SDMPanel {
 
@@ -152,7 +151,5 @@ public class TablePropertiesPanel extends SDMPanel {
     private JButton editTableButton;
     private JButton deleteTableButton;
     // JFormDesigner - End of variables declaration //GEN-END:variables
-
-
 
 }

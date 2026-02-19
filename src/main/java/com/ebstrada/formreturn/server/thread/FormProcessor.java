@@ -18,7 +18,6 @@ import com.ebstrada.formreturn.manager.logic.recognition.structure.FormRecogniti
 import com.ebstrada.formreturn.manager.persistence.jpa.Form;
 import com.ebstrada.formreturn.manager.persistence.jpa.FormPage;
 import com.ebstrada.formreturn.manager.persistence.jpa.IncomingImage;
-import com.ebstrada.formreturn.manager.persistence.jpa.Log;
 import com.ebstrada.formreturn.manager.util.image.ImageUtil;
 import com.ebstrada.formreturn.manager.util.preferences.PreferencesManager;
 import com.ebstrada.formreturn.manager.util.preferences.persistence.PublicationPreferences;
@@ -385,8 +384,6 @@ public class FormProcessor extends Thread {
             currentFilename = "";
             currentPage = 0;
             updateStatus();
-
-
 
             try {
                 Thread.sleep(sleepTime);

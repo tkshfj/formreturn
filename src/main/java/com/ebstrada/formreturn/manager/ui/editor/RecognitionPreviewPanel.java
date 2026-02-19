@@ -19,13 +19,10 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.util.concurrent.ExecutionException;
 
@@ -33,8 +30,6 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import org.apache.commons.io.FileUtils;
 
 import au.com.southsky.jfreesane.SanePasswordProvider;
 
@@ -149,7 +144,6 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
         scanImageButton.setVisible(true);
 
     }
-
 
     public void applySettingsButtonActionPerformed(final Double deskewThreshold,
         final int luminanceCutOff, final int markThreshold, final int fragmentPadding,
@@ -719,7 +713,6 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
 
     }
 
-
     private void browseTestImageButtonActionPerformed(ActionEvent e) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -1053,7 +1046,6 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
         }
         ProcessBuilder processBuilder;
         String endsWith = "lib" + System.getProperty("file.separator") + "formreturn.jar";
-
 
         ScannerClientDialog scd = null;
 
@@ -1665,7 +1657,6 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
     public boolean isFinishedLoading() {
         return finishedLoading;
     }
-
 
     public void setFinishedLoading(boolean finishedLoading) {
         this.finishedLoading = finishedLoading;

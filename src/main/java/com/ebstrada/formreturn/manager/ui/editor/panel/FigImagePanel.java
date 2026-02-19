@@ -19,7 +19,6 @@ import com.ebstrada.formreturn.manager.gef.ui.PageAttributes;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.FigImageProperties;
-import org.jdesktop.swingx.*;
 
 public class FigImagePanel extends EditorPanel {
 
@@ -182,7 +181,6 @@ public class FigImagePanel extends EditorPanel {
         contentPane.add(panel1);
         // //GEN-END:initComponents
     }
-
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY
     // //GEN-BEGIN:variables

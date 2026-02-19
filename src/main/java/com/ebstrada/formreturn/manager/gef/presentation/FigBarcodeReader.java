@@ -13,21 +13,17 @@ import org.apache.commons.logging.LogFactory;
 
 import com.ebstrada.formreturn.manager.gef.font.CachedFontManager;
 import com.ebstrada.formreturn.manager.gef.graph.presentation.JGraph;
-import com.ebstrada.formreturn.manager.gef.persistence.ExportAttributes;
 import com.ebstrada.formreturn.manager.gef.ui.DocumentAttributes;
-import com.ebstrada.formreturn.manager.gef.ui.PageAttributes;
 import com.ebstrada.formreturn.manager.gef.undo.UndoManager;
 import com.ebstrada.formreturn.manager.gef.undo.memento.BarcodeReaderMemento;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.logic.recognition.reader.BarcodeReaderTypes;
 import com.ebstrada.formreturn.manager.logic.recognition.structure.BarcodeRecognitionStructure;
-import com.ebstrada.formreturn.manager.logic.recognition.structure.FormRecognitionStructure;
 import com.ebstrada.formreturn.manager.logic.recognition.structure.SegmentRecognitionStructure;
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.FigBarcodeReaderProperties;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigBarcodeReaderPanel;
-import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -128,7 +124,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                     }
 
                 }
-
 
             }
         }

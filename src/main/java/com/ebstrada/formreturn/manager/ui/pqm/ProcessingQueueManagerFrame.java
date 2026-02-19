@@ -12,10 +12,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.openjpa.persistence.RollbackException;
 
 import com.ebstrada.formreturn.api.messaging.ProcessingStatusDialog;
-import com.ebstrada.formreturn.manager.gef.base.Globals;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.persistence.JPAConfiguration;
 import com.ebstrada.formreturn.manager.persistence.jpa.IncomingImage;
@@ -26,7 +24,6 @@ import com.ebstrada.formreturn.manager.ui.component.TableFilterPanel;
 import com.ebstrada.formreturn.manager.ui.component.ZoomSettings;
 import com.ebstrada.formreturn.manager.ui.dialog.ImagePreviewFrame;
 import com.ebstrada.formreturn.manager.ui.dialog.LoadingDialog;
-import com.ebstrada.formreturn.manager.ui.filefilter.FilenameExtensionFilter;
 import com.ebstrada.formreturn.manager.ui.panel.PropertiesPanelController;
 import com.ebstrada.formreturn.manager.ui.pqm.panel.UnidentifiedImagesPropertiesPanel;
 import com.ebstrada.formreturn.manager.ui.pqm.panel.UnprocessedImagesPropertiesPanel;
@@ -132,7 +129,6 @@ public class ProcessingQueueManagerFrame extends JPanel implements GenericDataVi
             }
         }
     }
-
 
     public PropertiesPanelController getPropertiesPanelController() {
         return Main.getInstance().getPropertiesPanelController();
@@ -595,7 +591,6 @@ public class ProcessingQueueManagerFrame extends JPanel implements GenericDataVi
                     getClass().getResource("/com/ebstrada/formreturn/manager/ui/icons/one.png")),
                 unprocessedImagesPanel);
 
-
             //======== unidentifiedImagesPanel ========
             {
                 unidentifiedImagesPanel.setOpaque(false);
@@ -689,7 +684,6 @@ public class ProcessingQueueManagerFrame extends JPanel implements GenericDataVi
     private TableFilterPanel unidentifiedFilterPanel;
     private JPanel imagePreviewContainer;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-
 
     public void refresh() {
         refresh(true);

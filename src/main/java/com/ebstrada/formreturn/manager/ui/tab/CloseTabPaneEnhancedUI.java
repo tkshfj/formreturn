@@ -1,6 +1,5 @@
 package com.ebstrada.formreturn.manager.ui.tab;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -9,7 +8,6 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.Stroke;
 
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
@@ -17,7 +15,6 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.text.View;
 
 import com.ebstrada.formreturn.manager.ui.Main;
-
 
 /**
  * This UI displays a different interface, which is independent from the look
@@ -104,7 +101,6 @@ public class CloseTabPaneEnhancedUI extends CloseTabPaneUI {
                 delta += BUTTONSIZE + WIDTHDELTA;
                 delta2 += BUTTONSIZE;
             }
-
 
             if (tabPane.isEnabledAt(tabIndex)) {
                 leftGradient = new GradientPaint(x, y, selectedColor, x, y + h / 2, lightBlue);

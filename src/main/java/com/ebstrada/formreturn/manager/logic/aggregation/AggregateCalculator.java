@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 
 import com.ebstrada.aggregation.exception.ErrorFlagException;
 import com.ebstrada.aggregation.exception.InvalidRulePartException;
-import com.ebstrada.aggregation.exception.NoMatchException;
 import com.ebstrada.formreturn.api.messaging.MessageNotification;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.logic.recognition.reader.FormReaderException;

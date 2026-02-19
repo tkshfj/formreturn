@@ -8,23 +8,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import javax.jms.Message;
-
-import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.util.Misc;
 import java.nio.file.Files;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.internal.LinkedTreeMap;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 
 public class ICAScanner {
 

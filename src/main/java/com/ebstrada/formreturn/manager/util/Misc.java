@@ -3,8 +3,6 @@ package com.ebstrada.formreturn.manager.util;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FileDialog;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.BufferedInputStream;
@@ -51,7 +49,6 @@ import javax.print.PrintServiceLookup;
 import javax.print.attribute.standard.Media;
 import javax.print.attribute.standard.MediaSizeName;
 import javax.swing.JColorChooser;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -64,7 +61,6 @@ import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.openjpa.persistence.RollbackException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.printing.PDFPageable;
 
@@ -97,7 +93,6 @@ import com.ebstrada.formreturn.manager.persistence.jpa.SourceText;
 import com.ebstrada.formreturn.manager.persistence.xstream.Document;
 import com.ebstrada.formreturn.manager.persistence.xstream.Page;
 import com.ebstrada.formreturn.manager.ui.Main;
-import com.ebstrada.formreturn.manager.ui.cdm.dialog.PublicationSettingsDialog;
 import com.ebstrada.formreturn.manager.ui.dialog.MessageDialog;
 import com.ebstrada.formreturn.manager.ui.editor.persistence.MarkingRule;
 import com.ebstrada.formreturn.manager.ui.filefilter.FilenameExtensionFilter;
@@ -366,7 +361,6 @@ public class Misc {
 
     }
 
-
     public static void showExceptionMsg(final Component parent, final Exception ex) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -621,7 +615,6 @@ public class Misc {
         }
         return null;
     }
-
 
     public static String getMD5Sum(String input) {
         try {

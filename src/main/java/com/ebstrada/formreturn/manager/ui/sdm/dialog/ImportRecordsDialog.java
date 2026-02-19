@@ -8,12 +8,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.Driver;
@@ -58,7 +55,6 @@ import com.ebstrada.formreturn.manager.logic.jpa.RecordController;
 import com.ebstrada.formreturn.manager.persistence.jpa.DataSet;
 import com.ebstrada.formreturn.manager.persistence.jpa.QueryProfile;
 import com.ebstrada.formreturn.manager.ui.Main;
-import com.ebstrada.formreturn.manager.ui.component.*;
 import com.ebstrada.formreturn.manager.ui.filefilter.FilenameExtensionFilter;
 import com.ebstrada.formreturn.manager.ui.sdm.SourceDataManagerFrame;
 import com.ebstrada.formreturn.manager.ui.sdm.persistence.JDBCProfile;
@@ -219,8 +215,6 @@ public class ImportRecordsDialog extends JDialog {
             && passwordPasswordField.getPassword().length > 0) {
             properties.put("password", new String(passwordPasswordField.getPassword()));
         }
-
-
 
         final File jdbcDriverFile = new File(jdbcDriverPathTextField.getText().trim());
         if (!(jdbcDriverFile.exists())) {
@@ -399,7 +393,6 @@ public class ImportRecordsDialog extends JDialog {
         sqlQueryTextArea.setText(currentJDBCProfile.getSqlQuery());
         databaseNameTextField.setText(currentJDBCProfile.getDatabaseName());
     }
-
 
     private void setJDBCProfileData() {
         currentJDBCProfile = new JDBCProfile();

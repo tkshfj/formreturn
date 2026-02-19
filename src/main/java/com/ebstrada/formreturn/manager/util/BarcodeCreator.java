@@ -3,8 +3,6 @@ package com.ebstrada.formreturn.manager.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.DefaultConfiguration;
 import org.krysalis.barcode4j.BarcodeGenerator;
 import org.krysalis.barcode4j.ChecksumMode;
 import org.krysalis.barcode4j.HumanReadablePlacement;
@@ -14,7 +12,6 @@ import org.krysalis.barcode4j.impl.code128.EAN128Bean;
 import org.krysalis.barcode4j.impl.code39.Code39Bean;
 import org.krysalis.barcode4j.impl.datamatrix.DataMatrixBean;
 import org.krysalis.barcode4j.impl.fourstate.RoyalMailCBCBean;
-import org.krysalis.barcode4j.impl.fourstate.USPSIntelligentMail;
 import org.krysalis.barcode4j.impl.fourstate.USPSIntelligentMailBean;
 import org.krysalis.barcode4j.impl.int2of5.Interleaved2Of5Bean;
 import org.krysalis.barcode4j.impl.pdf417.PDF417Bean;

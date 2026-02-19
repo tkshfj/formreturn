@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.sdm.SourceDataManagerFrame;
-import org.jdesktop.swingx.*;
 
 public class RecordPropertiesPanel extends SDMPanel {
 

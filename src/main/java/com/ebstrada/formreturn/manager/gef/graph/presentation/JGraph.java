@@ -1,7 +1,6 @@
 package com.ebstrada.formreturn.manager.gef.graph.presentation;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -29,9 +28,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.KeyStroke;
 import javax.swing.ToolTipManager;
@@ -41,14 +38,12 @@ import com.ebstrada.formreturn.manager.gef.base.Editor;
 import com.ebstrada.formreturn.manager.gef.base.Globals;
 import com.ebstrada.formreturn.manager.gef.base.Layer;
 import com.ebstrada.formreturn.manager.gef.base.LayerDiagram;
-import com.ebstrada.formreturn.manager.gef.base.LayerGrid;
 import com.ebstrada.formreturn.manager.gef.base.NudgeAction;
 import com.ebstrada.formreturn.manager.gef.base.SelectNearAction;
 import com.ebstrada.formreturn.manager.gef.base.SelectNextAction;
 import com.ebstrada.formreturn.manager.gef.base.ZoomAction;
 import com.ebstrada.formreturn.manager.gef.event.GraphSelectionListener;
 import com.ebstrada.formreturn.manager.gef.event.ModeChangeListener;
-import com.ebstrada.formreturn.manager.gef.font.CachedFontManager;
 import com.ebstrada.formreturn.manager.gef.graph.GraphModel;
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.presentation.FigBarcode;
@@ -59,7 +54,6 @@ import com.ebstrada.formreturn.manager.logic.recognition.structure.FormRecogniti
 import com.ebstrada.formreturn.manager.persistence.xstream.Document;
 import com.ebstrada.formreturn.manager.persistence.xstream.DocumentPackage;
 import com.ebstrada.formreturn.manager.persistence.xstream.Page;
-import com.ebstrada.formreturn.manager.ui.Main;
 
 public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
 
@@ -255,7 +249,6 @@ public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
         bindKey(new SelectNearAction(SelectNearAction.DOWN), KeyEvent.VK_DOWN, meta);
 
         bindKey(new DeleteFromModelAction("Delete"), KeyEvent.VK_DELETE, 0);
-
 
     }
 
@@ -694,7 +687,6 @@ public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
 
 }
 
-
 class JGraphInternalPane extends JPanel {
 
     private Editor _editor;
@@ -754,7 +746,6 @@ class JGraphInternalPane extends JPanel {
         super.processMouseEvent(e);
     }
 
-
     /**
      * Tell Swing/AWT that JGraph handles tab-order itself.
      */
@@ -772,7 +763,6 @@ class JGraphInternalPane extends JPanel {
     static final long serialVersionUID = -5067026168452437942L;
 
 }
-
 
 class WheelKeyListenerToggleAction implements KeyListener {
 

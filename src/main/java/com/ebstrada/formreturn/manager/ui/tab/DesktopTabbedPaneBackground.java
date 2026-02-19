@@ -13,8 +13,6 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 import javax.swing.JComponent;
 
@@ -71,7 +69,6 @@ public class DesktopTabbedPaneBackground {
     private GVTBuilder builder;
 
     private boolean debug = false;
-
 
     @SuppressWarnings("serial") private class ScalingRectangle extends Rectangle2D.Double {
 

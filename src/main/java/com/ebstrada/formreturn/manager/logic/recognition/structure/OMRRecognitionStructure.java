@@ -2,7 +2,6 @@ package com.ebstrada.formreturn.manager.logic.recognition.structure;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.persistence.EntityManager;

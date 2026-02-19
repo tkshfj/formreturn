@@ -12,7 +12,6 @@ import javax.swing.*;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
-import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.manager.util.image.BlobExtractor;
 import com.ebstrada.formreturn.manager.util.image.BubbleDetection;
 
@@ -158,7 +157,6 @@ public class BlobExtractionDebugPanel extends JPanel {
         }
 
     }
-
 
     public void renderImagePreview(Graphics2D g) {
 

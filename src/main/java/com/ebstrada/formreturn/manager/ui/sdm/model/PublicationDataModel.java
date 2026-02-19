@@ -14,7 +14,6 @@ import com.ebstrada.formreturn.manager.persistence.model.AbstractDataModel;
 import com.ebstrada.formreturn.manager.persistence.model.filter.OrderByFilter;
 import com.ebstrada.formreturn.manager.persistence.model.filter.SearchFilter;
 import com.ebstrada.formreturn.manager.ui.Main;
-import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.manager.util.preferences.persistence.PublicationPreferences;
 
 public class PublicationDataModel extends AbstractDataModel {

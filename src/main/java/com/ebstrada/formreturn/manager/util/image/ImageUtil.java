@@ -22,7 +22,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
 
@@ -38,21 +37,12 @@ import com.sun.media.jai.codec.ImageDecoder;
 import com.sun.media.jai.codec.SeekableStream;
 import com.sun.media.jai.codec.TIFFDirectory;
 
-
 import com.sun.media.jai.codecimpl.TIFFImage;
 import com.sun.media.jai.codecimpl.TIFFImageDecoder;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.pdfbox.cos.COSBase;
-import org.apache.pdfbox.cos.COSDictionary;
-import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageTree;
-import org.apache.pdfbox.pdmodel.PDResources;
-import org.apache.pdfbox.pdmodel.graphics.PDXObject;
-import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
 import com.ebstrada.blobextractor.ComponentLabeler;
@@ -349,7 +339,6 @@ public class ImageUtil {
             return newImg;
         }
 
-
         WritableRaster raster = newImg.getRaster();
 
         int imageWidth = image.getWidth();
@@ -612,7 +601,6 @@ public class ImageUtil {
                     if (o instanceof TIFFDirectory) {
 
                         TIFFDirectory dir = (TIFFDirectory) o;
-
 
 			/*
 			 * This code is a test of the despeckle filter in imagej

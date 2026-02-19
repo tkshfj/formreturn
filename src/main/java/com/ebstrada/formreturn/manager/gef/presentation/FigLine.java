@@ -6,9 +6,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Stroke;
 
-import com.ebstrada.formreturn.manager.gef.base.Layer;
 import com.ebstrada.formreturn.manager.gef.graph.MutableGraphSupport;
-import com.ebstrada.formreturn.manager.gef.undo.Memento;
 import com.ebstrada.formreturn.manager.gef.undo.UndoManager;
 import com.ebstrada.formreturn.manager.gef.undo.memento.FigAddMemento;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigLinePanel;

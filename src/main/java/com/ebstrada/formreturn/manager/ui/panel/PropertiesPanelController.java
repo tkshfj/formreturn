@@ -2,7 +2,6 @@ package com.ebstrada.formreturn.manager.ui.panel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 import java.util.Vector;
@@ -11,9 +10,7 @@ import org.jdesktop.swingx.JXTaskPaneContainer;
 
 import com.ebstrada.formreturn.manager.gef.graph.presentation.JGraph;
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
-import com.ebstrada.formreturn.manager.gef.presentation.FigSegmentArea;
 import com.ebstrada.formreturn.manager.gef.presentation.FigText;
-import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.cdm.panel.CDMPanel;
 import com.ebstrada.formreturn.manager.ui.editor.frame.FormFrame;
 import com.ebstrada.formreturn.manager.ui.editor.frame.SegmentFrame;
@@ -27,7 +24,6 @@ import com.ebstrada.formreturn.manager.ui.editor.panel.SegmentPropertiesPanel;
 import com.ebstrada.formreturn.manager.ui.pqm.panel.PQMPanel;
 import com.ebstrada.formreturn.manager.ui.reprocessor.panel.ReprocessorPanel;
 import com.ebstrada.formreturn.manager.ui.sdm.panel.SDMPanel;
-import com.ebstrada.formreturn.manager.ui.sdm.panel.TablePropertiesPanel;
 
 public class PropertiesPanelController {
 

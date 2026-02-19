@@ -15,13 +15,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
-import java.io.Writer;
 import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -68,7 +65,6 @@ import org.apache.derby.jdbc.ClientDataSource;
 import org.apache.log4j.Appender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.tools.ant.util.FileUtils;
 
 import com.ebstrada.formreturn.manager.gef.base.Editor;
@@ -149,13 +145,11 @@ public class Main extends JFrame {
         }
     }
 
-
     private final class DesktopPaneKeyAdapter extends java.awt.event.KeyAdapter {
         public void keyTyped(java.awt.event.KeyEvent e) {
             desktopPaneKeyTyped(e);
         }
     }
-
 
     public static final int RELEASE = 0;
 

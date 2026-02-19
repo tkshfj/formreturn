@@ -2,17 +2,13 @@ package com.ebstrada.formreturn.scanner.client;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Set;
-import java.util.Vector;
 
 import javax.persistence.EntityManager;
 import javax.print.PrintService;
@@ -21,7 +17,6 @@ import javax.print.attribute.standard.Media;
 import javax.print.attribute.standard.MediaSizeName;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.*;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.persistence.jpa.IncomingImage;

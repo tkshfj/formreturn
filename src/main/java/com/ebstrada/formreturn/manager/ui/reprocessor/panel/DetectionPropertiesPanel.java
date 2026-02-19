@@ -8,8 +8,6 @@ import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.reprocessor.frame.ReprocessorFrame;
 
-import org.jdesktop.swingx.*;
-
 public class DetectionPropertiesPanel extends ReprocessorPanel {
 
     private static final long serialVersionUID = 1L;
@@ -21,7 +19,6 @@ public class DetectionPropertiesPanel extends ReprocessorPanel {
         initComponents();
         this.reprocessorFrame = reprocessorFrame;
     }
-
 
     @Override public void removeListeners() {
         // TODO Auto-generated method stub

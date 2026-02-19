@@ -1,8 +1,6 @@
 package com.ebstrada.formreturn.manager.gef.base;
 
-import java.awt.Toolkit;
 import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Vector;
@@ -13,7 +11,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
-import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
@@ -144,7 +141,6 @@ public class ModePopup extends FigModifyingModeImpl {
                 // TODO: put group popup logic here!!!
 
             }
-
 
         }
         return false;

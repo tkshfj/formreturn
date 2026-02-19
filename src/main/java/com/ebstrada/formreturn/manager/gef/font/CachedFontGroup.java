@@ -2,7 +2,6 @@ package com.ebstrada.formreturn.manager.gef.font;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 
 import com.ebstrada.formreturn.manager.util.NoObfuscation;

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.ebstrada.formreturn.manager.logic.recognition.structure.BarcodeRecognitionStructure;
 import com.ebstrada.formreturn.manager.logic.recognition.structure.FragmentRecognitionStructure;
 
 public class RecognitionStructureMap

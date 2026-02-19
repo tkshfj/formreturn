@@ -4,18 +4,15 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
-import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.PersistJobDataAfterExecution;
-import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.Trigger.TriggerState;
-import org.quartz.impl.triggers.CronTriggerImpl;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.util.RandomGUID;
