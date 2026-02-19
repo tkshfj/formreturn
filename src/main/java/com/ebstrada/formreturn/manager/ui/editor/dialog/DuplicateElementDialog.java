@@ -359,7 +359,7 @@ public class DuplicateElementDialog extends JDialog {
     // JFormDesigner - End of variables declaration //GEN-END:variables
 
     public void setFieldnameCounter(int fieldnameCounterStart) {
-        fieldnameCounterSpinner.setValue(new Integer(fieldnameCounterStart));
+        fieldnameCounterSpinner.setValue(Integer.valueOf(fieldnameCounterStart));
     }
 
     public void setFieldnamePrefix(String fieldnamePrefix) {

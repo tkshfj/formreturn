@@ -170,7 +170,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
 
         try {
             if (getFontSize() % 1 == 0.0f) {
-                fontSizeComboBox.setSelectedItem(new Float(getFontSize()));
+                fontSizeComboBox.setSelectedItem(Float.valueOf(getFontSize()));
             } else {
                 fontSizeComboBox.setSelectedItem(getFontSize() + "");
             }
@@ -399,7 +399,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
     }
 
     private void revertFontSize() throws Exception {
-        fontSizeComboBox.setSelectedItem(new Float(getFontSize()));
+        fontSizeComboBox.setSelectedItem(Float.valueOf(getFontSize()));
         updateUI();
     }
 

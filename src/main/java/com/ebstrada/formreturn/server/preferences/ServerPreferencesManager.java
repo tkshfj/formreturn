@@ -76,7 +76,8 @@ public class ServerPreferencesManager {
             throw new IllegalArgumentException(Localizer.localize("Server", "NullFileMessage"));
         }
 
-        Writer output = new BufferedWriter(new FileWriter(systemPasswordFile));
+        Writer output = new BufferedWriter(new java.io.OutputStreamWriter(
+            new java.io.FileOutputStream(systemPasswordFile), "UTF-8"));
         try {
             output.write(systemPassword);
         } finally {
@@ -95,7 +96,8 @@ public class ServerPreferencesManager {
         }
 
         try {
-            BufferedReader input = new BufferedReader(new FileReader(systemPasswordFile));
+            BufferedReader input = new BufferedReader(new java.io.InputStreamReader(
+                new java.io.FileInputStream(systemPasswordFile), "UTF-8"));
             try {
                 contents.append(input.readLine());
             } finally {

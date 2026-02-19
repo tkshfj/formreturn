@@ -66,10 +66,10 @@ public class RecognitionSettingsPanel extends JXTaskPane {
         fragmentPadding = 1;
         performDeskew = true;
 
-        deskewThresholdSpinner.setValue(new Double(deskewThreshold));
-        luminanceThresholdSpinner.setValue(new Integer(luminanceCutOff));
-        markThresholdSpinner.setValue(new Integer(markThreshold));
-        fragmentPaddingSpinner.setValue(new Integer(fragmentPadding));
+        deskewThresholdSpinner.setValue(Double.valueOf(deskewThreshold));
+        luminanceThresholdSpinner.setValue(Integer.valueOf(luminanceCutOff));
+        markThresholdSpinner.setValue(Integer.valueOf(markThreshold));
+        fragmentPaddingSpinner.setValue(Integer.valueOf(fragmentPadding));
         performDeskewCheckBox.setSelected(performDeskew);
     }
 

@@ -484,7 +484,7 @@ public class PublicationSettingsDialog extends JDialog {
                             publicationXSL.setOrderIndex(i);
                             entityManager.persist(publicationXSL);
                             modifiedPublicationXSLIDs
-                                .add(new Long(publicationXSL.getPublicationXSLId()));
+                                .add(Long.valueOf(publicationXSL.getPublicationXSLId()));
                             foundTemplate = true;
                         }
                     }
@@ -502,7 +502,7 @@ public class PublicationSettingsDialog extends JDialog {
                         entityManager.persist(publicationXSL);
                         entityManager.flush();
                         modifiedPublicationXSLIDs
-                            .add(new Long(publicationXSL.getPublicationXSLId()));
+                            .add(Long.valueOf(publicationXSL.getPublicationXSLId()));
                     }
 
                 }
@@ -648,10 +648,10 @@ public class PublicationSettingsDialog extends JDialog {
             publication = entityManager.find(Publication.class, publicationId);
             if (publication != null) {
                 luminanceThresholdSpinner
-                    .setValue(new Integer(publication.getLuminanceThreshold()));
-                markThresholdSpinner.setValue(new Integer(publication.getMarkThreshold()));
-                fragmentPaddingSpinner.setValue(new Integer(publication.getFragmentPadding()));
-                deskewThresholdSpinner.setValue(new Double(publication.getDeskewThreshold()));
+                    .setValue(Integer.valueOf(publication.getLuminanceThreshold()));
+                markThresholdSpinner.setValue(Integer.valueOf(publication.getMarkThreshold()));
+                fragmentPaddingSpinner.setValue(Integer.valueOf(publication.getFragmentPadding()));
+                deskewThresholdSpinner.setValue(Double.valueOf(publication.getDeskewThreshold()));
                 performDeskewCheckBox
                     .setSelected(publication.getPerformDeskew() == 1 ? true : false);
                 scannedInOrderCheckBox

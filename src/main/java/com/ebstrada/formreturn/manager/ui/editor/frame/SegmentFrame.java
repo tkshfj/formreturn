@@ -277,8 +277,8 @@ public class SegmentFrame extends EditorFrame {
 
     public void restorePageAttributes() {
 
-        int pageWidth = (new Double(getPageAttributes().getDimension().getWidth())).intValue();
-        int pageHeight = (new Double(getPageAttributes().getDimension().getHeight())).intValue();
+        int pageWidth = (int)(getPageAttributes().getDimension().getWidth());
+        int pageHeight = (int)(getPageAttributes().getDimension().getHeight());
         int leftMargin = getPageAttributes().getLeftMargin();
         int rightMargin = getPageAttributes().getRightMargin();
         int topMargin = getPageAttributes().getTopMargin();
@@ -382,7 +382,6 @@ public class SegmentFrame extends EditorFrame {
         removeAllFigs();
         Globals.curEditor(null);
         Globals.mode(null);
-        System.gc();
 
         return true;
 

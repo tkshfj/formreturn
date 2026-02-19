@@ -197,7 +197,7 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
             com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
         }
 
-        if (Locale.getDefault().getCountry() == "US" || Locale.getDefault().getCountry() == "CA") {
+        if ("US".equals(Locale.getDefault().getCountry()) || "CA".equals(Locale.getDefault().getCountry())) {
             return false;
         }
 

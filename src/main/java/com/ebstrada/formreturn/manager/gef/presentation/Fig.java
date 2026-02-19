@@ -563,7 +563,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
     }
 
     final public void firePropChange(String propName, int oldV, int newV) {
-        firePropChange(propName, new Integer(oldV), new Integer(newV));
+        firePropChange(propName, Integer.valueOf(oldV), Integer.valueOf(newV));
     }
 
     /**
@@ -579,7 +579,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
     }
 
     final public void firePropChange(String propName, boolean oldV, boolean newV) {
-        firePropChange(propName, new Boolean(oldV), new Boolean(newV));
+        firePropChange(propName, Boolean.valueOf(oldV), Boolean.valueOf(newV));
     }
 
     /**

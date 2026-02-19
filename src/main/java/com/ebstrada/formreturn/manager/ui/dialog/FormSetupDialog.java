@@ -92,8 +92,8 @@ public class FormSetupDialog extends javax.swing.JDialog {
     public void restorePageAttributes() {
 
         Dimension d = pageAttributes.getDimension();
-        int attrPageWidth = (new Double(d.getWidth())).intValue();
-        int attrPageHeight = (new Double(d.getHeight())).intValue();
+        int attrPageWidth = (int)(d.getWidth());
+        int attrPageHeight = (int)(d.getHeight());
 
         if (pageAttributes.getPageSize() != null) {
             pageSize.setSelectedItem(pageAttributes.getPageSize());
@@ -151,27 +151,27 @@ public class FormSetupDialog extends javax.swing.JDialog {
         if (getSelectedUnit() == Measurement.PIXELS) {
 
             pageWidth.setValue(
-                new Double(Math.round(measurement.convert((Double) pageWidth.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) pageWidth.getValue()))));
             pageHeight.setValue(
-                new Double(Math.round(measurement.convert((Double) pageHeight.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) pageHeight.getValue()))));
             leftMargin.setValue(
-                new Double(Math.round(measurement.convert((Double) leftMargin.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) leftMargin.getValue()))));
             rightMargin.setValue(
-                new Double(Math.round(measurement.convert((Double) rightMargin.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) rightMargin.getValue()))));
             topMargin.setValue(
-                new Double(Math.round(measurement.convert((Double) topMargin.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) topMargin.getValue()))));
             bottomMargin.setValue(
-                new Double(Math.round(measurement.convert((Double) bottomMargin.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) bottomMargin.getValue()))));
 
         } else {
 
-            pageWidth.setValue(new Double(measurement.convert((Double) pageWidth.getValue())));
-            pageHeight.setValue(new Double(measurement.convert((Double) pageHeight.getValue())));
-            leftMargin.setValue(new Double(measurement.convert((Double) leftMargin.getValue())));
-            rightMargin.setValue(new Double(measurement.convert((Double) rightMargin.getValue())));
-            topMargin.setValue(new Double(measurement.convert((Double) topMargin.getValue())));
+            pageWidth.setValue(Double.valueOf(measurement.convert((Double) pageWidth.getValue())));
+            pageHeight.setValue(Double.valueOf(measurement.convert((Double) pageHeight.getValue())));
+            leftMargin.setValue(Double.valueOf(measurement.convert((Double) leftMargin.getValue())));
+            rightMargin.setValue(Double.valueOf(measurement.convert((Double) rightMargin.getValue())));
+            topMargin.setValue(Double.valueOf(measurement.convert((Double) topMargin.getValue())));
             bottomMargin
-                .setValue(new Double(measurement.convert((Double) bottomMargin.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) bottomMargin.getValue())));
 
         }
 
@@ -659,7 +659,7 @@ public class FormSetupDialog extends javax.swing.JDialog {
     }
 
     public void setPageWidth(int width) {
-        setPageWidth(new Double(width));
+        setPageWidth(Double.valueOf(width));
     }
 
     public void setPageWidth(Double width) {
@@ -677,7 +677,7 @@ public class FormSetupDialog extends javax.swing.JDialog {
     }
 
     public void setPageHeight(int height) {
-        setPageHeight(new Double(height));
+        setPageHeight(Double.valueOf(height));
     }
 
     public void setPageHeight(Double height) {
@@ -695,7 +695,7 @@ public class FormSetupDialog extends javax.swing.JDialog {
     }
 
     public void setLeftMargin(int width) {
-        setLeftMargin(new Double(width));
+        setLeftMargin(Double.valueOf(width));
     }
 
     public void setLeftMargin(Double width) {
@@ -713,7 +713,7 @@ public class FormSetupDialog extends javax.swing.JDialog {
     }
 
     public void setRightMargin(int width) {
-        setRightMargin(new Double(width));
+        setRightMargin(Double.valueOf(width));
     }
 
     public void setRightMargin(Double width) {
@@ -731,7 +731,7 @@ public class FormSetupDialog extends javax.swing.JDialog {
     }
 
     public void setTopMargin(int height) {
-        setTopMargin(new Double(height));
+        setTopMargin(Double.valueOf(height));
     }
 
     public void setTopMargin(Double height) {
@@ -749,7 +749,7 @@ public class FormSetupDialog extends javax.swing.JDialog {
     }
 
     public void setBottomMargin(int height) {
-        setBottomMargin(new Double(height));
+        setBottomMargin(Double.valueOf(height));
     }
 
     public void setBottomMargin(Double height) {

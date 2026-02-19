@@ -43,7 +43,7 @@ public class FormProcessor extends Thread {
 
     private static final Logger logger = Logger.getLogger(FormProcessor.class);
 
-    public static long lastFormIdProcessed;
+    public static volatile long lastFormIdProcessed;
 
     public void processForm(IncomingImage incomingImage) {
 

@@ -145,7 +145,6 @@ public class FormPublisher {
         // this exits the batik cleaner thread
         // developed from patch - https://issues.apache.org/bugzilla/show_bug.cgi?id=48771
         CleanerThread.THREAD.exit();
-        System.gc();
     }
 
     public void exportPublication() throws Exception {

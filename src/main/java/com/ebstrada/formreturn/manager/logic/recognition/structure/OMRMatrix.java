@@ -557,7 +557,7 @@ public class OMRMatrix {
                 lowestToLeft = linearPosition;
             }
 
-            positionMap.put(new Integer(linearPosition), bubbleDetection);
+            positionMap.put(Integer.valueOf(linearPosition), bubbleDetection);
 
         }
 
@@ -753,11 +753,11 @@ public class OMRMatrix {
 
             OMRBox omrBox = null;
 
-            if (allOmrBoxes.containsKey(new Integer(regionIndex))) {
-                omrBox = allOmrBoxes.get(new Integer(regionIndex));
+            if (allOmrBoxes.containsKey(Integer.valueOf(regionIndex))) {
+                omrBox = allOmrBoxes.get(Integer.valueOf(regionIndex));
             } else {
                 omrBox = new OMRBox(regionIndex, blobExtraction.getBubbleDetection(regionIndex));
-                allOmrBoxes.put(new Integer(regionIndex), omrBox);
+                allOmrBoxes.put(Integer.valueOf(regionIndex), omrBox);
             }
 
         }
@@ -798,7 +798,7 @@ public class OMRMatrix {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 int regionIndex = blobExtractionRegionArray[x + y * width];
-                if (displayedRegions.contains(new Integer(regionIndex))) {
+                if (displayedRegions.contains(Integer.valueOf(regionIndex))) {
                     bufimage.setRGB(x, y, Color.BLACK.getRGB());
                 }
             }

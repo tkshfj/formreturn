@@ -37,9 +37,9 @@ public class CheckForUpdatesPanel extends JPanel implements IWizardPanel {
 
     private void updateSelection() {
         if (this.checkForUpdatesRadioButton.isSelected()) {
-            settings.put(CHECK_FOR_UDPATES_KEY, new Boolean(true));
+            settings.put(CHECK_FOR_UDPATES_KEY, Boolean.TRUE);
         } else {
-            settings.put(CHECK_FOR_UDPATES_KEY, new Boolean(false));
+            settings.put(CHECK_FOR_UDPATES_KEY, Boolean.FALSE);
         }
     }
 

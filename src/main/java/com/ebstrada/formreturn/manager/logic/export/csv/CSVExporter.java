@@ -462,7 +462,7 @@ public class CSVExporter {
                         String value = (String) stobjs[1];
                         Long orderIndexLong = (Long) stobjs[3];
                         if (orderIndexLong == null) {
-                            orderIndexLong = new Long(0);
+                            orderIndexLong = Long.valueOf(0);
                         }
                         orderIndex = (orderIndexLong).intValue();
                         if (value == null) {

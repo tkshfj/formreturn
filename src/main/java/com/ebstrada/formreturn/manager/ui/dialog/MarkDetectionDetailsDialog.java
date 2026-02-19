@@ -128,7 +128,7 @@ public class MarkDetectionDetailsDialog extends JDialog {
         for (int i = 0; i < omrBoxMatrix.length; i++) {
             for (int j = 0; j < omrBoxMatrix[i].length; j++) {
 
-                data[(i * columnCount) + j][0] = new Boolean(true);
+                data[(i * columnCount) + j][0] = Boolean.TRUE;
                 data[(i * columnCount) + j][1] = omrBoxMatrix[i][j].getRegionIndex() + "";
                 data[(i * columnCount) + j][2] = omrBoxMatrix[i][j].getPixelCount() + "";
 
@@ -152,7 +152,7 @@ public class MarkDetectionDetailsDialog extends JDialog {
 
 
                 data[(i * columnCount) + j][6] = omrBoxMatrix[i][j].getValue();
-                selectedIndexes.add(new Integer(omrBoxMatrix[i][j].getRegionIndex()));
+                selectedIndexes.add(Integer.valueOf(omrBoxMatrix[i][j].getRegionIndex()));
 
             }
         }

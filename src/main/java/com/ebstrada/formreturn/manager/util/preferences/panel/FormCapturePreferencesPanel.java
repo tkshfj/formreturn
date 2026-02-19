@@ -28,10 +28,10 @@ public class FormCapturePreferencesPanel extends JPanel {
         // set the recognition settings data first
         PublicationRecognitionStructure prs =
             PreferencesManager.getPublicationRecognitionStructure();
-        luminanceThresholdSpinner.setValue(new Integer(prs.getLuminanceCutOff()));
-        markThresholdSpinner.setValue(new Integer(prs.getMarkThreshold()));
-        fragmentPaddingSpinner.setValue(new Integer(prs.getFragmentPadding()));
-        deskewThresholdSpinner.setValue(new Double(prs.getDeskewThreshold()));
+        luminanceThresholdSpinner.setValue(Integer.valueOf(prs.getLuminanceCutOff()));
+        markThresholdSpinner.setValue(Integer.valueOf(prs.getMarkThreshold()));
+        fragmentPaddingSpinner.setValue(Integer.valueOf(prs.getFragmentPadding()));
+        deskewThresholdSpinner.setValue(Double.valueOf(prs.getDeskewThreshold()));
         performDeskewCheckBox.setSelected(prs.isPerformDeskew());
 
         // restore the fieldname duplicate presets
@@ -76,10 +76,10 @@ public class FormCapturePreferencesPanel extends JPanel {
         prs.setFragmentPadding(1);
         prs.setPerformDeskew(true);
 
-        luminanceThresholdSpinner.setValue(new Integer(prs.getLuminanceCutOff()));
-        markThresholdSpinner.setValue(new Integer(prs.getMarkThreshold()));
-        fragmentPaddingSpinner.setValue(new Integer(prs.getFragmentPadding()));
-        deskewThresholdSpinner.setValue(new Double(prs.getDeskewThreshold()));
+        luminanceThresholdSpinner.setValue(Integer.valueOf(prs.getLuminanceCutOff()));
+        markThresholdSpinner.setValue(Integer.valueOf(prs.getMarkThreshold()));
+        fragmentPaddingSpinner.setValue(Integer.valueOf(prs.getFragmentPadding()));
+        deskewThresholdSpinner.setValue(Double.valueOf(prs.getDeskewThreshold()));
         performDeskewCheckBox.setSelected(prs.isPerformDeskew());
 
         PreferencesManager.setPublicationRecognitionStructure(prs);

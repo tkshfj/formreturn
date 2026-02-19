@@ -108,7 +108,7 @@ public class FormReader {
     public static final double ORIENTATION_LANDSCAPE_NEXT_ROTATE = 180;
     public static final double ORIENTATION_LANDSCAPE_FLIP_NEXT_ROTATE = 90;
 
-    private static int lastOrientation = ORIENTATION_PORTRAIT;
+    private static volatile int lastOrientation = ORIENTATION_PORTRAIT;
 
     private Exception processingError;
 

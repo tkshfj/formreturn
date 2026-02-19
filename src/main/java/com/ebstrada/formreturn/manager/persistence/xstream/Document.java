@@ -224,12 +224,14 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
         if (xslDirectory.exists() && xslDirectory.isDirectory()) {
             File[] files = xslDirectory.listFiles();
-            for (File file : files) {
-                if (file.isFile() && !(file.isDirectory())) {
-                    String basename = file.getName().toLowerCase().replace(".xsl", "");
-                    if (!(guids.contains(basename))) {
-                        // can't find the file.. delete it!
-                        file.delete();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile() && !(file.isDirectory())) {
+                        String basename = file.getName().toLowerCase().replace(".xsl", "");
+                        if (!(guids.contains(basename))) {
+                            // can't find the file.. delete it!
+                            file.delete();
+                        }
                     }
                 }
             }
@@ -280,12 +282,14 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
         if (jarDirectory.exists() && jarDirectory.isDirectory()) {
             File[] files = jarDirectory.listFiles();
-            for (File file : files) {
-                if (file.isFile() && !(file.isDirectory())) {
-                    String basename = file.getName().toLowerCase().replace(".jar", "");
-                    if (!(guids.contains(basename))) {
-                        // can't find the file.. delete it!
-                        file.delete();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile() && !(file.isDirectory())) {
+                        String basename = file.getName().toLowerCase().replace(".jar", "");
+                        if (!(guids.contains(basename))) {
+                            // can't find the file.. delete it!
+                            file.delete();
+                        }
                     }
                 }
             }

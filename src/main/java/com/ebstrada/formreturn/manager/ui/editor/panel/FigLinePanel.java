@@ -32,7 +32,7 @@ public class FigLinePanel extends EditorPanel {
     }
 
     @Override public void updatePanel() {
-        lineWidthSpinner.setValue(new Double(selectedElement.getLineWidth()));
+        lineWidthSpinner.setValue(Double.valueOf(selectedElement.getLineWidth()));
         lineStyleComboBox.setSelectedItem(selectedElement.getDashedString());
         if (selectedElement != null) {
             foregroundColorButton.setIcon(Swatch.forColor(selectedElement.getLineColor()));
@@ -54,12 +54,12 @@ public class FigLinePanel extends EditorPanel {
     }
 
     private void lineWidthSpinnerStateChanged(ChangeEvent e) {
-        double newWidthValue = new Double(((JSpinner) e.getSource()).getValue() + "");
+        double newWidthValue = Double.valueOf(((JSpinner) e.getSource()).getValue() + "");
 
         if (newWidthValue != selectedElement.getLineWidth()) {
-            selectedElement.setLineWidth(new Float(newWidthValue));
+            selectedElement.setLineWidth((float)(newWidthValue));
             selectedElement.damage();
-            lineWidthSpinner.setValue(new Double(newWidthValue));
+            lineWidthSpinner.setValue(Double.valueOf(newWidthValue));
         }
     }
 

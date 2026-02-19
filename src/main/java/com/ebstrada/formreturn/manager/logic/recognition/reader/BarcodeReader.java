@@ -89,7 +89,7 @@ public class BarcodeReader {
         BinaryBitmap bitmap = new BinaryBitmap(new GlobalHistogramBinarizer(source));
         Hashtable<DecodeHintType, Object> hints = new Hashtable<DecodeHintType, Object>();
         hints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
-        hints.put(DecodeHintType.SKIP_TO_ROW, new Integer(0));
+        hints.put(DecodeHintType.SKIP_TO_ROW, Integer.valueOf(0));
         hints.put(DecodeHintType.IGNORE_AREAS, new Vector<Rectangle2D>());
 
         try {

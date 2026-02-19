@@ -97,7 +97,7 @@ public class FigSegmentAreaPanel extends ReprocessorPanel {
                     segment.getSegmentId() + "", segment.getBarcodeOne() + "",
                     segment.getBarcodeTwo() + "");
                 sncb.addElement(segmentName);
-                segments.add(i, new Long(segment.getSegmentId()));
+                segments.add(i, Long.valueOf(segment.getSegmentId()));
                 if (isCurrentStencilIndex(segment.getSegmentId())) {
                     selectedIndex = i;
                 }

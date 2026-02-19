@@ -306,8 +306,8 @@ public class ImagePreviewPanel extends JPanel {
         int panelHeight = imagePreviewLabel.getHeight();
         int scaledPageHeight = (int) (sourceImage.getHeight() * realZoom);
 
-        int x_offset = new Integer((panelWidth - scaledPageWidth) / 2);
-        int y_offset = new Integer((panelHeight - scaledPageHeight) / 2);
+        int x_offset = (panelWidth - scaledPageWidth) / 2;
+        int y_offset = (panelHeight - scaledPageHeight) / 2;
 
         point = new Point((int) ((point.getX() - x_offset) / realZoom),
             (int) ((point.getY() - y_offset) / realZoom));

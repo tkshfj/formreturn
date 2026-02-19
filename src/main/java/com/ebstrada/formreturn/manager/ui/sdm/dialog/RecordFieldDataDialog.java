@@ -242,7 +242,7 @@ public class RecordFieldDataDialog extends JDialog {
                             .equals(fieldName.trim())) {
                             if (st.getSourceTextString() != fieldValue) {
                                 stc.updateSourceTextStringValue(st.getSourceTextId(), fieldValue);
-                                rowIndexVector.remove(new Integer(i));
+                                rowIndexVector.remove(Integer.valueOf(i));
                             }
                         }
                     }

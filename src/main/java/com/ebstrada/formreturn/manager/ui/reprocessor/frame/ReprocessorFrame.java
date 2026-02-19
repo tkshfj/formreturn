@@ -1118,7 +1118,6 @@ public class ReprocessorFrame extends JPanel {
         removeAllFigs();
         Globals.curEditor(null);
         Globals.mode(null);
-        System.gc();
 
         return true;
     }

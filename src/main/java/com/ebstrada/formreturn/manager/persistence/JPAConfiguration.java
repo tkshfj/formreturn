@@ -79,8 +79,8 @@ public class JPAConfiguration {
 
     private Connection getConnection()
         throws InstantiationException, IllegalAccessException, ClassNotFoundException,
-        SQLException {
-        Class.forName(getConnectionDriverName()).newInstance();
+        SQLException, java.lang.reflect.InvocationTargetException, NoSuchMethodException {
+        Class.forName(getConnectionDriverName()).getDeclaredConstructor().newInstance();
         Properties props = new Properties();
         props.put("user", "formreturn");
         props.put("password", getConnectionPassword());

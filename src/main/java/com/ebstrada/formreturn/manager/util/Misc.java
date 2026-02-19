@@ -154,10 +154,15 @@ public class Misc {
     @SuppressWarnings("unchecked")
     public static Class registerJarFile(File jarFile, String className)
         throws MalformedURLException, ClassNotFoundException {
-        URL url = jarFile.toURL();
+        URL url = jarFile.toURI().toURL();
         URL[] urls = new URL[] {url};
-        ClassLoader cl = new URLClassLoader(urls);
+        URLClassLoader cl = new URLClassLoader(urls);
         Class cls = cl.loadClass(className);
+        try {
+            cl.close();
+        } catch (java.io.IOException e) {
+            // ignore
+        }
         return cls;
     }
 
@@ -200,7 +205,7 @@ public class Misc {
             com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
         }
 
-        if (Locale.getDefault().getCountry() == "US" || Locale.getDefault().getCountry() == "CA") {
+        if ("US".equals(Locale.getDefault().getCountry()) || "CA".equals(Locale.getDefault().getCountry())) {
             return false;
         }
 
@@ -413,35 +418,30 @@ public class Misc {
     }
 
     public static byte[] getBytesFromFile(File file) throws IOException {
-        InputStream is = new FileInputStream(file);
-
-        // Get the size of the file
         long length = file.length();
 
         if (length > Integer.MAX_VALUE) {
-            // File is too large
+            throw new IOException("File is too large: " + file.getName());
         }
 
-        // Create the byte array to hold the data
         byte[] bytes = new byte[(int) length];
+        InputStream is = new FileInputStream(file);
+        try {
+            int offset = 0;
+            int numRead = 0;
+            while (offset < bytes.length
+                && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+                offset += numRead;
+            }
 
-        // Read in the bytes
-        int offset = 0;
-        int numRead = 0;
-        while (offset < bytes.length
-            && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
-            offset += numRead;
+            if (offset < bytes.length) {
+                throw new IOException(String
+                    .format(Localizer.localize("Util", "GetBytesFromFileCannotReadFileMessage"),
+                        file.getName()));
+            }
+        } finally {
+            is.close();
         }
-
-        // Ensure all the bytes have been read in
-        if (offset < bytes.length) {
-            throw new IOException(String
-                .format(Localizer.localize("Util", "GetBytesFromFileCannotReadFileMessage"),
-                    file.getName()));
-        }
-
-        // Close the input stream and return bytes
-        is.close();
         return bytes;
     }
 
@@ -479,13 +479,13 @@ public class Misc {
     }
 
     public static String randomPassword() {
-        java.util.Random rn = new java.util.Random();
+        java.security.SecureRandom rn = new java.security.SecureRandom();
         byte b[] = new byte[10];
         for (int i = 0; i < 8; i++) {
-            b[i] = (byte) (rn.nextInt(24) + 65);
+            b[i] = (byte) (rn.nextInt(26) + 65);
         }
         for (int i = 8; i < 10; i++) {
-            b[i] = (byte) (rn.nextInt(9) + 48);
+            b[i] = (byte) (rn.nextInt(10) + 48);
         }
         return new String(b);
     }
@@ -1287,7 +1287,7 @@ public class Misc {
                 }
 
                 if (marks != null) {
-                    marks.put(fieldName, new Double(mark));
+                    marks.put(fieldName, Double.valueOf(mark));
                 }
 
             }

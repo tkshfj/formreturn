@@ -147,8 +147,7 @@ public class ColorFactory {
      * @return the single integer value representing the Color
      */
     private static Integer colorToInteger(Color color) {
-        return new Integer(color.getRGB());
-        // Integer.valueOf(color.getRGB()); - TODO when JRE1.4 support dropped
+        return Integer.valueOf(color.getRGB());
     }
 
     /**

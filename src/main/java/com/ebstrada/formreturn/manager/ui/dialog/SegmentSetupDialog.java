@@ -112,8 +112,8 @@ public class SegmentSetupDialog extends javax.swing.JDialog {
         segmentBarcodeScaleSpinner.setValue(pageAttributes.getRecognitionBarcodesScale());
 
         setReportName(documentAttributes.getName());
-        segmentWidth.setValue(new Double(attrPageWidth));
-        segmentHeight.setValue(new Double(attrPageHeight));
+        segmentWidth.setValue(Double.valueOf(attrPageWidth));
+        segmentHeight.setValue(Double.valueOf(attrPageHeight));
 
     }
 
@@ -160,8 +160,8 @@ public class SegmentSetupDialog extends javax.swing.JDialog {
     }
 
     private void setPageSize(SizeAttributes sizeAttributes) {
-        segmentWidth.setValue(new Double(sizeAttributes.getWidth()));
-        segmentHeight.setValue(new Double(sizeAttributes.getHeight()));
+        segmentWidth.setValue(Double.valueOf(sizeAttributes.getWidth()));
+        segmentHeight.setValue(Double.valueOf(sizeAttributes.getHeight()));
     }
 
     private void setPageSize(String size) {
@@ -182,16 +182,16 @@ public class SegmentSetupDialog extends javax.swing.JDialog {
         if (getSelectedUnit() == Measurement.PIXELS) {
 
             segmentWidth.setValue(
-                new Double(Math.round(measurement.convert((Double) segmentWidth.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) segmentWidth.getValue()))));
             segmentHeight.setValue(
-                new Double(Math.round(measurement.convert((Double) segmentHeight.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) segmentHeight.getValue()))));
 
         } else {
 
             segmentWidth
-                .setValue(new Double(measurement.convert((Double) segmentWidth.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) segmentWidth.getValue())));
             segmentHeight
-                .setValue(new Double(measurement.convert((Double) segmentHeight.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) segmentHeight.getValue())));
 
         }
 

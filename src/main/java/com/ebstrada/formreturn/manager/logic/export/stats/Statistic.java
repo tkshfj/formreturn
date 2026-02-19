@@ -32,7 +32,7 @@ public class Statistic implements NoObfuscation {
             this.frequencies.set(index, (frequency + 1));
         } else {
             this.answers.add(answer);
-            this.frequencies.add(new Integer(1));
+            this.frequencies.add(Integer.valueOf(1));
         }
 
         if (score > 0) {
@@ -54,7 +54,7 @@ public class Statistic implements NoObfuscation {
                 this.frequencies.set(index, (frequency + 1));
             } else {
                 this.answers.add(answer);
-                this.frequencies.add(new Integer(1));
+                this.frequencies.add(Integer.valueOf(1));
             }
         }
 

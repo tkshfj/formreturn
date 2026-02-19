@@ -150,7 +150,8 @@ public class PreferencesManager {
         StringBuilder contents = new StringBuilder();
 
         try {
-            BufferedReader input = new BufferedReader(new FileReader(systemPasswordFile));
+            BufferedReader input = new BufferedReader(new java.io.InputStreamReader(
+                new java.io.FileInputStream(systemPasswordFile), "UTF-8"));
             try {
                 contents.append(input.readLine());
             } finally {

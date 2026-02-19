@@ -169,7 +169,6 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
                 binarizedPreviewImage = null;
                 formReader = null;
                 testFormReader = null;
-                System.gc();
 
                 if (previewImageFile != null) {
                     loadPreviewImage(previewImageFile);
@@ -393,8 +392,8 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
             g2d.fill(new Rectangle2D.Double(0, 0, pageImageLabel.getWidth(),
                 pageImageLabel.getHeight()));
 
-            int x_offset = new Integer((panelWidth - scaledPageWidth) / 2);
-            int y_offset = new Integer((panelHeight - scaledPageHeight) / 2);
+            int x_offset = (panelWidth - scaledPageWidth) / 2;
+            int y_offset = (panelHeight - scaledPageHeight) / 2;
 
             AffineTransform at = new AffineTransform();
             at.translate(x_offset, y_offset);
@@ -919,7 +918,6 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
         }
         testPageImageLabel.revalidate();
 
-        System.gc();
         repaint();
         recognitionPanelController.destroyPanels();
     }
@@ -1525,8 +1523,8 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
         int panelHeight = pageImageLabel.getHeight();
         int scaledPageHeight = (int) (currentPageAttributes.getFullHeight() * realZoom);
 
-        int x_offset = new Integer((panelWidth - scaledPageWidth) / 2);
-        int y_offset = new Integer((panelHeight - scaledPageHeight) / 2);
+        int x_offset = (panelWidth - scaledPageWidth) / 2;
+        int y_offset = (panelHeight - scaledPageHeight) / 2;
 
         point = new Point((int) (((point.getX() - x_offset) * 2) / realZoom),
             (int) (((point.getY() - y_offset) * 2) / realZoom));
@@ -1597,8 +1595,8 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
         int panelHeight = testPageImageLabel.getHeight();
         int scaledPageHeight = (int) (binarizedPreviewImage.getHeight() * testImageRealZoom);
 
-        int x_offset = new Integer((panelWidth - scaledPageWidth) / 2);
-        int y_offset = new Integer((panelHeight - scaledPageHeight) / 2);
+        int x_offset = (panelWidth - scaledPageWidth) / 2;
+        int y_offset = (panelHeight - scaledPageHeight) / 2;
 
         point = new Point((int) ((point.getX() - x_offset) / testImageRealZoom),
             (int) ((point.getY() - y_offset) / testImageRealZoom));

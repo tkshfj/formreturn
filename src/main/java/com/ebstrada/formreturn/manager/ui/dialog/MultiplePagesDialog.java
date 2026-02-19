@@ -18,7 +18,7 @@ public class MultiplePagesDialog extends JDialog {
         initComponents();
         DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
         for (int i = 1; i <= pageCount; i++) {
-            dcbm.addElement(new Integer(i));
+            dcbm.addElement(Integer.valueOf(i));
         }
         pageNumberComboBox.setModel(dcbm);
         getRootPane().setDefaultButton(chooseButton);

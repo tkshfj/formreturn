@@ -442,14 +442,14 @@ public class Globals {
      * Send a property change event to listeners of the src Fig.
      */
     public static void firePropChange(Object src, String propName, boolean oldV, boolean newV) {
-        firePropChange(src, propName, new Boolean(oldV), new Boolean(newV));
+        firePropChange(src, propName, Boolean.valueOf(oldV), Boolean.valueOf(newV));
     }
 
     /**
      * Send a property change event to listeners of the src Fig.
      */
     public static void firePropChange(Object src, String propName, int oldV, int newV) {
-        firePropChange(src, propName, new Integer(oldV), new Integer(newV));
+        firePropChange(src, propName, Integer.valueOf(oldV), Integer.valueOf(newV));
     }
 
     /**

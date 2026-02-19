@@ -316,6 +316,7 @@ public class ExportJob extends TaskSchedulerJob {
             Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
 
             TransformerFactory factory = TransformerFactory.newInstance();
+            factory.setFeature(javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING, true);
             Transformer transformer = factory.newTransformer(new StreamSource(bais));
             transformer.setParameter("versionParam", "2.0");
             transformer.setOutputProperty(javax.xml.transform.OutputKeys.ENCODING, "UTF-8");

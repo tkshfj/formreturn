@@ -72,8 +72,8 @@ public class SegmentPropertiesPanel extends JXTaskPane {
                 presetSizeComboBox.setSelectedItem("Custom");
             }
 
-            widthSpinner.setValue(new Double(attrPageWidth));
-            heightSpinner.setValue(new Double(attrPageHeight));
+            widthSpinner.setValue(Double.valueOf(attrPageWidth));
+            heightSpinner.setValue(Double.valueOf(attrPageHeight));
 
             orientationComboBox.setSelectedItem(
                 PageAttributes.getOrientationText(pageAttributes.getOrientation()));
@@ -142,8 +142,8 @@ public class SegmentPropertiesPanel extends JXTaskPane {
     }
 
     private void setPageSize(SizeAttributes sizeAttributes) {
-        widthSpinner.setValue(new Double(sizeAttributes.getWidth()));
-        heightSpinner.setValue(new Double(sizeAttributes.getHeight()));
+        widthSpinner.setValue(Double.valueOf(sizeAttributes.getWidth()));
+        heightSpinner.setValue(Double.valueOf(sizeAttributes.getHeight()));
     }
 
     private void setPageSize(String size) {
@@ -190,16 +190,16 @@ public class SegmentPropertiesPanel extends JXTaskPane {
         if (getSelectedUnit() == Measurement.PIXELS) {
 
             widthSpinner.setValue(
-                new Double(Math.round(measurement.convert((Double) widthSpinner.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) widthSpinner.getValue()))));
             heightSpinner.setValue(
-                new Double(Math.round(measurement.convert((Double) heightSpinner.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) heightSpinner.getValue()))));
 
         } else {
 
             widthSpinner
-                .setValue(new Double(measurement.convert((Double) widthSpinner.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) widthSpinner.getValue())));
             heightSpinner
-                .setValue(new Double(measurement.convert((Double) heightSpinner.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) heightSpinner.getValue())));
 
         }
 

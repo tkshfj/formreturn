@@ -248,7 +248,7 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
             com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
         }
 
-        if (Locale.getDefault().getCountry() == "US" || Locale.getDefault().getCountry() == "CA") {
+        if ("US".equals(Locale.getDefault().getCountry()) || "CA".equals(Locale.getDefault().getCountry())) {
             return false;
         }
 

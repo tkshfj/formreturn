@@ -305,7 +305,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
 
         for (int i = 0; i < icl.getSize(); i++) {
             ColumnOption columnOption = icl.getElementAt(i);
-            orderedColumnKeys.add(new Integer(columnOption.getType()));
+            orderedColumnKeys.add(Integer.valueOf(columnOption.getType()));
         }
 
         return orderedColumnKeys;
@@ -620,7 +620,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
             .setValue(imageExportPreferences.getCapturedDataColumnCount());
         this.sourceDataColumnsSpinner.setValue(imageExportPreferences.getSourceDataColumnCount());
         this.columnFontSizeSpinner
-            .setValue(new Float(imageExportPreferences.getColumnFontSize()).intValue());
+            .setValue((int) imageExportPreferences.getColumnFontSize());
         this.rotateImageCheckBox.setSelected(imageExportPreferences.isImageRotated());
 
     }

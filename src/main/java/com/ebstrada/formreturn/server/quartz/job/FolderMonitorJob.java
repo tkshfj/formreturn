@@ -47,21 +47,28 @@ public abstract class FolderMonitorJob extends TaskSchedulerJob {
         if (entityManager == null) {
             return false;
         } else {
-            boolean hasTransaction = false;
-            while (hasTransaction == false) {
+            int maxRetries = 10;
+            for (int attempt = 0; attempt < maxRetries; attempt++) {
                 try {
                     if (entityManager.getTransaction().isActive()) {
                         entityManager.getTransaction().rollback();
                     }
                     entityManager.getTransaction().begin();
                     entityManager.flush();
-                    hasTransaction = true;
+                    return true;
                 } catch (Exception ex) {
                     logger.warn(ex.getLocalizedMessage(), ex);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                        return false;
+                    }
                 }
             }
+            logger.error("Failed to start transaction after " + maxRetries + " attempts");
         }
-        return true;
+        return false;
     }
 
     protected void stop(JobExecutionContext jobExecutionContext, Exception ex)

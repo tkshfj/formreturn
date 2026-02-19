@@ -259,7 +259,11 @@ public class DatabaseInstance {
     private Connection getConnection()
         throws InstantiationException, IllegalAccessException, ClassNotFoundException,
         SQLException {
-        Class.forName(embeddedDriver).newInstance();
+        try {
+            Class.forName(embeddedDriver).getDeclaredConstructor().newInstance();
+        } catch (NoSuchMethodException | java.lang.reflect.InvocationTargetException e) {
+            throw new InstantiationException(e.getMessage());
+        }
         Properties props = new Properties();
         props.put("user", "formreturn");
         props.put("password", systemPassword);
@@ -700,7 +704,7 @@ public class DatabaseInstance {
         boolean gotSQLExc = false;
 
         try {
-            Class.forName(embeddedDriver).newInstance();
+            Class.forName(embeddedDriver).getDeclaredConstructor().newInstance();
             Properties props = new Properties();
             props.put("user", "formreturn");
             props.put("password", systemPassword);

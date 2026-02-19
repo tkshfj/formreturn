@@ -279,7 +279,6 @@ public class Main extends JFrame {
                 checkDesktopPaneBG();
                 UndoManager.setInstance(new UndoManager());
                 UndoManager.getInstance().fireAllEvents();
-                System.gc();
                 revalidateAllFrames();
             }
         });
@@ -440,8 +439,8 @@ public class Main extends JFrame {
 
         if (applicationState.getScreenWidth() > 800 && applicationState.getScreenHeight() > 400) {
 
-            Double storedWidth = new Double(applicationState.getScreenWidth());
-            Double storedHeight = new Double(applicationState.getScreenHeight());
+            Double storedWidth = Double.valueOf(applicationState.getScreenWidth());
+            Double storedHeight = Double.valueOf(applicationState.getScreenHeight());
 
             if ((storedWidth >= 800 && storedHeight >= 400) && (
                 storedWidth <= maximumWindowSize.getWidth() && storedHeight <= maximumWindowSize
@@ -539,7 +538,6 @@ public class Main extends JFrame {
                     checkDesktopPaneBG();
                     UndoManager.setInstance(new UndoManager());
                     UndoManager.getInstance().fireAllEvents();
-                    System.gc();
                 }
                 revalidateAllFrames();
             }
@@ -575,7 +573,6 @@ public class Main extends JFrame {
                     checkDesktopPaneBG();
                     UndoManager.setInstance(new UndoManager());
                     UndoManager.getInstance().fireAllEvents();
-                    System.gc();
                 }
                 revalidateAllFrames();
             }
@@ -644,15 +641,24 @@ public class Main extends JFrame {
 
         byte[] openFileBytes = (fileToLoad.getPath() + "\n").getBytes();
 
+        RandomAccessFile raf = null;
+        FileChannel fc = null;
         try {
-            FileChannel fc = new RandomAccessFile(getOpenFileIPC(), "rw").getChannel();
+            raf = new RandomAccessFile(getOpenFileIPC(), "rw");
+            fc = raf.getChannel();
             MappedByteBuffer mem = fc.map(FileChannel.MapMode.READ_WRITE, 0, openFileBytes.length);
             mem.put(openFileBytes);
-            fc.close();
         } catch (FileNotFoundException e) {
             Misc.printStackTrace(e);
         } catch (IOException e) {
             Misc.printStackTrace(e);
+        } finally {
+            if (fc != null) {
+                try { fc.close(); } catch (IOException e) { /* ignore */ }
+            }
+            if (raf != null) {
+                try { raf.close(); } catch (IOException e) { /* ignore */ }
+            }
         }
 
     }
@@ -778,9 +784,6 @@ public class Main extends JFrame {
         if (em != null) {
             em.close();
         }
-
-        // do a garbage collection
-        System.gc();
 
     }
 

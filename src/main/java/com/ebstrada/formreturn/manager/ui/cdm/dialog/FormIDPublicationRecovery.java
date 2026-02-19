@@ -62,7 +62,7 @@ import com.ebstrada.formreturn.manager.util.Misc;
         String value = (String) formPagesTable.getValueAt(formPagesTable.getSelectedRow(), 0);
         int formPageId = Misc.parseIntegerString(value);
         try {
-            firstFormPageIDSpinner.setValue(new Integer(formPageId));
+            firstFormPageIDSpinner.setValue(Integer.valueOf(formPageId));
             this.firstFormPageId = formPageId;
         } catch (Exception ex) {
             Misc.printStackTrace(ex);

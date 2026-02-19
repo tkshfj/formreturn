@@ -71,12 +71,12 @@ public class PagePropertiesPanel extends JXTaskPane {
                 presetSizeComboBox.setSelectedItem("Custom");
             }
 
-            widthSpinner.setValue(new Double(attrPageWidth));
-            heightSpinner.setValue(new Double(attrPageHeight));
-            leftMarginSpinner.setValue(new Double(pageAttributes.getLeftMargin()));
-            rightMarginSpinner.setValue(new Double(pageAttributes.getRightMargin()));
-            topMarginSpinner.setValue(new Double(pageAttributes.getTopMargin()));
-            bottomMarginSpinner.setValue(new Double(pageAttributes.getBottomMargin()));
+            widthSpinner.setValue(Double.valueOf(attrPageWidth));
+            heightSpinner.setValue(Double.valueOf(attrPageHeight));
+            leftMarginSpinner.setValue(Double.valueOf(pageAttributes.getLeftMargin()));
+            rightMarginSpinner.setValue(Double.valueOf(pageAttributes.getRightMargin()));
+            topMarginSpinner.setValue(Double.valueOf(pageAttributes.getTopMargin()));
+            bottomMarginSpinner.setValue(Double.valueOf(pageAttributes.getBottomMargin()));
             orientationComboBox.setSelectedItem(
                 PageAttributes.getOrientationText(pageAttributes.getOrientation()));
         }
@@ -162,12 +162,12 @@ public class PagePropertiesPanel extends JXTaskPane {
     }
 
     private void setPageSize(SizeAttributes sizeAttributes) {
-        widthSpinner.setValue(new Double(sizeAttributes.getWidth()));
-        heightSpinner.setValue(new Double(sizeAttributes.getHeight()));
-        leftMarginSpinner.setValue(new Double(sizeAttributes.getLeftMargin()));
-        rightMarginSpinner.setValue(new Double(sizeAttributes.getRightMargin()));
-        topMarginSpinner.setValue(new Double(sizeAttributes.getTopMargin()));
-        bottomMarginSpinner.setValue(new Double(sizeAttributes.getBottomMargin()));
+        widthSpinner.setValue(Double.valueOf(sizeAttributes.getWidth()));
+        heightSpinner.setValue(Double.valueOf(sizeAttributes.getHeight()));
+        leftMarginSpinner.setValue(Double.valueOf(sizeAttributes.getLeftMargin()));
+        rightMarginSpinner.setValue(Double.valueOf(sizeAttributes.getRightMargin()));
+        topMarginSpinner.setValue(Double.valueOf(sizeAttributes.getTopMargin()));
+        bottomMarginSpinner.setValue(Double.valueOf(sizeAttributes.getBottomMargin()));
     }
 
     private void setPageSize(String size) {
@@ -265,32 +265,32 @@ public class PagePropertiesPanel extends JXTaskPane {
         if (getSelectedUnit() == Measurement.PIXELS) {
 
             widthSpinner.setValue(
-                new Double(Math.round(measurement.convert((Double) widthSpinner.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) widthSpinner.getValue()))));
             heightSpinner.setValue(
-                new Double(Math.round(measurement.convert((Double) heightSpinner.getValue()))));
+                Double.valueOf(Math.round(measurement.convert((Double) heightSpinner.getValue()))));
             leftMarginSpinner.setValue(
-                new Double(Math.round(measurement.convert((Double) leftMarginSpinner.getValue()))));
-            rightMarginSpinner.setValue(new Double(
+                Double.valueOf(Math.round(measurement.convert((Double) leftMarginSpinner.getValue()))));
+            rightMarginSpinner.setValue(Double.valueOf(
                 Math.round(measurement.convert((Double) rightMarginSpinner.getValue()))));
             topMarginSpinner.setValue(
-                new Double(Math.round(measurement.convert((Double) topMarginSpinner.getValue()))));
-            bottomMarginSpinner.setValue(new Double(
+                Double.valueOf(Math.round(measurement.convert((Double) topMarginSpinner.getValue()))));
+            bottomMarginSpinner.setValue(Double.valueOf(
                 Math.round(measurement.convert((Double) bottomMarginSpinner.getValue()))));
 
         } else {
 
             widthSpinner
-                .setValue(new Double(measurement.convert((Double) widthSpinner.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) widthSpinner.getValue())));
             heightSpinner
-                .setValue(new Double(measurement.convert((Double) heightSpinner.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) heightSpinner.getValue())));
             leftMarginSpinner
-                .setValue(new Double(measurement.convert((Double) leftMarginSpinner.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) leftMarginSpinner.getValue())));
             rightMarginSpinner
-                .setValue(new Double(measurement.convert((Double) rightMarginSpinner.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) rightMarginSpinner.getValue())));
             topMarginSpinner
-                .setValue(new Double(measurement.convert((Double) topMarginSpinner.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) topMarginSpinner.getValue())));
             bottomMarginSpinner
-                .setValue(new Double(measurement.convert((Double) bottomMarginSpinner.getValue())));
+                .setValue(Double.valueOf(measurement.convert((Double) bottomMarginSpinner.getValue())));
 
         }
 

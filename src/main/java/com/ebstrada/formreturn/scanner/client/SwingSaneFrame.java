@@ -714,7 +714,7 @@ public class SwingSaneFrame implements IComponents, IScanEventHandler {
 
         pagesToScanSpinner = new JSpinner();
         pagesToScanSpinner
-            .setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+            .setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         pagesToScanSpinner.setFont(UIManager.getFont("Spinner.font"));
         pagesToScanSpinner.setEnabled(false);
         GridBagConstraints gbc_pagesToScanSpinner = new GridBagConstraints();

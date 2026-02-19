@@ -38,10 +38,10 @@ public class FigPanel extends EditorPanel {
     }
 
     @Override public void updatePanel() {
-        widthSpinner.setValue(new Integer(selectedElement.getWidth()));
-        heightSpinner.setValue(new Integer(selectedElement.getHeight()));
-        xSpinner.setValue(new Integer(selectedElement.getX()));
-        ySpinner.setValue(new Integer(selectedElement.getY()));
+        widthSpinner.setValue(Integer.valueOf(selectedElement.getWidth()));
+        heightSpinner.setValue(Integer.valueOf(selectedElement.getHeight()));
+        xSpinner.setValue(Integer.valueOf(selectedElement.getX()));
+        ySpinner.setValue(Integer.valueOf(selectedElement.getY()));
     }
 
     @Override public void setSelectedElement(Fig selectedFig) {

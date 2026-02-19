@@ -268,7 +268,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
             flags = new HashMap<String, Boolean>();
         }
 
-        flags.put(flagName, new Boolean(value));
+        flags.put(flagName, Boolean.valueOf(value));
     }
 
     public String getStringValue(String flagName) {

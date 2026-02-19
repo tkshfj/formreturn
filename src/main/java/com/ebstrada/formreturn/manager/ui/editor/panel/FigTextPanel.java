@@ -77,7 +77,7 @@ public class FigTextPanel extends EditorPanel {
         if (fontFamilyIndex >= 0 && fontFamilyComboBox.getSelectedIndex() < 0 || !initialized) {
             fontFamilyComboBox.setSelectedIndex(fontFamilyIndex);
             if (getFontSize() % 1 == 0.0f) {
-                fontSizeComboBox.setSelectedItem(new Float(getFontSize()));
+                fontSizeComboBox.setSelectedItem(Float.valueOf(getFontSize()));
             } else {
                 fontSizeComboBox.setSelectedItem(getFontSize() + "");
             }
@@ -188,7 +188,7 @@ public class FigTextPanel extends EditorPanel {
     }
 
     private void revertFontSize() {
-        fontSizeComboBox.setSelectedItem(new Float(getFontSize()));
+        fontSizeComboBox.setSelectedItem(Float.valueOf(getFontSize()));
         updateUI();
     }
 

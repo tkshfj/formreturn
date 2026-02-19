@@ -677,8 +677,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         frc = graphics2D.getFontRenderContext();
         _fm = ((Graphics) graphicContext).getFontMetrics(_font);
 
-        float chunkX = (new Integer(getX() + _leftMargin)).floatValue();
-        float chunkY = (new Integer(getY() + _topMargin)).floatValue();
+        float chunkX = (float)(getX() + _leftMargin);
+        float chunkY = (float)(getY() + _topMargin);
 
         if (_filled) {
             Color OriginalColor = graphics2D.getColor();

@@ -243,9 +243,6 @@ public class CachedFontManager {
 
         detectSystemFontDir(sp);
 
-        // run a garbage collection
-        System.gc();
-
     }
 
     public void readAvailableFontPSNames() {

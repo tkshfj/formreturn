@@ -263,11 +263,13 @@ public class DocumentPackage {
 
         if (path.exists()) {
             File[] files = path.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isDirectory()) {
-                    deleteDirectory(files[i]);
-                } else {
-                    files[i].delete();
+            if (files != null) {
+                for (int i = 0; i < files.length; i++) {
+                    if (files[i].isDirectory()) {
+                        deleteDirectory(files[i]);
+                    } else {
+                        files[i].delete();
+                    }
                 }
             }
         }
@@ -364,28 +366,16 @@ public class DocumentPackage {
             bos = new BufferedOutputStream(tfos);
         }
 
-        @Override public void write(byte[] byteArray) {
-            try {
-                bos.write(byteArray);
-            } catch (IOException ex) {
-                com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
-            }
+        @Override public void write(byte[] byteArray) throws IOException {
+            bos.write(byteArray);
         }
 
-        @Override public void write(byte[] byteArray, int offset, int length) {
-            try {
-                bos.write(byteArray, offset, length);
-            } catch (IOException ex) {
-                com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
-            }
+        @Override public void write(byte[] byteArray, int offset, int length) throws IOException {
+            bos.write(byteArray, offset, length);
         }
 
-        public void write(int byteArray) {
-            try {
-                bos.write(byteArray);
-            } catch (IOException ex) {
-                com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
-            }
+        @Override public void write(int byteArray) throws IOException {
+            bos.write(byteArray);
         }
 
         @Override public void close() {

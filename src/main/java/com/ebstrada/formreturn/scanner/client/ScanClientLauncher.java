@@ -24,7 +24,6 @@ public class ScanClientLauncher {
 
     public void clearScanClientFrame() {
         sct = null;
-        System.gc();
     }
 
 }

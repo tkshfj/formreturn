@@ -155,7 +155,7 @@ public class TableFilterPanel extends JPanel {
     public int getTotalNumberOfPages() {
         long size = tableModel.getSize();
         long limit = tableModel.getLimit();
-        return (int) Math.ceil(new Double(size) / new Double(limit));
+        return (int) Math.ceil((double) size / (double) limit);
     }
 
     public void updatePageNumbers() {

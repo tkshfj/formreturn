@@ -945,10 +945,10 @@ public class SelectionManager
             int count = 0;
             if (superclasses.containsKey(figClass.getName())) {
                 count = ((Integer) superclasses.get(figClass.getName())).intValue();
-                superclasses.put(figClass.getName(), new Integer(++count));
+                superclasses.put(figClass.getName(), Integer.valueOf(++count));
             } else {
                 count = 1;
-                superclasses.put(figClass.getName(), new Integer(count));
+                superclasses.put(figClass.getName(), Integer.valueOf(count));
             }
 
             if (count > maxCount) {
@@ -960,10 +960,10 @@ public class SelectionManager
             while (!(superClass == null || superClass.equals(Fig.class))) {
                 if (superclasses.containsKey(superClass.getName())) {
                     count = ((Integer) superclasses.get(superClass.getName())).intValue();
-                    superclasses.put(superClass.getName(), new Integer(++count));
+                    superclasses.put(superClass.getName(), Integer.valueOf(++count));
                 } else {
                     count = 1;
-                    superclasses.put(superClass.getName(), new Integer(count));
+                    superclasses.put(superClass.getName(), Integer.valueOf(count));
                 }
 
                 if (count > maxCount) {

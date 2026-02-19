@@ -131,10 +131,10 @@ public class SegmentPropertiesDialog extends JDialog {
 
         PublicationRecognitionStructure prs =
             PreferencesManager.getPublicationRecognitionStructure();
-        luminanceThresholdSpinner.setValue(new Integer(prs.getLuminanceCutOff()));
-        markThresholdSpinner.setValue(new Integer(prs.getMarkThreshold()));
-        fragmentPaddingSpinner.setValue(new Integer(prs.getFragmentPadding()));
-        deskewThresholdSpinner.setValue(new Double(prs.getDeskewThreshold()));
+        luminanceThresholdSpinner.setValue(Integer.valueOf(prs.getLuminanceCutOff()));
+        markThresholdSpinner.setValue(Integer.valueOf(prs.getMarkThreshold()));
+        fragmentPaddingSpinner.setValue(Integer.valueOf(prs.getFragmentPadding()));
+        deskewThresholdSpinner.setValue(Double.valueOf(prs.getDeskewThreshold()));
         performDeskewCheckBox.setSelected(prs.isPerformDeskew());
 
         // restore the fieldname duplicate presets
@@ -926,7 +926,7 @@ public class SegmentPropertiesDialog extends JDialog {
         defaultFieldnamePrefixTextField
             .setText(documentAttributes.getDefaultCapturedDataFieldname());
         fieldnameCounterSpinner
-            .setValue(new Integer(documentAttributes.getDefaultCDFNIncrementor()));
+            .setValue(Integer.valueOf(documentAttributes.getDefaultCDFNIncrementor()));
 
         descriptionTextArea.setText(documentAttributes.getDescription());
         commentsTextField.setText(documentAttributes.getComments());
@@ -937,10 +937,10 @@ public class SegmentPropertiesDialog extends JDialog {
         // restore recognition settings
         PublicationRecognitionStructure prs =
             documentAttributes.getPublicationRecognitionStructure();
-        luminanceThresholdSpinner.setValue(new Integer(prs.getLuminanceCutOff()));
-        markThresholdSpinner.setValue(new Integer(prs.getMarkThreshold()));
-        fragmentPaddingSpinner.setValue(new Integer(prs.getFragmentPadding()));
-        deskewThresholdSpinner.setValue(new Double(prs.getDeskewThreshold()));
+        luminanceThresholdSpinner.setValue(Integer.valueOf(prs.getLuminanceCutOff()));
+        markThresholdSpinner.setValue(Integer.valueOf(prs.getMarkThreshold()));
+        fragmentPaddingSpinner.setValue(Integer.valueOf(prs.getFragmentPadding()));
+        deskewThresholdSpinner.setValue(Double.valueOf(prs.getDeskewThreshold()));
         performDeskewCheckBox.setSelected(prs.isPerformDeskew());
 
         // restore the fieldname duplicate presets

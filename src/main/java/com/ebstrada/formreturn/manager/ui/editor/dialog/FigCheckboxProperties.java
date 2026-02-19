@@ -213,8 +213,8 @@ public class FigCheckboxProperties extends JDialog {
 
             if (rmapsd.isRestoreMarkAreaValues()) {
                 TableModel fctm = getFigCheckboxTableModel();
-                columnSpinner.setValue(new Integer(fctm.getColumnCount()));
-                rowSpinner.setValue(new Integer(fctm.getRowCount()));
+                columnSpinner.setValue(Integer.valueOf(fctm.getColumnCount()));
+                rowSpinner.setValue(Integer.valueOf(fctm.getRowCount()));
                 checkboxValuesTable.setModel(getFigCheckboxTableModel());
             }
 
@@ -330,8 +330,8 @@ public class FigCheckboxProperties extends JDialog {
                 }
 
                 if (rmapsd.isRestoreMarkAreaValues()) {
-                    columnSpinner.setValue(new Integer(selectedStyle.getColumnCount()));
-                    rowSpinner.setValue(new Integer(selectedStyle.getRowCount()));
+                    columnSpinner.setValue(Integer.valueOf(selectedStyle.getColumnCount()));
+                    rowSpinner.setValue(Integer.valueOf(selectedStyle.getRowCount()));
                     String[] columnHeadings = new String[selectedStyle.getColumnCount()];
                     for (int i = 1; i <= selectedStyle.getColumnCount(); i++) {
                         columnHeadings[(i - 1)] = i + "";
@@ -1413,7 +1413,7 @@ public class FigCheckboxProperties extends JDialog {
     }
 
     private void setWidthRoundness(int widthRoundness) {
-        widthRoundnessSpinner.setValue(new Integer(widthRoundness));
+        widthRoundnessSpinner.setValue(Integer.valueOf(widthRoundness));
     }
 
     private void setHeightRoundness(int heightRoundness) {
@@ -1613,7 +1613,7 @@ public class FigCheckboxProperties extends JDialog {
 
 
     private void setCheckboxFontSize(float fontSize) {
-        fontSizeSpinner.setValue(new Integer(((Float) fontSize).intValue()));
+        fontSizeSpinner.setValue(Integer.valueOf(((Float) fontSize).intValue()));
     }
 
     public TableModel getFigCheckboxTableModel() {
@@ -1653,7 +1653,7 @@ public class FigCheckboxProperties extends JDialog {
     }
 
     public void setFontDarkness(int fontDarkness) {
-        fontDarknessSpinner.setValue(new Integer(fontDarkness));
+        fontDarknessSpinner.setValue(Integer.valueOf(fontDarkness));
     }
 
     public int getBoxWidth() {
@@ -1661,7 +1661,7 @@ public class FigCheckboxProperties extends JDialog {
     }
 
     public void setBoxWidth(int boxWidth) {
-        boxWidthSpinner.setValue(new Integer(boxWidth));
+        boxWidthSpinner.setValue(Integer.valueOf(boxWidth));
     }
 
     public int getBoxHeight() {
@@ -1669,7 +1669,7 @@ public class FigCheckboxProperties extends JDialog {
     }
 
     private void setBoxHeight(int boxHeight) {
-        boxHeightSpinner.setValue(new Integer(boxHeight));
+        boxHeightSpinner.setValue(Integer.valueOf(boxHeight));
     }
 
     public float getBoxWeight() {
@@ -1677,7 +1677,7 @@ public class FigCheckboxProperties extends JDialog {
     }
 
     public void setBoxWeight(float newBoxWeight) {
-        boxWeight.setValue(new Double(newBoxWeight));
+        boxWeight.setValue(Double.valueOf(newBoxWeight));
     }
 
     public int getHorizontalSpace() {
@@ -1685,7 +1685,7 @@ public class FigCheckboxProperties extends JDialog {
     }
 
     public void setHorizontalSpace(int newHorizontalSpace) {
-        setHorizontalSpace(new Integer(newHorizontalSpace));
+        setHorizontalSpace(Integer.valueOf(newHorizontalSpace));
     }
 
     public void setHorizontalSpace(Integer newHorizontalSpace) {
@@ -1697,7 +1697,7 @@ public class FigCheckboxProperties extends JDialog {
     }
 
     public void setVerticalSpace(int newVerticalSpace) {
-        setVerticalSpace(new Integer(newVerticalSpace));
+        setVerticalSpace(Integer.valueOf(newVerticalSpace));
     }
 
     public void setVerticalSpace(Integer newVerticalSpace) {
@@ -1758,7 +1758,7 @@ public class FigCheckboxProperties extends JDialog {
                 Integer[] colIds = new Integer[checkboxValuesTable.getColumnCount()];
 
                 for (int j = 0; j < checkboxValuesTable.getColumnCount(); j++) {
-                    colIds[j] = new Integer(j + 1);
+                    colIds[j] = Integer.valueOf(j + 1);
                 }
 
                 dtm.setColumnIdentifiers(colIds);

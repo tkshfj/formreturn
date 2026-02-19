@@ -157,7 +157,7 @@ public class EditorPreferencesPanel extends JPanel {
         defaultFormPageSizeComboBox.setSelectedItem(sa.getName());
         defaultSegmentPageSizeComboBox.setSelectedIndex(0);
         defaultFormOrientationComboBox.setSelectedItem("Portrait");
-        segmentBarcodeScaleSpinner.setValue(new Double(0.6));
+        segmentBarcodeScaleSpinner.setValue(Double.valueOf(0.6));
     }
 
     private void addNewSegmentSizeButtonActionPerformed(ActionEvent e) {
