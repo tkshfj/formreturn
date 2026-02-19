@@ -288,13 +288,13 @@ public class FigSegmentSetup extends JDialog {
         Document document =
             Main.getInstance().getSelectedFrame().getGraph().getDocumentPackage().getDocument();
 
-        List segmentImages = segment.getImages();
+        List<String> segmentImages = segment.getImages();
 
         String segmentWorkingDirName = graph.getDocumentPackage().getWorkingDirName();
 
-        for (Iterator segmentImageIterator = segmentImages.iterator(); segmentImageIterator
+        for (Iterator<String> segmentImageIterator = segmentImages.iterator(); segmentImageIterator
             .hasNext(); ) {
-            String segmentImageFileName = (String) segmentImageIterator.next();
+            String segmentImageFileName = segmentImageIterator.next();
 
             try {
                 document
@@ -314,13 +314,13 @@ public class FigSegmentSetup extends JDialog {
         Document document =
             Main.getInstance().getSelectedFrame().getGraph().getDocumentPackage().getDocument();
 
-        List segmentFonts = segment.getFonts();
+        List<String> segmentFonts = segment.getFonts();
 
         String segmentWorkingDirName = graph.getDocumentPackage().getWorkingDirName();
 
-        for (Iterator segmentFontIterator = segmentFonts.iterator(); segmentFontIterator
+        for (Iterator<String> segmentFontIterator = segmentFonts.iterator(); segmentFontIterator
             .hasNext(); ) {
-            String segmentFontFileName = (String) segmentFontIterator.next();
+            String segmentFontFileName = segmentFontIterator.next();
 
             try {
                 document.addFont(new File(segmentWorkingDirName + "/fonts/" + segmentFontFileName),
@@ -551,12 +551,12 @@ public class FigSegmentSetup extends JDialog {
         return button;
     }
 
-    private ArrayList getLinkIDs() {
-        ArrayList<Object> linkIDs = new ArrayList<Object>();
+    private ArrayList<String> getLinkIDs() {
+        ArrayList<String> linkIDs = new ArrayList<String>();
         JTableComponentModel jtbm = (JTableComponentModel) segmentsTable.getModel();
         int rowCount = jtbm.getRowCount();
         for (int i = 0; i < rowCount; i++) {
-            linkIDs.add(jtbm.getValueAt(i, 0)); // column 0 is linkID
+            linkIDs.add((String) jtbm.getValueAt(i, 0)); // column 0 is linkID
         }
         return linkIDs;
     }

@@ -111,7 +111,7 @@ public class LayerPolar extends Layer {
         return _bgColor;
     }
 
-    @Override public List getContents() {
+    @Override public List<Fig> getContents() {
         return null;
     }
 

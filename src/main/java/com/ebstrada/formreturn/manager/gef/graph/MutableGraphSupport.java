@@ -25,7 +25,7 @@ public abstract class MutableGraphSupport implements MutableGraphModel, java.io.
     public MutableGraphSupport() {
     }
 
-    public List getGraphListeners() {
+    public List<GraphListener> getGraphListeners() {
         return _graphListeners;
     }
 

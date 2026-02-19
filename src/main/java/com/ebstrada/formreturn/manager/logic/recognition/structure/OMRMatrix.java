@@ -613,24 +613,24 @@ public class OMRMatrix {
 
     private Integer[] sortYKeys(Map<Integer, OMRBox> omrBoxes) {
         YValueComparator yvc = new YValueComparator(omrBoxes);
-        List keys = new ArrayList(omrBoxes.keySet());
+        List<Integer> keys = new ArrayList<Integer>(omrBoxes.keySet());
         Collections.sort(keys, yvc);
 
         Integer[] sortedKeys = new Integer[keys.size()];
         for (int i = 0; i < keys.size(); i++) {
-            sortedKeys[i] = (Integer) keys.get(i);
+            sortedKeys[i] = keys.get(i);
         }
         return sortedKeys;
     }
 
     private Integer[] sortXKeys(Map<Integer, OMRBox> omrBoxes) {
         XValueComparator xvc = new XValueComparator(omrBoxes);
-        List keys = new ArrayList(omrBoxes.keySet());
+        List<Integer> keys = new ArrayList<Integer>(omrBoxes.keySet());
         Collections.sort(keys, xvc);
 
         Integer[] sortedKeys = new Integer[keys.size()];
         for (int i = 0; i < keys.size(); i++) {
-            sortedKeys[i] = (Integer) keys.get(i);
+            sortedKeys[i] = keys.get(i);
         }
         return sortedKeys;
     }
@@ -720,7 +720,7 @@ public class OMRMatrix {
         int numberOfResults = omrrs.getNumberOfRows() * omrrs.getNumberOfColumns();
 
         AreaPixelCountComparator apcc = new AreaPixelCountComparator(allOmrBoxes);
-        List keys = new ArrayList(allOmrBoxes.keySet());
+        List<Integer> keys = new ArrayList<Integer>(allOmrBoxes.keySet());
         Collections.sort(keys, apcc);
 
         for (int i = 0; i < numberOfResults; i++) {

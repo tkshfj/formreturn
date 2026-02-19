@@ -94,7 +94,7 @@ public class ManageDatabaseUsers extends JDialog {
         contentPanel = new JPanel();
         panel1 = new JPanel();
         scrollPane1 = new JScrollPane();
-        databaseUserList = new JList();
+        databaseUserList = new JList<String>();
         buttonBar = new JPanel();
         removeUserButton = new JButton();
         addNewUserButton = new JButton();
@@ -218,7 +218,7 @@ public class ManageDatabaseUsers extends JDialog {
     private JPanel contentPanel;
     private JPanel panel1;
     private JScrollPane scrollPane1;
-    private JList databaseUserList;
+    private JList<String> databaseUserList;
     private JPanel buttonBar;
     private JButton removeUserButton;
     private JButton addNewUserButton;

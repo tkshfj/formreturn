@@ -14,9 +14,9 @@ import javax.swing.ImageIcon;
  */
 
 public class ResourceLoader {
-    private static HashMap _resourceCache = new HashMap();
-    private static List _resourceLocations = new ArrayList();
-    private static List _resourceExtensions = new ArrayList();
+    private static HashMap<String, ImageIcon> _resourceCache = new HashMap<String, ImageIcon>();
+    private static List<String> _resourceLocations = new ArrayList<String>();
+    private static List<String> _resourceExtensions = new ArrayList<String>();
 
     public static ImageIcon lookupIconResource(String resource) {
         return lookupIconResource(resource, resource);

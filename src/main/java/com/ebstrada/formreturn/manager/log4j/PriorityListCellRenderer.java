@@ -115,7 +115,7 @@ public class PriorityListCellRenderer extends DefaultListCellRenderer {
      * @param cellHasFocus -
      *                     True if the specified cell has the focus.
      */
-    @Override public Component getListCellRendererComponent(JList list, Object value, int index,
+    @Override public Component getListCellRendererComponent(JList<?> list, Object value, int index,
         boolean isSelected, boolean cellHasFocus) {
         if ((value instanceof LoggingEvent) && (appender != null)) {
             LoggingEvent event = (LoggingEvent) value;

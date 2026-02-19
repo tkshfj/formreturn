@@ -109,7 +109,7 @@ public class ModePopup extends FigModifyingModeImpl {
             if (commonInstance instanceof PopupGenerator) {
 
                 PopupGenerator popupGenerator = (PopupGenerator) commonInstance;
-                List actions = popupGenerator.getPopUpActions(me);
+                List<Object> actions = popupGenerator.getPopUpActions(me);
 
                 JPopupMenu popup = new JPopupMenu();
                 popup.setFont(UIManager.getFont("PopupMenu.font"));

@@ -486,7 +486,7 @@ public class FormPropertiesDialog extends JDialog {
         gradingRulesLabel = new JLabel();
         gradingRulesPanel = new JPanel();
         gradingListScrollPane = new JScrollPane();
-        gradingList = new JList();
+        gradingList = new JList<MarkingRule>();
         gradingRulesButtonPanel = new JPanel();
         gradingRuleUpButton = new JButton();
         gradingRuleDownButton = new JButton();
@@ -499,7 +499,7 @@ public class FormPropertiesDialog extends JDialog {
         xslReportDescriptionLabel = new JLabel();
         xslReportDescriptionHelpLabel = new JHelpLabel();
         xslFileListScrollPane = new JScrollPane();
-        xslFileList = new JList();
+        xslFileList = new JList<XSLTemplate>();
         xslFileListButtonPanel = new JPanel();
         xslFileUpButton = new JButton();
         xslFileDownButton = new JButton();
@@ -1470,7 +1470,7 @@ public class FormPropertiesDialog extends JDialog {
     private JLabel gradingRulesLabel;
     private JPanel gradingRulesPanel;
     private JScrollPane gradingListScrollPane;
-    private JList gradingList;
+    private JList<MarkingRule> gradingList;
     private JPanel gradingRulesButtonPanel;
     private JButton gradingRuleUpButton;
     private JButton gradingRuleDownButton;
@@ -1483,7 +1483,7 @@ public class FormPropertiesDialog extends JDialog {
     private JLabel xslReportDescriptionLabel;
     private JHelpLabel xslReportDescriptionHelpLabel;
     private JScrollPane xslFileListScrollPane;
-    private JList xslFileList;
+    private JList<XSLTemplate> xslFileList;
     private JPanel xslFileListButtonPanel;
     private JButton xslFileUpButton;
     private JButton xslFileDownButton;

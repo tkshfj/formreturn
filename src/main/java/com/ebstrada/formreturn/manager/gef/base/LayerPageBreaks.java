@@ -62,7 +62,7 @@ public class LayerPageBreaks extends Layer {
         _pageSize = d;
     }
 
-    @Override public List getContents() {
+    @Override public List<Fig> getContents() {
         return null;
     }
 

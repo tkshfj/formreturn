@@ -409,11 +409,11 @@ public class FormFrame extends EditorFrame {
             getGraph().setCurrentPageNumber(nextPageNumber);
 
             // 5. Load the figs from this page container to the active layer
-            List figs = nextPageContainer.getFigs();
+            List<Fig> figs = nextPageContainer.getFigs();
             if (figs != null) {
                 Layer lay = getGraph().getEditor().getLayerManager().getActiveLayer();
-                for (Iterator it = figs.iterator(); it.hasNext(); ) {
-                    Fig fig = (Fig) it.next();
+                for (Iterator<Fig> it = figs.iterator(); it.hasNext(); ) {
+                    Fig fig = it.next();
                     lay.add(fig);
                 }
             }
@@ -467,11 +467,11 @@ public class FormFrame extends EditorFrame {
                 getGraph().setCurrentPageNumber(nextPageNumber);
 
                 // 4. Load the figs from this page container to the active layer
-                List figs = nextPageContainer.getFigs();
+                List<Fig> figs = nextPageContainer.getFigs();
                 if (figs != null) {
                     Layer lay = getGraph().getEditor().getLayerManager().getActiveLayer();
-                    for (Iterator it = figs.iterator(); it.hasNext(); ) {
-                        Fig fig = (Fig) it.next();
+                    for (Iterator<Fig> it = figs.iterator(); it.hasNext(); ) {
+                        Fig fig = it.next();
                         lay.add(fig);
                     }
                 }
@@ -519,11 +519,11 @@ public class FormFrame extends EditorFrame {
             getGraph().setCurrentPageNumber(nextPageNumber);
 
             // 5. Load the figs from this page container to the active layer
-            List figs = nextPageContainer.getFigs();
+            List<Fig> figs = nextPageContainer.getFigs();
             if (figs != null) {
                 Layer lay = getGraph().getEditor().getLayerManager().getActiveLayer();
-                for (Iterator it = figs.iterator(); it.hasNext(); ) {
-                    Fig fig = (Fig) it.next();
+                for (Iterator<Fig> it = figs.iterator(); it.hasNext(); ) {
+                    Fig fig = it.next();
                     lay.add(fig);
                 }
             }
@@ -698,11 +698,11 @@ public class FormFrame extends EditorFrame {
             // 2.3 Set the new current page number then load the new page
             Page nextPageContainer = getGraph().getDocument().getPageByPageNumber(newPageNumber);
             getGraph().setCurrentPageNumber(newPageNumber);
-            List figs = nextPageContainer.getFigs();
+            List<Fig> figs = nextPageContainer.getFigs();
             if (figs != null) {
                 Layer lay = getGraph().getEditor().getLayerManager().getActiveLayer();
-                for (Iterator it = figs.iterator(); it.hasNext(); ) {
-                    Fig fig = (Fig) it.next();
+                for (Iterator<Fig> it = figs.iterator(); it.hasNext(); ) {
+                    Fig fig = it.next();
                     lay.add(fig);
                 }
             }
@@ -1283,11 +1283,11 @@ public class FormFrame extends EditorFrame {
     }
 
     public void addFigsToActiveLayer() {
-        List figs = getGraph().getEditor().getLayerManager().getContents();
+        List<Fig> figs = getGraph().getEditor().getLayerManager().getContents();
         if (figs != null) {
             Layer lay = getGraph().getEditor().getLayerManager().getActiveLayer();
-            for (Iterator it = figs.iterator(); it.hasNext(); ) {
-                Fig fig = (Fig) it.next();
+            for (Iterator<Fig> it = figs.iterator(); it.hasNext(); ) {
+                Fig fig = it.next();
                 fig.setLayer(lay);
             }
         }

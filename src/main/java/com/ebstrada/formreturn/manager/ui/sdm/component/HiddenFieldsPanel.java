@@ -74,7 +74,7 @@ public class HiddenFieldsPanel extends JPanel {
         hideFromViewButton = new JButton();
         hiddenFieldsListPanel = new JPanel();
         hiddenFieldsListScrollPane = new JScrollPane();
-        hiddenFieldsList = new JList();
+        hiddenFieldsList = new JList<String>();
         hiddenFieldsListButtonPanel = new JPanel();
         removeFromViewButton = new JButton();
 
@@ -202,7 +202,7 @@ public class HiddenFieldsPanel extends JPanel {
     private JButton hideFromViewButton;
     private JPanel hiddenFieldsListPanel;
     private JScrollPane hiddenFieldsListScrollPane;
-    private JList hiddenFieldsList;
+    private JList<String> hiddenFieldsList;
     private JPanel hiddenFieldsListButtonPanel;
     private JButton removeFromViewButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

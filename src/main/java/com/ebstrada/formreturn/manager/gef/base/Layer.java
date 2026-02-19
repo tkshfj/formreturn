@@ -96,7 +96,7 @@ public abstract class Layer implements java.io.Serializable {
      * A list of the Editors that are displaying this Layer. Use addEditor(),
      * removeEditor() and getEditors() to access this.
      */
-    private transient List _editors = new ArrayList();
+    private transient List<Editor> _editors = new ArrayList<Editor>();
 
     // //////////////////////////////////////////////////////////////
     // constructors
@@ -227,13 +227,13 @@ public abstract class Layer implements java.io.Serializable {
      *
      * @return the figs
      */
-    abstract public List getContents();
+    abstract public List<Fig> getContents();
 
     /**
      * Return the list of Editors that are showing this Layer.
      */
-    public List getEditors() {
-        return new ArrayList(_editors);
+    public List<Editor> getEditors() {
+        return new ArrayList<Editor>(_editors);
     }
 
     /**
@@ -451,7 +451,7 @@ public abstract class Layer implements java.io.Serializable {
      */
     public void addEditor(Editor ed) {
         if (_editors == null) {
-            _editors = new ArrayList();
+            _editors = new ArrayList<Editor>();
         }
         _editors.add(ed);
     }

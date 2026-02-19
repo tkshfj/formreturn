@@ -89,21 +89,21 @@ public class SelectionManager
     /**
      * All of the nodes being dragged
      */
-    private List _draggingNodes;
+    private List<Fig> _draggingNodes;
     /**
      * All the edges that have both ends attached to nodes that are being
      * dragged (they will also be dragged).
      */
-    private List _draggingMovingEdges;
+    private List<Fig> _draggingMovingEdges;
     /**
      * Edges that only have one end attached to an edge being dragged (they will
      * be reshaped)
      */
-    private List _draggingNonMovingEdges;
+    private List<Fig> _draggingNonMovingEdges;
     /**
      * Other Figs that are being dragged (ie primitives)
      */
-    private List _draggingOthers;
+    private List<Fig> _draggingOthers;
 
     // //////////////////////////////////////////////////////////////
     // constructor
@@ -377,8 +377,8 @@ public class SelectionManager
      * Get a collection of Figs that will be dragged as a result of dragging
      * this selection.
      */
-    public List getDraggableFigs() {
-        List figs = new ArrayList(getFigs());
+    public List<Fig> getDraggableFigs() {
+        List<Fig> figs = new ArrayList<Fig>(getFigs());
         return figs;
     }
 
@@ -387,7 +387,7 @@ public class SelectionManager
      */
     public void endTrans() {
         int selSize = selections.size();
-        List affected = new ArrayList();
+        List<Fig> affected = new ArrayList<Fig>();
         for (int i = 0; i < selSize; ++i) {
             Selection s = (Selection) selections.get(i);
             addEnclosed(affected, s.getContent());
@@ -565,7 +565,7 @@ public class SelectionManager
     protected void addEnclosed(Collection affected, Fig f) {
         if (!affected.contains(f)) {
             affected.add(f);
-            List enclosed = f.getEnclosedFigs();
+            List<Fig> enclosed = f.getEnclosedFigs();
             if (enclosed != null) {
                 int size = enclosed.size();
                 for (int i = 0; i < size; ++i) {
@@ -580,11 +580,11 @@ public class SelectionManager
         // any other mementos that the framework would normally create for
         // us. So make sure generate mementos is turned off during drag.
 
-        List draggingFigs = new ArrayList();
-        _draggingNodes = new ArrayList();
-        _draggingMovingEdges = new ArrayList();
-        _draggingNonMovingEdges = new ArrayList();
-        _draggingOthers = new ArrayList();
+        List<Fig> draggingFigs = new ArrayList<Fig>();
+        _draggingNodes = new ArrayList<Fig>();
+        _draggingMovingEdges = new ArrayList<Fig>();
+        _draggingNonMovingEdges = new ArrayList<Fig>();
+        _draggingOthers = new ArrayList<Fig>();
 
         int selectionCount = selections.size();
         for (int selectionIndex = 0; selectionIndex < selectionCount; ++selectionIndex) {
@@ -598,7 +598,7 @@ public class SelectionManager
             _draggingOthers.add(fig);
         }
 
-        List topLeftList = (_draggingNodes.size() > 0 ? _draggingNodes : _draggingOthers);
+        List<Fig> topLeftList = (_draggingNodes.size() > 0 ? _draggingNodes : _draggingOthers);
         int s = topLeftList.size();
         for (int i = 0; i < s; ++i) {
             Fig fig = (Fig) topLeftList.get(i);
@@ -658,7 +658,7 @@ public class SelectionManager
         }
 
         if (layer != null) {
-            List editors = layer.getEditors();
+            List<Editor> editors = layer.getEditors();
             int editorCount = editors.size();
             Rectangle dirtyRegionScaled = new Rectangle();
             for (int editorIndex = 0; editorIndex < editorCount; ++editorIndex) {
@@ -1032,17 +1032,17 @@ public class SelectionManager
 
     class DragMemento extends Memento {
 
-        List draggingNodes;
-        List draggingOthers;
-        List bounds;
+        List<Fig> draggingNodes;
+        List<Fig> draggingOthers;
+        List<Rectangle> bounds;
 
-        List movingEdges;
-        List nonMovingEdges;
-        List points;
+        List<Fig> movingEdges;
+        List<Fig> nonMovingEdges;
+        List<Point> points;
 
-        public DragMemento(List draggingNodes, List draggingOthers, List movingEdges,
-            List nonMovingEdges) {
-            bounds = new ArrayList(draggingOthers.size());
+        public DragMemento(List<Fig> draggingNodes, List<Fig> draggingOthers, List<Fig> movingEdges,
+            List<Fig> nonMovingEdges) {
+            bounds = new ArrayList<Rectangle>(draggingOthers.size());
 
             this.draggingOthers = draggingOthers;
             Iterator otherIt = draggingOthers.iterator();
@@ -1059,7 +1059,7 @@ public class SelectionManager
             Iterator boundsIt = bounds.iterator();
 
             // Create an array to store each node's current boundaries
-            List oldBounds = new ArrayList(draggingOthers.size());
+            List<Rectangle> oldBounds = new ArrayList<Rectangle>(draggingOthers.size());
 
 
             Iterator otherIt = draggingOthers.iterator();
@@ -1091,14 +1091,14 @@ public class SelectionManager
 
     class SelectionMemento extends Memento {
 
-        ArrayList prevSelections;
+        ArrayList<Selection> prevSelections;
 
         public SelectionMemento() {
-            prevSelections = new ArrayList(selections);
+            prevSelections = new ArrayList<Selection>(selections);
         }
 
         public void undo() {
-            ArrayList curSelections = new ArrayList(selections);
+            ArrayList<Selection> curSelections = new ArrayList<Selection>(selections);
             selections = prevSelections;
             prevSelections = curSelections;
             _editor.damageAll();

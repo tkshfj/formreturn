@@ -270,7 +270,7 @@ public class ModeModify extends FigModifyingModeImpl {
         me.consume();
         SelectionManager sm = editor.getSelectionManager();
         sm.stopDrag();
-        List figs = sm.getFigs();
+        List<Fig> figs = sm.getFigs();
         int figCount = figs.size();
         for (int figIndex = 0; figIndex < figCount; ++figIndex) {
             Fig selectedFig = (Fig) figs.get(figIndex);
@@ -315,7 +315,7 @@ public class ModeModify extends FigModifyingModeImpl {
 
     private void legal(int dx, int dy, SelectionManager selectionManager) {
 
-        List figs = selectionManager.getFigs();
+        List<Fig> figs = selectionManager.getFigs();
         int figCount = figs.size();
         Rectangle figBounds = new Rectangle();
         Fig selectedFig = null;

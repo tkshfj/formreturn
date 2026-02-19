@@ -31,7 +31,7 @@ public class AlignAction extends UndoableAction {
 
     public static final int ALIGN_TO_GRID = 7;
 
-    private List figs;
+    private List<Fig> figs;
 
     /**
      * Specification of the type of alignment requested
@@ -52,7 +52,7 @@ public class AlignAction extends UndoableAction {
         direction = dir;
     }
 
-    public AlignAction(int dir, List figs) {
+    public AlignAction(int dir, List<Fig> figs) {
         super("Align" + wordFor(dir)); // needs-more-work:
         // direction
         direction = dir;

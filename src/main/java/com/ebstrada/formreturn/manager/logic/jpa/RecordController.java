@@ -44,7 +44,7 @@ public class RecordController {
                 sourceFieldQuery.setParameter("sourceFieldName", columnNames[i].trim());
                 sourceFieldQuery.setParameter("dataSetId", dataSet);
 
-                List resultList = sourceFieldQuery.getResultList();
+                List<?> resultList = sourceFieldQuery.getResultList();
                 SourceField sourceField;
 
                 if (resultList.size() <= 0) {

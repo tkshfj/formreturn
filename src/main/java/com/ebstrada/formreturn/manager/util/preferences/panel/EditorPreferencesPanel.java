@@ -560,7 +560,7 @@ public class EditorPreferencesPanel extends JPanel {
         customizedSegmentSizesHeadingLabel = new JLabel();
         panel6 = new JPanel();
         scrollPane1 = new JScrollPane();
-        segmentSizesList = new JList();
+        segmentSizesList = new JList<String>();
         panel4 = new JPanel();
         restoreDefaultSegmentSizesButton = new JButton();
         addNewSegmentSizeButton = new JButton();
@@ -570,7 +570,7 @@ public class EditorPreferencesPanel extends JPanel {
         customizedFormSizesHeadingLabel = new JLabel();
         panel8 = new JPanel();
         scrollPane2 = new JScrollPane();
-        formSizesList = new JList();
+        formSizesList = new JList<String>();
         panel9 = new JPanel();
         restoreDefaultFormSizesButton = new JButton();
         addNewFormSizeButton = new JButton();
@@ -1010,7 +1010,7 @@ public class EditorPreferencesPanel extends JPanel {
     private JLabel customizedSegmentSizesHeadingLabel;
     private JPanel panel6;
     private JScrollPane scrollPane1;
-    private JList segmentSizesList;
+    private JList<String> segmentSizesList;
     private JPanel panel4;
     private JButton restoreDefaultSegmentSizesButton;
     private JButton addNewSegmentSizeButton;
@@ -1020,7 +1020,7 @@ public class EditorPreferencesPanel extends JPanel {
     private JLabel customizedFormSizesHeadingLabel;
     private JPanel panel8;
     private JScrollPane scrollPane2;
-    private JList formSizesList;
+    private JList<String> formSizesList;
     private JPanel panel9;
     private JButton restoreDefaultFormSizesButton;
     private JButton addNewFormSizeButton;

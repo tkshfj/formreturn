@@ -681,7 +681,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
      *
      * @return the list of gravity points.
      */
-    public List getGravityPoints() {
+    public List<Point> getGravityPoints() {
         return null;
     }
 
@@ -741,7 +741,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
             return "LAYER_NULL";
         }
 
-        List c = (List) layer.getContents();
+        List<?> c = (List<?>) layer.getContents();
         int index = c.indexOf(this);
         return "Fig" + index;
     }

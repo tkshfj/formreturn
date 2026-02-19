@@ -13,7 +13,7 @@ public class SegmentContainer implements Serializable, NoObfuscation {
 
     @XStreamAlias("segments") private ArrayList<Document> segments = new ArrayList<Document>();
 
-    @XStreamAlias("segmentLinkIDs") private ArrayList linkIDs = new ArrayList();
+    @XStreamAlias("segmentLinkIDs") private ArrayList<String> linkIDs = new ArrayList<String>();
 
     private String defaultSelectedSegment = "Random";
 
@@ -71,11 +71,11 @@ public class SegmentContainer implements Serializable, NoObfuscation {
         return -1;
     }
 
-    public ArrayList getLinkIDs() {
+    public ArrayList<String> getLinkIDs() {
         return linkIDs;
     }
 
-    public void setLinkIDs(ArrayList newLinkIDs) {
+    public void setLinkIDs(ArrayList<String> newLinkIDs) {
         linkIDs = newLinkIDs;
     }
 

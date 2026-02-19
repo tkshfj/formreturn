@@ -344,7 +344,7 @@ public class FormProcessor extends Thread {
                     entityManager.createNamedQuery("IncomingImage.findByMatchStatus");
                 incomingImageQuery.setParameter("matchStatus", (short) 0);
 
-                List resultList = incomingImageQuery.getResultList();
+                List<IncomingImage> resultList = incomingImageQuery.getResultList();
                 if (resultList.size() > 0) {
                     doLoop = true;
 

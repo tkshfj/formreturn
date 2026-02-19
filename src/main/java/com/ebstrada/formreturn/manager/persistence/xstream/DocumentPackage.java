@@ -137,28 +137,28 @@ public class DocumentPackage {
         ZipOutputStream zos = new ZipOutputStream(fileOutputStream);
         addZipEntryFile(documentFile, zos, "", true);
 
-        List images = document.getImages();
-        for (Iterator it = images.iterator(); it.hasNext(); ) {
+        List<String> images = document.getImages();
+        for (Iterator<String> it = images.iterator(); it.hasNext(); ) {
             addZipEntryFile(new File(
                     getWorkingDirName() + System.getProperty("file.separator") + "images" + System
-                        .getProperty("file.separator") + (String) it.next()), zos,
+                        .getProperty("file.separator") + it.next()), zos,
                 "images" + System.getProperty("file.separator"), true);
         }
 
-        List fonts = document.getFonts();
-        for (Iterator it = fonts.iterator(); it.hasNext(); ) {
+        List<String> fonts = document.getFonts();
+        for (Iterator<String> it = fonts.iterator(); it.hasNext(); ) {
             addZipEntryFile(new File(
                     getWorkingDirName() + System.getProperty("file.separator") + "fonts" + System
-                        .getProperty("file.separator") + (String) it.next()), zos,
+                        .getProperty("file.separator") + it.next()), zos,
                 "fonts" + System.getProperty("file.separator"), true);
         }
 
-        List xsl = document.getXSLTemplates();
+        List<String> xsl = document.getXSLTemplates();
         if (xsl != null) {
-            for (Iterator it = xsl.iterator(); it.hasNext(); ) {
+            for (Iterator<String> it = xsl.iterator(); it.hasNext(); ) {
                 addZipEntryFile(new File(
                         getWorkingDirName() + System.getProperty("file.separator") + "xsl" + System
-                            .getProperty("file.separator") + (String) it.next()), zos,
+                            .getProperty("file.separator") + it.next()), zos,
                     "xsl" + System.getProperty("file.separator"), true);
             }
         }
@@ -175,35 +175,35 @@ public class DocumentPackage {
     public void removeUnlinkedResources() {
 
         // clone the images array
-        List imagesClone = ((List) ((ArrayList) getDocument().getImages()).clone());
+        List<String> imagesClone = new ArrayList<String>(getDocument().getImages());
 
         // clone the fonts array
-        List fontsClone = ((List) ((ArrayList) getDocument().getFonts()).clone());
+        List<String> fontsClone = new ArrayList<String>(getDocument().getFonts());
 
-        Map pages = (Map) getDocument().getPages();
-        Collection pagesCollection = pages.values();
-        for (Iterator pageIterator = pagesCollection.iterator(); pageIterator.hasNext(); ) {
-            Page page = (Page) pageIterator.next();
-            List figs = page.getFigs();
+        Map<String, Page> pages = getDocument().getPages();
+        Collection<Page> pagesCollection = pages.values();
+        for (Iterator<Page> pageIterator = pagesCollection.iterator(); pageIterator.hasNext(); ) {
+            Page page = pageIterator.next();
+            ArrayList<Fig> figs = page.getFigs();
             if (figs != null) {
-                for (Iterator figIterator = figs.iterator(); figIterator.hasNext(); ) {
-                    Fig fig = (Fig) figIterator.next();
+                for (Iterator<Fig> figIterator = figs.iterator(); figIterator.hasNext(); ) {
+                    Fig fig = figIterator.next();
                     if (fig instanceof FigSegment) {
-                        List segments =
-                            (List) ((FigSegment) fig).getSegmentContainer().getSegments();
-                        for (Iterator segmentIterator = segments.iterator(); segmentIterator
+                        List<Document> segments =
+                            ((FigSegment) fig).getSegmentContainer().getSegments();
+                        for (Iterator<Document> segmentIterator = segments.iterator(); segmentIterator
                             .hasNext(); ) {
-                            Document segment = (Document) segmentIterator.next();
-                            Map segmentPages = (Map) segment.getPages();
-                            Collection segmentPagesCollection = segmentPages.values();
-                            for (Iterator segmentPageIterator =
+                            Document segment = segmentIterator.next();
+                            Map<String, Page> segmentPages = segment.getPages();
+                            Collection<Page> segmentPagesCollection = segmentPages.values();
+                            for (Iterator<Page> segmentPageIterator =
                                  segmentPagesCollection.iterator(); segmentPageIterator
                                      .hasNext(); ) {
-                                Page segmentPage = (Page) segmentPageIterator.next();
-                                List segmentFigs = segmentPage.getFigs();
-                                for (Iterator segmentFigIterator =
+                                Page segmentPage = segmentPageIterator.next();
+                                ArrayList<Fig> segmentFigs = segmentPage.getFigs();
+                                for (Iterator<Fig> segmentFigIterator =
                                      segmentFigs.iterator(); segmentFigIterator.hasNext(); ) {
-                                    Fig segmentFig = (Fig) segmentFigIterator.next();
+                                    Fig segmentFig = segmentFigIterator.next();
                                     if (segmentFig instanceof FigImage) {
                                         String imageFileName =
                                             ((FigImage) segmentFig).getImageFileName();
@@ -231,14 +231,14 @@ public class DocumentPackage {
             }
         }
 
-        for (Iterator imagesCloneIterator = imagesClone.iterator(); imagesCloneIterator
+        for (Iterator<String> imagesCloneIterator = imagesClone.iterator(); imagesCloneIterator
             .hasNext(); ) {
-            String imageFileName = (String) imagesCloneIterator.next();
+            String imageFileName = imagesCloneIterator.next();
             getDocument().getImages().remove(imageFileName);
         }
 
-        for (Iterator fontsCloneIterator = fontsClone.iterator(); fontsCloneIterator.hasNext(); ) {
-            String fontFileName = (String) fontsCloneIterator.next();
+        for (Iterator<String> fontsCloneIterator = fontsClone.iterator(); fontsCloneIterator.hasNext(); ) {
+            String fontFileName = fontsCloneIterator.next();
             getDocument().getFonts().remove(fontFileName);
         }
 

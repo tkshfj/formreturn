@@ -182,7 +182,7 @@ public class LayerDiagram extends Layer {
     /**
      * Reply the contents of this layer. Do I really want to do this?
      */
-    @Override public List getContents() {
+    @Override public List<Fig> getContents() {
         return Collections.unmodifiableList(_contents);
     }
 
@@ -237,8 +237,8 @@ public class LayerDiagram extends Layer {
      * Find the all Figs that visualise the given model element in this layer,
      * or null if there is none.
      */
-    public List presentationsFor(Object obj) {
-        ArrayList presentations = new ArrayList();
+    public List<Fig> presentationsFor(Object obj) {
+        ArrayList<Fig> presentations = new ArrayList<Fig>();
         int figCount = _contents.size();
         for (int figIndex = 0; figIndex < figCount; ++figIndex) {
             Fig fig = (Fig) _contents.get(figIndex);
@@ -279,9 +279,9 @@ public class LayerDiagram extends Layer {
      */
     @Override public void paintContents(Graphics g, FigPainter painter) {
         Rectangle clipBounds = g.getClipBounds();
-        Iterator figsIter;
+        Iterator<Fig> figsIter;
         synchronized (_contents) {
-            figsIter = (new ArrayList(_contents)).iterator();
+            figsIter = (new ArrayList<Fig>(_contents)).iterator();
         }
         while (figsIter.hasNext()) {
             Fig fig = (Fig) figsIter.next();

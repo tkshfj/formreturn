@@ -140,7 +140,7 @@ public class LayerGrid extends Layer {
     // //////////////////////////////////////////////////////////////
     // accessors
 
-    @Override public List getContents() {
+    @Override public List<Fig> getContents() {
         return null;
     }
 

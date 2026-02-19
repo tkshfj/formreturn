@@ -139,7 +139,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
                 int maximumOrderIndex = 0;
 
-                List layerContents = graph.getEditor().getLayerManager().getContents();
+                List<?> layerContents = graph.getEditor().getLayerManager().getContents();
                 for (int j = 0; j < layerContents.size(); j++) {
                     Fig fig = (Fig) layerContents.get(j);
                     if (fig instanceof FigBarcodeReader) {
@@ -179,7 +179,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
                     boolean nomatch = true;
 
-                    List layerContents = graph.getEditor().getLayerManager().getContents();
+                    List<?> layerContents = graph.getEditor().getLayerManager().getContents();
                     for (int j = 0; j < layerContents.size(); j++) {
                         Fig fig = (Fig) layerContents.get(j);
                         if (fig instanceof FigBarcodeReader) {

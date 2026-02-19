@@ -39,9 +39,9 @@ public interface GraphController extends java.io.Serializable {
      */
     public boolean containsEdge(Object edge);
 
-    public List getNodes();
+    public List<Object> getNodes();
 
-    public List getEdges();
+    public List<Object> getEdges();
 
     /**
      * Counts the number of presentations known to the GraphController for the

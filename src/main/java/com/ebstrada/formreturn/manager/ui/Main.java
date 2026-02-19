@@ -1462,11 +1462,11 @@ public class Main extends JFrame {
                         graph.setCurrentPageNumber(1);
                         graph.setPageAttributes(pageContainer.getPageAttributes());
 
-                        List figs = pageContainer.getFigs();
+                        List<Fig> figs = pageContainer.getFigs();
                         if (figs != null) {
                             Layer lay = graph.getEditor().getLayerManager().getActiveLayer();
-                            for (Iterator it = figs.iterator(); it.hasNext(); ) {
-                                Fig fig = (Fig) it.next();
+                            for (Iterator<Fig> it = figs.iterator(); it.hasNext(); ) {
+                                Fig fig = it.next();
                                 // this loads the reverse way to the editor.add() method.
                                 // this is because we don't want to be notified of the layer adding as a change when loading.
                                 lay.add(fig);

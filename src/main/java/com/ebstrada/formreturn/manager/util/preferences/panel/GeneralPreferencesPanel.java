@@ -340,7 +340,7 @@ public class GeneralPreferencesPanel extends JPanel {
         panel6 = new JPanel();
         panel19 = new JPanel();
         scrollPane1 = new JScrollPane();
-        fontDirectoriesList = new JList();
+        fontDirectoriesList = new JList<Object>();
         panel8 = new JPanel();
         resetFontPathsButton = new JButton();
         addFontDirectoryButton = new JButton();
@@ -850,7 +850,7 @@ public class GeneralPreferencesPanel extends JPanel {
     private JPanel panel6;
     private JPanel panel19;
     private JScrollPane scrollPane1;
-    private JList fontDirectoriesList;
+    private JList<Object> fontDirectoriesList;
     private JPanel panel8;
     private JButton resetFontPathsButton;
     private JButton addFontDirectoryButton;

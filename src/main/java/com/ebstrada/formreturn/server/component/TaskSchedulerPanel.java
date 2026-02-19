@@ -628,7 +628,7 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         taskListPanel = new JPanel();
         taskListScrollPane = new JScrollPane();
-        taskList = new JList();
+        taskList = new JList<TaskSchedulerJob>();
         taskListButtonPanel = new JPanel();
         createFolderMonitorTaskButton = new JButton();
         removeTaskButton = new JButton();
@@ -815,7 +815,7 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel taskListPanel;
     private JScrollPane taskListScrollPane;
-    private JList taskList;
+    private JList<TaskSchedulerJob> taskList;
     private JPanel taskListButtonPanel;
     private JButton createFolderMonitorTaskButton;
     private JButton removeTaskButton;

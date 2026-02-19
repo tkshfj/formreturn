@@ -23,7 +23,7 @@ public class LayerManager implements java.io.Serializable {
     /**
      * The Layer's contained within this LayerManager.
      */
-    protected List _layers = new ArrayList();
+    protected List<Layer> _layers = new ArrayList<Layer>();
 
     /**
      * In most editors one Layer is the active layer and all mouse clicks go to
@@ -158,7 +158,7 @@ public class LayerManager implements java.io.Serializable {
      * contained in this layer, reply the contents of my active layer. Maybe
      * this should really reply _all_ the contents of all layers.
      */
-    public List getContents() {
+    public List<Fig> getContents() {
         return (_activeLayer == null) ? null : _activeLayer.getContents();
     }
 
@@ -167,7 +167,7 @@ public class LayerManager implements java.io.Serializable {
      * contained in this layer, reply the contents of my active layer. Maybe
      * this should really reply _all_ the contents of all layers.
      */
-    public List getContents(List oldList) {
+    public List<Fig> getContents(List<Fig> oldList) {
         return (_activeLayer == null) ? null : _activeLayer.getContents();
     }
 

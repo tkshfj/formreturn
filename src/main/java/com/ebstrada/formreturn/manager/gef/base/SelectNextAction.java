@@ -144,7 +144,7 @@ public class SelectNextAction extends AbstractAction {
         }
         Editor ce = Globals.curEditor();
         SelectionManager sm = ce.getSelectionManager();
-        List diagramContents = ce.getLayerManager().getContents();
+        List<Fig> diagramContents = ce.getLayerManager().getContents();
         int diagramSize = diagramContents.size();
         int newIndex = diagramSize + 1;
 

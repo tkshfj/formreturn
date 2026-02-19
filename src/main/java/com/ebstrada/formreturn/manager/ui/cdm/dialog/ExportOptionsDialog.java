@@ -1885,12 +1885,12 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
         availableColumnsLabel = new JLabel();
         includedColumnsLabel = new JLabel();
         includedColumnsScrollPane = new JScrollPane();
-        availableColumnsList = new JList();
+        availableColumnsList = new JList<ColumnOption>();
         addRemoveColumnsPanel = new JPanel();
         addColumnButton = new JButton();
         removeColumnButton = new JButton();
         includedColumnsListScrollPane = new JScrollPane();
-        includedColumnsList = new JList();
+        includedColumnsList = new JList<ColumnOption>();
         columnsUpDownPanel = new JPanel();
         columnUpButton = new JButton();
         columnDownButton = new JButton();
@@ -1975,7 +1975,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
         setAsXMLDefaultButton = new JButton();
         xslTemplatePanel = new JPanel();
         xslTemplateListScrollPane = new JScrollPane();
-        xslTemplateList = new JList();
+        xslTemplateList = new JList<XSLTemplate>();
         xmlExportButtonsPanel = new JPanel();
         createXSLFOReportButton = new JButton();
         exportXMLButton = new JButton();
@@ -3235,12 +3235,12 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
     private JLabel availableColumnsLabel;
     private JLabel includedColumnsLabel;
     private JScrollPane includedColumnsScrollPane;
-    private JList availableColumnsList;
+    private JList<ColumnOption> availableColumnsList;
     private JPanel addRemoveColumnsPanel;
     private JButton addColumnButton;
     private JButton removeColumnButton;
     private JScrollPane includedColumnsListScrollPane;
-    private JList includedColumnsList;
+    private JList<ColumnOption> includedColumnsList;
     private JPanel columnsUpDownPanel;
     private JButton columnUpButton;
     private JButton columnDownButton;
@@ -3325,7 +3325,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
     private JButton setAsXMLDefaultButton;
     private JPanel xslTemplatePanel;
     private JScrollPane xslTemplateListScrollPane;
-    private JList xslTemplateList;
+    private JList<XSLTemplate> xslTemplateList;
     private JPanel xmlExportButtonsPanel;
     private JButton createXSLFOReportButton;
     private JButton exportXMLButton;

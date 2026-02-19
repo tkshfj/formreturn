@@ -123,9 +123,9 @@ public class FigCheckboxProperties extends JDialog {
     public boolean existsDuplicateFieldname(String newFieldName) {
 
         if (figCheckbox != null) {
-            List layerContents = figCheckbox.getGraph().getEditor().getLayerManager().getContents();
+            List<Fig> layerContents = figCheckbox.getGraph().getEditor().getLayerManager().getContents();
             for (int i = 0; i < layerContents.size(); i++) {
-                Fig fig = (Fig) layerContents.get(i);
+                Fig fig = layerContents.get(i);
                 if (fig instanceof FigCheckbox) {
                     if (fig == figCheckbox) {
                         continue;

@@ -223,7 +223,7 @@ public class DatabasePreferencesPanel extends JPanel {
         localDatabasesHeadingLabel = new JLabel();
         panel8 = new JPanel();
         scrollPane1 = new JScrollPane();
-        localDatabaseList = new JList();
+        localDatabaseList = new JList<String>();
         panel1 = new JPanel();
         refreshLocalDatabaseListButton = new JButton();
         setAsActiveDatabaseButton = new JButton();
@@ -624,7 +624,7 @@ public class DatabasePreferencesPanel extends JPanel {
     private JLabel localDatabasesHeadingLabel;
     private JPanel panel8;
     private JScrollPane scrollPane1;
-    private JList localDatabaseList;
+    private JList<String> localDatabaseList;
     private JPanel panel1;
     private JButton refreshLocalDatabaseListButton;
     private JButton setAsActiveDatabaseButton;

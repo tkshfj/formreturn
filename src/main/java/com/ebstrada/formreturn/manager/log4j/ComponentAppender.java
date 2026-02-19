@@ -134,8 +134,8 @@ public class ComponentAppender extends AppenderSkeleton {
             ((JComboBox) comp).setModel(new DefaultComboBoxModel());
         }
         if (comp instanceof JList) {
-            ((JList) comp).setModel(new LoggingEventModel());
-            ((JList) comp).setCellRenderer(new PriorityListCellRenderer(true, true, this));
+            ((JList<?>) comp).setModel(new LoggingEventModel());
+            ((JList<?>) comp).setCellRenderer(new PriorityListCellRenderer(true, true, this));
         }
         if (comp instanceof JTable) {
             ((JTable) comp).setModel(new LoggingEventModel());
@@ -202,7 +202,7 @@ public class ComponentAppender extends AppenderSkeleton {
                     model.removeElementAt(0);
                 }
             } else if (comp instanceof JList) {
-                LoggingEventModel model = (LoggingEventModel) ((JList) comp).getModel();
+                LoggingEventModel model = (LoggingEventModel) ((JList<?>) comp).getModel();
                 for (int i = 0; i < toomuch; i++) {
                     model.removeElementAt(0);
                 }
@@ -380,7 +380,7 @@ public class ComponentAppender extends AppenderSkeleton {
             entries += 1;
             ((JComboBox) comp).setSelectedIndex(entries - 1);
         } else if (comp instanceof JList) {
-            LoggingEventModel model = (LoggingEventModel) ((JList) comp).getModel();
+            LoggingEventModel model = (LoggingEventModel) ((JList<?>) comp).getModel();
             if (entries == maxEntries) {
                 model.removeElementAt(0);
                 entries -= 1;
@@ -422,7 +422,7 @@ public class ComponentAppender extends AppenderSkeleton {
             DefaultComboBoxModel model = (DefaultComboBoxModel) ((JComboBox) comp).getModel();
             model.removeAllElements();
         } else if (comp instanceof JList) {
-            LoggingEventModel model = (LoggingEventModel) ((JList) comp).getModel();
+            LoggingEventModel model = (LoggingEventModel) ((JList<?>) comp).getModel();
             model.removeAllElements();
         } else if (comp instanceof JTable) {
             LoggingEventModel model = (LoggingEventModel) ((JTable) comp).getModel();

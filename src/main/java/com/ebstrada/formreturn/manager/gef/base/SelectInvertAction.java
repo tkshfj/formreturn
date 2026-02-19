@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
+import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 
 /**
@@ -67,13 +68,13 @@ public class SelectInvertAction extends AbstractAction {
 
     public void actionPerformed(ActionEvent e) {
         Editor ce = Globals.curEditor();
-        List selected = ce.getSelectionManager().getFigs();
-        List diagramContents = ce.getLayerManager().getContents();
-        List inverse = new ArrayList(diagramContents.size());
+        List<Fig> selected = ce.getSelectionManager().getFigs();
+        List<Fig> diagramContents = ce.getLayerManager().getContents();
+        List<Fig> inverse = new ArrayList<Fig>(diagramContents.size());
 
-        Iterator it = diagramContents.iterator();
+        Iterator<Fig> it = diagramContents.iterator();
         while (it.hasNext()) {
-            Object dc = it.next();
+            Fig dc = it.next();
             if (!selected.contains(dc)) {
                 inverse.add(dc);
             }

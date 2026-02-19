@@ -210,7 +210,7 @@ public class UndoManager {
      *
      * @param list the list of mementos
      */
-    private void emptyStack(List list) {
+    private void emptyStack(List<?> list) {
         for (int i = 0; i < list.size(); ++i) {
             ((Memento) list.get(i)).dispose();
         }

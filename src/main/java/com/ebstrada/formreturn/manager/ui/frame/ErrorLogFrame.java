@@ -55,7 +55,7 @@ public class ErrorLogFrame extends JPanel implements ClipboardOwner {
 
     private void button2ActionPerformed(ActionEvent e) {
         JScrollPane jsp = ((Main) mainFrame).getSystemConsoleScrollPane();
-        JList jlist = ((ListAppenderScrollPane) jsp).getList();
+        JList<?> jlist = ((ListAppenderScrollPane) jsp).getList();
         if (jlist.getSelectedIndex() == -1) {
             loggingEventModel.removeElementAt(0);
         } else {

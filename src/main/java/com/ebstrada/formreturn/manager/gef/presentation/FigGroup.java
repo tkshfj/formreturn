@@ -32,7 +32,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     /**
      * The Fig's contained in this FigGroup
      */
-    private ArrayList figs;
+    private ArrayList<Fig> figs;
 
     private int _extraFrameSpace = 0;
 
@@ -68,15 +68,15 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
      */
     public FigGroup() {
         super();
-        figs = new ArrayList();
+        figs = new ArrayList<Fig>();
     }
 
     /**
      * Construct a new FigGroup that holds the given Figs.
      */
-    public FigGroup(List figs) {
+    public FigGroup(List<Fig> figs) {
         super();
-        this.figs = new ArrayList(figs);
+        this.figs = new ArrayList<Fig>(figs);
         calcBounds();
     }
 
@@ -139,7 +139,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
         Fig f;
         for (int figIndex = 0; figIndex < figCount; ++figIndex) {
-            f = (Fig) this.figs.get(figIndex);
+            f = this.figs.get(figIndex);
             if (f.isVisible()) {
                 if (boundingBox == null) {
                     boundingBox = f.getBounds();
@@ -174,9 +174,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     @Override public Object clone() {
         FigGroup figClone = (FigGroup) super.clone();
         int figCount = this.figs.size();
-        ArrayList figsClone = new ArrayList(figCount);
+        ArrayList<Fig> figsClone = new ArrayList<Fig>(figCount);
         for (int i = 0; i < figCount; ++i) {
-            Fig tempFig = (Fig) this.figs.get(i);
+            Fig tempFig = this.figs.get(i);
             Fig tempFigClone = (Fig) tempFig.clone();
             figsClone.add(tempFigClone);
             tempFigClone.setGroup(figClone);
@@ -231,7 +231,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
      *
      * @return the figs of this group USED BY PGML.tee
      */
-    public List getFigs() {
+    public List<Fig> getFigs() {
         return Collections.unmodifiableList(this.figs);
     }
 
@@ -300,7 +300,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         Fig res = null;
         int figCount = this.figs.size();
         for (int figIndex = 0; figIndex < figCount; ++figIndex) {
-            Fig f = (Fig) this.figs.get(figIndex);
+            Fig f = this.figs.get(figIndex);
             if (f.hit(r)) {
                 res = f;
             }
@@ -383,7 +383,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
      */
     public Collection getDisplayedFigs(Collection c) {
         if (c == null) {
-            c = new ArrayList();
+            c = new ArrayList<Fig>();
         }
 
         int figCount = this.figs.size();
@@ -426,9 +426,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     /**
      * Set the Figs in this group. Fires PropertyChange with "bounds".
      */
-    public void setFigs(List figs) {
+    public void setFigs(List<Fig> figs) {
         Rectangle oldBounds = getBounds();
-        this.figs = new ArrayList(figs);
+        this.figs = new ArrayList<Fig>(figs);
         calcBounds();
         firePropChange("bounds", oldBounds, getBounds());
     }

@@ -87,7 +87,7 @@ public class NudgeAction extends UndoableAction {
         }
         // Should I move it so that it aligns with the next grid?
 
-        List figs = sm.getFigs();
+        List<Fig> figs = sm.getFigs();
         int figCount = figs.size();
         Rectangle figBounds = new Rectangle();
         Fig selectedFig = null;

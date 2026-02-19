@@ -29,7 +29,7 @@ public class DistributeAction extends UndoableAction {
      */
     private int _request;
     private Rectangle _bbox = null;
-    private List figs;
+    private List<Fig> figs;
     private Integer gap;
 
     /**
@@ -43,7 +43,7 @@ public class DistributeAction extends UndoableAction {
         _request = r;
     }
 
-    public DistributeAction(int r, List figs) {
+    public DistributeAction(int r, List<Fig> figs) {
         this(r);
         this.figs = figs;
     }
@@ -199,8 +199,8 @@ public class DistributeAction extends UndoableAction {
     public void undoIt() {
     }
 
-    protected void swap(List v, int i, int j) {
-        Object temp = v.get(i);
+    protected void swap(List<Fig> v, int i, int j) {
+        Fig temp = v.get(i);
         v.set(i, v.get(j));
         v.set(j, temp);
     }

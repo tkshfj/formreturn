@@ -1300,7 +1300,7 @@ public class ReprocessorFrame extends JPanel {
 
         FormReaderException fre = null;
 
-        List figs = _graph.getEditor().getLayerManager().getActiveLayer().getContents();
+        List<Fig> figs = _graph.getEditor().getLayerManager().getActiveLayer().getContents();
         for (Object obj : figs) {
             if (obj instanceof FigSegmentArea) {
                 FigSegmentArea figSegmentArea = (FigSegmentArea) obj;

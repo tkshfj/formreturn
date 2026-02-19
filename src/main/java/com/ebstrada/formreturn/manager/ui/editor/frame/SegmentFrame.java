@@ -159,11 +159,11 @@ public class SegmentFrame extends EditorFrame {
 
         ArrayList<FigBarcode> removeBarcodes = new ArrayList<FigBarcode>();
         Layer lay = _graph.getEditor().getLayerManager().getActiveLayer();
-        List figs = lay.getContents();
+        List<Fig> figs = lay.getContents();
         if (figs != null) {
-            Iterator fit = figs.iterator();
+            Iterator<Fig> fit = figs.iterator();
             while (fit.hasNext()) {
-                Fig fig = (Fig) fit.next();
+                Fig fig = fit.next();
                 if (fig instanceof FigBarcode) {
                     FigBarcode figBarcode = (FigBarcode) fig;
                     if (figBarcode.getLocked()) {
