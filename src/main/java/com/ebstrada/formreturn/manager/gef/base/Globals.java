@@ -369,7 +369,7 @@ public class Globals {
      * pointers that can reduce grabage collection.
      */
 
-    protected static HashMap _pcListeners = new HashMap();
+    protected static HashMap<Object, PropertyChangeListener[]> _pcListeners = new HashMap<Object, PropertyChangeListener[]>();
     protected static PropertyChangeListener universalListener = null;
 
     /**

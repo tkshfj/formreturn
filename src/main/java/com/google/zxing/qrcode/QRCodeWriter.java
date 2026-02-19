@@ -43,7 +43,7 @@ public final class QRCodeWriter implements Writer {
   }
 
   public ByteMatrix encode(String contents, BarcodeFormat format, int width, int height,
-      HashMap hints) throws WriterException {
+      HashMap<EncodeHintType, Object> hints) throws WriterException {
 
     if (contents == null || contents.length() == 0) {
       throw new IllegalArgumentException("Found empty contents");

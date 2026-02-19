@@ -26,7 +26,7 @@ public class ICAScanner {
 
     private String jscPath;
     private ArrayList<String> scannerNames = new ArrayList<String>();
-    private HashMap<String, LinkedTreeMap> scannerSettings = new HashMap<String, LinkedTreeMap>();
+    private HashMap<String, LinkedTreeMap<String, Object>> scannerSettings = new HashMap<String, LinkedTreeMap<String, Object>>();
     private boolean scannerBusy = false;
     private ICAListener scannerListener;
     private String selectedScanner;
@@ -139,7 +139,7 @@ public class ICAScanner {
                 if (line.matches("^\\{\\s*\"resp.*")) {
 
                     if (response != null) {
-                        LinkedTreeMap message = gson.fromJson(response, LinkedTreeMap.class);
+                        LinkedTreeMap<String, Object> message = gson.fromJson(response, LinkedTreeMap.class);
                         processResponse(message);
                     }
 
@@ -153,7 +153,7 @@ public class ICAScanner {
             }
 
             if (response != null) {
-                LinkedTreeMap message = gson.fromJson(response, LinkedTreeMap.class);
+                LinkedTreeMap<String, Object> message = gson.fromJson(response, LinkedTreeMap.class);
                 processResponse(message);
             }
 
@@ -173,7 +173,7 @@ public class ICAScanner {
 
     }
 
-    private void processResponse(LinkedTreeMap response) throws Exception {
+    private void processResponse(LinkedTreeMap<String, Object> response) throws Exception {
 
         String responseType = (String) response.get("response");
 
@@ -200,7 +200,7 @@ public class ICAScanner {
 
     }
 
-    private void statusUpdate(LinkedTreeMap response) {
+    private void statusUpdate(LinkedTreeMap<String, Object> response) {
         try {
             ICAScannerMetadata metadata = new ICAScannerMetadata();
             metadata.setResponse(response);
@@ -211,7 +211,7 @@ public class ICAScanner {
         }
     }
 
-    private void refreshComponents(LinkedTreeMap response) {
+    private void refreshComponents(LinkedTreeMap<String, Object> response) {
         try {
             ICAScannerMetadata metadata = new ICAScannerMetadata();
             metadata.setResponse(response);
@@ -243,7 +243,7 @@ public class ICAScanner {
 
                     scannerListener.update(ICAScannerMetadata.Type.ACQUIRE, metadata);
 
-                    LinkedTreeMap settings = scannerListener.getSettings();
+                    LinkedTreeMap<String, Object> settings = scannerListener.getSettings();
                     settings.put("base-directory", tempDirectory.getAbsolutePath());
                     Gson gson = new Gson();
 
@@ -295,7 +295,7 @@ public class ICAScanner {
                             if (line.matches("^\\{\\s*\"resp.*")) {
 
                                 if (response != null) {
-                                    LinkedTreeMap message =
+                                    LinkedTreeMap<String, Object> message =
                                         gson.fromJson(response, LinkedTreeMap.class);
                                     processResponse(message);
                                 }
@@ -310,7 +310,7 @@ public class ICAScanner {
                         }
 
                         if (response != null) {
-                            LinkedTreeMap message = gson.fromJson(response, LinkedTreeMap.class);
+                            LinkedTreeMap<String, Object> message = gson.fromJson(response, LinkedTreeMap.class);
                             processResponse(message);
                         }
 
@@ -361,7 +361,7 @@ public class ICAScanner {
         // no need to close jsonscan
     }
 
-    public HashMap<String, LinkedTreeMap> getScannerSettings() {
+    public HashMap<String, LinkedTreeMap<String, Object>> getScannerSettings() {
         return this.scannerSettings;
     }
 

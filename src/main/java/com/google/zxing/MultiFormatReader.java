@@ -34,7 +34,7 @@ import java.util.Vector;
  */
 public final class MultiFormatReader implements Reader {
 
-  private HashMap hints;
+  private HashMap<DecodeHintType, Object> hints;
   private Vector readers;
 
   /**
@@ -59,7 +59,7 @@ public final class MultiFormatReader implements Reader {
    * @return The contents of the image
    * @throws NotFoundException Any errors which occurred
    */
-  public Result decode(BinaryBitmap image, HashMap hints) throws NotFoundException {
+  public Result decode(BinaryBitmap image, HashMap<DecodeHintType, Object> hints) throws NotFoundException {
     setHints(hints);
     return decodeInternal(image);
   }
@@ -87,7 +87,7 @@ public final class MultiFormatReader implements Reader {
    *
    * @param hints The set of hints to use for subsequent calls to decode(image)
    */
-  public void setHints(HashMap hints) {
+  public void setHints(HashMap<DecodeHintType, Object> hints) {
     this.hints = hints;
 
     boolean tryHarder = hints != null && hints.containsKey(DecodeHintType.TRY_HARDER);

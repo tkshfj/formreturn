@@ -5,12 +5,12 @@ import java.util.HashMap;
 
 public class PropCategoryManager {
 
-    protected static HashMap _categories = new HashMap();
+    protected static HashMap<String, HashMap<String, String>> _categories = new HashMap<String, HashMap<String, String>>();
 
     public static void categorizeProperty(String catName, String propName) {
-        HashMap cat = (HashMap) _categories.get(catName);
+        HashMap<String, String> cat = _categories.get(catName);
         if (cat == null) {
-            cat = new HashMap();
+            cat = new HashMap<String, String>();
         }
         cat.put(propName, propName);
         _categories.put(catName, cat);
@@ -28,7 +28,7 @@ public class PropCategoryManager {
         if ("All".equals(catName)) {
             return true;
         }
-        HashMap cat = (HashMap) _categories.get(catName);
+        HashMap<String, String> cat = _categories.get(catName);
         if (cat == null) {
             return false;
         }

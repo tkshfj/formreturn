@@ -18,6 +18,7 @@ package com.google.zxing.multi;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
+import com.google.zxing.DecodeHintType;
 import com.google.zxing.FormatException;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.Reader;
@@ -47,7 +48,7 @@ public final class ByQuadrantReader implements Reader {
     return decode(image, null);
   }
 
-  public Result decode(BinaryBitmap image, HashMap hints)
+  public Result decode(BinaryBitmap image, HashMap<DecodeHintType, Object> hints)
       throws NotFoundException, ChecksumException, FormatException {
 
     int width = image.getWidth();

@@ -937,7 +937,7 @@ public class SelectionManager
      */
     public Class findCommonSuperClass() {
         Iterator selectionIter = selections.iterator();
-        Map superclasses = new HashMap();
+        Map<String, Integer> superclasses = new HashMap<String, Integer>();
         int maxCount = 0;
         Class maxClass = null;
         while (selectionIter.hasNext()) {

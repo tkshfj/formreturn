@@ -335,7 +335,7 @@ public class LayerGrid extends Layer {
      *
      * @see com.ebstrada.formreturn.manager.gef.base.Layer#adjust(java.util.HashMap)
      */
-    @Override public void adjust(HashMap map) {
+    @Override public void adjust(HashMap<String, Object> map) {
         super.adjust(map);
         Object m;
         _stamp = null;

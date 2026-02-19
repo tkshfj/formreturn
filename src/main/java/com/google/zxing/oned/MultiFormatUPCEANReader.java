@@ -38,7 +38,7 @@ public final class MultiFormatUPCEANReader extends OneDReader {
 
   private final Vector readers;
 
-  public MultiFormatUPCEANReader(HashMap hints) {
+  public MultiFormatUPCEANReader(HashMap<DecodeHintType, Object> hints) {
     Vector possibleFormats = hints == null ? null :
         (Vector) hints.get(DecodeHintType.POSSIBLE_FORMATS);
     readers = new Vector();
@@ -63,7 +63,7 @@ public final class MultiFormatUPCEANReader extends OneDReader {
     }
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, HashMap hints) throws NotFoundException {
+  public Result decodeRow(int rowNumber, BitArray row, HashMap<DecodeHintType, Object> hints) throws NotFoundException {
     // Compute this location once and reuse it on multiple implementations
     int[] startGuardPattern = UPCEANReader.findStartGuardPattern(row);
     int size = readers.size();

@@ -48,7 +48,7 @@ public class FigModifyingModeImpl extends ModeImpl implements FigModifyingMode {
      * parameter representing the the Editor, this Mode belongs to, should be
      * provided.
      */
-    public FigModifyingModeImpl(Map parameters) {
+    public FigModifyingModeImpl(Map<String, Object> parameters) {
         init(parameters);
     }
 

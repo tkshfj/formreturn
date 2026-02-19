@@ -19,8 +19,8 @@ import com.ebstrada.formreturn.manager.gef.util.Localizer;
 public class SetModeAction extends AbstractAction {
 
     private static final long serialVersionUID = -5362721817833001571L;
-    protected Map modeArgs;
-    protected Map args;
+    protected Map<String, Object> modeArgs;
+    protected Map<String, Object> args;
 
     /**
      * Creates a new SetModeAction
@@ -34,7 +34,10 @@ public class SetModeAction extends AbstractAction {
      */
     public SetModeAction(String name, Properties args) {
         super(name);
-        this.args = args;
+        this.args = new HashMap<String, Object>();
+        for (String key : args.stringPropertyNames()) {
+            this.args.put(key, args.getProperty(key));
+        }
     }
 
     /**
@@ -102,7 +105,7 @@ public class SetModeAction extends AbstractAction {
     /**
      * Set the next global mode to the named mode, and set all arguments.
      */
-    public SetModeAction(Class modeClass, HashMap modeArgs) {
+    public SetModeAction(Class modeClass, HashMap<String, Object> modeArgs) {
         super("SetEditorMode");
         setArg("desiredModeClass", modeClass);
         this.modeArgs = modeArgs;
@@ -110,21 +113,21 @@ public class SetModeAction extends AbstractAction {
 
     public SetModeAction(Class modeClass, String arg, Object value) {
         this(modeClass, arg, value, "SetEditorMode");
-        modeArgs = new HashMap(1);
+        modeArgs = new HashMap<String, Object>(1);
         modeArgs.put(arg, value);
         setArg("desiredModeClass", modeClass);
     }
 
     public SetModeAction(Class modeClass, String arg, Object value, String name) {
         super(name);
-        modeArgs = new HashMap(1);
+        modeArgs = new HashMap<String, Object>(1);
         modeArgs.put(arg, value);
         setArg("desiredModeClass", modeClass);
     }
 
     public SetModeAction(Class modeClass, String arg, Object value, String name, ImageIcon icon) {
         super(name, icon);
-        modeArgs = new HashMap(1);
+        modeArgs = new HashMap<String, Object>(1);
         modeArgs.put(arg, value);
         setArg("desiredModeClass", modeClass);
     }
@@ -154,7 +157,7 @@ public class SetModeAction extends AbstractAction {
      */
     private void setArg(String key, Object value) {
         if (args == null) {
-            args = new HashMap();
+            args = new HashMap<String, Object>();
         }
         args.put(key, value);
     }

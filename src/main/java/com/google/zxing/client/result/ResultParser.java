@@ -226,12 +226,12 @@ public abstract class ResultParser {
     return true;
   }
 
-  static HashMap parseNameValuePairs(String uri) {
+  static HashMap<String, String> parseNameValuePairs(String uri) {
     int paramStart = uri.indexOf('?');
     if (paramStart < 0) {
       return null;
     }
-    HashMap result = new HashMap(3);
+    HashMap<String, String> result = new HashMap<String, String>(3);
     paramStart++;
     int paramEnd;
     while ((paramEnd = uri.indexOf('&', paramStart)) >= 0) {
@@ -242,7 +242,7 @@ public abstract class ResultParser {
     return result;
   }
 
-  private static void appendKeyValue(String uri, int paramStart, int paramEnd, HashMap result) {
+  private static void appendKeyValue(String uri, int paramStart, int paramEnd, HashMap<String, String> result) {
     int separator = uri.indexOf('=', paramStart);
     if (separator >= 0) {
       // key = value

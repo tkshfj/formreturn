@@ -47,7 +47,7 @@ public class LayerPerspective extends LayerDiagram implements GraphListener {
     /**
      * Rectangles of where to place nodes that are automatically added.
      */
-    protected HashMap _nodeTypeRegions = new HashMap();
+    protected HashMap<Class<?>, Rectangle> _nodeTypeRegions = new HashMap<Class<?>, Rectangle>();
 
     private static Log LOG = LogFactory.getLog(LayerPerspective.class);
 

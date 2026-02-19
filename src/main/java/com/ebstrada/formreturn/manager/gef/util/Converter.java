@@ -6,11 +6,11 @@ package com.ebstrada.formreturn.manager.gef.util;
 
 public class Converter {
 
-    public static java.util.HashMap convert(java.util.HashMap oldOne) {
+    public static java.util.HashMap<Object, Object> convert(java.util.HashMap<Object, Object> oldOne) {
         if (oldOne == null) {
             return null;
         }
-        java.util.HashMap newOne = new java.util.HashMap();
+        java.util.HashMap<Object, Object> newOne = new java.util.HashMap<Object, Object>();
         for (Object key : oldOne.keySet()) {
             newOne.put(key, oldOne.get(key));
         }

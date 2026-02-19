@@ -18,16 +18,16 @@ public interface Mode {
 
     public void done();
 
-    public void setArgs(Map args);
+    public void setArgs(Map<String, Object> args);
 
     public void setArg(String key, Object value);
 
-    public Map getArgs();
+    public Map<String, Object> getArgs();
 
     public Object getArg(String key);
 
     public boolean canExit();
 
-    public void init(Map parameters);
+    public void init(Map<String, Object> parameters);
 
 } /* end interface Mode */

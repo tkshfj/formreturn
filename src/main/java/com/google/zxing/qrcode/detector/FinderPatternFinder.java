@@ -72,7 +72,7 @@ public class FinderPatternFinder {
     return possibleCenters;
   }
 
-  FinderPatternInfo find(HashMap hints) throws NotFoundException {
+  FinderPatternInfo find(HashMap<DecodeHintType, Object> hints) throws NotFoundException {
     boolean tryHarder = hints != null && hints.containsKey(DecodeHintType.TRY_HARDER);
     int maxI = image.getHeight();
     int maxJ = image.getWidth();

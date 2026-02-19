@@ -36,7 +36,7 @@ public final class MultiFormatOneDReader extends OneDReader {
 
   private final Vector readers;
 
-  public MultiFormatOneDReader(HashMap hints) {
+  public MultiFormatOneDReader(HashMap<DecodeHintType, Object> hints) {
     Vector possibleFormats = hints == null ? null :
         (Vector) hints.get(DecodeHintType.POSSIBLE_FORMATS);
     boolean useCode39CheckDigit = hints != null &&
@@ -71,7 +71,7 @@ public final class MultiFormatOneDReader extends OneDReader {
     }
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, HashMap hints) throws NotFoundException {
+  public Result decodeRow(int rowNumber, BitArray row, HashMap<DecodeHintType, Object> hints) throws NotFoundException {
     int size = readers.size();
     for (int i = 0; i < size; i++) {
       OneDReader reader = (OneDReader) readers.elementAt(i);

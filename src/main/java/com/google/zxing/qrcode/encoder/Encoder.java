@@ -79,7 +79,7 @@ public final class Encoder {
     encode(content, ecLevel, null, qrCode);
   }
 
-  public static void encode(String content, ErrorCorrectionLevel ecLevel, HashMap hints,
+  public static void encode(String content, ErrorCorrectionLevel ecLevel, HashMap<EncodeHintType, Object> hints,
       QRCode qrCode) throws WriterException {
 
     String encoding = hints == null ? null : (String) hints.get(EncodeHintType.CHARACTER_SET);

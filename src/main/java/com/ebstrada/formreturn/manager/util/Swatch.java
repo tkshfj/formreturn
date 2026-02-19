@@ -6,7 +6,7 @@ import java.util.*;
 import javax.swing.*;
 
 public class Swatch implements Icon {
-    protected static HashMap _swatches = new HashMap();
+    protected static HashMap<Color, Swatch> _swatches = new HashMap<Color, Swatch>();
 
     Color _color = Color.black;
 

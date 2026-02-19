@@ -53,7 +53,7 @@ final class SMSMMSResultParser extends ResultParser {
     }
 
     // Check up front if this is a URI syntax string with query arguments
-    HashMap nameValuePairs = parseNameValuePairs(rawText);
+    HashMap<String, String> nameValuePairs = parseNameValuePairs(rawText);
     String subject = null;
     String body = null;
     boolean querySyntax = false;

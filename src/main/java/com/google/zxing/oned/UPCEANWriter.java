@@ -17,6 +17,7 @@
 package com.google.zxing.oned;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.ByteMatrix;
@@ -37,7 +38,7 @@ public abstract class UPCEANWriter implements Writer {
   }
 
   public ByteMatrix encode(String contents, BarcodeFormat format, int width, int height,
-      HashMap hints) throws WriterException {
+      HashMap<EncodeHintType, Object> hints) throws WriterException {
     if (contents == null || contents.length() == 0) {
       throw new IllegalArgumentException("Found empty contents");
     }

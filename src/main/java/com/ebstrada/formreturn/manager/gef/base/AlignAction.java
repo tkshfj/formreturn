@@ -38,7 +38,7 @@ public class AlignAction extends UndoableAction {
      */
     private int direction;
 
-    private Map boundsByFig;
+    private Map<Fig, Rectangle> boundsByFig;
 
     /**
      * Construct a new CmdAlign.
@@ -104,7 +104,7 @@ public class AlignAction extends UndoableAction {
             bbox.add(((Fig) figs.get(i)).getBounds());
         }
 
-        boundsByFig = new HashMap(size);
+        boundsByFig = new HashMap<Fig, Rectangle>(size);
         for (int i = 0; i < size; i++) {
             Fig f = (Fig) figs.get(i);
             boundsByFig.put(f, f.getBounds());

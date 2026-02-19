@@ -65,8 +65,8 @@ public class BarcodeImageReader {
 
     }
 
-    private Result[] decodeMultiple(BinaryBitmap image, HashMap hints) throws ReaderException {
-        Vector results = new Vector();
+    private Result[] decodeMultiple(BinaryBitmap image, HashMap<DecodeHintType, Object> hints) throws ReaderException {
+        Vector<Result> results = new Vector<Result>();
         while (true) {
             try {
                 Result result = delegate.decode(image, hints);

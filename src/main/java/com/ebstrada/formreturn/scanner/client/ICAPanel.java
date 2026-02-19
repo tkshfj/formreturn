@@ -49,7 +49,7 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
 
     private ScannerPreferences scannerPreferences;
 
-    private LinkedTreeMap documentTypeMap;
+    private LinkedTreeMap<String, Object> documentTypeMap;
 
     public ICAPanel() {
         initComponents();
@@ -100,14 +100,14 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
         this.scannerPreferences = PreferencesManager.getScannerPreferences();
 
         String selectedScanner = scanner.getSelectedScanner();
-        HashMap<String, LinkedTreeMap> scannerSettings = scanner.getScannerSettings();
-        LinkedTreeMap settings = scannerSettings.get(selectedScanner);
+        HashMap<String, LinkedTreeMap<String, Object>> scannerSettings = scanner.getScannerSettings();
+        LinkedTreeMap<String, Object> settings = scannerSettings.get(selectedScanner);
 
         // read-only-settings -> supported-document-types
-        LinkedTreeMap readOnlySettings = (LinkedTreeMap) settings.get("read-only-settings");
-        LinkedTreeMap supportedDocumentTypes =
-            (LinkedTreeMap) readOnlySettings.get("supported-document-types");
-        Collection documentTypes = supportedDocumentTypes.values();
+        LinkedTreeMap<String, Object> readOnlySettings = (LinkedTreeMap<String, Object>) settings.get("read-only-settings");
+        LinkedTreeMap<String, Object> supportedDocumentTypes =
+            (LinkedTreeMap<String, Object>) readOnlySettings.get("supported-document-types");
+        Collection<Object> documentTypes = supportedDocumentTypes.values();
 
         this.pageSizes = (String[]) documentTypes.toArray(new String[documentTypes.size()]);
         this.documentTypeMap = supportedDocumentTypes;
@@ -116,8 +116,8 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
             pageSizeComboBox.addItem(size);
         }
 
-        LinkedTreeMap resolutions = (LinkedTreeMap) readOnlySettings.get("preferred-resolutions");
-        Set resolutionList = resolutions.keySet();
+        LinkedTreeMap<String, Object> resolutions = (LinkedTreeMap<String, Object>) readOnlySettings.get("preferred-resolutions");
+        Set<String> resolutionList = resolutions.keySet();
         String[] resArray = (String[]) resolutionList.toArray(new String[resolutionList.size()]);
 
         for (String res : resArray) {
@@ -764,9 +764,9 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
 
     }
 
-    public LinkedTreeMap getSettings() {
+    public LinkedTreeMap<String, Object> getSettings() {
 
-        LinkedTreeMap settings = new LinkedTreeMap();
+        LinkedTreeMap<String, Object> settings = new LinkedTreeMap<String, Object>();
 
         String deviceName = (String) deviceComboBox.getSelectedItem();
         settings.put("device-name", deviceName);

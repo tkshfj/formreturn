@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -65,8 +66,8 @@ public class BarcodeReader {
         return resultArray;
     }
 
-    private Result[] decodeMultiple(BinaryBitmap image, HashMap hints) throws ReaderException {
-        Vector results = new Vector();
+    private Result[] decodeMultiple(BinaryBitmap image, HashMap<DecodeHintType, Object> hints) throws ReaderException {
+        Vector<Result> results = new Vector<Result>();
         while (true) {
             try {
                 Result result = delegate.decode(image, hints);
@@ -108,7 +109,7 @@ public class BarcodeReader {
             double x2 = result.getResultPoints()[1].getX();
             double y2 = result.getResultPoints()[1].getY();
 
-            HashMap metadata = result.getResultMetadata();
+            Map<ResultMetadataType, Object> metadata = result.getResultMetadata();
 
             int orientation = 0;
             if (metadata != null && metadata.containsKey(ResultMetadataType.ORIENTATION)) {

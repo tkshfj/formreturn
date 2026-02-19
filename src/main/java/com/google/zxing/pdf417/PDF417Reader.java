@@ -54,7 +54,7 @@ public final class PDF417Reader implements Reader {
     return decode(image, null);
   }
 
-  public Result decode(BinaryBitmap image, HashMap hints)
+  public Result decode(BinaryBitmap image, HashMap<DecodeHintType, Object> hints)
       throws NotFoundException, FormatException {
     DecoderResult decoderResult;
     ResultPoint[] points;

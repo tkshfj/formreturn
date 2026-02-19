@@ -19,6 +19,7 @@ package com.google.zxing.oned;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
+import com.google.zxing.DecodeHintType;
 import com.google.zxing.FormatException;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
@@ -36,12 +37,12 @@ public final class UPCAReader extends UPCEANReader {
 
   private final UPCEANReader ean13Reader = new EAN13Reader();
 
-  public Result decodeRow(int rowNumber, BitArray row, int[] startGuardRange, HashMap hints)
+  public Result decodeRow(int rowNumber, BitArray row, int[] startGuardRange, HashMap<DecodeHintType, Object> hints)
       throws NotFoundException, FormatException, ChecksumException {
     return maybeReturnResult(ean13Reader.decodeRow(rowNumber, row, startGuardRange, hints));
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, HashMap hints)
+  public Result decodeRow(int rowNumber, BitArray row, HashMap<DecodeHintType, Object> hints)
       throws NotFoundException, FormatException, ChecksumException {
     return maybeReturnResult(ean13Reader.decodeRow(rowNumber, row, hints));
   }
@@ -50,7 +51,7 @@ public final class UPCAReader extends UPCEANReader {
     return maybeReturnResult(ean13Reader.decode(image));
   }
 
-  public Result decode(BinaryBitmap image, HashMap hints) throws NotFoundException, FormatException {
+  public Result decode(BinaryBitmap image, HashMap<DecodeHintType, Object> hints) throws NotFoundException, FormatException {
     return maybeReturnResult(ean13Reader.decode(image, hints));
   }
 

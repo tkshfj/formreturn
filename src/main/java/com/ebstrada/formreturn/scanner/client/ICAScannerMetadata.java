@@ -13,7 +13,7 @@ public class ICAScannerMetadata {
     }
 
 
-    private LinkedTreeMap response;
+    private LinkedTreeMap<String, Object> response;
     private ICAScanner scanner;
 
     public BufferedImage getImage() throws Exception {
@@ -34,11 +34,11 @@ public class ICAScannerMetadata {
         return scanner.isBusy();
     }
 
-    public void setResponse(LinkedTreeMap response) {
+    public void setResponse(LinkedTreeMap<String, Object> response) {
         this.response = response;
     }
 
-    public LinkedTreeMap getResponse() {
+    public LinkedTreeMap<String, Object> getResponse() {
         return this.response;
     }
 

@@ -70,7 +70,7 @@ public class Detector {
    * @throws NotFoundException if QR Code cannot be found
    * @throws FormatException if a QR Code cannot be decoded
    */
-  public DetectorResult detect(HashMap hints) throws NotFoundException, FormatException {
+  public DetectorResult detect(HashMap<DecodeHintType, Object> hints) throws NotFoundException, FormatException {
 
     resultPointCallback = hints == null ? null :
         (ResultPointCallback) hints.get(DecodeHintType.NEED_RESULT_POINT_CALLBACK);

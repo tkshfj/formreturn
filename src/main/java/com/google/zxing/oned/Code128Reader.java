@@ -18,6 +18,7 @@ package com.google.zxing.oned;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.ChecksumException;
+import com.google.zxing.DecodeHintType;
 import com.google.zxing.FormatException;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
@@ -239,7 +240,7 @@ public final class Code128Reader extends OneDReader {
     }
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, HashMap hints)
+  public Result decodeRow(int rowNumber, BitArray row, HashMap<DecodeHintType, Object> hints)
       throws NotFoundException, FormatException, ChecksumException {
 
     int[] startPatternInfo = findStartPattern(row);

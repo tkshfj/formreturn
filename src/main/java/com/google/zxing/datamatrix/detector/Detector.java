@@ -83,7 +83,7 @@ public final class Detector {
 
     // Figure out which point is their intersection by tallying up the number of times we see the
     // endpoints in the four endpoints. One will show up twice.
-    HashMap pointCount = new HashMap();
+    HashMap<ResultPoint, Integer> pointCount = new HashMap<ResultPoint, Integer>();
     increment(pointCount, lSideOne.getFrom());
     increment(pointCount, lSideOne.getTo());
     increment(pointCount, lSideTwo.getFrom());
@@ -158,7 +158,7 @@ public final class Detector {
   /**
    * Increments the Integer associated with a key by one.
    */
-  private static void increment(HashMap table, ResultPoint key) {
+  private static void increment(HashMap<ResultPoint, Integer> table, ResultPoint key) {
     Integer value = (Integer) table.get(key);
     table.put(key, value == null ? INTEGERS[1] : INTEGERS[value.intValue() + 1]);
   }

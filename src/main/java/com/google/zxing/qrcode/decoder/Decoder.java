@@ -17,6 +17,7 @@
 package com.google.zxing.qrcode.decoder;
 
 import com.google.zxing.ChecksumException;
+import com.google.zxing.DecodeHintType;
 import com.google.zxing.FormatException;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.common.BitMatrix;
@@ -56,7 +57,7 @@ public final class Decoder {
    * @throws FormatException if the QR Code cannot be decoded
    * @throws ChecksumException if error correction fails
    */
-  public DecoderResult decode(boolean[][] image, HashMap hints)
+  public DecoderResult decode(boolean[][] image, HashMap<DecodeHintType, Object> hints)
       throws ChecksumException, FormatException, NotFoundException {
     int dimension = image.length;
     BitMatrix bits = new BitMatrix(dimension);
@@ -83,7 +84,7 @@ public final class Decoder {
    * @throws FormatException if the QR Code cannot be decoded
    * @throws ChecksumException if error correction fails
    */
-  public DecoderResult decode(BitMatrix bits, HashMap hints)
+  public DecoderResult decode(BitMatrix bits, HashMap<DecodeHintType, Object> hints)
       throws NotFoundException, FormatException, ChecksumException {
 
     // Construct a parser and read version, error-correction level

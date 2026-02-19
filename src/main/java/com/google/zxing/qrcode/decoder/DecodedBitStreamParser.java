@@ -59,7 +59,7 @@ final class DecodedBitStreamParser {
   private DecodedBitStreamParser() {
   }
 
-  static DecoderResult decode(byte[] bytes, Version version, ErrorCorrectionLevel ecLevel, HashMap hints)
+  static DecoderResult decode(byte[] bytes, Version version, ErrorCorrectionLevel ecLevel, HashMap<DecodeHintType, Object> hints)
       throws FormatException {
     BitSource bits = new BitSource(bytes);
     StringBuffer result = new StringBuffer(50);
@@ -151,7 +151,7 @@ final class DecodedBitStreamParser {
                                         int count,
                                         CharacterSetECI currentCharacterSetECI,
                                         Vector byteSegments,
-                                        HashMap hints) throws FormatException {
+                                        HashMap<DecodeHintType, Object> hints) throws FormatException {
     byte[] readBytes = new byte[count];
     if (count << 3 > bits.available()) {
       throw FormatException.getFormatInstance();
@@ -244,7 +244,7 @@ final class DecodedBitStreamParser {
     }
   }
 
-  private static String guessEncoding(byte[] bytes, HashMap hints) {
+  private static String guessEncoding(byte[] bytes, HashMap<DecodeHintType, Object> hints) {
     if (hints != null) {
       String characterSet = (String) hints.get(DecodeHintType.CHARACTER_SET);
       if (characterSet != null) {

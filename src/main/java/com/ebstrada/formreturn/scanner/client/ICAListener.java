@@ -6,6 +6,6 @@ public interface ICAListener {
 
     public void update(ICAScannerMetadata.Type type, ICAScannerMetadata metadata) throws Exception;
 
-    public LinkedTreeMap getSettings();
+    public LinkedTreeMap<String, Object> getSettings();
 
 }

@@ -16,8 +16,8 @@ public class ColorFactory {
      * the form "rrr ggg bbb" where rrr = red value int ggg = green value int
      * and bbb = blue value int.
      */
-    private static final Map USED_COLORS_BY_RGB_STRING = new HashMap();
-    private static final Map USED_COLORS_BY_RGB_INTEGER = new HashMap();
+    private static final Map<String, Color> USED_COLORS_BY_RGB_STRING = new HashMap<String, Color>();
+    private static final Map<Integer, Color> USED_COLORS_BY_RGB_INTEGER = new HashMap<Integer, Color>();
 
     static {
         cacheColor(Color.white);

@@ -230,7 +230,7 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
     throw NotFoundException.getNotFoundInstance();
   }
 
-  public FinderPatternInfo[] findMulti(HashMap hints) throws NotFoundException {
+  public FinderPatternInfo[] findMulti(HashMap<DecodeHintType, Object> hints) throws NotFoundException {
     boolean tryHarder = hints != null && hints.containsKey(DecodeHintType.TRY_HARDER);
     BitMatrix image = getImage();
     int maxI = image.getHeight();

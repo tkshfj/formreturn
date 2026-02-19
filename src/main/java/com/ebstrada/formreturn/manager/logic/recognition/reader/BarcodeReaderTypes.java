@@ -121,8 +121,8 @@ public class BarcodeReaderTypes {
                 return new QRCodeReader();
             case AUTO_DETECT:
             default:
-                HashMap hints = new HashMap();
-                Vector possibleFormats = new Vector();
+                HashMap<DecodeHintType, Object> hints = new HashMap<DecodeHintType, Object>();
+                Vector<BarcodeFormat> possibleFormats = new Vector<BarcodeFormat>();
                 possibleFormats.add(BarcodeFormat.CODE_128);
                 possibleFormats.add(BarcodeFormat.CODE_39);
                 possibleFormats.add(BarcodeFormat.ITF);

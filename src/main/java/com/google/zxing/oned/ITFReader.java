@@ -76,7 +76,7 @@ public final class ITFReader extends OneDReader {
       {N, W, N, W, N}  // 9
   };
 
-  public Result decodeRow(int rowNumber, BitArray row, HashMap hints) throws FormatException, NotFoundException {
+  public Result decodeRow(int rowNumber, BitArray row, HashMap<DecodeHintType, Object> hints) throws FormatException, NotFoundException {
 
     // Find out where the Middle section (payload) starts & ends
     int[] startRange = decodeStart(row);

@@ -28,7 +28,7 @@ public class ModeImpl
      * Arguments to this mode. These are usually set just after the mode is
      * created via the init method and used later.
      */
-    protected Map _args = new HashMap();
+    protected Map<String, Object> _args = new HashMap<String, Object>();
 
     // //////////////////////////////////////////////////////////////
     // constructors
@@ -37,7 +37,7 @@ public class ModeImpl
      * Construct a new Mode instance with the given parameters as its initial
      * parameters
      */
-    public ModeImpl(Map parameters) {
+    public ModeImpl(Map<String, Object> parameters) {
         setArgs(parameters);
     }
 
@@ -54,18 +54,18 @@ public class ModeImpl
     // //////////////////////////////////////////////////////////////
     // Arguments
 
-    public void setArgs(Map args) {
+    public void setArgs(Map<String, Object> args) {
         _args = args;
     }
 
     public void setArg(String key, Object value) {
         if (_args == null) {
-            _args = new HashMap();
+            _args = new HashMap<String, Object>();
         }
         _args.put(key, value);
     }
 
-    public Map getArgs() {
+    public Map<String, Object> getArgs() {
         return _args;
     }
 
@@ -111,7 +111,7 @@ public class ModeImpl
      * method, a Mode can be inititalized with a unspecified number of
      * parameters. Call this method first, before using a Mode.
      */
-    public void init(Map parameters) {
+    public void init(Map<String, Object> parameters) {
         setArgs(parameters);
     }
 

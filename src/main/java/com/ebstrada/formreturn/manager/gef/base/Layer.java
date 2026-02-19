@@ -493,7 +493,7 @@ public abstract class Layer implements java.io.Serializable {
      * @param map a hashmap with properties
      * @see LayerGrid
      */
-    public void adjust(HashMap map) {
+    public void adjust(HashMap<String, Object> map) {
     }
 
 } /* end class Layer */

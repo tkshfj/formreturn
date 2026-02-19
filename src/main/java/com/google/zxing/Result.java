@@ -29,7 +29,7 @@ public final class Result {
   private final byte[] rawBytes;
   private final ResultPoint[] resultPoints;
   private final BarcodeFormat format;
-  private HashMap resultMetadata;
+  private HashMap<ResultMetadataType, Object> resultMetadata;
 
   public Result(String text,
                 byte[] rawBytes,
@@ -80,13 +80,13 @@ public final class Result {
    *   <code>null</code>. This contains optional metadata about what was detected about the barcode,
    *   like orientation.
    */
-  public HashMap getResultMetadata() {
+  public HashMap<ResultMetadataType, Object> getResultMetadata() {
     return resultMetadata;
   }
 
   public void putMetadata(ResultMetadataType type, Object value) {
     if (resultMetadata == null) {
-      resultMetadata = new HashMap(3);
+      resultMetadata = new HashMap<ResultMetadataType, Object>(3);
     }
     resultMetadata.put(type, value);
   }

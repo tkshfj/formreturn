@@ -26,12 +26,12 @@ import java.util.HashMap;
  */
 public final class CharacterSetECI extends ECI {
 
-  private static HashMap VALUE_TO_ECI;
-  private static HashMap NAME_TO_ECI;
+  private static HashMap<Integer, CharacterSetECI> VALUE_TO_ECI;
+  private static HashMap<String, CharacterSetECI> NAME_TO_ECI;
 
   private static void initialize() {
-    VALUE_TO_ECI = new HashMap(29);
-    NAME_TO_ECI = new HashMap(29);
+    VALUE_TO_ECI = new HashMap<Integer, CharacterSetECI>(29);
+    NAME_TO_ECI = new HashMap<String, CharacterSetECI>(29);
     // TODO figure out if these values are even right!
     addCharacterSet(0, "Cp437");
     addCharacterSet(1, new String[] {"ISO8859_1", "ISO-8859-1"});

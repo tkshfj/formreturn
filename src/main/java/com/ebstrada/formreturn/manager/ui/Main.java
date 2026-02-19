@@ -278,7 +278,7 @@ public class Main extends JFrame {
         });
     }
 
-    public Main(Map map, String[] args, ApplicationStatePreferences applicationState) {
+    public Main(Map<String, SplashDialog> map, String[] args, ApplicationStatePreferences applicationState) {
 
         if (Main.instance == null) {
             Main.instance = this;

@@ -38,7 +38,7 @@ public final class MultiFormatWriter implements Writer {
   }
 
   public ByteMatrix encode(String contents, BarcodeFormat format, int width, int height,
-      HashMap hints) throws WriterException {
+      HashMap<EncodeHintType, Object> hints) throws WriterException {
 
     if (format == BarcodeFormat.EAN_8) {
       return new EAN8Writer().encode(contents, format, width, height, hints);

@@ -91,7 +91,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
 
     private Vector htmlViews;
 
-    private HashMap mnemonicToIndexMap;
+    private HashMap<Integer, Integer> mnemonicToIndexMap;
 
     /**
      * InputMap used for mnemonics. Only non-null if the JTabbedPane has
@@ -518,7 +518,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
      * Installs the state needed for mnemonics.
      */
     private void initMnemonics() {
-        mnemonicToIndexMap = new HashMap();
+        mnemonicToIndexMap = new HashMap<Integer, Integer>();
         mnemonicInputMap = new InputMapUIResource();
         mnemonicInputMap.setParent(
             SwingUtilities.getUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT));

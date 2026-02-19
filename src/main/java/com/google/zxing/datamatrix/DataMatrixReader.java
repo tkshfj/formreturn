@@ -57,7 +57,7 @@ public final class DataMatrixReader implements Reader {
     return decode(image, null);
   }
 
-  public Result decode(BinaryBitmap image, HashMap hints)
+  public Result decode(BinaryBitmap image, HashMap<DecodeHintType, Object> hints)
       throws NotFoundException, ChecksumException, FormatException {
     DecoderResult decoderResult;
     ResultPoint[] points;
