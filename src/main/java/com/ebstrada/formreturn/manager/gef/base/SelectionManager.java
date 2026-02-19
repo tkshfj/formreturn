@@ -1008,7 +1008,7 @@ public class SelectionManager
 
     // //////////////////////////////////////////////////////////////
     // static methods
-    // protected static Hashtable _SelectionRegistry = new Hashtable();
+    // protected static HashMap _SelectionRegistry = new HashMap();
     // needs-more-work: cache a pool of selection objects?
     public static Selection makeSelectionFor(Fig f) {
         Selection customSelection = f.makeSelection();

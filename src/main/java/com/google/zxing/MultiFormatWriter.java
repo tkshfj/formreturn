@@ -21,7 +21,7 @@ import com.google.zxing.oned.EAN13Writer;
 import com.google.zxing.oned.EAN8Writer;
 import com.google.zxing.qrcode.QRCodeWriter;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * This is a factory class which finds the appropriate Writer subclass for the BarcodeFormat
@@ -38,7 +38,7 @@ public final class MultiFormatWriter implements Writer {
   }
 
   public ByteMatrix encode(String contents, BarcodeFormat format, int width, int height,
-      Hashtable hints) throws WriterException {
+      HashMap hints) throws WriterException {
 
     if (format == BarcodeFormat.EAN_8) {
       return new EAN8Writer().encode(contents, format, width, height, hints);

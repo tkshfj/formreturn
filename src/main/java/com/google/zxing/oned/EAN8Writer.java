@@ -20,7 +20,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.ByteMatrix;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * This object renders an EAN8 code as a ByteMatrix 2D array of greyscale
@@ -37,7 +37,7 @@ public final class EAN8Writer extends UPCEANWriter {
       3; // end guard
 
   public ByteMatrix encode(String contents, BarcodeFormat format, int width, int height,
-      Hashtable hints) throws WriterException {
+      HashMap hints) throws WriterException {
     if (format != BarcodeFormat.EAN_8) {
       throw new IllegalArgumentException("Can only encode EAN_8, but got "
           + format);

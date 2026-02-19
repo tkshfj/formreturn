@@ -361,7 +361,7 @@ public class Globals {
      * A global dictionary of PropertyChangeListeners for Figs. Most Figs will
      * not have any listeners at any given moment, so I did not want to allocate
      * an instance variable to hold listeners. Instead I use this global
-     * Hashtable with Figs ans keys and arrays of up to 4 listeners as values.
+     * HashMap with Figs ans keys and arrays of up to 4 listeners as values.
      * <p>
      * <p>
      * Note: It is important that all listeners eventually remove themselves by
@@ -430,7 +430,7 @@ public class Globals {
                 return;
             }
         }
-        // s has no listeners, keep Hashtable size reasonable
+        // s has no listeners, keep HashMap size reasonable
         _pcListeners.remove(s);
     }
 

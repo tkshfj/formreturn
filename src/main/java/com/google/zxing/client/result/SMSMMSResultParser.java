@@ -18,7 +18,7 @@ package com.google.zxing.client.result;
 
 import com.google.zxing.Result;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * <p>Parses an "sms:" URI result, which specifies a number to SMS and optional
@@ -53,7 +53,7 @@ final class SMSMMSResultParser extends ResultParser {
     }
 
     // Check up front if this is a URI syntax string with query arguments
-    Hashtable nameValuePairs = parseNameValuePairs(rawText);
+    HashMap nameValuePairs = parseNameValuePairs(rawText);
     String subject = null;
     String body = null;
     boolean querySyntax = false;

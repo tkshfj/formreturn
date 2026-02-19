@@ -27,7 +27,7 @@ import com.google.zxing.common.GridSampler;
 import com.google.zxing.common.PerspectiveTransform;
 import com.google.zxing.qrcode.decoder.Version;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * <p>Encapsulates logic that can detect a QR Code in an image, even if the QR Code
@@ -70,7 +70,7 @@ public class Detector {
    * @throws NotFoundException if QR Code cannot be found
    * @throws FormatException if a QR Code cannot be decoded
    */
-  public DetectorResult detect(Hashtable hints) throws NotFoundException, FormatException {
+  public DetectorResult detect(HashMap hints) throws NotFoundException, FormatException {
 
     resultPointCallback = hints == null ? null :
         (ResultPointCallback) hints.get(DecodeHintType.NEED_RESULT_POINT_CALLBACK);

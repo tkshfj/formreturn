@@ -21,7 +21,7 @@ import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.ByteMatrix;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * <p>Encapsulates functionality and implementation that is common to UPC and EAN families
@@ -37,7 +37,7 @@ public abstract class UPCEANWriter implements Writer {
   }
 
   public ByteMatrix encode(String contents, BarcodeFormat format, int width, int height,
-      Hashtable hints) throws WriterException {
+      HashMap hints) throws WriterException {
     if (contents == null || contents.length() == 0) {
       throw new IllegalArgumentException("Found empty contents");
     }

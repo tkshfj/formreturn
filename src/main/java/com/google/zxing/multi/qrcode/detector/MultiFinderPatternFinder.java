@@ -27,7 +27,7 @@ import com.google.zxing.qrcode.detector.FinderPattern;
 import com.google.zxing.qrcode.detector.FinderPatternFinder;
 import com.google.zxing.qrcode.detector.FinderPatternInfo;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -230,7 +230,7 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
     throw NotFoundException.getNotFoundInstance();
   }
 
-  public FinderPatternInfo[] findMulti(Hashtable hints) throws NotFoundException {
+  public FinderPatternInfo[] findMulti(HashMap hints) throws NotFoundException {
     boolean tryHarder = hints != null && hints.containsKey(DecodeHintType.TRY_HARDER);
     BitMatrix image = getImage();
     int maxI = image.getHeight();

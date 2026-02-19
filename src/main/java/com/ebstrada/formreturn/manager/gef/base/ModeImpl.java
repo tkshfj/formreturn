@@ -6,7 +6,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This is the default implementation for the basic interface of all modes. It
@@ -27,7 +28,7 @@ public class ModeImpl
      * Arguments to this mode. These are usually set just after the mode is
      * created via the init method and used later.
      */
-    protected Hashtable _args = new Hashtable();
+    protected Map _args = new HashMap();
 
     // //////////////////////////////////////////////////////////////
     // constructors
@@ -36,7 +37,7 @@ public class ModeImpl
      * Construct a new Mode instance with the given parameters as its initial
      * parameters
      */
-    public ModeImpl(Hashtable parameters) {
+    public ModeImpl(Map parameters) {
         setArgs(parameters);
     }
 
@@ -53,18 +54,18 @@ public class ModeImpl
     // //////////////////////////////////////////////////////////////
     // Arguments
 
-    public void setArgs(Hashtable args) {
+    public void setArgs(Map args) {
         _args = args;
     }
 
     public void setArg(String key, Object value) {
         if (_args == null) {
-            _args = new Hashtable();
+            _args = new HashMap();
         }
         _args.put(key, value);
     }
 
-    public Hashtable getArgs() {
+    public Map getArgs() {
         return _args;
     }
 
@@ -110,7 +111,7 @@ public class ModeImpl
      * method, a Mode can be inititalized with a unspecified number of
      * parameters. Call this method first, before using a Mode.
      */
-    public void init(Hashtable parameters) {
+    public void init(Map parameters) {
         setArgs(parameters);
     }
 

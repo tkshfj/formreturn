@@ -24,7 +24,7 @@ import com.google.zxing.Result;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.common.BitArray;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * <p>Decodes Code 39 barcodes. This does not support "Full ASCII Code 39" yet.</p>
@@ -90,7 +90,7 @@ public final class Code39Reader extends OneDReader {
     this.extendedMode = extendedMode;
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, Hashtable hints)
+  public Result decodeRow(int rowNumber, BitArray row, HashMap hints)
       throws NotFoundException, ChecksumException, FormatException {
 
     int[] start = findAsteriskPattern(row);

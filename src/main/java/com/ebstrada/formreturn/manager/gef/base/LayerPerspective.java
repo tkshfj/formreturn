@@ -2,7 +2,7 @@ package com.ebstrada.formreturn.manager.gef.base;
 
 import java.awt.Rectangle;
 import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 import org.apache.commons.logging.Log;
@@ -47,7 +47,7 @@ public class LayerPerspective extends LayerDiagram implements GraphListener {
     /**
      * Rectangles of where to place nodes that are automatically added.
      */
-    protected Hashtable _nodeTypeRegions = new Hashtable();
+    protected HashMap _nodeTypeRegions = new HashMap();
 
     private static Log LOG = LogFactory.getLog(LayerPerspective.class);
 

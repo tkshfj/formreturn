@@ -1,7 +1,7 @@
 package com.ebstrada.formreturn.manager.logic.recognition.reader;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -122,7 +122,7 @@ public class BarcodeReaderTypes {
                 return new QRCodeReader();
             case AUTO_DETECT:
             default:
-                Hashtable hints = new Hashtable();
+                HashMap hints = new HashMap();
                 Vector possibleFormats = new Vector();
                 possibleFormats.add(BarcodeFormat.CODE_128);
                 possibleFormats.add(BarcodeFormat.CODE_39);

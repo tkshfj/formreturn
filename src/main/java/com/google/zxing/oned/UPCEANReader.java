@@ -26,7 +26,7 @@ import com.google.zxing.ResultPoint;
 import com.google.zxing.ResultPointCallback;
 import com.google.zxing.common.BitArray;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * <p>Encapsulates functionality and implementation that is common to UPC and EAN families
@@ -115,17 +115,17 @@ public abstract class UPCEANReader extends OneDReader {
     return startRange;
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, Hashtable hints)
+  public Result decodeRow(int rowNumber, BitArray row, HashMap hints)
       throws NotFoundException, ChecksumException, FormatException {
     return decodeRow(rowNumber, row, findStartGuardPattern(row), hints);
   }
 
   /**
-   * <p>Like {@link #decodeRow(int, BitArray, java.util.Hashtable)}, but
+   * <p>Like {@link #decodeRow(int, BitArray, java.util.HashMap)}, but
    * allows caller to inform method about where the UPC/EAN start pattern is
    * found. This allows this to be computed once and reused across many implementations.</p>
    */
-  public Result decodeRow(int rowNumber, BitArray row, int[] startGuardRange, Hashtable hints)
+  public Result decodeRow(int rowNumber, BitArray row, int[] startGuardRange, HashMap hints)
       throws NotFoundException, ChecksumException, FormatException {
 
     ResultPointCallback resultPointCallback = hints == null ? null :

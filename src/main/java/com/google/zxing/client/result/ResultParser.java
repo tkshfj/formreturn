@@ -18,7 +18,7 @@ package com.google.zxing.client.result;
 
 import com.google.zxing.Result;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -226,12 +226,12 @@ public abstract class ResultParser {
     return true;
   }
 
-  static Hashtable parseNameValuePairs(String uri) {
+  static HashMap parseNameValuePairs(String uri) {
     int paramStart = uri.indexOf('?');
     if (paramStart < 0) {
       return null;
     }
-    Hashtable result = new Hashtable(3);
+    HashMap result = new HashMap(3);
     paramStart++;
     int paramEnd;
     while ((paramEnd = uri.indexOf('&', paramStart)) >= 0) {
@@ -242,7 +242,7 @@ public abstract class ResultParser {
     return result;
   }
 
-  private static void appendKeyValue(String uri, int paramStart, int paramEnd, Hashtable result) {
+  private static void appendKeyValue(String uri, int paramStart, int paramEnd, HashMap result) {
     int separator = uri.indexOf('=', paramStart);
     if (separator >= 0) {
       // key = value

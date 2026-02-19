@@ -25,7 +25,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.google.zxing.qrcode.encoder.Encoder;
 import com.google.zxing.qrcode.encoder.QRCode;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * This object renders a QR Code as a ByteMatrix 2D array of greyscale values.
@@ -43,7 +43,7 @@ public final class QRCodeWriter implements Writer {
   }
 
   public ByteMatrix encode(String contents, BarcodeFormat format, int width, int height,
-      Hashtable hints) throws WriterException {
+      HashMap hints) throws WriterException {
 
     if (contents == null || contents.length() == 0) {
       throw new IllegalArgumentException("Found empty contents");

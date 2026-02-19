@@ -16,7 +16,7 @@
 
 package com.google.zxing;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * Enumerates barcode formats known to this package.
@@ -27,7 +27,7 @@ public final class BarcodeFormat {
 
   // No, we can't use an enum here. J2ME doesn't support it.
 
-  private static final Hashtable<String, BarcodeFormat> VALUES = new Hashtable<>();
+  private static final HashMap<String, BarcodeFormat> VALUES = new HashMap<>();
 
   /** QR Code 2D barcode format. */
   public static final BarcodeFormat QR_CODE = new BarcodeFormat("QR_CODE");

@@ -18,7 +18,7 @@ package com.google.zxing.client.result;
 
 import com.google.zxing.Result;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * Represents a result that encodes an e-mail address, either as a plain address
@@ -41,7 +41,7 @@ final class EmailAddressResultParser extends ResultParser {
       if (queryStart >= 0) {
         emailAddress = emailAddress.substring(0, queryStart);
       }
-      Hashtable nameValues = parseNameValuePairs(rawText);
+      HashMap nameValues = parseNameValuePairs(rawText);
       String subject = null;
       String body = null;
       if (nameValues != null) {

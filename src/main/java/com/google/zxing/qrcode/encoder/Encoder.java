@@ -28,7 +28,7 @@ import com.google.zxing.qrcode.decoder.Mode;
 import com.google.zxing.qrcode.decoder.Version;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -79,7 +79,7 @@ public final class Encoder {
     encode(content, ecLevel, null, qrCode);
   }
 
-  public static void encode(String content, ErrorCorrectionLevel ecLevel, Hashtable hints,
+  public static void encode(String content, ErrorCorrectionLevel ecLevel, HashMap hints,
       QRCode qrCode) throws WriterException {
 
     String encoding = hints == null ? null : (String) hints.get(EncodeHintType.CHARACTER_SET);

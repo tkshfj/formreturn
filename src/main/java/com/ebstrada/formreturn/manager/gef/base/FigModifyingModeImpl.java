@@ -3,7 +3,7 @@ package com.ebstrada.formreturn.manager.gef.base;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.Hashtable;
+import java.util.Map;
 
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.ui.PageAttributes;
@@ -49,7 +49,7 @@ public class FigModifyingModeImpl extends ModeImpl implements FigModifyingMode {
      * parameter representing the the Editor, this Mode belongs to, should be
      * provided.
      */
-    public FigModifyingModeImpl(Hashtable parameters) {
+    public FigModifyingModeImpl(Map parameters) {
         init(parameters);
     }
 

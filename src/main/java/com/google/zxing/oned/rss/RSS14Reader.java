@@ -25,7 +25,7 @@ import com.google.zxing.ResultPointCallback;
 import com.google.zxing.common.BitArray;
 import com.google.zxing.oned.OneDReader;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -78,7 +78,7 @@ public final class RSS14Reader extends OneDReader {
     possibleRightPairs = new Vector();
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, Hashtable hints) throws NotFoundException {
+  public Result decodeRow(int rowNumber, BitArray row, HashMap hints) throws NotFoundException {
     Pair leftPair = decodePair(row, false, rowNumber, hints);
     if (leftPair != null) {
       possibleLeftPairs.addElement(leftPair);
@@ -156,7 +156,7 @@ public final class RSS14Reader extends OneDReader {
     return checkValue == targetCheckValue;
   }
 
-  private Pair decodePair(BitArray row, boolean right, int rowNumber, Hashtable hints) {
+  private Pair decodePair(BitArray row, boolean right, int rowNumber, HashMap hints) {
     try {
       int[] startEnd = findFinderPattern(row, 0, right);
       FinderPattern pattern = parseFoundFinderPattern(row, rowNumber, right, startEnd);

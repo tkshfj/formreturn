@@ -25,7 +25,7 @@ import com.google.zxing.Result;
 import com.google.zxing.common.BitArray;
 import com.google.zxing.oned.rss.RSS14Reader;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -36,7 +36,7 @@ public final class MultiFormatOneDReader extends OneDReader {
 
   private final Vector readers;
 
-  public MultiFormatOneDReader(Hashtable hints) {
+  public MultiFormatOneDReader(HashMap hints) {
     Vector possibleFormats = hints == null ? null :
         (Vector) hints.get(DecodeHintType.POSSIBLE_FORMATS);
     boolean useCode39CheckDigit = hints != null &&
@@ -71,7 +71,7 @@ public final class MultiFormatOneDReader extends OneDReader {
     }
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, Hashtable hints) throws NotFoundException {
+  public Result decodeRow(int rowNumber, BitArray row, HashMap hints) throws NotFoundException {
     int size = readers.size();
     for (int i = 0; i < size; i++) {
       OneDReader reader = (OneDReader) readers.elementAt(i);

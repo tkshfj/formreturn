@@ -32,7 +32,7 @@ import com.google.zxing.common.DetectorResult;
 import com.google.zxing.qrcode.decoder.Decoder;
 import com.google.zxing.qrcode.detector.Detector;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * This implementation can detect and decode QR Codes in an image.
@@ -61,7 +61,7 @@ public class QRCodeReader implements Reader {
     return decode(image, null);
   }
 
-  public Result decode(BinaryBitmap image, Hashtable hints)
+  public Result decode(BinaryBitmap image, HashMap hints)
       throws NotFoundException, ChecksumException, FormatException {
     DecoderResult decoderResult;
     ResultPoint[] points;

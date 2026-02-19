@@ -24,7 +24,7 @@ import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.BitArray;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -38,7 +38,7 @@ public final class MultiFormatUPCEANReader extends OneDReader {
 
   private final Vector readers;
 
-  public MultiFormatUPCEANReader(Hashtable hints) {
+  public MultiFormatUPCEANReader(HashMap hints) {
     Vector possibleFormats = hints == null ? null :
         (Vector) hints.get(DecodeHintType.POSSIBLE_FORMATS);
     readers = new Vector();
@@ -63,7 +63,7 @@ public final class MultiFormatUPCEANReader extends OneDReader {
     }
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, Hashtable hints) throws NotFoundException {
+  public Result decodeRow(int rowNumber, BitArray row, HashMap hints) throws NotFoundException {
     // Compute this location once and reuse it on multiple implementations
     int[] startGuardPattern = UPCEANReader.findStartGuardPattern(row);
     int size = readers.size();

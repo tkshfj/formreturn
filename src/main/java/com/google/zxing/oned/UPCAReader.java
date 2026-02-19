@@ -24,7 +24,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.common.BitArray;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * <p>Implements decoding of the UPC-A format.</p>
@@ -36,12 +36,12 @@ public final class UPCAReader extends UPCEANReader {
 
   private final UPCEANReader ean13Reader = new EAN13Reader();
 
-  public Result decodeRow(int rowNumber, BitArray row, int[] startGuardRange, Hashtable hints)
+  public Result decodeRow(int rowNumber, BitArray row, int[] startGuardRange, HashMap hints)
       throws NotFoundException, FormatException, ChecksumException {
     return maybeReturnResult(ean13Reader.decodeRow(rowNumber, row, startGuardRange, hints));
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, Hashtable hints)
+  public Result decodeRow(int rowNumber, BitArray row, HashMap hints)
       throws NotFoundException, FormatException, ChecksumException {
     return maybeReturnResult(ean13Reader.decodeRow(rowNumber, row, hints));
   }
@@ -50,7 +50,7 @@ public final class UPCAReader extends UPCEANReader {
     return maybeReturnResult(ean13Reader.decode(image));
   }
 
-  public Result decode(BinaryBitmap image, Hashtable hints) throws NotFoundException, FormatException {
+  public Result decode(BinaryBitmap image, HashMap hints) throws NotFoundException, FormatException {
     return maybeReturnResult(ean13Reader.decode(image, hints));
   }
 

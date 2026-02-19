@@ -24,7 +24,7 @@ import com.google.zxing.Result;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.common.BitArray;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * <p>Decodes Code 128 barcodes.</p>
@@ -239,7 +239,7 @@ public final class Code128Reader extends OneDReader {
     }
   }
 
-  public Result decodeRow(int rowNumber, BitArray row, Hashtable hints)
+  public Result decodeRow(int rowNumber, BitArray row, HashMap hints)
       throws NotFoundException, FormatException, ChecksumException {
 
     int[] startPatternInfo = findStartPattern(row);

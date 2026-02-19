@@ -23,7 +23,7 @@ import com.google.zxing.common.DetectorResult;
 import com.google.zxing.qrcode.detector.Detector;
 import com.google.zxing.qrcode.detector.FinderPatternInfo;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -41,7 +41,7 @@ public final class MultiDetector extends Detector {
     super(image);
   }
 
-  public DetectorResult[] detectMulti(Hashtable hints) throws NotFoundException {
+  public DetectorResult[] detectMulti(HashMap hints) throws NotFoundException {
     BitMatrix image = getImage();
     MultiFinderPatternFinder finder = new MultiFinderPatternFinder(image);
     FinderPatternInfo[] info = finder.findMulti(hints);

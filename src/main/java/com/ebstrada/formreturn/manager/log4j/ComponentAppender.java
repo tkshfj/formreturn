@@ -3,7 +3,7 @@ package com.ebstrada.formreturn.manager.log4j;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.TextComponent;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -37,9 +37,9 @@ public class ComponentAppender extends AppenderSkeleton {
 
     protected int maxEntries;
 
-    private Hashtable<Level, ImageIcon> LevelIcon;
+    private HashMap<Level, ImageIcon> LevelIcon;
 
-    private Hashtable<Level, MutableAttributeSet> attributes;
+    private HashMap<Level, MutableAttributeSet> attributes;
 
     public static Appender getAppender(String appenderName, String categoryName) {
         Appender result = null;
@@ -75,8 +75,8 @@ public class ComponentAppender extends AppenderSkeleton {
         entries = 0;
         this.maxEntries = maxEntries;
         Level[] prios = new Level[] {Level.FATAL, Level.ERROR, Level.WARN, Level.INFO, Level.DEBUG};
-        LevelIcon = new Hashtable<Level, ImageIcon>();
-        attributes = new Hashtable<Level, MutableAttributeSet>();
+        LevelIcon = new HashMap<Level, ImageIcon>();
+        attributes = new HashMap<Level, MutableAttributeSet>();
 
         // default initialize colors and icons
         for (int i = 0; i < prios.length; i++) {

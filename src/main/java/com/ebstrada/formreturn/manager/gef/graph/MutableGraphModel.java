@@ -1,6 +1,6 @@
 package com.ebstrada.formreturn.manager.gef.graph;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**

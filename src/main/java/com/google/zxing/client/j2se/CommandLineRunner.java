@@ -40,7 +40,7 @@ import java.io.Writer;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
@@ -64,7 +64,7 @@ public final class CommandLineRunner {
       printUsage();
       return;
     }
-    Hashtable<DecodeHintType, Object> hints = buildHints();
+    HashMap<DecodeHintType, Object> hints = buildHints();
     boolean dumpResults = false;
     boolean dumpBlackPoint = false;
     for (String arg : args) {
@@ -88,8 +88,8 @@ public final class CommandLineRunner {
   }
 
   // Manually turn on all formats, even those not yet considered production quality.
-  private static Hashtable<DecodeHintType, Object> buildHints() {
-    Hashtable<DecodeHintType, Object> hints = new Hashtable<DecodeHintType, Object>(3);
+  private static HashMap<DecodeHintType, Object> buildHints() {
+    HashMap<DecodeHintType, Object> hints = new HashMap<DecodeHintType, Object>(3);
     Vector<BarcodeFormat> vector = new Vector<BarcodeFormat>(8);
     vector.addElement(BarcodeFormat.UPC_A);
     vector.addElement(BarcodeFormat.UPC_E);
@@ -113,7 +113,7 @@ public final class CommandLineRunner {
     System.err.println("  --dump_black_point: Compare black point algorithms as input.mono.png");
   }
 
-  private static void decodeOneArgument(String argument, Hashtable<DecodeHintType, Object> hints,
+  private static void decodeOneArgument(String argument, HashMap<DecodeHintType, Object> hints,
       boolean dumpResults, boolean dumpBlackPoint) throws IOException,
       URISyntaxException {
 
@@ -173,7 +173,7 @@ public final class CommandLineRunner {
     }
   }
 
-  private static Result decode(URI uri, Hashtable<DecodeHintType, Object> hints,
+  private static Result decode(URI uri, HashMap<DecodeHintType, Object> hints,
       boolean dumpBlackPoint) throws IOException {
     BufferedImage image;
     try {

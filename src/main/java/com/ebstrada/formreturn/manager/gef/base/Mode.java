@@ -1,6 +1,6 @@
 package com.ebstrada.formreturn.manager.gef.base;
 
-import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * This is the base interface for all modes in gef. A Mode is responsible for
@@ -18,16 +18,16 @@ public interface Mode {
 
     public void done();
 
-    public void setArgs(Hashtable args);
+    public void setArgs(Map args);
 
     public void setArg(String key, Object value);
 
-    public Hashtable getArgs();
+    public Map getArgs();
 
     public Object getArg(String key);
 
     public boolean canExit();
 
-    public void init(Hashtable parameters);
+    public void init(Map parameters);
 
 } /* end interface Mode */

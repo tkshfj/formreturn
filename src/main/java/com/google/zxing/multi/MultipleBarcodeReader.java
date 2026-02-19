@@ -20,7 +20,7 @@ import com.google.zxing.BinaryBitmap;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * Implementation of this interface attempt to read several barcodes from one image.
@@ -32,6 +32,6 @@ public interface MultipleBarcodeReader {
 
   Result[] decodeMultiple(BinaryBitmap image) throws NotFoundException;
 
-  Result[] decodeMultiple(BinaryBitmap image, Hashtable hints) throws NotFoundException;
+  Result[] decodeMultiple(BinaryBitmap image, HashMap hints) throws NotFoundException;
 
 }

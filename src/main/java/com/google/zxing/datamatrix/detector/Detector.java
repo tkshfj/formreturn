@@ -25,8 +25,7 @@ import com.google.zxing.common.DetectorResult;
 import com.google.zxing.common.GridSampler;
 import com.google.zxing.common.detector.MonochromeRectangleDetector;
 
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -84,7 +83,7 @@ public final class Detector {
 
     // Figure out which point is their intersection by tallying up the number of times we see the
     // endpoints in the four endpoints. One will show up twice.
-    Hashtable pointCount = new Hashtable();
+    HashMap pointCount = new HashMap();
     increment(pointCount, lSideOne.getFrom());
     increment(pointCount, lSideOne.getTo());
     increment(pointCount, lSideTwo.getFrom());
@@ -93,9 +92,8 @@ public final class Detector {
     ResultPoint maybeTopLeft = null;
     ResultPoint bottomLeft = null;
     ResultPoint maybeBottomRight = null;
-    Enumeration points = pointCount.keys();
-    while (points.hasMoreElements()) {
-      ResultPoint point = (ResultPoint) points.nextElement();
+    for (Object key : pointCount.keySet()) {
+      ResultPoint point = (ResultPoint) key;
       Integer value = (Integer) pointCount.get(point);
       if (value.intValue() == 2) {
         bottomLeft = point; // this is definitely the bottom left, then -- end of two L sides
@@ -160,7 +158,7 @@ public final class Detector {
   /**
    * Increments the Integer associated with a key by one.
    */
-  private static void increment(Hashtable table, ResultPoint key) {
+  private static void increment(HashMap table, ResultPoint key) {
     Integer value = (Integer) table.get(key);
     table.put(key, value == null ? INTEGERS[1] : INTEGERS[value.intValue() + 1]);
   }

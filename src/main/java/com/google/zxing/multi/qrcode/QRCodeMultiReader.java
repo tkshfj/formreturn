@@ -29,7 +29,7 @@ import com.google.zxing.multi.MultipleBarcodeReader;
 import com.google.zxing.multi.qrcode.detector.MultiDetector;
 import com.google.zxing.qrcode.QRCodeReader;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -46,7 +46,7 @@ public final class QRCodeMultiReader extends QRCodeReader implements MultipleBar
     return decodeMultiple(image, null);
   }
 
-  public Result[] decodeMultiple(BinaryBitmap image, Hashtable hints) throws NotFoundException {
+  public Result[] decodeMultiple(BinaryBitmap image, HashMap hints) throws NotFoundException {
     Vector results = new Vector();
     DetectorResult[] detectorResult = new MultiDetector(image.getBlackMatrix()).detectMulti(hints);
     for (int i = 0; i < detectorResult.length; i++) {

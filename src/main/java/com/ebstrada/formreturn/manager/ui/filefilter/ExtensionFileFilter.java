@@ -36,14 +36,14 @@
 package com.ebstrada.formreturn.manager.ui.filefilter;
 
 import java.io.File;
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.filechooser.FileFilter;
 
 public class ExtensionFileFilter extends FileFilter {
 
-    private Hashtable<String, ExtensionFileFilter> filters = null;
+    private HashMap<String, ExtensionFileFilter> filters = null;
 
     private String description = null;
 
@@ -58,7 +58,7 @@ public class ExtensionFileFilter extends FileFilter {
      * @see #addExtension
      */
     public ExtensionFileFilter() {
-        filters = new Hashtable<String, ExtensionFileFilter>();
+        filters = new HashMap<String, ExtensionFileFilter>();
     }
 
     /**
@@ -176,7 +176,7 @@ public class ExtensionFileFilter extends FileFilter {
      */
     public void addExtension(String extension) {
         if (filters == null) {
-            filters = new Hashtable<String, ExtensionFileFilter>(5);
+            filters = new HashMap<String, ExtensionFileFilter>(5);
         }
         filters.put(extension.toLowerCase(), this);
         fullDescription = null;
@@ -196,11 +196,11 @@ public class ExtensionFileFilter extends FileFilter {
             if (description == null || isExtensionListInDescription()) {
                 fullDescription = description == null ? "(" : description + " (";
                 // build the description from the extension list
-                Enumeration extensions = filters.keys();
-                if (extensions != null) {
-                    fullDescription += "." + (String) extensions.nextElement();
-                    while (extensions.hasMoreElements()) {
-                        fullDescription += ", ." + (String) extensions.nextElement();
+                Iterator<String> extensions = filters.keySet().iterator();
+                if (extensions.hasNext()) {
+                    fullDescription += "." + extensions.next();
+                    while (extensions.hasNext()) {
+                        fullDescription += ", ." + extensions.next();
                     }
                 }
                 fullDescription += ")";

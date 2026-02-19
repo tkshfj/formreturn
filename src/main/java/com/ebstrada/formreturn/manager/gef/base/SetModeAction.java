@@ -1,7 +1,8 @@
 package com.ebstrada.formreturn.manager.gef.base;
 
 import java.awt.event.ActionEvent;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.swing.AbstractAction;
@@ -18,8 +19,8 @@ import com.ebstrada.formreturn.manager.gef.util.Localizer;
 public class SetModeAction extends AbstractAction {
 
     private static final long serialVersionUID = -5362721817833001571L;
-    protected Hashtable modeArgs;
-    protected Hashtable args;
+    protected Map modeArgs;
+    protected Map args;
 
     /**
      * Creates a new SetModeAction
@@ -101,7 +102,7 @@ public class SetModeAction extends AbstractAction {
     /**
      * Set the next global mode to the named mode, and set all arguments.
      */
-    public SetModeAction(Class modeClass, Hashtable modeArgs) {
+    public SetModeAction(Class modeClass, HashMap modeArgs) {
         super("SetEditorMode");
         setArg("desiredModeClass", modeClass);
         this.modeArgs = modeArgs;
@@ -109,21 +110,21 @@ public class SetModeAction extends AbstractAction {
 
     public SetModeAction(Class modeClass, String arg, Object value) {
         this(modeClass, arg, value, "SetEditorMode");
-        modeArgs = new Hashtable(1);
+        modeArgs = new HashMap(1);
         modeArgs.put(arg, value);
         setArg("desiredModeClass", modeClass);
     }
 
     public SetModeAction(Class modeClass, String arg, Object value, String name) {
         super(name);
-        modeArgs = new Hashtable(1);
+        modeArgs = new HashMap(1);
         modeArgs.put(arg, value);
         setArg("desiredModeClass", modeClass);
     }
 
     public SetModeAction(Class modeClass, String arg, Object value, String name, ImageIcon icon) {
         super(name, icon);
-        modeArgs = new Hashtable(1);
+        modeArgs = new HashMap(1);
         modeArgs.put(arg, value);
         setArg("desiredModeClass", modeClass);
     }
@@ -153,7 +154,7 @@ public class SetModeAction extends AbstractAction {
      */
     private void setArg(String key, Object value) {
         if (args == null) {
-            args = new Hashtable();
+            args = new HashMap();
         }
         args.put(key, value);
     }

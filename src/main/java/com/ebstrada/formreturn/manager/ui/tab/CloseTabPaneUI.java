@@ -42,7 +42,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
@@ -99,7 +99,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
 
     private Vector htmlViews;
 
-    private Hashtable mnemonicToIndexMap;
+    private HashMap mnemonicToIndexMap;
 
     /**
      * InputMap used for mnemonics. Only non-null if the JTabbedPane has
@@ -526,7 +526,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
      * Installs the state needed for mnemonics.
      */
     private void initMnemonics() {
-        mnemonicToIndexMap = new Hashtable();
+        mnemonicToIndexMap = new HashMap();
         mnemonicInputMap = new InputMapUIResource();
         mnemonicInputMap.setParent(
             SwingUtilities.getUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT));

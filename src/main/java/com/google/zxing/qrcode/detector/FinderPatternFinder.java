@@ -24,7 +24,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.Collections;
 import com.google.zxing.common.Comparator;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -72,7 +72,7 @@ public class FinderPatternFinder {
     return possibleCenters;
   }
 
-  FinderPatternInfo find(Hashtable hints) throws NotFoundException {
+  FinderPatternInfo find(HashMap hints) throws NotFoundException {
     boolean tryHarder = hints != null && hints.containsKey(DecodeHintType.TRY_HARDER);
     int maxI = image.getHeight();
     int maxJ = image.getWidth();

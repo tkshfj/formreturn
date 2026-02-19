@@ -513,7 +513,7 @@ public class ImageUtil {
 	int height = img.getHeight();
 	WritableRaster raster = cm.createCompatibleWritableRaster(width, height);
 	boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-	Hashtable properties = new Hashtable();
+	HashMap properties = new HashMap();
 	String[] keys = img.getPropertyNames();
 	if (keys!=null) {
 	    for (int i = 0; i < keys.length; i++) {

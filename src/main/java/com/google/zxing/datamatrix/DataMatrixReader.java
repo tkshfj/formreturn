@@ -32,7 +32,7 @@ import com.google.zxing.common.DetectorResult;
 import com.google.zxing.datamatrix.decoder.Decoder;
 import com.google.zxing.datamatrix.detector.Detector;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * This implementation can detect and decode Data Matrix codes in an image.
@@ -57,7 +57,7 @@ public final class DataMatrixReader implements Reader {
     return decode(image, null);
   }
 
-  public Result decode(BinaryBitmap image, Hashtable hints)
+  public Result decode(BinaryBitmap image, HashMap hints)
       throws NotFoundException, ChecksumException, FormatException {
     DecoderResult decoderResult;
     ResultPoint[] points;

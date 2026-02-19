@@ -16,7 +16,7 @@
 
 package com.google.zxing;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * <p>Encapsulates the result of decoding a barcode within an image.</p>
@@ -29,7 +29,7 @@ public final class Result {
   private final byte[] rawBytes;
   private final ResultPoint[] resultPoints;
   private final BarcodeFormat format;
-  private Hashtable resultMetadata;
+  private HashMap resultMetadata;
 
   public Result(String text,
                 byte[] rawBytes,
@@ -76,17 +76,17 @@ public final class Result {
   }
 
   /**
-   * @return {@link Hashtable} mapping {@link ResultMetadataType} keys to values. May be
+   * @return {@link HashMap} mapping {@link ResultMetadataType} keys to values. May be
    *   <code>null</code>. This contains optional metadata about what was detected about the barcode,
    *   like orientation.
    */
-  public Hashtable getResultMetadata() {
+  public HashMap getResultMetadata() {
     return resultMetadata;
   }
 
   public void putMetadata(ResultMetadataType type, Object value) {
     if (resultMetadata == null) {
-      resultMetadata = new Hashtable(3);
+      resultMetadata = new HashMap(3);
     }
     resultMetadata.put(type, value);
   }

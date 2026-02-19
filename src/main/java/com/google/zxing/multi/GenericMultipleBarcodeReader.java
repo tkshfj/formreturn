@@ -23,7 +23,7 @@ import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.ResultPoint;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -54,7 +54,7 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
     return decodeMultiple(image, null);
   }
 
-  public Result[] decodeMultiple(BinaryBitmap image, Hashtable hints)
+  public Result[] decodeMultiple(BinaryBitmap image, HashMap hints)
       throws NotFoundException {
     Vector results = new Vector();
     doDecodeMultiple(image, hints, results, 0, 0);
@@ -70,7 +70,7 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
   }
 
   private void doDecodeMultiple(BinaryBitmap image,
-                                Hashtable hints,
+                                HashMap hints,
                                 Vector results,
                                 int xOffset,
                                 int yOffset) {

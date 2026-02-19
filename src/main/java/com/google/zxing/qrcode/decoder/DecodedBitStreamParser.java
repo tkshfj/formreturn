@@ -23,7 +23,7 @@ import com.google.zxing.common.CharacterSetECI;
 import com.google.zxing.common.DecoderResult;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -59,7 +59,7 @@ final class DecodedBitStreamParser {
   private DecodedBitStreamParser() {
   }
 
-  static DecoderResult decode(byte[] bytes, Version version, ErrorCorrectionLevel ecLevel, Hashtable hints)
+  static DecoderResult decode(byte[] bytes, Version version, ErrorCorrectionLevel ecLevel, HashMap hints)
       throws FormatException {
     BitSource bits = new BitSource(bytes);
     StringBuffer result = new StringBuffer(50);
@@ -151,7 +151,7 @@ final class DecodedBitStreamParser {
                                         int count,
                                         CharacterSetECI currentCharacterSetECI,
                                         Vector byteSegments,
-                                        Hashtable hints) throws FormatException {
+                                        HashMap hints) throws FormatException {
     byte[] readBytes = new byte[count];
     if (count << 3 > bits.available()) {
       throw FormatException.getFormatInstance();
@@ -244,7 +244,7 @@ final class DecodedBitStreamParser {
     }
   }
 
-  private static String guessEncoding(byte[] bytes, Hashtable hints) {
+  private static String guessEncoding(byte[] bytes, HashMap hints) {
     if (hints != null) {
       String characterSet = (String) hints.get(DecodeHintType.CHARACTER_SET);
       if (characterSet != null) {

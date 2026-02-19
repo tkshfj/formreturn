@@ -30,7 +30,7 @@ import com.google.zxing.common.DetectorResult;
 import com.google.zxing.pdf417.decoder.Decoder;
 import com.google.zxing.pdf417.detector.Detector;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * This implementation can detect and decode PDF417 codes in an image.
@@ -54,7 +54,7 @@ public final class PDF417Reader implements Reader {
     return decode(image, null);
   }
 
-  public Result decode(BinaryBitmap image, Hashtable hints)
+  public Result decode(BinaryBitmap image, HashMap hints)
       throws NotFoundException, FormatException {
     DecoderResult decoderResult;
     ResultPoint[] points;

@@ -24,7 +24,7 @@ import com.google.zxing.Result;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.common.BitArray;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * <p>Implements decoding of the ITF format.</p>
@@ -76,7 +76,7 @@ public final class ITFReader extends OneDReader {
       {N, W, N, W, N}  // 9
   };
 
-  public Result decodeRow(int rowNumber, BitArray row, Hashtable hints) throws FormatException, NotFoundException {
+  public Result decodeRow(int rowNumber, BitArray row, HashMap hints) throws FormatException, NotFoundException {
 
     // Find out where the Middle section (payload) starts & ends
     int[] startRange = decodeStart(row);

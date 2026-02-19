@@ -3,7 +3,7 @@ package com.ebstrada.formreturn.manager.logic.recognition.reader;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 import com.ebstrada.formreturn.manager.logic.recognition.structure.BarcodeRecognitionStructure;
@@ -39,7 +39,7 @@ public class BarcodeImageReader {
 
         source = new BufferedImageLuminanceSource(fragmentImage);
         BinaryBitmap bitmap = new BinaryBitmap(new GlobalHistogramBinarizer(source));
-        Hashtable<DecodeHintType, Object> hints = new Hashtable<DecodeHintType, Object>();
+        HashMap<DecodeHintType, Object> hints = new HashMap<DecodeHintType, Object>();
         hints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
         hints.put(DecodeHintType.SKIP_TO_ROW, Integer.valueOf(0));
         hints.put(DecodeHintType.IGNORE_AREAS, new Vector<Rectangle2D>());
@@ -67,7 +67,7 @@ public class BarcodeImageReader {
 
     }
 
-    private Result[] decodeMultiple(BinaryBitmap image, Hashtable hints) throws ReaderException {
+    private Result[] decodeMultiple(BinaryBitmap image, HashMap hints) throws ReaderException {
         Vector results = new Vector();
         while (true) {
             try {

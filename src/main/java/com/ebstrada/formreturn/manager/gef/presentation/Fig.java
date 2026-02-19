@@ -287,7 +287,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
      * <p>
      * Since most Fig's will never have any listeners, and I want Figs to be
      * fairly light-weight objects, listeners are kept in a global
-     * Hashtable, keyed by Fig. NOTE: It is important that all listeners
+     * HashMap, keyed by Fig. NOTE: It is important that all listeners
      * eventually remove themselves, otherwise this will prevent garbage
      * collection.
      */

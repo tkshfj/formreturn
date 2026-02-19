@@ -1,24 +1,19 @@
 package com.ebstrada.formreturn.manager.gef.util;
 
-import java.util.Enumeration;
-
 /**
  * This Class is a utility to convert java.util.*-classes to java.util.*-classes
  */
 
 public class Converter {
 
-    public static java.util.Hashtable convert(java.util.Hashtable oldOne) {
+    public static java.util.HashMap convert(java.util.HashMap oldOne) {
         if (oldOne == null) {
             return null;
         }
-        java.util.Hashtable newOne = new java.util.Hashtable();
-        Enumeration oldKeys = oldOne.keys();
-        while (oldKeys.hasMoreElements()) {
-            Object o = oldKeys.nextElement();
-            newOne.put(o, oldOne.get(o));
+        java.util.HashMap newOne = new java.util.HashMap();
+        for (Object key : oldOne.keySet()) {
+            newOne.put(key, oldOne.get(key));
         }
-
         return newOne;
     }
 

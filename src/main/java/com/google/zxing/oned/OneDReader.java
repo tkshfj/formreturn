@@ -31,7 +31,7 @@ import com.google.zxing.common.BitArray;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -51,7 +51,7 @@ public abstract class OneDReader implements Reader {
   }
 
   // Note that we don't try rotation without the try harder flag, even if rotation was supported.
-  public Result decode(BinaryBitmap image, Hashtable hints) throws NotFoundException, FormatException {
+  public Result decode(BinaryBitmap image, HashMap hints) throws NotFoundException, FormatException {
     try {
       return doDecode(image, hints);
     } catch (NotFoundException nfe) {
@@ -59,7 +59,7 @@ public abstract class OneDReader implements Reader {
     }
   }
   
-  private void locateIgnoreArea(Result result, BinaryBitmap image, Hashtable hints) throws ReaderException {
+  private void locateIgnoreArea(Result result, BinaryBitmap image, HashMap hints) throws ReaderException {
 
       ResultPoint[] resultPoints = result.getResultPoints();
       if (resultPoints == null || resultPoints.length == 0) {
@@ -170,7 +170,7 @@ private void whiteOutIgnoreAreas(int rowNumber, BitArray row, Vector<Rectangle2D
    * @return The contents of the decoded barcode
    * @throws NotFoundException Any spontaneous errors which occur
    */
-  private Result doDecode(BinaryBitmap image, Hashtable hints) throws NotFoundException {
+  private Result doDecode(BinaryBitmap image, HashMap hints) throws NotFoundException {
       int width = image.getWidth();
       int height = image.getHeight();
       BitArray row = new BitArray(width);
@@ -323,7 +323,7 @@ private void whiteOutIgnoreAreas(int rowNumber, BitArray row, Vector<Rectangle2D
    * @return {@link Result} containing encoded string and start/end of barcode
    * @throws NotFoundException if an error occurs or barcode cannot be found
    */
-  public abstract Result decodeRow(int rowNumber, BitArray row, Hashtable hints)
+  public abstract Result decodeRow(int rowNumber, BitArray row, HashMap hints)
       throws NotFoundException, ChecksumException, FormatException;
 
 }

@@ -23,7 +23,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.DetectorResult;
 import com.google.zxing.common.GridSampler;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * <p>Encapsulates logic that can detect a PDF417 Code in an image, even if the
@@ -75,7 +75,7 @@ public final class Detector {
    * @return {@link DetectorResult} encapsulating results of detecting a PDF417 Code
    * @throws NotFoundException if no PDF417 Code can be found
    */
-  public DetectorResult detect(Hashtable hints) throws NotFoundException {
+  public DetectorResult detect(HashMap hints) throws NotFoundException {
     // Fetch the 1 bit matrix once up front.
     BitMatrix matrix = image.getBlackMatrix();
 

@@ -23,7 +23,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Reader;
 import com.google.zxing.Result;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  * This class attempts to decode a barcode from an image, not by scanning the whole image,
@@ -47,7 +47,7 @@ public final class ByQuadrantReader implements Reader {
     return decode(image, null);
   }
 
-  public Result decode(BinaryBitmap image, Hashtable hints)
+  public Result decode(BinaryBitmap image, HashMap hints)
       throws NotFoundException, ChecksumException, FormatException {
 
     int width = image.getWidth();

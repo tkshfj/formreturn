@@ -1,16 +1,16 @@
 package com.ebstrada.formreturn.manager.gef.properties;
 
 import java.beans.PropertyDescriptor;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class PropCategoryManager {
 
-    protected static Hashtable _categories = new Hashtable();
+    protected static HashMap _categories = new HashMap();
 
     public static void categorizeProperty(String catName, String propName) {
-        Hashtable cat = (Hashtable) _categories.get(catName);
+        HashMap cat = (HashMap) _categories.get(catName);
         if (cat == null) {
-            cat = new Hashtable();
+            cat = new HashMap();
         }
         cat.put(propName, propName);
         _categories.put(catName, cat);
@@ -28,7 +28,7 @@ public class PropCategoryManager {
         if ("All".equals(catName)) {
             return true;
         }
-        Hashtable cat = (Hashtable) _categories.get(catName);
+        HashMap cat = (HashMap) _categories.get(catName);
         if (cat == null) {
             return false;
         }

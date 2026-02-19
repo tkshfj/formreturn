@@ -21,7 +21,7 @@ import com.google.zxing.oned.MultiFormatOneDReader;
 import com.google.zxing.pdf417.PDF417Reader;
 import com.google.zxing.qrcode.QRCodeReader;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -34,7 +34,7 @@ import java.util.Vector;
  */
 public final class MultiFormatReader implements Reader {
 
-  private Hashtable hints;
+  private HashMap hints;
   private Vector readers;
 
   /**
@@ -59,7 +59,7 @@ public final class MultiFormatReader implements Reader {
    * @return The contents of the image
    * @throws NotFoundException Any errors which occurred
    */
-  public Result decode(BinaryBitmap image, Hashtable hints) throws NotFoundException {
+  public Result decode(BinaryBitmap image, HashMap hints) throws NotFoundException {
     setHints(hints);
     return decodeInternal(image);
   }
@@ -87,7 +87,7 @@ public final class MultiFormatReader implements Reader {
    *
    * @param hints The set of hints to use for subsequent calls to decode(image)
    */
-  public void setHints(Hashtable hints) {
+  public void setHints(HashMap hints) {
     this.hints = hints;
 
     boolean tryHarder = hints != null && hints.containsKey(DecodeHintType.TRY_HARDER);
