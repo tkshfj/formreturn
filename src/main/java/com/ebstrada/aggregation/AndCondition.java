@@ -1,11 +1,5 @@
 package com.ebstrada.aggregation;
 
-import com.ebstrada.aggregation.AbstractFunction;
-import com.ebstrada.aggregation.ConditionPartFactory;
-import com.ebstrada.aggregation.IConditionPart;
-import com.ebstrada.aggregation.Selection;
-import com.ebstrada.aggregation.Value;
-import com.ebstrada.aggregation.Wildcard;
 import com.ebstrada.aggregation.exception.InvalidRulePartException;
 
 import java.util.ArrayList;

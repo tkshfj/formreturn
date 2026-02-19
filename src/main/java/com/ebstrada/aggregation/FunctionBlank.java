@@ -1,8 +1,5 @@
 package com.ebstrada.aggregation;
 
-import com.ebstrada.aggregation.AbstractFunction;
-import com.ebstrada.aggregation.Selection;
-
 public class FunctionBlank extends AbstractFunction {
 
     @Override

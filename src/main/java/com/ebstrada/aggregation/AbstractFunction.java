@@ -1,6 +1,5 @@
 package com.ebstrada.aggregation;
 
-import com.ebstrada.aggregation.IConditionPart;
 import com.ebstrada.aggregation.exception.InvalidRulePartException;
 
 import java.util.ArrayList;

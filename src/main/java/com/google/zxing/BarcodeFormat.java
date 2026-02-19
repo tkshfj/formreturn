@@ -27,7 +27,7 @@ public final class BarcodeFormat {
 
   // No, we can't use an enum here. J2ME doesn't support it.
 
-  private static final Hashtable VALUES = new Hashtable();
+  private static final Hashtable<String, BarcodeFormat> VALUES = new Hashtable<>();
 
   /** QR Code 2D barcode format. */
   public static final BarcodeFormat QR_CODE = new BarcodeFormat("QR_CODE");
@@ -78,7 +78,7 @@ public final class BarcodeFormat {
   }
 
   public static BarcodeFormat valueOf(String name) {
-    BarcodeFormat format = (BarcodeFormat) VALUES.get(name);
+    BarcodeFormat format = VALUES.get(name);
     if (format == null) {
       throw new IllegalArgumentException();
     }

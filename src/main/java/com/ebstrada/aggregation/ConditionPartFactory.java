@@ -1,9 +1,5 @@
 package com.ebstrada.aggregation;
 
-import com.ebstrada.aggregation.FunctionFactory;
-import com.ebstrada.aggregation.IConditionPart;
-import com.ebstrada.aggregation.Value;
-import com.ebstrada.aggregation.Wildcard;
 import com.ebstrada.aggregation.exception.InvalidRulePartException;
 
 public class ConditionPartFactory {

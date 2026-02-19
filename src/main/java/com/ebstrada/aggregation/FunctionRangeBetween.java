@@ -1,7 +1,5 @@
 package com.ebstrada.aggregation;
 
-import com.ebstrada.aggregation.AbstractFunction;
-import com.ebstrada.aggregation.Selection;
 import com.ebstrada.aggregation.exception.InvalidRulePartException;
 
 import java.util.ArrayList;

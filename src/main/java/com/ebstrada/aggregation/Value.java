@@ -1,8 +1,5 @@
 package com.ebstrada.aggregation;
 
-import com.ebstrada.aggregation.IConditionPart;
-import com.ebstrada.aggregation.Selection;
-
 public class Value implements IConditionPart {
     
     private String value;
