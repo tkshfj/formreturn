@@ -142,7 +142,7 @@ public class GradingRuleDialog extends JDialog {
         contentPanel = new JPanel();
         qualifierLabel = new JLabel();
         panel1 = new JPanel();
-        qualifierComboBox = new JComboBox();
+        qualifierComboBox = new JComboBox<>();
         thresholdTextField = new JTextField();
         gradeLabel = new JLabel();
         gradeTextField = new JTextField();
@@ -282,7 +282,7 @@ public class GradingRuleDialog extends JDialog {
     private JPanel contentPanel;
     private JLabel qualifierLabel;
     private JPanel panel1;
-    private JComboBox qualifierComboBox;
+    private JComboBox<String> qualifierComboBox;
     private JTextField thresholdTextField;
     private JLabel gradeLabel;
     private JTextField gradeTextField;

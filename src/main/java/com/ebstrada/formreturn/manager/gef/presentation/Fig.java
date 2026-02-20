@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -76,6 +77,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
     // each
     // subarray
 
+    @SuppressWarnings("unused")
     private BasicStroke stroke;
 
     /**
@@ -620,7 +622,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
         return DASHED_CHOICES[_dashStyle];
     }
 
-    public Vector getEnclosedFigs() {
+    public Vector<Fig> getEnclosedFigs() {
         return null;
     }
 
@@ -808,8 +810,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
         return null;
     }
 
-    public Vector getPopUpActions(MouseEvent me) {
-        Vector popUpActions = new Vector();
+    public List<Object> getPopUpActions(MouseEvent me) {
+        List<Object> popUpActions = new ArrayList<Object>();
         JMenu orderMenu = new JMenu(Localizer.localize("GefBase", "Ordering"));
         orderMenu.setFont(UIManager.getFont("Menu.font"));
 
@@ -842,7 +844,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
                 ReorderAction.SEND_TO_BACK));
         menuItem.setFont(UIManager.getFont("MenuItem.font"));
         orderMenu.add(menuItem);
-        popUpActions.addElement(orderMenu);
+        popUpActions.add(orderMenu);
 
         JMenu editMenu = new JMenu(Localizer.localize("GefBase", "Edit"));
         editMenu.setFont(UIManager.getFont("Menu.font"));
@@ -898,7 +900,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
         editMenu.add(duplicateItem);
 
-        popUpActions.addElement(editMenu);
+        popUpActions.add(editMenu);
 
         return popUpActions;
     }

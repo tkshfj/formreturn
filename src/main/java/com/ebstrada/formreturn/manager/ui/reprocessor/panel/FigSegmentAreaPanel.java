@@ -69,7 +69,7 @@ public class FigSegmentAreaPanel extends ReprocessorPanel {
             return;
         }
 
-        DefaultComboBoxModel sncb = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> sncb = new DefaultComboBoxModel<>();
 
         try {
             long formPageId = reprocessorFrame.getFormPageId();
@@ -151,7 +151,7 @@ public class FigSegmentAreaPanel extends ReprocessorPanel {
         panel1 = new JPanel();
         panel2 = new JPanel();
         segmentStencilPanelLabel = new JLabel();
-        segmentStencilComboBox = new JComboBox();
+        segmentStencilComboBox = new JComboBox<>();
         figSegmentAreaPropertiesButton = new JButton();
 
         //======== this ========
@@ -227,7 +227,7 @@ public class FigSegmentAreaPanel extends ReprocessorPanel {
     private JPanel panel1;
     private JPanel panel2;
     private JLabel segmentStencilPanelLabel;
-    private JComboBox segmentStencilComboBox;
+    private JComboBox<String> segmentStencilComboBox;
     private JButton figSegmentAreaPropertiesButton;
     // JFormDesigner - End of variables declaration //GEN-END:variables
 }

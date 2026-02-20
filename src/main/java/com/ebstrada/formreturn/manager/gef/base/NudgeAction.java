@@ -59,6 +59,7 @@ public class NudgeAction extends UndoableAction {
      * Move the selected items a few pixels in the given direction. Note that
      * the sign convention is the opposite of CmdScroll.
      */
+    @SuppressWarnings("deprecation")
     @Override public void actionPerformed(ActionEvent e) {
 
         super.actionPerformed(e);

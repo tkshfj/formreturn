@@ -373,7 +373,7 @@ public final class Encoder {
     int maxNumEcBytes = 0;
 
     // Since, we know the number of reedsolmon blocks, we can initialize the vector with the number.
-    Vector blocks = new Vector(numRSBlocks);
+    Vector<BlockPair> blocks = new Vector<BlockPair>(numRSBlocks);
 
     for (int i = 0; i < numRSBlocks; ++i) {
       int[] numDataBytesInBlock = new int[1];
@@ -398,7 +398,7 @@ public final class Encoder {
     // First, place data blocks.
     for (int i = 0; i < maxNumDataBytes; ++i) {
       for (int j = 0; j < blocks.size(); ++j) {
-        ByteArray dataBytes = ((BlockPair) blocks.elementAt(j)).getDataBytes();
+        ByteArray dataBytes = blocks.elementAt(j).getDataBytes();
         if (i < dataBytes.size()) {
           result.appendBits(dataBytes.at(i), 8);
         }
@@ -407,7 +407,7 @@ public final class Encoder {
     // Then, place error correction blocks.
     for (int i = 0; i < maxNumEcBytes; ++i) {
       for (int j = 0; j < blocks.size(); ++j) {
-        ByteArray ecBytes = ((BlockPair) blocks.elementAt(j)).getErrorCorrectionBytes();
+        ByteArray ecBytes = blocks.elementAt(j).getErrorCorrectionBytes();
         if (i < ecBytes.size()) {
           result.appendBits(ecBytes.at(i), 8);
         }

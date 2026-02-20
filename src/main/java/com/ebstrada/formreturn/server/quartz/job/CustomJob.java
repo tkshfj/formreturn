@@ -1,14 +1,11 @@
 package com.ebstrada.formreturn.server.quartz.job;
 
-import org.apache.log4j.Logger;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import com.ebstrada.formreturn.server.preferences.persistence.CustomJobPreferences;
 
 public class CustomJob extends TaskSchedulerJob {
-
-    private static final Logger logger = Logger.getLogger(CustomJob.class);
 
     // DO NOT REMOVE THE DEFAULT CONSTRUCTOR - IT IS REQUIRED FOR QUARTZ!
     public CustomJob() {

@@ -11,14 +11,13 @@ import com.ebstrada.formreturn.manager.gef.undo.UndoManager;
 import com.ebstrada.formreturn.manager.gef.undo.memento.FigAddMemento;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigLinePanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
  * Class to display lines in diagrams.
  */
 
-@XStreamAlias("line") public class FigLine extends Fig implements NoObfuscation {
+@XStreamAlias("line") public class FigLine extends Fig {
 
     private static final long serialVersionUID = 1L;
 

@@ -105,6 +105,7 @@ public class PDFDocumentExporter extends PDFDocumentGraphics2D {
 
     }
 
+    @SuppressWarnings("unchecked")
     public void createPDF(EntityManager entityManager, long formId) throws Exception {
 
         Form form = entityManager.find(Form.class, formId);

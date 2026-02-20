@@ -93,7 +93,7 @@ public class SelectPageSizePanel extends JPanel implements IWizardPanel {
         contentLabel = new JLabel();
         pageSizeComboBoxPanel = new JPanel();
         defaultPaperSizeLabel = new JLabel();
-        paperSizeComboBox = new JComboBox();
+        paperSizeComboBox = new JComboBox<>();
 
         //======== this ========
         setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -175,7 +175,7 @@ public class SelectPageSizePanel extends JPanel implements IWizardPanel {
                     GridBagConstraints.VERTICAL, new Insets(0, 0, 0, 5), 0, 0));
 
             //---- paperSizeComboBox ----
-            paperSizeComboBox.setModel(new DefaultComboBoxModel(new String[] {"A4", "Letter"}));
+            paperSizeComboBox.setModel(new DefaultComboBoxModel<>(new String[] {"A4", "Letter"}));
             paperSizeComboBox.setPrototypeDisplayValue("xxxxxxxxxxxxxxxxxxxxx");
             paperSizeComboBox.setFont(UIManager.getFont("ComboBox.font"));
             paperSizeComboBox.addActionListener(new ActionListener() {
@@ -207,7 +207,7 @@ public class SelectPageSizePanel extends JPanel implements IWizardPanel {
     private JLabel contentLabel;
     private JPanel pageSizeComboBoxPanel;
     private JLabel defaultPaperSizeLabel;
-    private JComboBox paperSizeComboBox;
+    private JComboBox<String> paperSizeComboBox;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 

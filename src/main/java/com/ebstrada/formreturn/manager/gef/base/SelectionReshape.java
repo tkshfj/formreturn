@@ -17,7 +17,7 @@ import com.ebstrada.formreturn.manager.gef.presentation.Handle;
  * @see FigLine
  */
 
-public class SelectionReshape extends Selection implements KeyListener {
+public class SelectionReshape extends Selection {
 
     private static final long serialVersionUID = 2204649413528863935L;
 

@@ -146,13 +146,12 @@ public class Misc {
 
     }
 
-    @SuppressWarnings("unchecked")
-    public static Class registerJarFile(File jarFile, String className)
+    public static Class<?> registerJarFile(File jarFile, String className)
         throws MalformedURLException, ClassNotFoundException {
         URL url = jarFile.toURI().toURL();
         URL[] urls = new URL[] {url};
         URLClassLoader cl = new URLClassLoader(urls);
-        Class cls = cl.loadClass(className);
+        Class<?> cls = cl.loadClass(className);
         try {
             cl.close();
         } catch (java.io.IOException e) {
@@ -636,11 +635,11 @@ public class Misc {
 
         try {
             if (osName.startsWith("Mac OS")) {
-                Class fileMgr = Class.forName("com.apple.eio.FileManager");
-                Method openURL = fileMgr.getDeclaredMethod("openURL", new Class[] {String.class});
+                Class<?> fileMgr = Class.forName("com.apple.eio.FileManager");
+                Method openURL = fileMgr.getDeclaredMethod("openURL", new Class<?>[] {String.class});
                 openURL.invoke(null, new Object[] {url});
             } else if (osName.startsWith("Windows")) {
-                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
+                Runtime.getRuntime().exec(new String[] {"rundll32", "url.dll,FileProtocolHandler", url});
             } else { // assume Unix or Linux
                 String[] browsers =
                     {"chromium-browser", "google-chrome", "google-chrome-stable", "chrome",
@@ -1206,11 +1205,12 @@ public class Misc {
         return recordMap;
     }
 
+    @SuppressWarnings("unchecked")
     public static HashMap<String, String> getSourceData(EntityManager entityManager,
         Record record) {
         Query sourceTextQuery = entityManager.createNativeQuery(
-            "SELECT RECORD_ID, SOURCE_TEXT_STRING, SOURCE_FIELD_NAME FROM SOURCE_TEXT LEFT JOIN SOURCE_FIELD ON SOURCE_TEXT.SOURCE_FIELD_ID = SOURCE_FIELD.SOURCE_FIELD_ID WHERE RECORD_ID = "
-                + record.getRecordId() + " ORDER BY ORDER_INDEX ASC");
+            "SELECT RECORD_ID, SOURCE_TEXT_STRING, SOURCE_FIELD_NAME FROM SOURCE_TEXT LEFT JOIN SOURCE_FIELD ON SOURCE_TEXT.SOURCE_FIELD_ID = SOURCE_FIELD.SOURCE_FIELD_ID WHERE RECORD_ID = ?1 ORDER BY ORDER_INDEX ASC");
+        sourceTextQuery.setParameter(1, record.getRecordId());
         List<Object[]> stResultList = sourceTextQuery.getResultList();
 
         List<String> hiddenFields = PreferencesManager.getHiddenFields();

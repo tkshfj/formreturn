@@ -86,8 +86,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         return null;
     }
 
-    public DefaultComboBoxModel getAvailableStylesList() {
-        DefaultComboBoxModel availableStylesList = new DefaultComboBoxModel();
+    public DefaultComboBoxModel<String> getAvailableStylesList() {
+        DefaultComboBoxModel<String> availableStylesList = new DefaultComboBoxModel<>();
         if (cachedFontStylePlain != null) {
             availableStylesList.addElement("Plain");
         }

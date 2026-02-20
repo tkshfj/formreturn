@@ -532,7 +532,7 @@ public class ImagePreviewPanel extends JPanel {
         imagePreviewLabel = new JImageLabel();
         masterPanel = new JPanel();
         panel2 = new JPanel();
-        zoomBox = new JComboBox();
+        zoomBox = new JComboBox<>();
         zoomInLabel = new JLabel();
         zoomOutLabel = new JLabel();
         zoomToFitCheckBox = new JCheckBox();
@@ -607,7 +607,7 @@ public class ImagePreviewPanel extends JPanel {
                             new double[] {0.0, 1.0E-4};
 
                         //---- zoomBox ----
-                        zoomBox.setModel(new DefaultComboBoxModel(
+                        zoomBox.setModel(new DefaultComboBoxModel<>(
                             new String[] {"5%", "10%", "25%", "50%", "100%", "200%", "500%",
                                 "1000%"}));
                         zoomBox.setSelectedIndex(4);
@@ -800,7 +800,7 @@ public class ImagePreviewPanel extends JPanel {
     private JImageLabel imagePreviewLabel;
     private JPanel masterPanel;
     private JPanel panel2;
-    private JComboBox zoomBox;
+    private JComboBox<String> zoomBox;
     private JLabel zoomInLabel;
     private JLabel zoomOutLabel;
     private JCheckBox zoomToFitCheckBox;

@@ -36,6 +36,7 @@ public final class Collections {
    * @param vector vector to sort
    * @param comparator comparator to define sort ordering
    */
+  @SuppressWarnings({"rawtypes", "unchecked"}) // Vector element type varies by caller; Comparator is untyped
   public static void insertionSort(Vector vector, Comparator comparator) {
     int max = vector.size();
     for (int i = 1; i < max; i++) {

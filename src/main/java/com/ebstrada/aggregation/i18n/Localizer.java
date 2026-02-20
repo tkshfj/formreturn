@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 
 public class Localizer {
     
-    public static Locale currentLocale = new Locale("en");
+    public static Locale currentLocale = Locale.of("en");
     
     private static final Logger logger = Logger.getLogger(com.ebstrada.aggregation.i18n.Localizer.class);
 
@@ -33,7 +33,7 @@ public class Localizer {
         try {
             ResourceBundle.getBundle("com.ebstrada.aggregation.messages", currentLocale);
         } catch ( Exception ex ) {
-            ResourceBundle.getBundle("com.ebstrada.aggregation.messages", new Locale("en"));
+            ResourceBundle.getBundle("com.ebstrada.aggregation.messages", Locale.of("en"));
         }
     }
 

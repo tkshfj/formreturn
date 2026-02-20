@@ -11,11 +11,8 @@ public class FormPopupMenu extends AbstractRecordPopupMenu {
 
     private static final long serialVersionUID = 1L;
 
-    private FormNode formNode;
-
     public FormPopupMenu(FormNode formNode, RecordTree tree, RecordTreeNode node) {
         super(formNode, tree, node);
-        this.formNode = formNode;
         initComponents();
     }
 

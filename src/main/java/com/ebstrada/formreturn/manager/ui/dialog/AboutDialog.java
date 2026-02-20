@@ -65,7 +65,7 @@ public class AboutDialog extends JDialog implements ClipboardOwner {
         clipboard.setContents(stringSelection, this);
     }
 
-    @SuppressWarnings("serial") private void setSystemPropertiesTable() {
+    private void setSystemPropertiesTable() {
         Object[] keys = System.getProperties().keySet().toArray();
         Object[] values = System.getProperties().values().toArray();
 
@@ -150,8 +150,6 @@ public class AboutDialog extends JDialog implements ClipboardOwner {
         panel8 = new JPanel();
         panel9 = new JPanel();
         versionLabel = new JLabel();
-        copyrightLabel = new JLabel();
-        publishedUnderLicenseLabel = new JLabel();
         logoIconLabel = new JLabel();
         aboutDialogTabbedPane = new JTabbedPane();
         panel3 = new JPanel();
@@ -431,8 +429,6 @@ public class AboutDialog extends JDialog implements ClipboardOwner {
     private JPanel panel8;
     private JPanel panel9;
     private JLabel versionLabel;
-    private JLabel copyrightLabel;
-    private JLabel publishedUnderLicenseLabel;
     private JLabel logoIconLabel;
     private JTabbedPane aboutDialogTabbedPane;
     private JPanel panel3;

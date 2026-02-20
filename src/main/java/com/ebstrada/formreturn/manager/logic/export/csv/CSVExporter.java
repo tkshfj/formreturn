@@ -180,6 +180,7 @@ public class CSVExporter {
 
     }
 
+    @SuppressWarnings("unchecked")
     public void write(CSVWriter writer, MessageNotification processingStatusDialog) {
 
         ExportMap export = new ExportMap();
@@ -190,8 +191,9 @@ public class CSVExporter {
             Grading grading = null;
 
             String gradingSQL =
-                "SELECT MAX(GRADING_ID) FROM GRADING WHERE PUBLICATION_ID = " + publicationId;
+                "SELECT MAX(GRADING_ID) FROM GRADING WHERE PUBLICATION_ID = ?1";
             Query gradingIdQuery = entityManager.createNativeQuery(gradingSQL);
+            gradingIdQuery.setParameter(1, publicationId);
 
             try {
                 Long gradingId = (Long) gradingIdQuery.getSingleResult();
@@ -211,13 +213,12 @@ public class CSVExporter {
 
             if (foundExcludeFilter) {
                 formQuery = entityManager.createNativeQuery(
-                    "SELECT FORM.FORM_ID, FORM.FORM_PASSWORD, FORM.RECORD_ID, FORM.AGGREGATE_MARK, MIN(FORM_PAGE.PROCESSED_TIME) FROM FORM LEFT JOIN FORM_PAGE ON FORM.FORM_ID = FORM_PAGE.FORM_ID WHERE RECORD_ID IS NOT NULL AND FORM_PAGE.PROCESSED_TIME IS NOT NULL AND FORM.PUBLICATION_ID = "
-                        + publicationId
-                        + " GROUP BY FORM.FORM_ID, FORM.FORM_PASSWORD, FORM.RECORD_ID, FORM.AGGREGATE_MARK ORDER BY FORM.FORM_ID ASC");
+                    "SELECT FORM.FORM_ID, FORM.FORM_PASSWORD, FORM.RECORD_ID, FORM.AGGREGATE_MARK, MIN(FORM_PAGE.PROCESSED_TIME) FROM FORM LEFT JOIN FORM_PAGE ON FORM.FORM_ID = FORM_PAGE.FORM_ID WHERE RECORD_ID IS NOT NULL AND FORM_PAGE.PROCESSED_TIME IS NOT NULL AND FORM.PUBLICATION_ID = ?1 GROUP BY FORM.FORM_ID, FORM.FORM_PASSWORD, FORM.RECORD_ID, FORM.AGGREGATE_MARK ORDER BY FORM.FORM_ID ASC");
+                formQuery.setParameter(1, publicationId);
             } else {
                 formQuery = entityManager.createNativeQuery(
-                    "SELECT FORM_ID, FORM_PASSWORD, RECORD_ID, AGGREGATE_MARK FROM FORM WHERE RECORD_ID IS NOT NULL AND PUBLICATION_ID = "
-                        + publicationId + " ORDER BY FORM_ID ASC");
+                    "SELECT FORM_ID, FORM_PASSWORD, RECORD_ID, AGGREGATE_MARK FROM FORM WHERE RECORD_ID IS NOT NULL AND PUBLICATION_ID = ?1 ORDER BY FORM_ID ASC");
+                formQuery.setParameter(1, publicationId);
             }
 
             List<Object[]> resultList = formQuery.getResultList();
@@ -229,7 +230,7 @@ public class CSVExporter {
             for (Object[] objArr : resultList) {
 
                 // skip anything where recordId is null
-                if (objArr[1] == null) {
+                if (objArr[2] == null) {
                     continue;
                 }
 
@@ -272,11 +273,11 @@ public class CSVExporter {
                     orderIndex = 0;
 
                     String segmentScoreSQL =
-                        "SELECT segment.* FROM FORM frm LEFT JOIN FORM_PAGE fp ON frm.FORM_ID = fp.FORM_ID LEFT JOIN SEGMENT segment ON fp.FORM_PAGE_ID = segment.FORM_PAGE_ID WHERE frm.FORM_ID = "
-                            + formId + " ORDER BY segment.BARCODE_ONE";
+                        "SELECT segment.* FROM FORM frm LEFT JOIN FORM_PAGE fp ON frm.FORM_ID = fp.FORM_ID LEFT JOIN SEGMENT segment ON fp.FORM_PAGE_ID = segment.FORM_PAGE_ID WHERE frm.FORM_ID = ?1 ORDER BY segment.BARCODE_ONE";
 
                     Query segmentScoreQuery =
                         entityManager.createNativeQuery(segmentScoreSQL, Segment.class);
+                    segmentScoreQuery.setParameter(1, formId);
                     List<Segment> segmentResultList = segmentScoreQuery.getResultList();
 
                     if (segmentResultList != null && segmentResultList.size() > 0) {
@@ -308,10 +309,10 @@ public class CSVExporter {
                     orderIndex = 0;
 
                     String formPageSQL =
-                        "SELECT fp.* FROM FORM frm LEFT JOIN FORM_PAGE fp ON frm.FORM_ID = fp.FORM_ID WHERE frm.FORM_ID = "
-                            + formId + " ORDER BY fp.FORM_PAGE_NUMBER ASC";
+                        "SELECT fp.* FROM FORM frm LEFT JOIN FORM_PAGE fp ON frm.FORM_ID = fp.FORM_ID WHERE frm.FORM_ID = ?1 ORDER BY fp.FORM_PAGE_NUMBER ASC";
                     Query formPageQuery =
                         entityManager.createNativeQuery(formPageSQL, FormPage.class);
+                    formPageQuery.setParameter(1, formId);
                     List<FormPage> formPageResultList = formPageQuery.getResultList();
 
 
@@ -398,10 +399,10 @@ public class CSVExporter {
                                 }
 
                                 String imageNameSQL =
-                                    "SELECT PROCESSED_IMAGE_NAME FROM PROCESSED_IMAGE WHERE FORM_PAGE_ID = "
-                                        + formPage.getFormPageId();
+                                    "SELECT PROCESSED_IMAGE_NAME FROM PROCESSED_IMAGE WHERE FORM_PAGE_ID = ?1";
                                 Query imageNameQuery =
                                     entityManager.createNativeQuery(imageNameSQL);
+                                imageNameQuery.setParameter(1, formPage.getFormPageId());
                                 List<String> imageNameResultList = imageNameQuery.getResultList();
                                 if (imageNameResultList == null
                                     || imageNameResultList.size() <= 0) {
@@ -452,8 +453,8 @@ public class CSVExporter {
                 if (includeSourceData) {
 
                     Query sourceTextQuery = entityManager.createNativeQuery(
-                        "SELECT RECORD_ID, SOURCE_TEXT_STRING, SOURCE_FIELD_NAME, ORDER_INDEX FROM SOURCE_TEXT LEFT JOIN SOURCE_FIELD ON SOURCE_TEXT.SOURCE_FIELD_ID = SOURCE_FIELD.SOURCE_FIELD_ID WHERE RECORD_ID = "
-                            + recordId);
+                        "SELECT RECORD_ID, SOURCE_TEXT_STRING, SOURCE_FIELD_NAME, ORDER_INDEX FROM SOURCE_TEXT LEFT JOIN SOURCE_FIELD ON SOURCE_TEXT.SOURCE_FIELD_ID = SOURCE_FIELD.SOURCE_FIELD_ID WHERE RECORD_ID = ?1");
+                    sourceTextQuery.setParameter(1, recordId);
                     List<Object[]> stResultList = sourceTextQuery.getResultList();
 
 
@@ -478,10 +479,10 @@ public class CSVExporter {
                 if (includeCapturedData || includeIndividualScores || includeStatistics) {
 
                     String fragmentBarcodeSQL =
-                        "SELECT fbc.* FROM FORM frm LEFT JOIN FORM_PAGE fp ON frm.FORM_ID = fp.FORM_ID LEFT JOIN SEGMENT seg ON fp.FORM_PAGE_ID = seg.FORM_PAGE_ID LEFT JOIN FRAGMENT_BARCODE fbc ON seg.SEGMENT_ID = fbc.SEGMENT_ID WHERE frm.FORM_ID = "
-                            + formId;
+                        "SELECT fbc.* FROM FORM frm LEFT JOIN FORM_PAGE fp ON frm.FORM_ID = fp.FORM_ID LEFT JOIN SEGMENT seg ON fp.FORM_PAGE_ID = seg.FORM_PAGE_ID LEFT JOIN FRAGMENT_BARCODE fbc ON seg.SEGMENT_ID = fbc.SEGMENT_ID WHERE frm.FORM_ID = ?1";
                     Query fragmentBarcodeQuery =
                         entityManager.createNativeQuery(fragmentBarcodeSQL, FragmentBarcode.class);
+                    fragmentBarcodeQuery.setParameter(1, formId);
                     List<FragmentBarcode> fragmentBarcodeResultList =
                         fragmentBarcodeQuery.getResultList();
                     if (includeCapturedData && fragmentBarcodeResultList != null
@@ -507,9 +508,9 @@ public class CSVExporter {
 
 
                     String query =
-                        "SELECT fomr.* FROM FORM frm LEFT JOIN FORM_PAGE fp ON frm.FORM_ID = fp.FORM_ID LEFT JOIN SEGMENT seg ON fp.FORM_PAGE_ID = seg.FORM_PAGE_ID LEFT JOIN FRAGMENT_OMR fomr ON seg.SEGMENT_ID = fomr.SEGMENT_ID WHERE frm.FORM_ID = "
-                            + formId;
+                        "SELECT fomr.* FROM FORM frm LEFT JOIN FORM_PAGE fp ON frm.FORM_ID = fp.FORM_ID LEFT JOIN SEGMENT seg ON fp.FORM_PAGE_ID = seg.FORM_PAGE_ID LEFT JOIN FRAGMENT_OMR fomr ON seg.SEGMENT_ID = fomr.SEGMENT_ID WHERE frm.FORM_ID = ?1";
                     Query fragmentQuery = entityManager.createNativeQuery(query, FragmentOmr.class);
+                    fragmentQuery.setParameter(1, formId);
                     List<FragmentOmr> fragmentResultList = fragmentQuery.getResultList();
 
                     for (FragmentOmr fragmentOmr : fragmentResultList) {

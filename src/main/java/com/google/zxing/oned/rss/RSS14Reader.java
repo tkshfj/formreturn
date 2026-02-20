@@ -64,8 +64,8 @@ public final class RSS14Reader extends OneDReader {
   private final float[] evenRoundingErrors;
   private final int[] oddCounts;
   private final int[] evenCounts;
-  private final Vector possibleLeftPairs;
-  private final Vector possibleRightPairs;
+  private final Vector<Pair> possibleLeftPairs;
+  private final Vector<Pair> possibleRightPairs;
 
   public RSS14Reader() {
     decodeFinderCounters = new int[4];
@@ -74,8 +74,8 @@ public final class RSS14Reader extends OneDReader {
     evenRoundingErrors = new float[4];
     oddCounts = new int[dataCharacterCounters.length / 2];
     evenCounts = new int[dataCharacterCounters.length / 2];
-    possibleLeftPairs = new Vector();
-    possibleRightPairs = new Vector();
+    possibleLeftPairs = new Vector<Pair>();
+    possibleRightPairs = new Vector<Pair>();
   }
 
   public Result decodeRow(int rowNumber, BitArray row, HashMap<DecodeHintType, Object> hints) throws NotFoundException {
@@ -92,9 +92,9 @@ public final class RSS14Reader extends OneDReader {
     int numLeftPairs = possibleLeftPairs.size();
     int numRightPairs = possibleRightPairs.size();
     for (int l = 0; l < numLeftPairs; l++) {
-      Pair left = (Pair) possibleLeftPairs.elementAt(l);
+      Pair left = possibleLeftPairs.elementAt(l);
       for (int r = 0; r < numRightPairs; r++) {
-        Pair right = (Pair) possibleRightPairs.elementAt(r);
+        Pair right = possibleRightPairs.elementAt(r);
         if (checkChecksum(left, right)) {
           return constructResult(left, right);
         }

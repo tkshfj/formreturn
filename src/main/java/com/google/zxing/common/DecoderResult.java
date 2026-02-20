@@ -31,10 +31,10 @@ public final class DecoderResult {
 
   private final byte[] rawBytes;
   private final String text;
-  private final Vector byteSegments;
+  private final Vector<byte[]> byteSegments;
   private final ErrorCorrectionLevel ecLevel;
 
-  public DecoderResult(byte[] rawBytes, String text, Vector byteSegments, ErrorCorrectionLevel ecLevel) {
+  public DecoderResult(byte[] rawBytes, String text, Vector<byte[]> byteSegments, ErrorCorrectionLevel ecLevel) {
     if (rawBytes == null && text == null) {
       throw new IllegalArgumentException();
     }
@@ -52,7 +52,7 @@ public final class DecoderResult {
     return text;
   }
 
-  public Vector getByteSegments() {
+  public Vector<byte[]> getByteSegments() {
     return byteSegments;
   }
 

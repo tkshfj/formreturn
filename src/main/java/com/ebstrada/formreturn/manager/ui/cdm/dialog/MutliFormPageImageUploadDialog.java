@@ -8,7 +8,7 @@ import javax.swing.border.*;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 
-@SuppressWarnings("serial") public class MutliFormPageImageUploadDialog extends JDialog {
+public class MutliFormPageImageUploadDialog extends JDialog {
 
     private int dialogResult = JOptionPane.CANCEL_OPTION;
     private int pageCount = 1;

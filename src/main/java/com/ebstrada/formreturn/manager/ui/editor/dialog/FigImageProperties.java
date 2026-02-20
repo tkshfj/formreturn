@@ -144,7 +144,7 @@ public class FigImageProperties extends JDialog {
                 graphicsNode.paint(graphics);
                 imagePreviewLabel.setIcon(new ImageIcon(bufferedImage));
             } else {
-                imagePreviewLabel.setIcon(new ImageIcon(selectedFile.toURL()));
+                imagePreviewLabel.setIcon(new ImageIcon(selectedFile.toURI().toURL()));
             }
         } catch (Exception ex) {
             String message = String.format(Localizer.localize("UI", "UnableToReadFileMessage"),

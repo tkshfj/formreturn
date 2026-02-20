@@ -98,13 +98,13 @@ public class UnprocessedImageDataModel extends AbstractDataModel {
 
     }
 
-    @Override public TableModel getTableModel() {
+    @SuppressWarnings("unchecked") @Override public TableModel getTableModel() {
 
         DefaultTableModel dtm = new DefaultTableModel() {
 
             private static final long serialVersionUID = 1L;
 
-            Class[] columnTypes = new Class[] {String.class, String.class};
+            Class<?>[] columnTypes = new Class<?>[] {String.class, String.class};
             boolean[] columnEditable = new boolean[] {false, false};
 
             @Override public Class<?> getColumnClass(int columnIndex) {

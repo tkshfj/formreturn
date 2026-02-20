@@ -19,7 +19,6 @@ package com.google.zxing.oned;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.NotFoundException;
-import com.google.zxing.Reader;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.BitArray;
@@ -36,12 +35,13 @@ import java.util.Vector;
  */
 public final class MultiFormatUPCEANReader extends OneDReader {
 
-  private final Vector readers;
+  private final Vector<UPCEANReader> readers;
 
   public MultiFormatUPCEANReader(HashMap<DecodeHintType, Object> hints) {
-    Vector possibleFormats = hints == null ? null :
-        (Vector) hints.get(DecodeHintType.POSSIBLE_FORMATS);
-    readers = new Vector();
+    @SuppressWarnings("unchecked")
+    Vector<BarcodeFormat> possibleFormats = hints == null ? null :
+        (Vector<BarcodeFormat>) hints.get(DecodeHintType.POSSIBLE_FORMATS);
+    readers = new Vector<UPCEANReader>();
     if (possibleFormats != null) {
       if (possibleFormats.contains(BarcodeFormat.EAN_13)) {
         readers.addElement(new EAN13Reader());
@@ -68,7 +68,7 @@ public final class MultiFormatUPCEANReader extends OneDReader {
     int[] startGuardPattern = UPCEANReader.findStartGuardPattern(row);
     int size = readers.size();
     for (int i = 0; i < size; i++) {
-      UPCEANReader reader = (UPCEANReader) readers.elementAt(i);
+      UPCEANReader reader = readers.elementAt(i);
       Result result;
       try {
         result = reader.decodeRow(rowNumber, row, startGuardPattern, hints);
@@ -99,7 +99,7 @@ public final class MultiFormatUPCEANReader extends OneDReader {
   public void reset() {
     int size = readers.size();
     for (int i = 0; i < size; i++) {
-      Reader reader = (Reader) readers.elementAt(i);
+      UPCEANReader reader = readers.elementAt(i);
       reader.reset();
     }
   }

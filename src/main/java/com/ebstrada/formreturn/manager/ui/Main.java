@@ -716,7 +716,7 @@ public class Main extends JFrame {
         boolean isSuccess = false;
 
         try {
-            Class.forName(driverName).newInstance();
+            Class.forName(driverName).getDeclaredConstructor().newInstance();
             Properties props = new Properties();
             props.put("user", username);
             props.put("password", password);
@@ -724,11 +724,7 @@ public class Main extends JFrame {
                 ClientDataSource.STRONG_PASSWORD_SUBSTITUTE_SECURITY + "");
             conn = DriverManager.getConnection(jdbcURL, props);
             isSuccess = true;
-        } catch (InstantiationException ex) {
-            isSuccess = false;
-        } catch (IllegalAccessException ex) {
-            isSuccess = false;
-        } catch (ClassNotFoundException ex) {
+        } catch (ReflectiveOperationException ex) {
             isSuccess = false;
         } catch (SQLException ex) {
             isSuccess = false;
@@ -1324,7 +1320,7 @@ public class Main extends JFrame {
                 OSXAdapter.setPreferencesHandler(this,
                     getClass().getDeclaredMethod("preferences", (Class[]) null));
                 OSXAdapter.setFileHandler(this,
-                    getClass().getDeclaredMethod("open", new Class[] {File.class}));
+                    getClass().getDeclaredMethod("open", new Class<?>[] {File.class}));
                 if (System.getProperty("apple.laf.useScreenMenuBar") != null) {
                     if (System.getProperty("apple.laf.useScreenMenuBar").equals("true")) {
                         mainMenu.removeOSXMenuItems();
@@ -2152,6 +2148,7 @@ public class Main extends JFrame {
             @Override protected MapperWrapper wrapMapper(MapperWrapper next) {
                 return new MapperWrapper(next) {
                     @Override
+                    @SuppressWarnings("rawtypes")
                     public boolean shouldSerializeMember(Class definedIn, String fieldName) {
                         if (definedIn == Object.class) {
                             return false;
@@ -2170,8 +2167,21 @@ public class Main extends JFrame {
         xs.allowTypesByWildcard(new String[] {
             "com.ebstrada.formreturn.**",
             "com.swingsane.preferences.model.**",
-            "java.util.**",
             "java.awt.**"
+        });
+        xs.allowTypes(new Class[] {
+            java.util.ArrayList.class,
+            java.util.HashMap.class,
+            java.util.LinkedHashMap.class,
+            java.util.LinkedList.class,
+            java.util.HashSet.class,
+            java.util.TreeMap.class,
+            java.util.TreeSet.class,
+            java.util.Vector.class,
+            java.util.Hashtable.class,
+            java.util.Properties.class,
+            java.util.Date.class,
+            java.util.Locale.class
         });
     }
 

@@ -15,6 +15,7 @@ import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.manager.util.RandomGUID;
 import com.ebstrada.formreturn.manager.util.preferences.PreferencesManager;
 
+@SuppressWarnings("unused")
 public class ScanClientController {
 
     /*

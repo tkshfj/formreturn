@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -19,7 +18,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  * @author Jason Robbins
  */
 
-@XStreamAlias("group") public class FigGroup extends Fig implements NoObfuscation {
+@XStreamAlias("group") public class FigGroup extends Fig {
 
     // //////////////////////////////////////////////////////////////
     // instance variables
@@ -104,8 +103,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
      *
      * @param figs Collection of figs to be added.
      */
-    public void addFigs(Collection figs) {
-        Iterator figIter = figs.iterator();
+    public void addFigs(Collection<? extends Fig> figs) {
+        Iterator<?> figIter = figs.iterator();
         while (figIter.hasNext()) {
             addFig((Fig) figIter.next());
         }
@@ -117,7 +116,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
      *
      * @param figs Collection of figs to be set.
      */
-    public void setFigs(Collection figs) {
+    public void setFigs(Collection<? extends Fig> figs) {
         this.figs.clear();
         addFigs(figs);
     }
@@ -199,7 +198,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     /**
      * Reply an Iterator of the Figs contained in this FigGroup.
      */
-    public Iterator iterator() {
+    public Iterator<Fig> iterator() {
         return this.figs.iterator();
     }
 
@@ -381,7 +380,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
      * Returns a list of the displayable Figs enclosed. e.g. returns the list of
      * enclosed Figs, without the Compartments that should not be displayed.
      */
-    public Collection getDisplayedFigs(Collection c) {
+    public Collection<Fig> getDisplayedFigs(Collection<Fig> c) {
         if (c == null) {
             c = new ArrayList<Fig>();
         }

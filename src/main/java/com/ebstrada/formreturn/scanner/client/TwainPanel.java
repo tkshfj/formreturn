@@ -130,22 +130,22 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
         tabbedPane.setTitleAt(1, Localizer.localize("UI", "AdvancedSettingsTabTitle"));
 
         // advanced controls
-        DefaultComboBoxModel scanningClientModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> scanningClientModel = new DefaultComboBoxModel<>();
         scanningClientModel.addElement(Localizer.localize("UI", "ScanningClient1"));
         scanningClientModel.addElement(Localizer.localize("UI", "ScanningClient2"));
         uiComboBox.setModel(scanningClientModel);
 
-        DefaultComboBoxModel transferModeModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> transferModeModel = new DefaultComboBoxModel<>();
         transferModeModel.addElement(Localizer.localize("UI", "TransferMode1"));
         transferModeModel.addElement(Localizer.localize("UI", "TransferMode2"));
         transferModeComboBox.setModel(transferModeModel);
 
-        DefaultComboBoxModel colorModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> colorModel = new DefaultComboBoxModel<>();
         colorModel.addElement(Localizer.localize("UI", "Color1"));
         colorModel.addElement(Localizer.localize("UI", "Color2"));
         colorComboBox.setModel(colorModel);
 
-        DefaultComboBoxModel duplexModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> duplexModel = new DefaultComboBoxModel<>();
         duplexModel.addElement(Localizer.localize("UI", "Duplex1"));
         duplexModel.addElement(Localizer.localize("UI", "Duplex2"));
         duplexComboBox.setModel(duplexModel);
@@ -373,23 +373,23 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
         formReturnScannerIconLabel = new JLabel();
         tabbedPane = new JTabbedPane();
         scannerActionsPanel = new JPanel();
-        deviceComboBox = new JComboBox();
+        deviceComboBox = new JComboBox<>();
         scanButton = new JButton();
         cancelButton = new JButton();
         scannerBusyLabel = new JXBusyLabel();
         advancedSettingsPanel = new JPanel();
         scanningClientLabel = new JLabel();
-        uiComboBox = new JComboBox();
+        uiComboBox = new JComboBox<>();
         transferModeLabel = new JLabel();
-        transferModeComboBox = new JComboBox();
+        transferModeComboBox = new JComboBox<>();
         resolutionLabel = new JLabel();
         resolutionSpinner = new JSpinner();
         colorLabel = new JLabel();
-        colorComboBox = new JComboBox();
+        colorComboBox = new JComboBox<>();
         pageSizeLabel = new JLabel();
-        pageSizeComboBox = new JComboBox();
+        pageSizeComboBox = new JComboBox<>();
         duplexLabel = new JLabel();
-        duplexComboBox = new JComboBox();
+        duplexComboBox = new JComboBox<>();
         blackThresholdLabel = new JLabel();
         panel3 = new JPanel();
         blackThresholdSpinner = new JSpinner();
@@ -497,7 +497,7 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
                                 GridBagConstraints.NONE, new Insets(0, 0, 5, 5), 0, 0));
 
                         //---- uiComboBox ----
-                        uiComboBox.setModel(new DefaultComboBoxModel(
+                        uiComboBox.setModel(new DefaultComboBoxModel<>(
                             new String[] {"FormReturn Scanner",
                                 "Scanning Vendor's User Interface"}));
                         advancedSettingsPanel.add(uiComboBox,
@@ -513,7 +513,7 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
 
                         //---- transferModeComboBox ----
                         transferModeComboBox
-                            .setModel(new DefaultComboBoxModel(new String[] {"Memory", "Native"}));
+                            .setModel(new DefaultComboBoxModel<>(new String[] {"Memory", "Native"}));
                         transferModeComboBox.setSelectedIndex(1);
                         advancedSettingsPanel.add(transferModeComboBox,
                             new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
@@ -538,7 +538,7 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
                                 GridBagConstraints.NONE, new Insets(0, 0, 5, 5), 0, 0));
 
                         //---- colorComboBox ----
-                        colorComboBox.setModel(new DefaultComboBoxModel(
+                        colorComboBox.setModel(new DefaultComboBoxModel<>(
                             new String[] {"Black & White", "Grayscale", "Color"}));
                         advancedSettingsPanel.add(colorComboBox,
                             new GridBagConstraints(2, 4, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
@@ -560,7 +560,7 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
                                 GridBagConstraints.NONE, new Insets(0, 0, 5, 5), 0, 0));
 
                         //---- duplexComboBox ----
-                        duplexComboBox.setModel(new DefaultComboBoxModel(
+                        duplexComboBox.setModel(new DefaultComboBoxModel<>(
                             new String[] {"Scan Single Side", "Scan Both Sides"}));
                         advancedSettingsPanel.add(duplexComboBox,
                             new GridBagConstraints(2, 6, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
@@ -676,23 +676,23 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
     private JLabel formReturnScannerIconLabel;
     private JTabbedPane tabbedPane;
     private JPanel scannerActionsPanel;
-    private JComboBox deviceComboBox;
+    private JComboBox<String> deviceComboBox;
     private JButton scanButton;
     private JButton cancelButton;
     private JXBusyLabel scannerBusyLabel;
     private JPanel advancedSettingsPanel;
     private JLabel scanningClientLabel;
-    private JComboBox uiComboBox;
+    private JComboBox<String> uiComboBox;
     private JLabel transferModeLabel;
-    private JComboBox transferModeComboBox;
+    private JComboBox<String> transferModeComboBox;
     private JLabel resolutionLabel;
     private JSpinner resolutionSpinner;
     private JLabel colorLabel;
-    private JComboBox colorComboBox;
+    private JComboBox<String> colorComboBox;
     private JLabel pageSizeLabel;
-    private JComboBox pageSizeComboBox;
+    private JComboBox<String> pageSizeComboBox;
     private JLabel duplexLabel;
-    private JComboBox duplexComboBox;
+    private JComboBox<String> duplexComboBox;
     private JLabel blackThresholdLabel;
     private JPanel panel3;
     private JSpinner blackThresholdSpinner;

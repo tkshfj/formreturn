@@ -53,14 +53,14 @@ final class AddressBookAUResultParser extends ResultParser {
 
   private static String[] matchMultipleValuePrefix(String prefix, int max, String rawText,
       boolean trim) {
-    Vector values = null;
+    Vector<String> values = null;
     for (int i = 1; i <= max; i++) {
       String value = matchSinglePrefixedField(prefix + i + ':', rawText, '\r', trim);
       if (value == null) {
         break;
       }
       if (values == null) {
-        values = new Vector(max); // lazy init
+        values = new Vector<String>(max); // lazy init
       }
       values.addElement(value);
     }

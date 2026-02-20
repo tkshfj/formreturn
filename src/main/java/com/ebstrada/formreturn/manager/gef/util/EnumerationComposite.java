@@ -9,14 +9,14 @@ import java.util.Vector;
  * elements from each Enumeration until that enumeration is exhausted.
  */
 
-public class EnumerationComposite implements Enumeration, java.io.Serializable {
+public class EnumerationComposite implements Enumeration<Object>, java.io.Serializable {
     // //////////////////////////////////////////////////////////////
     // instance variables
 
     /**
      * The enumerations being concatenated
      */
-    private Vector _subs = new Vector();
+    private Vector<Enumeration<?>> _subs = new Vector<Enumeration<?>>();
 
     /**
      * The next element to return from nextElement().
@@ -28,16 +28,16 @@ public class EnumerationComposite implements Enumeration, java.io.Serializable {
     public EnumerationComposite() {
     }
 
-    public EnumerationComposite(Enumeration e1) {
+    public EnumerationComposite(Enumeration<?> e1) {
         addSub(e1);
     }
 
-    public EnumerationComposite(Enumeration e1, Enumeration e2) {
+    public EnumerationComposite(Enumeration<?> e1, Enumeration<?> e2) {
         addSub(e1);
         addSub(e2);
     }
 
-    public EnumerationComposite(Enumeration e1, Enumeration e2, Enumeration e3) {
+    public EnumerationComposite(Enumeration<?> e1, Enumeration<?> e2, Enumeration<?> e3) {
         addSub(e1);
         addSub(e2);
         addSub(e3);
@@ -47,7 +47,7 @@ public class EnumerationComposite implements Enumeration, java.io.Serializable {
      * Concatenate the given Enumeration to the end of the receiving
      * EnumerationComposite.
      */
-    public void addSub(Enumeration e) {
+    public void addSub(Enumeration<?> e) {
         if (e != null && e.hasMoreElements()) {
             _subs.addElement(e);
             findNext();
@@ -58,7 +58,7 @@ public class EnumerationComposite implements Enumeration, java.io.Serializable {
      * Concatenate the elements() of the given Vector to the end of the
      * receiving EnumerationComposite.
      */
-    public void addSub(Vector v) {
+    public void addSub(Vector<?> v) {
         if (v != null) {
             addSub(v.elements());
         }
@@ -92,11 +92,11 @@ public class EnumerationComposite implements Enumeration, java.io.Serializable {
         if (_nextElement != null) {
             return;
         }
-        while (!_subs.isEmpty() && !((Enumeration) _subs.firstElement()).hasMoreElements()) {
+        while (!_subs.isEmpty() && !_subs.firstElement().hasMoreElements()) {
             _subs.removeElementAt(0);
         }
         if (!_subs.isEmpty()) {
-            _nextElement = ((Enumeration) _subs.firstElement()).nextElement();
+            _nextElement = _subs.firstElement().nextElement();
         }
     }
 } /* end class EnumerationComposite */

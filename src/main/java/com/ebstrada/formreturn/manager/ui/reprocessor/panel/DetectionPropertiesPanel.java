@@ -13,8 +13,6 @@ public class DetectionPropertiesPanel extends ReprocessorPanel {
     private static final long serialVersionUID = 1L;
     private ReprocessorFrame reprocessorFrame;
 
-    private Fig selectedFig;
-
     public DetectionPropertiesPanel(ReprocessorFrame reprocessorFrame) {
         initComponents();
         this.reprocessorFrame = reprocessorFrame;
@@ -122,7 +120,6 @@ public class DetectionPropertiesPanel extends ReprocessorPanel {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     @Override public void setSelectedElement(Fig selectedFig) {
-        this.selectedFig = selectedFig;
     }
 
 }

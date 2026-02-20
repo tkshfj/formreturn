@@ -8,7 +8,7 @@ import javax.swing.*;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
 
-@SuppressWarnings("serial") public class DesktopMenu extends JPopupMenu {
+public class DesktopMenu extends JPopupMenu {
 
     public DesktopMenu(Main frame) {
         initComponents();

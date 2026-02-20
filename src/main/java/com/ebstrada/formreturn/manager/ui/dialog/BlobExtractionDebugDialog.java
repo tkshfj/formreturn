@@ -17,13 +17,9 @@ public class BlobExtractionDebugDialog extends JDialog {
     private BlobExtractionDebugPanel regionLabelFirstParse;
     private BlobExtractionDebugPanel bubbleDetection;
 
-    private OMRMatrix omrMatrix;
-
     public BlobExtractionDebugDialog(Frame owner, OMRMatrix omrMatrix) {
         super(owner);
         initComponents();
-
-        this.omrMatrix = omrMatrix;
 
         binarizedImage = new BlobExtractionDebugPanel(omrMatrix.getBlobExtraction(), null,
             BlobExtractionDebugPanel.BINARIZED_IMAGE);

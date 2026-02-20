@@ -129,13 +129,14 @@ public class ComponentAppender extends AppenderSkeleton {
         setComponent(comp);
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     protected void initializeNewComponent(Component comp) {
         if (comp instanceof JComboBox) {
-            ((JComboBox) comp).setModel(new DefaultComboBoxModel());
+            ((JComboBox<String>) comp).setModel(new DefaultComboBoxModel<>());
         }
         if (comp instanceof JList) {
-            ((JList<?>) comp).setModel(new LoggingEventModel());
-            ((JList<?>) comp).setCellRenderer(new PriorityListCellRenderer(true, true, this));
+            ((JList) comp).setModel(new LoggingEventModel());
+            ((JList) comp).setCellRenderer(new PriorityListCellRenderer(true, true, this));
         }
         if (comp instanceof JTable) {
             ((JTable) comp).setModel(new LoggingEventModel());
@@ -160,6 +161,7 @@ public class ComponentAppender extends AppenderSkeleton {
         return maxEntries;
     }
 
+    @SuppressWarnings("unchecked")
     public void setMaxEntries(int value) {
         if (entries > value) {
             // the new maxEntry value is smaller than the actual entry
@@ -197,7 +199,7 @@ public class ComponentAppender extends AppenderSkeleton {
                 } catch (Exception x) {
                 }
             } else if (comp instanceof JComboBox) {
-                DefaultComboBoxModel model = (DefaultComboBoxModel) ((JComboBox) comp).getModel();
+                DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) ((JComboBox<?>) comp).getModel();
                 for (int i = 0; i < toomuch; i++) {
                     model.removeElementAt(0);
                 }
@@ -313,7 +315,7 @@ public class ComponentAppender extends AppenderSkeleton {
         return true;
     }
 
-    @Override public void append(LoggingEvent event) {
+    @SuppressWarnings("unchecked") @Override public void append(LoggingEvent event) {
         String text = layout.format(event);
         // swing components
         if (comp instanceof JLabel) {
@@ -371,14 +373,14 @@ public class ComponentAppender extends AppenderSkeleton {
         } else if (comp instanceof JTextComponent) {
             ((JTextComponent) comp).setText(text);
         } else if (comp instanceof JComboBox) {
-            DefaultComboBoxModel model = (DefaultComboBoxModel) ((JComboBox) comp).getModel();
+            DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) ((JComboBox<?>) comp).getModel();
             if (entries == maxEntries) {
                 model.removeElementAt(0);
                 entries -= 1;
             }
             model.addElement(text);
             entries += 1;
-            ((JComboBox) comp).setSelectedIndex(entries - 1);
+            ((JComboBox<?>) comp).setSelectedIndex(entries - 1);
         } else if (comp instanceof JList) {
             LoggingEventModel model = (LoggingEventModel) ((JList<?>) comp).getModel();
             if (entries == maxEntries) {
@@ -411,6 +413,7 @@ public class ComponentAppender extends AppenderSkeleton {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void reset() {
         // swing components
         if (comp instanceof JLabel) {
@@ -419,7 +422,7 @@ public class ComponentAppender extends AppenderSkeleton {
             // and JTextPane!
             ((JTextComponent) comp).setText("");
         } else if (comp instanceof JComboBox) {
-            DefaultComboBoxModel model = (DefaultComboBoxModel) ((JComboBox) comp).getModel();
+            DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) ((JComboBox<?>) comp).getModel();
             model.removeAllElements();
         } else if (comp instanceof JList) {
             LoggingEventModel model = (LoggingEventModel) ((JList<?>) comp).getModel();

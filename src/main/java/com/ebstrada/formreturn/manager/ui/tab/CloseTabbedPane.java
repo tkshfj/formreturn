@@ -163,7 +163,7 @@ public class CloseTabbedPane extends JTabbedPane {
 
         frame.addWindowFocusListener(windowFocusListener);
 
-        frame.show();
+        frame.setVisible(true);
         frame.toFront();
 
     }

@@ -62,7 +62,7 @@ public class FieldDataModel extends AbstractDataModel {
 
             private static final long serialVersionUID = 1L;
 
-            Class[] columnTypes = new Class[] {String.class, String.class, String.class};
+            Class<?>[] columnTypes = new Class<?>[] {String.class, String.class, String.class};
             boolean[] columnEditable = new boolean[] {false, false, false};
 
             @Override public Class<?> getColumnClass(int columnIndex) {
@@ -93,6 +93,7 @@ public class FieldDataModel extends AbstractDataModel {
 
     }
 
+    @SuppressWarnings("unchecked")
     public List<SourceField> getSourceFields() {
 
         if (getParentId() < 0) {
@@ -125,6 +126,7 @@ public class FieldDataModel extends AbstractDataModel {
 
     }
 
+    @SuppressWarnings("unchecked")
     public int getMaximumOrderIndex() {
 
         EntityManager entityManager = Main.getInstance().getJPAConfiguration().getEntityManager();

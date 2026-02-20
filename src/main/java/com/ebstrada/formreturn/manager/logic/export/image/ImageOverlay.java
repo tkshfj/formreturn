@@ -31,6 +31,7 @@ import com.ebstrada.formreturn.manager.persistence.jpa.Record;
 import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.manager.util.image.ImageUtil;
 
+@SuppressWarnings("deprecation")
 public class ImageOverlay {
 
     private FormPage formPage;

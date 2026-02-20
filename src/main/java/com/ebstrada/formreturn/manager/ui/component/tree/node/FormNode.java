@@ -24,7 +24,7 @@ public class FormNode extends RecordNode {
     private long formPageCount = 0;
     private long formPagesProcessed = 0;
 
-    @Override public void loadChildren() throws Exception {
+    @SuppressWarnings("unchecked") @Override public void loadChildren() throws Exception {
         EntityManager entityManager = Main.getInstance().getJPAConfiguration().getEntityManager();
         try {
 

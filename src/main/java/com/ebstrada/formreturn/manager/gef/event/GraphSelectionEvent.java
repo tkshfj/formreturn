@@ -3,6 +3,8 @@ package com.ebstrada.formreturn.manager.gef.event;
 import java.util.EventObject;
 import java.util.Vector;
 
+import com.ebstrada.formreturn.manager.gef.presentation.Fig;
+
 /**
  * An event object that contains information about the current selection(s) in
  * an Editor. These events are sent to registered GraphSelectionListeners
@@ -15,18 +17,18 @@ import java.util.Vector;
 public class GraphSelectionEvent extends EventObject {
 
     private static final long serialVersionUID = 7055361155230503398L;
-    private Vector _selections;
+    private Vector<Fig> _selections;
 
     // //////////////////////////////////////////////////////////////
     // constructor
-    public GraphSelectionEvent(Object src, Vector selections) {
+    public GraphSelectionEvent(Object src, Vector<Fig> selections) {
         super(src);
         _selections = selections;
     }
 
     // //////////////////////////////////////////////////////////////
     // accessors
-    public Vector getSelections() {
+    public Vector<Fig> getSelections() {
         return _selections;
     }
 

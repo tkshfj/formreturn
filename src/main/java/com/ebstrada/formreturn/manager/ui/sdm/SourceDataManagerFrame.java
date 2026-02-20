@@ -150,8 +150,6 @@ public class SourceDataManagerFrame extends JPanel implements GenericDataViewer 
             if (e.getSource() == table.getSelectionModel() && table.getRowSelectionAllowed()
                 && e.getValueIsAdjusting() == false) {
                 // Column selection changed
-                int first = e.getFirstIndex();
-                int last = e.getLastIndex();
                 if (tablesTable.getSelectedRow() != -1) {
                     updateSelectedDataSetIds(getSelectedDataSetIds());
                     restoreFields();
@@ -162,8 +160,6 @@ public class SourceDataManagerFrame extends JPanel implements GenericDataViewer 
             } else if (e.getSource() == table.getColumnModel().getSelectionModel() && table
                 .getColumnSelectionAllowed()) {
                 // Row selection changed
-                int first = e.getFirstIndex();
-                int last = e.getLastIndex();
             }
 
             if (e.getValueIsAdjusting()) {
@@ -443,14 +439,12 @@ public class SourceDataManagerFrame extends JPanel implements GenericDataViewer 
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void exportCSVData(boolean selectedRecordsOnly) {
-        CSVWriter writer;
         File CSVFile = null;
         try {
             CSVFile = selectCSVFile();
             if (CSVFile != null) {
-                writer =
-                    new CSVWriter(new OutputStreamWriter(new FileOutputStream(CSVFile), "UTF-8"));
 
                 EntityManager entityManager =
                     Main.getInstance().getJPAConfiguration().getEntityManager();
@@ -463,52 +457,54 @@ public class SourceDataManagerFrame extends JPanel implements GenericDataViewer 
                     return;
                 }
 
-                Vector<Long> sourceFieldIds = new Vector<Long>();
+                try (CSVWriter writer =
+                    new CSVWriter(new OutputStreamWriter(new FileOutputStream(CSVFile), "UTF-8"))) {
 
-                String[] columns = new String[sourceFields.length];
-                for (int i = 0; i < sourceFields.length; i++) {
-                    SourceField sourceField = (SourceField) sourceFields[i];
-                    sourceFieldIds.add(sourceField.getSourceFieldId());
-                    columns[i] = sourceField.getSourceFieldName();
-                }
-                writer.writeNext(columns);
+                    Vector<Long> sourceFieldIds = new Vector<Long>();
 
-                Query recordQuery = null;
-
-                if (selectedRecordsOnly) {
-
-                    recordQuery = entityManager.createNamedQuery("Record.findByRecordIds");
-                    long[] selectedRecordIds = getSelectedRecordIds();
-                    List<Long> recordIds = new ArrayList<Long>();
-                    for (int i = 0; i < selectedRecordIds.length; i++) {
-                        recordIds.add(selectedRecordIds[i]);
+                    String[] columns = new String[sourceFields.length];
+                    for (int i = 0; i < sourceFields.length; i++) {
+                        SourceField sourceField = (SourceField) sourceFields[i];
+                        sourceFieldIds.add(sourceField.getSourceFieldId());
+                        columns[i] = sourceField.getSourceFieldName();
                     }
-                    recordQuery.setParameter("recordIds", recordIds);
+                    writer.writeNext(columns);
 
-                } else {
+                    Query recordQuery = null;
 
-                    recordQuery = entityManager.createNamedQuery("Record.findByDataSetId");
-                    recordQuery.setParameter("dataSetId",
-                        entityManager.find(DataSet.class, getSelectedDataSetId()));
+                    if (selectedRecordsOnly) {
 
-                }
+                        recordQuery = entityManager.createNamedQuery("Record.findByRecordIds");
+                        long[] selectedRecordIds = getSelectedRecordIds();
+                        List<Long> recordIds = new ArrayList<Long>();
+                        for (int i = 0; i < selectedRecordIds.length; i++) {
+                            recordIds.add(selectedRecordIds[i]);
+                        }
+                        recordQuery.setParameter("recordIds", recordIds);
 
-                Iterator<Record> resultListIterator = recordQuery.getResultList().iterator();
-                while (resultListIterator.hasNext()) {
-                    Record rf = resultListIterator.next();
+                    } else {
 
-                    String[] rowData = new String[sourceFieldIds.size()];
-                    Iterator<SourceText> stci = rf.getSourceTextCollection().iterator();
-                    while (stci.hasNext()) {
-                        SourceText st = stci.next();
-                        int sfIndex =
-                            sourceFieldIds.indexOf(st.getSourceFieldId().getSourceFieldId());
-                        rowData[sfIndex] = st.getSourceTextString() + "";
+                        recordQuery = entityManager.createNamedQuery("Record.findByDataSetId");
+                        recordQuery.setParameter("dataSetId",
+                            entityManager.find(DataSet.class, getSelectedDataSetId()));
+
                     }
-                    writer.writeNext(rowData);
-                }
 
-                writer.close();
+                    Iterator<Record> resultListIterator = recordQuery.getResultList().iterator();
+                    while (resultListIterator.hasNext()) {
+                        Record rf = resultListIterator.next();
+
+                        String[] rowData = new String[sourceFieldIds.size()];
+                        Iterator<SourceText> stci = rf.getSourceTextCollection().iterator();
+                        while (stci.hasNext()) {
+                            SourceText st = stci.next();
+                            int sfIndex =
+                                sourceFieldIds.indexOf(st.getSourceFieldId().getSourceFieldId());
+                            rowData[sfIndex] = st.getSourceTextString() + "";
+                        }
+                        writer.writeNext(rowData);
+                    }
+                }
                 entityManager.close();
 
                 String message = Localizer.localize("UI", "CSVFileSaveSuccessMessage");

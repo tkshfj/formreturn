@@ -34,7 +34,7 @@ import com.ebstrada.formreturn.manager.util.graph.SizeAttributes;
 import com.ebstrada.formreturn.manager.util.preferences.PreferencesManager;
 import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPreferences;
 
-@SuppressWarnings("serial") public class ExportOptionsDialog extends JDialog {
+public class ExportOptionsDialog extends JDialog {
 
     private int dialogResult = JOptionPane.CANCEL_OPTION;
 
@@ -312,7 +312,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
     }
 
     public static void setDefaultColumns(ArrayList<Integer> orderedColumnKeys,
-        DefaultListModel includeDLM, DefaultListModel availableDLM,
+        DefaultListModel<ColumnOption> includeDLM, DefaultListModel<ColumnOption> availableDLM,
         CSVExportPreferences csvExportPreferences) {
 
         ColumnOption col = null;
@@ -531,8 +531,8 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
                 sortTypeComboBox.setSelectedIndex(0);
         }
 
-        DefaultListModel includeDLM = new DefaultListModel();
-        DefaultListModel availableDLM = new DefaultListModel();
+        DefaultListModel<ColumnOption> includeDLM = new DefaultListModel<>();
+        DefaultListModel<ColumnOption> availableDLM = new DefaultListModel<>();
 
         setDefaultColumns(csvExportPreferences.getOrderedColumnKeys(), includeDLM, availableDLM,
             csvExportPreferences);
@@ -762,7 +762,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
     private void restorePageSizeComboBox() {
         List<String> pageSizeNames = PreferencesManager.getFormSizeNames();
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         for (String pageSizeName : pageSizeNames) {
             if (pageSizeName.equalsIgnoreCase("custom")) {
                 continue;
@@ -802,7 +802,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
         EntityManager entityManager = null;
         try {
             entityManager = getEntityManager();
-            DefaultListModel dlm = new DefaultListModel();
+            DefaultListModel<XSLTemplate> dlm = new DefaultListModel<>();
             for (long publicationId : this.publicationIds) {
                 Publication publication = entityManager.find(Publication.class, publicationId);
                 List<PublicationXSL> xslTemplates = publication.getPublicationXSLCollection();
@@ -984,7 +984,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
         this.exportType = exportType;
     }
 
-    public ColumnOption getColumnOption(int type, ListModel dlm) {
+    public ColumnOption getColumnOption(int type, ListModel<?> dlm) {
         for (int i = 0; i < dlm.getSize(); i++) {
             ColumnOption col = (ColumnOption) dlm.getElementAt(i);
             if (col.getType() == type) {
@@ -1110,7 +1110,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
     }
 
     public int getIncludedColumnIndex(int type) {
-        ListModel model = this.includedColumnsList.getModel();
+        ListModel<?> model = this.includedColumnsList.getModel();
         for (int i = 0; i < model.getSize(); i++) {
             ColumnOption col = (ColumnOption) model.getElementAt(i);
             if (col.getType() == type) {
@@ -1620,8 +1620,8 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
             public void run() {
                 ColumnOption col =
                     (ColumnOption) availableColumnsList.getModel().getElementAt(index);
-                ((DefaultListModel) includedColumnsList.getModel()).addElement(col);
-                ((DefaultListModel) availableColumnsList.getModel()).removeElement(col);
+                ((DefaultListModel<ColumnOption>) includedColumnsList.getModel()).addElement(col);
+                ((DefaultListModel<ColumnOption>) availableColumnsList.getModel()).removeElement(col);
             }
         });
     }
@@ -1635,8 +1635,8 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
             public void run() {
                 ColumnOption col =
                     (ColumnOption) includedColumnsList.getModel().getElementAt(index);
-                ((DefaultListModel) availableColumnsList.getModel()).addElement(col);
-                ((DefaultListModel) includedColumnsList.getModel()).removeElement(col);
+                ((DefaultListModel<ColumnOption>) availableColumnsList.getModel()).addElement(col);
+                ((DefaultListModel<ColumnOption>) includedColumnsList.getModel()).removeElement(col);
             }
         });
     }
@@ -1652,7 +1652,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
                     (ColumnOption) includedColumnsList.getModel().getElementAt(index - 1);
                 ColumnOption col2 =
                     (ColumnOption) includedColumnsList.getModel().getElementAt(index);
-                DefaultListModel dlm = (DefaultListModel) includedColumnsList.getModel();
+                DefaultListModel<ColumnOption> dlm = (DefaultListModel<ColumnOption>) includedColumnsList.getModel();
                 dlm.set(index - 1, col2);
                 dlm.set(index, col1);
                 includedColumnsList.setSelectedIndex(index - 1);
@@ -1671,7 +1671,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
                     (ColumnOption) includedColumnsList.getModel().getElementAt(index);
                 ColumnOption col2 =
                     (ColumnOption) includedColumnsList.getModel().getElementAt(index + 1);
-                DefaultListModel dlm = (DefaultListModel) includedColumnsList.getModel();
+                DefaultListModel<ColumnOption> dlm = (DefaultListModel<ColumnOption>) includedColumnsList.getModel();
                 dlm.set(index, col2);
                 dlm.set(index + 1, col1);
                 includedColumnsList.setSelectedIndex(index + 1);
@@ -1879,7 +1879,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
         exportCSVHelpLabel = new JHelpLabel();
         columnOrderingPanel = new JPanel();
         orderColumnsLabel = new JLabel();
-        sortTypeComboBox = new JComboBox();
+        sortTypeComboBox = new JComboBox<>();
         includedColumnsInExportPanel = new JPanel();
         columnsPanel = new JPanel();
         availableColumnsLabel = new JLabel();
@@ -1902,9 +1902,9 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
         delimitedFileOutputPanel = new JPanel();
         panel5 = new JPanel();
         label19 = new JLabel();
-        delimiterComboBox = new JComboBox();
+        delimiterComboBox = new JComboBox<>();
         label20 = new JLabel();
-        quotesComboBox = new JComboBox();
+        quotesComboBox = new JComboBox<>();
         panel3 = new JPanel();
         includeFieldnamesHeaderCheckBox = new JCheckBox();
         includeStatisticsCheckBox = new JCheckBox();
@@ -1943,7 +1943,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
         exportOptionsPanel = new JPanel();
         exportOptionsSubPanel1 = new JPanel();
         pageSizeLabel = new JLabel();
-        pageSizeComboBox = new JComboBox();
+        pageSizeComboBox = new JComboBox<>();
         columnFontSizeLabel = new JLabel();
         columnFontSizeSpinner = new JSpinner();
         exportOptionsSubPanel2 = new JPanel();
@@ -2080,7 +2080,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
 
                         //---- sortTypeComboBox ----
                         sortTypeComboBox.setFont(UIManager.getFont("ComboBox.font"));
-                        sortTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
+                        sortTypeComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                             Localizer.localize("UICDM", "ColumnOrderByIndex"),
                             Localizer.localize("UICDM", "ColumnOrderByFieldNameAscending"),
                             Localizer.localize("UICDM", "ColumnOrderByFieldNameDecending")
@@ -2334,7 +2334,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
                             //---- delimiterComboBox ----
                             delimiterComboBox.setFont(UIManager.getFont("ComboBox.font"));
                             delimiterComboBox.setPrototypeDisplayValue("xxxxxxxxxxxxxxxxxxxxxxxxxx");
-                            delimiterComboBox.setModel(new DefaultComboBoxModel(new String[] {
+                            delimiterComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                                 Localizer.localize("UICDM", "DelimiterCSV"),
                                 Localizer.localize("UICDM", "DelimiterTSV")
                             }));
@@ -2351,7 +2351,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
 
                             //---- quotesComboBox ----
                             quotesComboBox.setFont(UIManager.getFont("ComboBox.font"));
-                            quotesComboBox.setModel(new DefaultComboBoxModel(new String[] {
+                            quotesComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                                 Localizer.localize("UICDM", "DoubleQuotes"),
                                 Localizer.localize("UICDM", "SingleQuotes"),
                                 Localizer.localize("UICDM", "NoQuotes")
@@ -3229,7 +3229,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
     private JHelpLabel exportCSVHelpLabel;
     private JPanel columnOrderingPanel;
     private JLabel orderColumnsLabel;
-    private JComboBox sortTypeComboBox;
+    private JComboBox<String> sortTypeComboBox;
     private JPanel includedColumnsInExportPanel;
     private JPanel columnsPanel;
     private JLabel availableColumnsLabel;
@@ -3252,9 +3252,9 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
     private JPanel delimitedFileOutputPanel;
     private JPanel panel5;
     private JLabel label19;
-    private JComboBox delimiterComboBox;
+    private JComboBox<String> delimiterComboBox;
     private JLabel label20;
-    private JComboBox quotesComboBox;
+    private JComboBox<String> quotesComboBox;
     private JPanel panel3;
     private JCheckBox includeFieldnamesHeaderCheckBox;
     private JCheckBox includeStatisticsCheckBox;
@@ -3293,7 +3293,7 @@ import com.ebstrada.formreturn.manager.util.preferences.persistence.CSVExportPre
     private JPanel exportOptionsPanel;
     private JPanel exportOptionsSubPanel1;
     private JLabel pageSizeLabel;
-    private JComboBox pageSizeComboBox;
+    private JComboBox<String> pageSizeComboBox;
     private JLabel columnFontSizeLabel;
     private JSpinner columnFontSizeSpinner;
     private JPanel exportOptionsSubPanel2;

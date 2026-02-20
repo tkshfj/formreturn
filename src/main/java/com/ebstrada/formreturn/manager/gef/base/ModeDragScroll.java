@@ -3,7 +3,6 @@ package com.ebstrada.formreturn.manager.gef.base;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -94,8 +93,8 @@ public class ModeDragScroll extends FigModifyingModeImpl implements ActionListen
         // speeds
         // up
         // movement
-        boolean button1 = ((me.getModifiers() & InputEvent.BUTTON1_MASK) != 0);
-        boolean button2 = ((me.getModifiers() & InputEvent.BUTTON2_MASK) != 0);
+        boolean button1 = ((me.getModifiersEx() & InputEvent.BUTTON1_DOWN_MASK) != 0);
+        boolean button2 = ((me.getModifiersEx() & InputEvent.BUTTON2_DOWN_MASK) != 0);
 
         // Note JDK bug: for middle mouse button isAltDown() always returns
         // true.
@@ -296,8 +295,8 @@ public class ModeDragScroll extends FigModifyingModeImpl implements ActionListen
      * @param e
      */
     public void actionPerformed(ActionEvent e) {
-        MouseEvent me = new MouseEvent(getEditor().getJComponent(), Event.MOUSE_DRAG, 0,
-            InputEvent.BUTTON1_MASK, recentX, recentY, 0, false);
+        MouseEvent me = new MouseEvent(getEditor().getJComponent(), MouseEvent.MOUSE_DRAGGED, 0,
+            InputEvent.BUTTON1_DOWN_MASK, recentX, recentY, 0, false);
         getEditor().mouseDragged(me);
     }
 

@@ -122,7 +122,7 @@ public class FormDataModel extends AbstractDataModel {
 
     }
 
-    @Override public TableModel getTableModel() {
+    @SuppressWarnings("unchecked") @Override public TableModel getTableModel() {
 
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("ID");

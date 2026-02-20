@@ -1,11 +1,10 @@
 package com.ebstrada.formreturn.server.preferences.persistence;
 
 import com.ebstrada.formreturn.manager.logic.export.ExportOptions;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("exportJobPreferences") public class ExportJobPreferences
-    extends TaskSchedulerJobPreferences implements NoObfuscation {
+    extends TaskSchedulerJobPreferences {
 
     private ExportOptions exportOptions;
 

@@ -65,7 +65,7 @@ final class DecodedBitStreamParser {
     StringBuffer result = new StringBuffer(50);
     CharacterSetECI currentCharacterSetECI = null;
     boolean fc1InEffect = false;
-    Vector byteSegments = new Vector(1);
+    Vector<byte[]> byteSegments = new Vector<byte[]>(1);
     Mode mode;
     do {
       // While still another segment to read...
@@ -150,7 +150,7 @@ final class DecodedBitStreamParser {
                                         StringBuffer result,
                                         int count,
                                         CharacterSetECI currentCharacterSetECI,
-                                        Vector byteSegments,
+                                        Vector<byte[]> byteSegments,
                                         HashMap<DecodeHintType, Object> hints) throws FormatException {
     byte[] readBytes = new byte[count];
     if (count << 3 > bits.available()) {

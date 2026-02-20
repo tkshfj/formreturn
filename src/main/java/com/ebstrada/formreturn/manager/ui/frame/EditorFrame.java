@@ -28,7 +28,7 @@ public abstract class EditorFrame extends JPanel {
 
     public abstract PageAttributes getPageAttributes();
 
-    public abstract void updatePropertyBox(Vector<?> sels);
+    public abstract void updatePropertyBox(Vector<Fig> sels);
 
     public abstract boolean isFigFullyVisible(Fig fig);
 

@@ -8,7 +8,7 @@ import javax.swing.border.*;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 
-@SuppressWarnings("serial") public class AddSaneScannerDialog extends JDialog {
+public class AddSaneScannerDialog extends JDialog {
 
     private int dialogResult = JOptionPane.CANCEL_OPTION;
 

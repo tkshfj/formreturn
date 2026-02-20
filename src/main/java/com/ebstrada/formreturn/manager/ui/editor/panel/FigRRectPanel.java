@@ -72,7 +72,7 @@ public class FigRRectPanel extends EditorPanel {
         radiusLabel = new JLabel();
         radiusSpinner = new JSpinner();
         borderStyleLabel = new JLabel();
-        lineStyleComboBox = new JComboBox();
+        lineStyleComboBox = new JComboBox<>();
         colorLabel = new JLabel();
         foregroundColorButton = new JButton();
         backgroundColorButton = new JButton();
@@ -148,7 +148,7 @@ public class FigRRectPanel extends EditorPanel {
 
             //---- lineStyleComboBox ----
             lineStyleComboBox.setModel(
-                new DefaultComboBoxModel(new String[] {"Solid", "Dashed", "Dotted", "Double"}));
+                new DefaultComboBoxModel<>(new String[] {"Solid", "Dashed", "Dotted", "Double"}));
             lineStyleComboBox.setFont(UIManager.getFont("ComboBox.font"));
             lineStyleComboBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -238,7 +238,7 @@ public class FigRRectPanel extends EditorPanel {
     private JLabel radiusLabel;
     private JSpinner radiusSpinner;
     private JLabel borderStyleLabel;
-    private JComboBox lineStyleComboBox;
+    private JComboBox<String> lineStyleComboBox;
     private JLabel colorLabel;
     private JButton foregroundColorButton;
     private JButton backgroundColorButton;

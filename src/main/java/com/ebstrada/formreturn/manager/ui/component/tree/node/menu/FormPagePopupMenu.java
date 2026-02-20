@@ -11,11 +11,8 @@ public class FormPagePopupMenu extends AbstractRecordPopupMenu {
 
     private static final long serialVersionUID = 1L;
 
-    private FormPageNode formPageNode;
-
     public FormPagePopupMenu(FormPageNode formPageNode, RecordTree tree, RecordTreeNode node) {
         super(formPageNode, tree, node);
-        this.formPageNode = formPageNode;
         initComponents();
     }
 

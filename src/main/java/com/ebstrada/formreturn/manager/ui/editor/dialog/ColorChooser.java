@@ -17,7 +17,7 @@ public class ColorChooser extends JDialog {
 
     private boolean isForegroundUpdate;
 
-    private Vector selectedElements;
+    private Vector<Fig> selectedElements;
 
     public ColorChooser(Frame owner, Fig selectedElement, boolean isForegroundUpdate) {
         super(owner);
@@ -32,7 +32,7 @@ public class ColorChooser extends JDialog {
         getRootPane().setDefaultButton(okButton);
     }
 
-    public ColorChooser(Frame owner, Vector selectedElements, boolean isForegroundUpdate) {
+    public ColorChooser(Frame owner, Vector<Fig> selectedElements, boolean isForegroundUpdate) {
         super(owner);
         this.selectedElements = selectedElements;
         this.isForegroundUpdate = isForegroundUpdate;

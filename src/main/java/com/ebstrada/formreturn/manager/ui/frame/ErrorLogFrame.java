@@ -255,6 +255,7 @@ public class ErrorLogFrame extends JPanel implements ClipboardOwner {
         // //GEN-END:initComponents
     }
 
+    @SuppressWarnings("rawtypes")
     public void setErrorLogModel(ListModel lem) {
         loggingEventModel = (LoggingEventModel) lem;
     }

@@ -20,7 +20,7 @@ import org.apache.log4j.spi.LoggingEvent;
  *
  * @author <a HREF="mailto:V.Mentzner@psi-bt.de">Volker Mentzner</a>
  */
-public class LoggingEventModel extends AbstractListModel implements TableModel {
+public class LoggingEventModel extends AbstractListModel<Object> implements TableModel {
 
     private static final long serialVersionUID = 1L;
 
@@ -217,7 +217,7 @@ public class LoggingEventModel extends AbstractListModel implements TableModel {
      * @param columnIndex the column being queried
      * @return the Object.class
      */
-    @SuppressWarnings("unchecked") public Class getColumnClass(int columnIndex) {
+    public Class<?> getColumnClass(int columnIndex) {
         return Object.class;
     }
 

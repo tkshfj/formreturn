@@ -489,6 +489,7 @@ public class SimpleInternalFrame extends JPanel {
     /**
      * A panel with a horizontal gradient background.
      */
+    @SuppressWarnings("unused")
     private static final class GradientPanel extends JPanel {
 
         private GradientPanel(LayoutManager lm, Color background) {

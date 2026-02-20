@@ -55,7 +55,7 @@ public class FigBarcodeReaderProperties extends JDialog {
 
         // probably best to make the barcode types a contsant too
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         List<String> barcodeTypes = BarcodeReaderTypes.getBarcodeTypes();
         for (String barcodeType : barcodeTypes) {
             dcbm.addElement(barcodeType);
@@ -178,7 +178,7 @@ public class FigBarcodeReaderProperties extends JDialog {
         reconciliationKeyCheckBox = new JCheckBox();
         panel1 = new JPanel();
         detectBarcodeTypeLabel = new JLabel();
-        barcodeTypeComboBox = new JComboBox();
+        barcodeTypeComboBox = new JComboBox<>();
         barcodeAreaDesignPanel = new JPanel();
         panel5 = new JPanel();
         showBarcodeAreaCornersLabel = new JLabel();
@@ -672,7 +672,7 @@ public class FigBarcodeReaderProperties extends JDialog {
     private JCheckBox reconciliationKeyCheckBox;
     private JPanel panel1;
     private JLabel detectBarcodeTypeLabel;
-    private JComboBox barcodeTypeComboBox;
+    private JComboBox<String> barcodeTypeComboBox;
     private JPanel barcodeAreaDesignPanel;
     private JPanel panel5;
     private JLabel showBarcodeAreaCornersLabel;

@@ -15,6 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.presentation.FigCheckbox;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
@@ -26,7 +27,7 @@ public class FigCheckboxMultiPanel extends EditorMultiPanel {
 
     private static final long serialVersionUID = 1L;
 
-    private Vector selectedElements;
+    private Vector<Fig> selectedElements;
 
     private List<MarkAreaPresetStyle> markAreaPresetStyles;
 
@@ -37,7 +38,7 @@ public class FigCheckboxMultiPanel extends EditorMultiPanel {
     private void updatePresetStyles() {
         markAreaPresetStyles = PreferencesManager.getMarkAreaPresetStyles();
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         for (MarkAreaPresetStyle markAreaPresetStyle : markAreaPresetStyles) {
             dcbm.addElement(markAreaPresetStyle.getName());
         }
@@ -72,7 +73,7 @@ public class FigCheckboxMultiPanel extends EditorMultiPanel {
     @Override public void removeListeners() {
     }
 
-    @Override public void setSelectedElements(Vector selectedFig) {
+    @Override public void setSelectedElements(Vector<Fig> selectedFig) {
         selectedElements = selectedFig;
     }
 
@@ -172,7 +173,7 @@ public class FigCheckboxMultiPanel extends EditorMultiPanel {
         // //GEN-BEGIN:initComponents
         panel1 = new JPanel();
         presetStyleLabel = new JLabel();
-        presetStyleComboBox = new JComboBox();
+        presetStyleComboBox = new JComboBox<>();
         applyStyleButton = new JButton();
         aggregationRuleLabel = new JLabel();
         aggregationRuleTextField = new JTextField();
@@ -255,7 +256,7 @@ public class FigCheckboxMultiPanel extends EditorMultiPanel {
     // //GEN-BEGIN:variables
     private JPanel panel1;
     private JLabel presetStyleLabel;
-    private JComboBox presetStyleComboBox;
+    private JComboBox<String> presetStyleComboBox;
     private JButton applyStyleButton;
     private JLabel aggregationRuleLabel;
     private JTextField aggregationRuleTextField;

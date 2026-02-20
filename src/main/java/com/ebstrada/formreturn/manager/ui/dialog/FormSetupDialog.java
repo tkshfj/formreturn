@@ -81,7 +81,7 @@ public class FormSetupDialog extends javax.swing.JDialog {
     private void setFormNames() {
         List<String> formSizeNames = PreferencesManager.getFormSizeNames();
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         for (String formSizeName : formSizeNames) {
             dcbm.addElement(formSizeName);
         }
@@ -202,7 +202,7 @@ public class FormSetupDialog extends javax.swing.JDialog {
         });
     }
 
-    @SuppressWarnings("serial") private void initComponents() {
+    private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY
         // //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Roland Quast
@@ -213,14 +213,14 @@ public class FormSetupDialog extends javax.swing.JDialog {
         formName = new JTextField();
         panel2 = new JPanel();
         measurementLabel = new JLabel();
-        measurementComboBox = new JComboBox();
+        measurementComboBox = new JComboBox<>();
         panel1 = new JPanel();
         orientationLabel = new JLabel();
-        orientation = new JComboBox();
+        orientation = new JComboBox<>();
         leftMarginLabel = new JLabel();
         leftMargin = new JSpinner();
         presetSizeLabel = new JLabel();
-        pageSize = new JComboBox();
+        pageSize = new JComboBox<>();
         rightMarginLabel = new JLabel();
         rightMargin = new JSpinner();
         widthLabel = new JLabel();
@@ -318,7 +318,7 @@ public class FormSetupDialog extends javax.swing.JDialog {
                         new Insets(0, 0, 0, 5), 0, 0));
 
                     //---- measurementComboBox ----
-                    measurementComboBox.setModel(new DefaultComboBoxModel(new String[] {
+                    measurementComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                         "Pixels",
                         "Millimeters",
                         "Centimeters",
@@ -358,7 +358,7 @@ public class FormSetupDialog extends javax.swing.JDialog {
                         new Insets(0, 0, 5, 5), 0, 0));
 
                     //---- orientation ----
-                    orientation.setModel(new DefaultComboBoxModel(new String[] {
+                    orientation.setModel(new DefaultComboBoxModel<>(new String[] {
                         "Portrait",
                         "Landscape"
                     }));
@@ -788,14 +788,14 @@ public class FormSetupDialog extends javax.swing.JDialog {
     private JTextField formName;
     private JPanel panel2;
     private JLabel measurementLabel;
-    private JComboBox measurementComboBox;
+    private JComboBox<String> measurementComboBox;
     private JPanel panel1;
     private JLabel orientationLabel;
-    private JComboBox orientation;
+    private JComboBox<String> orientation;
     private JLabel leftMarginLabel;
     private JSpinner leftMargin;
     private JLabel presetSizeLabel;
-    private JComboBox pageSize;
+    private JComboBox<String> pageSize;
     private JLabel rightMarginLabel;
     private JSpinner rightMargin;
     private JLabel widthLabel;

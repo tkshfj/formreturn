@@ -41,8 +41,7 @@ public final class Detector {
   // Trick to avoid creating new Integer objects below -- a sort of crude copy of
   // the Integer.valueOf(int) optimization added in Java 5, not in J2ME
   private static final Integer[] INTEGERS =
-      { new Integer(0), new Integer(1), new Integer(2), new Integer(3), new Integer(4) };
-  // No, can't use valueOf()
+      { Integer.valueOf(0), Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(4) };
 
   private final BitMatrix image;
   private final MonochromeRectangleDetector rectangleDetector;
@@ -69,7 +68,7 @@ public final class Detector {
     // Point A and D are across the diagonal from one another,
     // as are B and C. Figure out which are the solid black lines
     // by counting transitions
-    Vector transitions = new Vector(4);
+    Vector<ResultPointsAndTransitions> transitions = new Vector<ResultPointsAndTransitions>(4);
     transitions.addElement(transitionsBetween(pointA, pointB));
     transitions.addElement(transitionsBetween(pointA, pointC));
     transitions.addElement(transitionsBetween(pointB, pointD));
@@ -78,8 +77,8 @@ public final class Detector {
 
     // Sort by number of transitions. First two will be the two solid sides; last two
     // will be the two alternating black/white sides
-    ResultPointsAndTransitions lSideOne = (ResultPointsAndTransitions) transitions.elementAt(0);
-    ResultPointsAndTransitions lSideTwo = (ResultPointsAndTransitions) transitions.elementAt(1);
+    ResultPointsAndTransitions lSideOne = transitions.elementAt(0);
+    ResultPointsAndTransitions lSideTwo = transitions.elementAt(1);
 
     // Figure out which point is their intersection by tallying up the number of times we see the
     // endpoints in the four endpoints. One will show up twice.

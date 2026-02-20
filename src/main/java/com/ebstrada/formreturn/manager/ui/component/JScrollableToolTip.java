@@ -48,7 +48,7 @@ public class JScrollableToolTip extends JToolTip implements MouseWheelListener {
         JComponent comp = getComponent();
         if (comp != null) {
             textPane.dispatchEvent(
-                new MouseWheelEvent(textPane, e.getID(), e.getWhen(), e.getModifiers(), 0, 0,
+                new MouseWheelEvent(textPane, e.getID(), e.getWhen(), e.getModifiersEx(), 0, 0,
                     e.getClickCount(), e.isPopupTrigger(), e.getScrollType(), e.getScrollAmount(),
                     e.getWheelRotation()));
         }

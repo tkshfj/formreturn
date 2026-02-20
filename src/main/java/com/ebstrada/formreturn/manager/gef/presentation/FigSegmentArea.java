@@ -24,10 +24,9 @@ import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
 import com.ebstrada.formreturn.manager.ui.reprocessor.dialog.SegmentStencilEditorDialog;
 import com.ebstrada.formreturn.manager.ui.reprocessor.panel.FigSegmentAreaPanel;
 import com.ebstrada.formreturn.manager.util.Misc;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 
 public class FigSegmentArea extends Fig
-    implements NoObfuscation, MouseListener, MouseMotionListener {
+    implements MouseListener, MouseMotionListener {
 
     private static final long serialVersionUID = 1L;
 

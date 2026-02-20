@@ -83,16 +83,8 @@ public class BubbleDetection {
 
     public boolean getValueAtPoint(int x, int y) {
         int linearPoint = (y * width) + x;
-        boolean value = false;
         Integer index = pixelPositionRegionIndexes.get(linearPoint);
-        if (index == null) {
-            value = false;
-        } else if (index == label) {
-            value = true;
-        } else {
-            value = false;
-        }
-        return value;
+        return index != null && index == label;
     }
 
     public Line2D findMinMaxBlackPoints(int direction, int index) throws Exception {

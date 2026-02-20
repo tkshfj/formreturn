@@ -131,7 +131,7 @@ public class FilterLimitResultsDialog extends JDialog {
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         limitAmountLabel = new JLabel();
-        limitComboBox = new JComboBox();
+        limitComboBox = new JComboBox<>();
         buttonBar = new JPanel();
         applyLimitButton = new JButton();
         defaultLimitButton = new JButton();
@@ -174,7 +174,7 @@ public class FilterLimitResultsDialog extends JDialog {
 
                 //---- limitComboBox ----
                 limitComboBox.setEditable(true);
-                limitComboBox.setModel(new DefaultComboBoxModel(
+                limitComboBox.setModel(new DefaultComboBoxModel<>(
                     new String[] {"5", "10", "15", "20", "25", "40", "50", "75", "100", "125",
                         "150", "175", "200", "350", "400", "500", "1000"}));
                 limitComboBox.setRequestFocusEnabled(false);
@@ -242,7 +242,7 @@ public class FilterLimitResultsDialog extends JDialog {
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel limitAmountLabel;
-    private JComboBox limitComboBox;
+    private JComboBox<String> limitComboBox;
     private JPanel buttonBar;
     private JButton applyLimitButton;
     private JButton defaultLimitButton;

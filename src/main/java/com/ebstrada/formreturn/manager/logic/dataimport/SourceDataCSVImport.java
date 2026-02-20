@@ -60,10 +60,8 @@ public class SourceDataCSVImport {
                 return;
             }
 
-            int rowNumber = 1;
             while ((nextLine = reader.readNext()) != null) {
                 createNewRecord(dataSet, columnNames, nextLine, entityManager);
-                rowNumber++;
             }
 
         } catch (FileNotFoundException ex) {

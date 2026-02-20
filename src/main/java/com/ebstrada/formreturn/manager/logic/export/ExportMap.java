@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@SuppressWarnings("serial") public class ExportMap extends java.util.HashMap<String, Column> {
+public class ExportMap extends java.util.HashMap<String, Column> {
 
     public static final int SORT_BY_ORDER_INDEX = 1;
     public static final int SORT_NATRUAL_ASCENDING = 2;

@@ -20,8 +20,6 @@ import org.apache.batik.bridge.UserAgent;
 import org.apache.batik.bridge.UserAgentAdapter;
 import org.apache.batik.bridge.ViewBox;
 import org.apache.batik.gvt.GraphicsNode;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.fop.svg.PDFGraphics2D;
 import org.w3c.dom.svg.SVGDocument;
 
@@ -31,11 +29,10 @@ import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.FigImageProperties;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigImagePanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("image") public class FigImage extends Fig
-    implements ImageObserver, NoObfuscation, MouseListener {
+    implements ImageObserver, MouseListener {
 
     private static final long serialVersionUID = 1L;
 
@@ -59,8 +56,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     private transient String workingDirName;
 
     private transient PageAttributes pageAttributes;
-
-    private static Log LOG = LogFactory.getLog(FigImage.class);
 
     /**
      * Construct a new FigImage with the given position, size, and Image.

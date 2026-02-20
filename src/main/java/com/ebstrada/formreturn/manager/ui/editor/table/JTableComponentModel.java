@@ -21,7 +21,7 @@ public class JTableComponentModel extends DefaultTableModel {
         super(str, rowCount);
     }
 
-    @SuppressWarnings("unchecked") @Override public Class getColumnClass(int column) {
+    @Override public Class<?> getColumnClass(int column) {
         return super.getValueAt(0, column).getClass();
     }
 

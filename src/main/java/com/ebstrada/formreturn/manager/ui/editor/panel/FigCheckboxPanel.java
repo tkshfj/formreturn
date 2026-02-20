@@ -38,7 +38,7 @@ public class FigCheckboxPanel extends EditorPanel {
     private void updatePresetStyles() {
         markAreaPresetStyles = PreferencesManager.getMarkAreaPresetStyles();
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         for (MarkAreaPresetStyle markAreaPresetStyle : markAreaPresetStyles) {
             dcbm.addElement(markAreaPresetStyle.getName());
         }
@@ -157,7 +157,7 @@ public class FigCheckboxPanel extends EditorPanel {
         setPropertiesButton = new JButton();
         panel2 = new JPanel();
         presetStyleLabel = new JLabel();
-        presetStyleComboBox = new JComboBox();
+        presetStyleComboBox = new JComboBox<>();
         applyStyleButton = new JButton();
         aggregationRuleLabel = new JLabel();
         aggregationRuleTextField = new JTextField();
@@ -270,7 +270,7 @@ public class FigCheckboxPanel extends EditorPanel {
     private JButton setPropertiesButton;
     private JPanel panel2;
     private JLabel presetStyleLabel;
-    private JComboBox presetStyleComboBox;
+    private JComboBox<String> presetStyleComboBox;
     private JButton applyStyleButton;
     private JLabel aggregationRuleLabel;
     private JTextField aggregationRuleTextField;

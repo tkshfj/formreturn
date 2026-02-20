@@ -74,7 +74,7 @@ public class DistributeAction extends UndoableAction {
         this.gap = gap;
     }
 
-    @Override public void actionPerformed(ActionEvent e) {
+    @SuppressWarnings("deprecation") @Override public void actionPerformed(ActionEvent e) {
 
         super.actionPerformed(e);
 

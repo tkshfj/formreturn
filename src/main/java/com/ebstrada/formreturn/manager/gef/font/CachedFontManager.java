@@ -7,7 +7,6 @@ import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +15,7 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -78,29 +78,27 @@ public class CachedFontManager {
     public static final int FSTYPE_NO_SUBSETTING = 0x0100;
     public static final int FSTYPE_BITMAP_EMBEDDING_ONLY = 0x0200;
 
-    private transient static Log log = LogFactory.getLog(CachedFontManager.class);
+    private static Log log = LogFactory.getLog(CachedFontManager.class);
 
     private CachedFontGroup cachedFontGroup = new CachedFontGroup();
 
-    private transient SortedComboBoxModel cachedFontList;
-
     private String defaultFontDirectory;
 
-    private transient GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    private GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-    private transient ArrayList<String> systemNames = new ArrayList<String>();
-    private transient HashMap<String, Font> systemFonts = new HashMap<String, Font>();
+    private ArrayList<String> systemNames = new ArrayList<>();
+    private HashMap<String, Font> systemFonts = new HashMap<>();
 
-    private transient Method registerFontMethod = null;
+    private Method registerFontMethod = null;
 
-    private transient Method getFont2DMethod = null;
+    private Method getFont2DMethod = null;
 
     private int invokeType = 0;
 
-    private static final String boldNames[] =
+    private static final String[] boldNames =
         {"bold", "demibold", "demi-bold", "demi bold", "negreta", "demi"};
-    private static final String italicNames[] = {"italic", "cursiva", "oblique", "inclined"};
-    private static final String boldItalicNames[] =
+    private static final String[] italicNames = {"italic", "cursiva", "oblique", "inclined"};
+    private static final String[] boldItalicNames =
         {"bolditalic", "bold-italic", "bold italic", "boldoblique", "bold-oblique", "bold oblique",
             "demibold italic", "negreta cursiva", "demi oblique"};
 
@@ -118,7 +116,7 @@ public class CachedFontManager {
             Method[] methods = clazz1.getMethods();
             for (int i = 0; i < methods.length; i++) {
                 if (methods[i].getName().equals("registerFont")) {
-                    registerFontMethod = clazz1.getMethod("registerFont", new Class[] {Font.class});
+                    registerFontMethod = clazz1.getMethod("registerFont", Font.class);
                     invokeType = 3;
                 }
             }
@@ -127,23 +125,17 @@ public class CachedFontManager {
         }
 
         try {
-
-            Class<?> c = null;
-
-            try {
+            Class<?> c;
+            try { // NOSONAR - nested try is intentional for fallback class loading
                 c = Class.forName("sun.font.FontManager"); // java 1.6 and lower
             } catch (ClassNotFoundException cnfe) {
                 c = Class.forName("sun.font.FontUtilities"); // java 1.7+
             }
 
-            if (c == null) {
-                throw new ClassNotFoundException();
-            }
-
             Method[] methods = c.getMethods();
             for (int i = 0; i < methods.length; i++) {
                 if (methods[i].getName().equals("getFont2D")) {
-                    getFont2DMethod = c.getMethod("getFont2D", new Class[] {Font.class});
+                    getFont2DMethod = c.getMethod("getFont2D", Font.class);
                 }
             }
         } catch (Exception ex) {
@@ -160,19 +152,19 @@ public class CachedFontManager {
                         // OSX java 1.5
                         registerFontMethod = clazz2
                             .getMethod("registerGenericFont",
-                                new Class[] {Class.forName("sun.font.Font2D")});
+                                Class.forName("sun.font.Font2D"));
                         invokeType = 0;
                     } else if (methods[i].getName().equals("registerFont")) {
                         Class<?>[] parameterTypes = methods[i].getParameterTypes();
                         if (parameterTypes[0].getName().endsWith("Font")) {
                             // most other java 1.5
                             registerFontMethod =
-                                clazz2.getMethod("registerFont", new Class[] {Font.class});
+                                clazz2.getMethod("registerFont", Font.class);
                             invokeType = 1;
                         } else {
                             registerFontMethod = clazz2
                                 .getMethod("registerFont",
-                                    new Class[] {Class.forName("sun.font.Font2D")});
+                                    Class.forName("sun.font.Font2D"));
                             invokeType = 2;
                         }
                     }
@@ -185,8 +177,10 @@ public class CachedFontManager {
         File oldVeraFontFile = new File(
             PreferencesManager.getFontDirectoryPath() + System.getProperty("file.separator")
                 + "Vera.ttf");
-        if (oldVeraFontFile.exists()) {
-            oldVeraFontFile.delete();
+        try {
+            Files.deleteIfExists(oldVeraFontFile.toPath());
+        } catch (IOException e) {
+            log.warn("Failed to delete old Vera font file: " + oldVeraFontFile, e);
         }
 
         File veraFontFile = new File(
@@ -204,8 +198,10 @@ public class CachedFontManager {
         File oldCyberbitFontFile = new File(
             PreferencesManager.getFontDirectoryPath() + System.getProperty("file.separator")
                 + "Cyberbit.ttf");
-        if (oldCyberbitFontFile.exists()) {
-            oldCyberbitFontFile.delete();
+        try {
+            Files.deleteIfExists(oldCyberbitFontFile.toPath());
+        } catch (IOException e) {
+            log.warn("Failed to delete old Cyberbit font file: " + oldCyberbitFontFile, e);
         }
 
         File cyberbitFontFile = new File(
@@ -276,11 +272,7 @@ public class CachedFontManager {
         String workingFontDir = workingDirName + System.getProperty("file.separator") + "fonts";
         try {
             loadFontFromFile(workingFontDir, embeddedFontFileName);
-        } catch (FileNotFoundException e) {
-            Misc.printStackTrace(e);
-        } catch (FontFormatException e) {
-            Misc.printStackTrace(e);
-        } catch (IOException e) {
+        } catch (FontFormatException | IOException e) {
             Misc.printStackTrace(e);
         }
     }
@@ -320,7 +312,7 @@ public class CachedFontManager {
 
         ArrayList<String> fontPaths = (ArrayList<String>) PreferencesManager.getFontPaths();
 
-        if (fontPaths.size() <= 0) {
+        if (fontPaths.isEmpty()) {
             resetFontPaths(fontPaths);
         }
 
@@ -338,7 +330,7 @@ public class CachedFontManager {
         try {
             URI uri = getClass().getProtectionDomain().getCodeSource().getLocation().toURI();
             if (!"file".equals(uri.getScheme())) {
-                throw new Exception(String
+                throw new IOException(String
                     .format(Localizer.localize("GefBase", "JarFileReadErrorMessage"),
                         uri.toString()));
             }
@@ -371,7 +363,7 @@ public class CachedFontManager {
                 File parent = new File(outFile.getParent());
 
                 if (parent != null && !parent.exists()) {
-                    parent.mkdirs();
+                    Files.createDirectories(parent.toPath());
                 }
 
                 out = new FileOutputStream(outFile);
@@ -384,7 +376,9 @@ public class CachedFontManager {
                     out.write(buf, 0, nRead);
                 }
                 out.close();
-                outFile.setLastModified(archiveTime.getTime());
+                if (!outFile.setLastModified(archiveTime.getTime())) {
+                    log.warn("Failed to set last modified time on: " + outFile);
+                }
             }
             zf.close();
 
@@ -465,7 +459,7 @@ public class CachedFontManager {
     }
 
     public void loadFontFromFile(String directory, String filename)
-        throws FileNotFoundException, FontFormatException, IOException {
+        throws FontFormatException, IOException {
 
         Font font = null;
 
@@ -478,7 +472,7 @@ public class CachedFontManager {
             return;
         }
 
-        if (cf == null || getCachedFont(cf.getStyle(), cf.getFamily()) != null) {
+        if (getCachedFont(cf.getStyle(), cf.getFamily()) != null) {
             return; // already loaded or cannot read.
         }
 
@@ -526,25 +520,21 @@ public class CachedFontManager {
             switch (invokeType) {
                 case 0:
                     Object f2d1 = getFont2DMethod.invoke(null, font);
-                    registerFontMethod.invoke(null, new Object[] {f2d1});
+                    registerFontMethod.invoke(null, f2d1);
                     break;
                 case 3:
-                    registerFontMethod.invoke(ge, new Object[] {font});
+                    registerFontMethod.invoke(ge, font);
                     break;
                 case 1:
-                    registerFontMethod.invoke(null, new Object[] {font});
+                    registerFontMethod.invoke(null, font);
                     break;
                 case 2:
                     Object f2d2 = getFont2DMethod.invoke(null, font);
-                    registerFontMethod.invoke(null, new Object[] {f2d2});
+                    registerFontMethod.invoke(null, f2d2);
                     break;
                 default:
             }
-        } catch (IllegalArgumentException e) {
-            com.ebstrada.formreturn.manager.util.Misc.printStackTrace(e);
-        } catch (IllegalAccessException e) {
-            com.ebstrada.formreturn.manager.util.Misc.printStackTrace(e);
-        } catch (InvocationTargetException e) {
+        } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
             com.ebstrada.formreturn.manager.util.Misc.printStackTrace(e);
         }
 
@@ -580,9 +570,7 @@ public class CachedFontManager {
             cf = getCachedFont(Font.PLAIN, "Times New Roman");
         }
 
-        Font defaultFont = cf.getFont();
-
-        return defaultFont;
+        return cf.getFont();
     }
 
     public CachedFont getCachedFontByFilename(String fontFileName) {
@@ -601,12 +589,12 @@ public class CachedFontManager {
         return cachedFontGroup.getCachedFontFamily(family);
     }
 
-    public DefaultComboBoxModel getCachedFontList() {
-        cachedFontList = new SortedComboBoxModel();
+    public DefaultComboBoxModel<String> getCachedFontList() {
+        SortedComboBoxModel cachedFontList = new SortedComboBoxModel();
         Map<String, CachedFontFamily> cachedFontFamilies = cachedFontGroup.getCachedFontFamilies();
-        Iterator cffi = cachedFontFamilies.values().iterator();
+        Iterator<CachedFontFamily> cffi = cachedFontFamilies.values().iterator();
         while (cffi.hasNext()) {
-            CachedFontFamily cachedFontFamily = (CachedFontFamily) cffi.next();
+            CachedFontFamily cachedFontFamily = cffi.next();
             String fontFamilyName = cachedFontFamily.getLocalizedFamilyName();
             cachedFontList.addElement(fontFamilyName);
         }
@@ -622,7 +610,7 @@ public class CachedFontManager {
         this.defaultFontDirectory = defaultFontDirectory;
     }
 
-    public void replaceSystemFont(File file) throws Exception {
+    public void replaceSystemFont(File file) throws IOException {
 
         File defaultFontFile =
             new File(defaultFontDirectory + System.getProperty("file.separator") + "default.ttf");
@@ -630,7 +618,7 @@ public class CachedFontManager {
         Misc.copyfile(file.getCanonicalPath(), defaultFontFile.getCanonicalPath());
 
         if (!(defaultFontFile.exists())) {
-            throw new Exception();
+            throw new IOException("Failed to replace system font: " + defaultFontFile);
         }
 
     }
@@ -652,7 +640,11 @@ public class CachedFontManager {
         File defaultFontFile =
             new File(defaultFontDirectory + System.getProperty("file.separator") + "default.ttf");
 
-        defaultFontFile.delete();
+        try {
+            Files.deleteIfExists(defaultFontFile.toPath());
+        } catch (IOException e) {
+            log.warn("Failed to delete default font file: " + defaultFontFile, e);
+        }
 
         if (!(defaultFontFile.exists())) {
             try {
@@ -682,7 +674,11 @@ public class CachedFontManager {
         File defaultFontFile =
             new File(defaultFontDirectory + System.getProperty("file.separator") + "default.ttf");
 
-        defaultFontFile.delete();
+        try {
+            Files.deleteIfExists(defaultFontFile.toPath());
+        } catch (IOException e) {
+            log.warn("Failed to delete default font file: " + defaultFontFile, e);
+        }
 
         if (!(defaultFontFile.exists())) {
             try {
@@ -699,29 +695,17 @@ public class CachedFontManager {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        String mappings = "";
-        ObjectOutputStream oos = null;
         try {
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(baos, "UTF-8"));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(baos, java.nio.charset.StandardCharsets.UTF_8));
             out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-            oos = Main.getInstance().getXstream().createObjectOutputStream(out);
-            oos.writeObject(cachedFontGroup);
-
-
-        } catch (Exception ex) {
-
-        } finally {
-            if (oos != null) {
-                try {
-                    oos.close();
-                } catch (IOException e) {
-                }
+            try (ObjectOutputStream oos = Main.getXstream().createObjectOutputStream(out)) {
+                oos.writeObject(cachedFontGroup); // NOSONAR - XStream handles serialization
             }
+        } catch (IOException ex) {
+            // Ignore serialization errors; return whatever was written
         }
 
-        mappings += baos.toString();
-
-        return mappings;
+        return baos.toString();
     }
 
 

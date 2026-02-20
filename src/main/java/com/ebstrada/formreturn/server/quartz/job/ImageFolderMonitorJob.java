@@ -37,6 +37,7 @@ public class ImageFolderMonitorJob extends FolderMonitorJob {
         super(jobPreferences);
     }
 
+    @SuppressWarnings("unchecked")
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
         Vector<String> imageWhitelist = Misc.getImageWhilelist();

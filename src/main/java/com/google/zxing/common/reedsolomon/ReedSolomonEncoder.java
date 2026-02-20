@@ -27,27 +27,27 @@ import java.util.Vector;
 public final class ReedSolomonEncoder {
 
   private final GF256 field;
-  private final Vector cachedGenerators;
+  private final Vector<GF256Poly> cachedGenerators;
 
   public ReedSolomonEncoder(GF256 field) {
     if (!GF256.QR_CODE_FIELD.equals(field)) {
       throw new IllegalArgumentException("Only QR Code is supported at this time");
     }
     this.field = field;
-    this.cachedGenerators = new Vector();
+    this.cachedGenerators = new Vector<GF256Poly>();
     cachedGenerators.addElement(new GF256Poly(field, new int[] { 1 }));
   }
 
   private GF256Poly buildGenerator(int degree) {
     if (degree >= cachedGenerators.size()) {
-      GF256Poly lastGenerator = (GF256Poly) cachedGenerators.elementAt(cachedGenerators.size() - 1);
+      GF256Poly lastGenerator = cachedGenerators.elementAt(cachedGenerators.size() - 1);
       for (int d = cachedGenerators.size(); d <= degree; d++) {
         GF256Poly nextGenerator = lastGenerator.multiply(new GF256Poly(field, new int[] { 1, field.exp(d - 1) }));
         cachedGenerators.addElement(nextGenerator);
         lastGenerator = nextGenerator;
       }
     }
-    return (GF256Poly) cachedGenerators.elementAt(degree);    
+    return cachedGenerators.elementAt(degree);
   }
 
   public void encode(int[] toEncode, int ecBytes) {

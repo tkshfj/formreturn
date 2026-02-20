@@ -132,10 +132,8 @@ public abstract class Layer implements java.io.Serializable {
     @Override public Object clone() {
         Layer lay;
         try {
-            lay = (this.getClass().newInstance());
-        } catch (java.lang.IllegalAccessException ignore) {
-            return null;
-        } catch (java.lang.InstantiationException ignore) {
+            lay = (this.getClass().getDeclaredConstructor().newInstance());
+        } catch (ReflectiveOperationException ignore) {
             return null;
         }
         lay._name = _name;
@@ -251,7 +249,7 @@ public abstract class Layer implements java.io.Serializable {
     public void removeAll() {
     }
 
-    public Enumeration elements() {
+    public Enumeration<?> elements() {
         return EnumerationEmpty.theInstance();
     }
 
@@ -263,7 +261,7 @@ public abstract class Layer implements java.io.Serializable {
      * Reply an enumeration of all the Figs in this Layer that intersect given
      * Rectangle.
      */
-    public Enumeration elementsIn(Rectangle r) {
+    public Enumeration<?> elementsIn(Rectangle r) {
         return new EnumerationPredicate(elements(), new PredFigInRect(r));
     }
 
@@ -271,7 +269,7 @@ public abstract class Layer implements java.io.Serializable {
      * Reply an enumeration of all the FigNodes in this Layer that intersect
      * given Rectangle.
      */
-    public Enumeration nodesIn(Rectangle r) {
+    public Enumeration<?> nodesIn(Rectangle r) {
         return new EnumerationPredicate(elements(), new PredFigNodeInRect(r));
     }
 
@@ -380,7 +378,7 @@ public abstract class Layer implements java.io.Serializable {
     }
 
     public Rectangle calcDrawingArea() {
-        Enumeration iter = elements();
+        Enumeration<?> iter = elements();
         if (!iter.hasMoreElements()) {
             return new Rectangle();
         }

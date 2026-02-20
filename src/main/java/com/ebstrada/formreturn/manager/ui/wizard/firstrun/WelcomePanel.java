@@ -84,7 +84,7 @@ public class WelcomePanel extends JPanel implements IWizardPanel {
         iconLabel = new JLabel();
         languageSelectionPanel = new JPanel();
         languageHeadingLabel = new JLabel();
-        languageComboBox = new JComboBox();
+        languageComboBox = new JComboBox<>();
         worldLabel = new JLabel();
 
         //======== this ========
@@ -193,7 +193,7 @@ public class WelcomePanel extends JPanel implements IWizardPanel {
     private JLabel iconLabel;
     private JPanel languageSelectionPanel;
     private JLabel languageHeadingLabel;
-    private JComboBox languageComboBox;
+    private JComboBox<String> languageComboBox;
     private JLabel worldLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 

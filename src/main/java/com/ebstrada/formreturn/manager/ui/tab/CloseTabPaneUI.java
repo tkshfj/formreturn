@@ -19,7 +19,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -54,11 +53,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.JViewport;
 import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
-import javax.swing.border.SoftBevelBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.ActionMapUIResource;
@@ -89,7 +85,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
 
     private ContainerListener containerListener;
 
-    private Vector htmlViews;
+    private Vector<View> htmlViews;
 
     private HashMap<Integer, Integer> mnemonicToIndexMap;
 
@@ -117,10 +113,6 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
     protected static final int BUTTONSIZE = 16;
 
     protected static final int WIDTHDELTA = 5;
-
-    private static final Border PRESSEDBORDER = new SoftBevelBorder(SoftBevelBorder.LOWERED);
-
-    private static final Border OVERBORDER = new SoftBevelBorder(SoftBevelBorder.RAISED);
 
     private BufferedImage closeImgB;
 
@@ -510,7 +502,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         if (mnemonicToIndexMap == null) {
             initMnemonics();
         }
-        mnemonicInputMap.put(KeyStroke.getKeyStroke(mnemonic, Event.ALT_MASK), "setSelectedIndex");
+        mnemonicInputMap.put(KeyStroke.getKeyStroke(mnemonic, java.awt.event.InputEvent.ALT_DOWN_MASK), "setSelectedIndex");
         mnemonicToIndexMap.put(Integer.valueOf(mnemonic), Integer.valueOf(index));
     }
 
@@ -659,8 +651,6 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
      * from (tab.y + tab.height) and adding yCropLen[i] to (tab.x).
      */
 
-    private static final int CROP_SEGMENT = 12;
-
     private void paintCroppedTabEdge(Graphics g, int tabPlacement, int tabIndex, boolean isSelected,
         int x, int y) {
 
@@ -778,6 +768,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
      * JTabbedPane's coordinate space to the coordinate space of the
      * ScrollableTabPanel. This is used for SCROLL_TAB_LAYOUT ONLY.
      */
+    @SuppressWarnings("unused")
     private Point translatePointToTabPanel(int srcx, int srcy, Point dest) {
         Point vpp = tabScroller.viewport.getLocation();
         Point viewp = tabScroller.viewport.getViewPosition();
@@ -796,11 +787,11 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
     //
     boolean requestMyFocusForVisibleComponent() {
         Component visibleComponent = getVisibleComponent();
-        if (visibleComponent.isFocusTraversable()) {
+        if (visibleComponent.isFocusable()) {
             visibleComponent.requestFocus();
             return true;
         } else if (visibleComponent instanceof JComponent) {
-            if (((JComponent) visibleComponent).requestDefaultFocus()) {
+            if (((JComponent) visibleComponent).requestFocusInWindow()) {
                 return true;
             }
         }
@@ -1024,7 +1015,10 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
                 //
                 if (selectedComponent != null) {
                     if (selectedComponent != visibleComponent && visibleComponent != null) {
-                        if (SwingUtilities.findFocusOwner(visibleComponent) != null) {
+                        if (java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner() != null
+                            && SwingUtilities.isDescendingFrom(
+                                java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner(),
+                                visibleComponent)) {
                             shouldChangeFocus = true;
                         }
                     }
@@ -1121,12 +1115,8 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
             Font font =
                 tabPane.getFont().deriveFont((Main.MAC_OS_X ? Font.BOLD : Font.PLAIN), 12.0f);
             FontMetrics metrics = tabPane.getFontMetrics(font);
-            Dimension size = tabPane.getSize();
-            Insets insets = tabPane.getInsets();
             Insets tabAreaInsets = getTabAreaInsets(tabPlacement);
-            int fontHeight = metrics.getHeight();
-            int selectedIndex = tabPane.getSelectedIndex();
-            int i, j;
+            int i;
 
             int osoffset = (Main.MAC_OS_X ? 0 : 4);
             int x = tabAreaInsets.left - 2 + osoffset;
@@ -1324,7 +1314,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
     }
 
     protected class ScrollableTabButton extends BasicArrowButton
-        implements UIResource, SwingConstants {
+        implements UIResource {
         public ScrollableTabButton(int direction) {
             super(direction, UIManager.getColor("TabbedPane.selected"),
                 UIManager.getColor("TabbedPane.shadow"),
@@ -1440,8 +1430,8 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         }
     }
 
-    private Vector createHTMLVector() {
-        Vector htmlViews = new Vector();
+    private Vector<View> createHTMLVector() {
+        Vector<View> htmlViews = new Vector<>();
         int count = tabPane.getTabCount();
         if (count > 0) {
             for (int i = 0; i < count; i++) {

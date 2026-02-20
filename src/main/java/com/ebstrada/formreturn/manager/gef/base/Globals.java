@@ -10,10 +10,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Vector;
 
+import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.ui.IStatusBar;
 
 /**
@@ -34,6 +37,7 @@ public class Globals {
     // //////////////////////////////////////////////////////////////
     // applet related methods
 
+    @SuppressWarnings("removal")
     protected static Applet _applet;
     protected static MediaTracker _tracker;
 
@@ -53,12 +57,14 @@ public class Globals {
      * If we are running as an applet, Store the Applet and AppletContext in a
      * well known place.
      */
+    @SuppressWarnings("removal")
     public static void setApplet(Applet a) {
         _applet = a;
         clearStatus();
         _tracker = new MediaTracker(a);
     }
 
+    @SuppressWarnings("removal")
     public static AppletContext getAppletContext() {
         try {
             return _applet.getAppletContext();
@@ -67,6 +73,7 @@ public class Globals {
         }
     }
 
+    @SuppressWarnings("removal")
     public static Applet getApplet() {
         return _applet;
     }
@@ -75,7 +82,7 @@ public class Globals {
      * Until jdk 1.2, this will be our clipboard TODO we have now gone beyond
      * JDK1.2
      */
-    public static Vector clipBoard;
+    public static Vector<Fig> clipBoard;
 
     public static boolean pastable = false;
 
@@ -177,8 +184,8 @@ public class Globals {
      */
     public static void showDocument(String urlString) {
         try {
-            showDocument(new URL(urlString));
-        } catch (MalformedURLException ignore) {
+            showDocument(new URI(urlString).toURL());
+        } catch (MalformedURLException | URISyntaxException ignore) {
         }
     }
 
@@ -203,13 +210,13 @@ public class Globals {
         try {
             Image img = null;
             if (getAppletContext() != null) {
-                img = getAppletContext().getImage(new URL(urlStr));
+                img = getAppletContext().getImage(new URI(urlStr).toURL());
             }
             if (_tracker != null && img != null) {
                 _tracker.addImage(img, 1);
             }
             return img;
-        } catch (java.net.MalformedURLException e) {
+        } catch (MalformedURLException | URISyntaxException e) {
             return null;
         }
     }
@@ -412,14 +419,12 @@ public class Globals {
 
     public static void removePropertyChangeListener(Object s, PropertyChangeListener listener) {
         PropertyChangeListener listeners[] = (PropertyChangeListener[]) _pcListeners.get(s);
-        boolean found = false;
         if (listeners == null) {
             return;
         }
         for (int i = 0; i < MAX_LISTENERS; ++i) {
             if (listeners[i] == listener) {
                 listeners[i] = null;
-                found = true;
             }
         }
         // if (LOG.isDebugEnabled() && !found) {

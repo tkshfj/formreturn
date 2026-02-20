@@ -6,7 +6,6 @@ import com.ebstrada.aggregation.exception.NoMatchException;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("serial")
 public class Rule extends ArrayList<RulePart> {
 
     public Rule() {

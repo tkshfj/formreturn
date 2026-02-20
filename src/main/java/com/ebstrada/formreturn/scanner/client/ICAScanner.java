@@ -93,6 +93,7 @@ public class ICAScanner {
         this.scannerListener = scannerListener;
     }
 
+    @SuppressWarnings("unchecked")
     public String[] getDeviceNames() {
 
         this.scannerNames.clear();
@@ -226,6 +227,7 @@ public class ICAScanner {
         this.selectedScanner = deviceName;
     }
 
+    @SuppressWarnings("unchecked")
     public void acquire() {
 
         final ICAScanner scanner = this;

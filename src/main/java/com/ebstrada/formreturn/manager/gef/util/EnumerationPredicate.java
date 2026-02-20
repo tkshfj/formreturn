@@ -8,14 +8,14 @@ import java.util.NoSuchElementException;
  * elements that do not satisfy the given predicate.
  */
 
-public class EnumerationPredicate implements Enumeration, java.io.Serializable {
+public class EnumerationPredicate implements Enumeration<Object>, java.io.Serializable {
     // //////////////////////////////////////////////////////////////
     // instance variables
 
     /**
      * The normal enumeration that this EnumerationPredicate is moving through.
      */
-    protected Enumeration _enum = null;
+    protected Enumeration<?> _enum = null;
 
     /**
      * The predicate that must be satisfied in order for a given element to be
@@ -32,7 +32,7 @@ public class EnumerationPredicate implements Enumeration, java.io.Serializable {
     // //////////////////////////////////////////////////////////////
     // constructors
 
-    public EnumerationPredicate(Enumeration e, Predicate p) {
+    public EnumerationPredicate(Enumeration<?> e, Predicate p) {
         _enum = e;
         _filter = p;
         findNext();

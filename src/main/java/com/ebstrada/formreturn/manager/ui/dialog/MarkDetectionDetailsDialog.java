@@ -228,6 +228,7 @@ public class MarkDetectionDetailsDialog extends JDialog {
             return super.getTableCellEditorComponent(table, value, isSelected, row, column);
         }
 
+        @SuppressWarnings("unused")
         public int getLastRow() {
             return lastRow;
         }
@@ -538,7 +539,7 @@ public class MarkDetectionDetailsDialog extends JDialog {
         scrollPane1 = new JScrollPane();
         markAreaImageLabel = new JImageLabel();
         panel5 = new JPanel();
-        zoomBox = new JComboBox();
+        zoomBox = new JComboBox<>();
         zoomInLabel = new JLabel();
         zoomOutLabel = new JLabel();
         silhouettesPanel = new JPanel();
@@ -638,7 +639,7 @@ public class MarkDetectionDetailsDialog extends JDialog {
                             ((GridBagLayout)panel5.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
 
                             //---- zoomBox ----
-                            zoomBox.setModel(new DefaultComboBoxModel(new String[] {
+                            zoomBox.setModel(new DefaultComboBoxModel<>(new String[] {
                                 "25%",
                                 "50%",
                                 "100%",
@@ -934,7 +935,7 @@ public class MarkDetectionDetailsDialog extends JDialog {
     private JScrollPane scrollPane1;
     private JImageLabel markAreaImageLabel;
     private JPanel panel5;
-    private JComboBox zoomBox;
+    private JComboBox<String> zoomBox;
     private JLabel zoomInLabel;
     private JLabel zoomOutLabel;
     private JPanel silhouettesPanel;

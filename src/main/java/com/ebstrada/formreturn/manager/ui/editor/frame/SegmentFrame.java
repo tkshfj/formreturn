@@ -105,7 +105,7 @@ public class SegmentFrame extends EditorFrame {
 
             public void selectionChanged(GraphSelectionEvent gse) {
                 getPropertiesPanelController().destroyPanels();
-                Vector sels = gse.getSelections();
+                Vector<Fig> sels = gse.getSelections();
                 updatePropertyBox(sels);
                 unpressAllButtons();
             }
@@ -118,7 +118,7 @@ public class SegmentFrame extends EditorFrame {
         Editor ce = _graph.getEditor();
         ce.setAntiAlias(true);
 
-        Vector sels = _graph.selectedFigs();
+        Vector<Fig> sels = _graph.selectedFigs();
         updatePropertyBox(sels);
         unpressAllButtons();
 
@@ -208,13 +208,13 @@ public class SegmentFrame extends EditorFrame {
     }
 
 
-    @Override public void updatePropertyBox(Vector sels) {
+    @Override public void updatePropertyBox(Vector<Fig> sels) {
 
         if (!isFinishedLoading()) {
             return;
         }
 
-        Iterator i = sels.iterator();
+        Iterator<?> i = sels.iterator();
 
         // only change properties panel on single selections
         if (sels.size() == 1) {
@@ -235,12 +235,12 @@ public class SegmentFrame extends EditorFrame {
         } else if (sels.size() > 1) {
 
             // itterate through all of the figs and check if they are all the same
-            Iterator selectedFigsIterator = sels.iterator();
-            Class clazz = selectedFigsIterator.next().getClass();
+            Iterator<?> selectedFigsIterator = sels.iterator();
+            Class<?> clazz = selectedFigsIterator.next().getClass();
 
             boolean classIsDifferent = false;
             while (selectedFigsIterator.hasNext()) {
-                Class clazz2 = selectedFigsIterator.next().getClass();
+                Class<?> clazz2 = selectedFigsIterator.next().getClass();
                 if (clazz != clazz2) {
                     classIsDifferent = true;
                     break;
@@ -328,9 +328,9 @@ public class SegmentFrame extends EditorFrame {
     }
 
     public void removeAllFigs() {
-        Enumeration<Fig> figs = _graph.getEditor().figs();
+        Enumeration<?> figs = _graph.getEditor().figs();
         while (figs.hasMoreElements()) {
-            _graph.getEditor().removePropertyChangeListener(figs.nextElement());
+            _graph.getEditor().removePropertyChangeListener((Fig) figs.nextElement());
         }
         _graph.getEditor().getSelectionManager().deselectAll();
         _graph.getEditor().getLayerManager().removeAll();
@@ -438,9 +438,9 @@ public class SegmentFrame extends EditorFrame {
         segmentPalette = new SegmentPalette();
         printDesignViewScrollPane = new JScrollPane();
         backgroundPanel = new JPanel();
-        _graph = _graph;
+        // _graph initialized elsewhere
         editorLowerPanel = new JPanel();
-        editorZoomComboBox = new JComboBox();
+        editorZoomComboBox = new JComboBox<>();
         zoomInLabel = new JLabel();
         zoomOutLabel = new JLabel();
         alignmentToolbarContainerPanel = new AlignmentPalette();
@@ -588,7 +588,7 @@ public class SegmentFrame extends EditorFrame {
                         new double[] {1.0, 1.0E-4};
 
                     //---- editorZoomComboBox ----
-                    editorZoomComboBox.setModel(new DefaultComboBoxModel(
+                    editorZoomComboBox.setModel(new DefaultComboBoxModel<>(
                         new String[] {"10%", "25%", "50%", "75%", "100%", "125%", "150%", "200%",
                             "250%", "350%", "500%", "700%", "1000%"}));
                     editorZoomComboBox.setSelectedIndex(4);
@@ -734,7 +734,7 @@ public class SegmentFrame extends EditorFrame {
         if (segmentFrameTabbedPane.getSelectedIndex() == 0) {
             if (getPropertiesPanelController() != null) {
                 getPropertiesPanelController().destroyPanels();
-                Vector sels = _graph.selectedFigs();
+                Vector<Fig> sels = _graph.selectedFigs();
                 updatePropertyBox(sels);
                 restoreScale();
             }
@@ -766,7 +766,7 @@ public class SegmentFrame extends EditorFrame {
         if (segmentFrameTabbedPane.getSelectedIndex() == 0) {
             if (getPropertiesPanelController() != null) {
                 getPropertiesPanelController().destroyPanels();
-                Vector sels = _graph.selectedFigs();
+                Vector<Fig> sels = _graph.selectedFigs();
                 updatePropertyBox(sels);
                 restoreScale();
             }
@@ -776,7 +776,7 @@ public class SegmentFrame extends EditorFrame {
 
         if (segmentFrameTabbedPane.getSelectedIndex() == 1) {
 
-            boolean hadToResizeGraphToFitFigs = _graph.updateGraphBoundaries();
+            _graph.updateGraphBoundaries();
 	    
 	    /*
 	    if ( hadToResizeGraphToFitFigs ) {
@@ -820,7 +820,7 @@ public class SegmentFrame extends EditorFrame {
     private JPanel backgroundPanel;
     private JGraph _graph;
     private JPanel editorLowerPanel;
-    private JComboBox editorZoomComboBox;
+    private JComboBox<String> editorZoomComboBox;
     private JLabel zoomInLabel;
     private JLabel zoomOutLabel;
     private AlignmentPalette alignmentToolbarContainerPanel;
@@ -909,7 +909,7 @@ public class SegmentFrame extends EditorFrame {
     }
 
     @Override public void rebuildPreview() {
-        SwingWorker worker = new SwingWorker<RecognitionPreviewPanel, Void>() {
+        SwingWorker<RecognitionPreviewPanel, Void> worker = new SwingWorker<RecognitionPreviewPanel, Void>() {
 
             @Override public RecognitionPreviewPanel doInBackground() {
 

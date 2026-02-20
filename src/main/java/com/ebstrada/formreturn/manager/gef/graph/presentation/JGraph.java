@@ -221,9 +221,9 @@ public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
 
     /* Set up some standard keystrokes and the Cmds that they invoke. */
     public void initKeys() {
-        int shift = InputEvent.SHIFT_MASK;
-        int alt = InputEvent.ALT_MASK;
-        int meta = InputEvent.META_MASK;
+        int shift = InputEvent.SHIFT_DOWN_MASK;
+        int alt = InputEvent.ALT_DOWN_MASK;
+        int meta = InputEvent.META_DOWN_MASK;
 
         bindKey(new SelectNextAction("Select Next", true), KeyEvent.VK_TAB, 0);
         bindKey(new SelectNextAction("Select Previous", false), KeyEvent.VK_TAB, shift);
@@ -273,7 +273,7 @@ public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
      * Enlarges the JGraphInternalPane dimensions as necessary to insure
      * that all the contained Figs are visible.
      */
-    protected boolean updateDrawingSizeToIncludeAllFigs(Enumeration iter) {
+    protected boolean updateDrawingSizeToIncludeAllFigs(Enumeration<?> iter) {
 
         boolean sizeUpdated = false;
 
@@ -467,21 +467,23 @@ public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
     /**
      * Select a collection of Figs.
      */
-    public void select(Vector items) {
+    @SuppressWarnings("deprecation")
+    public void select(Vector<Fig> items) {
         editor.getSelectionManager().select(items);
     }
 
     /**
      * Toggle the selection of a collection of Figs.
      */
-    public void toggleItems(Vector items) {
+    public void toggleItems(Vector<Fig> items) {
         editor.getSelectionManager().toggle(items);
     }
 
     /**
      * reply a Vector of all selected Figs. Used in many Cmds.
      */
-    public Vector selectedFigs() {
+    @SuppressWarnings("deprecation")
+    public Vector<Fig> selectedFigs() {
         return editor.getSelectionManager().getFigs();
     }
 
@@ -586,7 +588,7 @@ public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
 
         boolean drawingSizeModified = false;
 
-        Collection layerManagerContent = editor.getLayerManager().getContents();
+        Collection<Fig> layerManagerContent = editor.getLayerManager().getContents();
         if (layerManagerContent != null && getPageAttributes() != null) {
             drawingSizeModified =
                 updateDrawingSizeToIncludeAllFigs(Collections.enumeration(layerManagerContent));
@@ -769,9 +771,6 @@ class WheelKeyListenerToggleAction implements KeyListener {
     private int mask;
     private int down;
 
-    private MouseWheelListener listener;
-    private JPanel panel;
-
     /**
      * Creates KeyListener that adds and removes MouseWheelListener from
      * indicated JPanel so that it's only active when the modifier keys
@@ -788,27 +787,25 @@ class WheelKeyListenerToggleAction implements KeyListener {
      */
     public WheelKeyListenerToggleAction(JPanel panel, MouseWheelListener listener,
         int modifiersMask) {
-        this.panel = panel;
-        this.listener = listener;
         this.mask = modifiersMask;
     }
 
     public synchronized void keyPressed(KeyEvent e) {
-        if ((e.getModifiers() | mask) != mask) {
+        if ((e.getModifiersEx() | mask) != mask) {
             return;
         }
 
         if (down == 0) {
             // panel.addMouseWheelListener(listener);
         }
-        down |= e.getModifiers();
+        down |= e.getModifiersEx();
     }
 
     public synchronized void keyReleased(KeyEvent e) {
-        if ((e.getModifiers() & mask) == 0) {
+        if ((e.getModifiersEx() & mask) == 0) {
             // panel.removeMouseWheelListener(listener);
         }
-        down = e.getModifiers();
+        down = e.getModifiersEx();
     }
 
     public void keyTyped(KeyEvent e) {

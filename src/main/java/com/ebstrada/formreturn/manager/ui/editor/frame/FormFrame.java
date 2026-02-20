@@ -60,6 +60,7 @@ public class FormFrame extends EditorFrame {
 
     private BasicComboPopup pageSelectionPopup;
 
+    @SuppressWarnings("rawtypes")
     private JComboBox pageSelectionList;
 
     private PublishFormPanel pfp;
@@ -110,7 +111,7 @@ public class FormFrame extends EditorFrame {
 
             public void selectionChanged(GraphSelectionEvent gse) {
                 getPropertiesPanelController().destroyPanels();
-                Vector sels = _graph.selectedFigs();
+                Vector<Fig> sels = _graph.selectedFigs();
                 updatePropertyBox(sels);
                 unpressAllButtons();
             }
@@ -123,7 +124,7 @@ public class FormFrame extends EditorFrame {
         Editor ce = _graph.getEditor();
         ce.setAntiAlias(true);
 
-        Vector sels = _graph.selectedFigs();
+        Vector<Fig> sels = _graph.selectedFigs();
         updatePropertyBox(sels);
         unpressAllButtons();
 
@@ -140,13 +141,13 @@ public class FormFrame extends EditorFrame {
         return Main.getInstance().getPropertiesPanelController();
     }
 
-    @Override public void updatePropertyBox(Vector sels) {
+    @Override public void updatePropertyBox(Vector<Fig> sels) {
 
         if (!isFinishedLoading()) {
             return;
         }
 
-        Iterator i = sels.iterator();
+        Iterator<?> i = sels.iterator();
 
         // only change properties panel on single selections
         if (sels.size() == 1) {
@@ -171,12 +172,12 @@ public class FormFrame extends EditorFrame {
         } else if (sels.size() > 1) {
 
             // itterate through all of the figs and check if they are all the same
-            Iterator selectedFigsIterator = sels.iterator();
-            Class clazz = selectedFigsIterator.next().getClass();
+            Iterator<?> selectedFigsIterator = sels.iterator();
+            Class<?> clazz = selectedFigsIterator.next().getClass();
 
             boolean classIsDifferent = false;
             while (selectedFigsIterator.hasNext()) {
-                Class clazz2 = selectedFigsIterator.next().getClass();
+                Class<?> clazz2 = selectedFigsIterator.next().getClass();
                 if (clazz != clazz2) {
                     classIsDifferent = true;
                     break;
@@ -332,9 +333,9 @@ public class FormFrame extends EditorFrame {
     }
 
     public void removeAllFigs() {
-        Enumeration<Fig> figs = _graph.getEditor().figs();
+        Enumeration<?> figs = _graph.getEditor().figs();
         while (figs.hasMoreElements()) {
-            _graph.getEditor().removePropertyChangeListener(figs.nextElement());
+            _graph.getEditor().removePropertyChangeListener((Fig) figs.nextElement());
         }
         _graph.getEditor().getSelectionManager().deselectAll();
         _graph.getEditor().getLayerManager().removeAll();
@@ -435,6 +436,7 @@ public class FormFrame extends EditorFrame {
 
     }
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private void pageNumberLabelMouseClicked(MouseEvent e) {
 
         int numberOfPages = getGraph().getDocument().getNumberOfPages();
@@ -753,7 +755,7 @@ public class FormFrame extends EditorFrame {
         topMarginPanel = new JPanel();
         centerPanel = new JPanel();
         leftMarginPanel = new JPanel();
-        _graph = _graph;
+        // _graph initialized elsewhere
         rightMarginPanel = new JPanel();
         bottomMarginPanel = new JPanel();
         toolbarScrollpane = new JScrollPane();
@@ -762,7 +764,7 @@ public class FormFrame extends EditorFrame {
         drawingToolsLabel = new JLabel();
         formPalette = new FormPalette();
         panel2 = new JPanel();
-        editorZoomComboBox = new JComboBox();
+        editorZoomComboBox = new JComboBox<>();
         zoomInLabel = new JLabel();
         zoomOutLabel = new JLabel();
         alignmentToolbarContainerPanel = new JPanel();
@@ -1022,7 +1024,7 @@ public class FormFrame extends EditorFrame {
                     ((GridBagLayout) panel2.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
 
                     //---- editorZoomComboBox ----
-                    editorZoomComboBox.setModel(new DefaultComboBoxModel(
+                    editorZoomComboBox.setModel(new DefaultComboBoxModel<>(
                         new String[] {"10%", "25%", "50%", "75%", "100%", "125%", "150%", "200%",
                             "250%", "350%", "500%", "700%", "1000%"}));
                     editorZoomComboBox.setSelectedIndex(4);
@@ -1253,7 +1255,7 @@ public class FormFrame extends EditorFrame {
         if (formFrameTabbedPane.getSelectedIndex() == 0) {
             if (getPropertiesPanelController() != null) {
                 getPropertiesPanelController().destroyPanels();
-                Vector sels = _graph.selectedFigs();
+                Vector<Fig> sels = _graph.selectedFigs();
                 updatePropertyBox(sels);
                 restoreScale();
             }
@@ -1414,7 +1416,7 @@ public class FormFrame extends EditorFrame {
     private JLabel drawingToolsLabel;
     private FormPalette formPalette;
     private JPanel panel2;
-    private JComboBox editorZoomComboBox;
+    private JComboBox<String> editorZoomComboBox;
     private JLabel zoomInLabel;
     private JLabel zoomOutLabel;
     private JPanel alignmentToolbarContainerPanel;
@@ -1477,7 +1479,7 @@ public class FormFrame extends EditorFrame {
 
     @Override public void rebuildPreview() {
 
-        SwingWorker worker = new SwingWorker<RecognitionPreviewPanel, Void>() {
+        SwingWorker<RecognitionPreviewPanel, Void> worker = new SwingWorker<RecognitionPreviewPanel, Void>() {
 
             @Override public RecognitionPreviewPanel doInBackground() {
 

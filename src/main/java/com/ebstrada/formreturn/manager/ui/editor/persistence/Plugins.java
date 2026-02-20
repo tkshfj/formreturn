@@ -40,8 +40,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         this.jarPlugins = jarPlugins;
     }
 
-    public DefaultListModel getJARPluginsListModel() {
-        DefaultListModel dlm = new DefaultListModel();
+    public DefaultListModel<JARPlugin> getJARPluginsListModel() {
+        DefaultListModel<JARPlugin> dlm = new DefaultListModel<>();
 
         for (JARPlugin jarPlugin : this.jarPlugins) {
             dlm.addElement(jarPlugin);

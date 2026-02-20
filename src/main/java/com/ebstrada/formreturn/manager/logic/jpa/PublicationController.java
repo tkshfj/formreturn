@@ -13,6 +13,7 @@ import com.ebstrada.formreturn.manager.util.Misc;
 
 public class PublicationController {
 
+    @SuppressWarnings("unchecked")
     public void removePublicationsById(long[] selectedPublicationIds,
         MessageNotification messageNotification) {
 
@@ -26,6 +27,7 @@ public class PublicationController {
             entityManager.getTransaction().begin();
             entityManager.flush();
 
+            // selectedPublicationIds is long[] (primitive longs), safe from SQL injection
             String sqlQry =
                 "SELECT FORM.FORM_ID FROM PUBLICATION LEFT JOIN FORM ON PUBLICATION.PUBLICATION_ID = FORM.PUBLICATION_ID WHERE PUBLICATION.PUBLICATION_ID IN ("
                     + Misc.implode(selectedPublicationIds, ",") + ")";
@@ -54,8 +56,8 @@ public class PublicationController {
                     .format(Localizer.localize("UI", "DeletingFormStatusMessageText"), i + "",
                         formIds.size() + ""));
 
-                String deleteSql = "DELETE FROM FORM WHERE FORM_ID = " + formId;
-                Query deleteFormQuery = entityManager.createNativeQuery(deleteSql);
+                Query deleteFormQuery = entityManager.createNativeQuery("DELETE FROM FORM WHERE FORM_ID = ?1");
+                deleteFormQuery.setParameter(1, formId);
                 int result = deleteFormQuery.executeUpdate();
                 i++;
 
@@ -72,6 +74,7 @@ public class PublicationController {
             entityManager.getTransaction().begin();
             entityManager.flush();
 
+            // selectedPublicationIds is long[] (primitive longs), safe from SQL injection
             Query publicationQuery = entityManager.createNativeQuery(
                 "SELECT * FROM PUBLICATION WHERE PUBLICATION_ID IN (" + Misc
                     .implode(selectedPublicationIds, ",") + ")", Publication.class);

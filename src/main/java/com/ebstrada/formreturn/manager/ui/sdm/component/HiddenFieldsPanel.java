@@ -23,7 +23,7 @@ public class HiddenFieldsPanel extends JPanel {
 
     public void restoreHiddenFieldsList() {
         List<String> hiddenFields = PreferencesManager.getHiddenFields();
-        DefaultListModel dlm = new DefaultListModel();
+        DefaultListModel<String> dlm = new DefaultListModel<>();
         for (String hiddenField : hiddenFields) {
             dlm.addElement(hiddenField);
         }

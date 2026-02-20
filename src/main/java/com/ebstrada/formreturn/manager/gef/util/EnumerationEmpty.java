@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
  * have any elements.
  */
 
-public class EnumerationEmpty implements Enumeration, Iterator, java.io.Serializable {
+public class EnumerationEmpty implements Enumeration<Object>, Iterator<Object>, java.io.Serializable {
 
     public boolean hasMoreElements() {
         return false;

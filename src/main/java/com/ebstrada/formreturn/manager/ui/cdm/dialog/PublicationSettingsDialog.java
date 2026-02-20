@@ -210,8 +210,8 @@ public class PublicationSettingsDialog extends JDialog {
 
             private static final long serialVersionUID = 1L;
 
-            Class[] columnTypes =
-                new Class[] {String.class, String.class, String.class, String.class, String.class,
+            Class<?>[] columnTypes =
+                new Class<?>[] {String.class, String.class, String.class, String.class, String.class,
                     String.class, String.class};
             boolean[] columnEditable = new boolean[] {false, false, true, false, true, false, true};
 
@@ -458,7 +458,7 @@ public class PublicationSettingsDialog extends JDialog {
             xslTemplateCollection = new ArrayList<PublicationXSL>();
         } else {
 
-            ListModel xfl = this.xslFileList.getModel();
+            ListModel<?> xfl = this.xslFileList.getModel();
 
             ArrayList<Long> modifiedPublicationXSLIDs = new ArrayList<Long>();
 
@@ -559,9 +559,7 @@ public class PublicationSettingsDialog extends JDialog {
             gradingCollection = new ArrayList<Grading>();
         }
 
-        ArrayList<MarkingRule> markingRules = new ArrayList<MarkingRule>();
-
-        ListModel glm = this.gradingList.getModel();
+        ListModel<?> glm = this.gradingList.getModel();
 
         if (glm.getSize() > 0) {
 
@@ -607,10 +605,8 @@ public class PublicationSettingsDialog extends JDialog {
     }
 
     public void restorePublicationType() {
-        PublicationPreferences publicationPreferences =
-            PreferencesManager.getPublicationPreferences();
         List<String> publicationTypes = PublicationPreferences.getPublicationTypes();
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         for (String publicationTypeStr : publicationTypes) {
             dcbm.addElement(publicationTypeStr);
         }
@@ -1728,6 +1724,7 @@ public class PublicationSettingsDialog extends JDialog {
 
     }
 
+    @SuppressWarnings("unchecked")
     protected TemplateFormPageID getTemplateFormPageId(EntityManager entityManager) {
 
         Publication publication = entityManager.find(Publication.class, publicationId);
@@ -2068,7 +2065,6 @@ public class PublicationSettingsDialog extends JDialog {
     }
 
     private void removeXSLFileButtonActionPerformed(ActionEvent e) {
-        final Dialog thisDialog = this;
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 
@@ -2184,7 +2180,7 @@ public class PublicationSettingsDialog extends JDialog {
         scannedInOrderCheckBox = new JCheckBox();
         scannedInOrderDescriptionLabel = new JLabel();
         changePublicationTypePanel = new JPanel();
-        publicationTypeComboBox = new JComboBox();
+        publicationTypeComboBox = new JComboBox<>();
         publicationTypeDescriptionLabel = new JLabel();
         buttonBar = new JPanel();
         closeButton = new JButton();
@@ -3366,7 +3362,7 @@ public class PublicationSettingsDialog extends JDialog {
     private JCheckBox scannedInOrderCheckBox;
     private JLabel scannedInOrderDescriptionLabel;
     private JPanel changePublicationTypePanel;
-    private JComboBox publicationTypeComboBox;
+    private JComboBox<String> publicationTypeComboBox;
     private JLabel publicationTypeDescriptionLabel;
     private JPanel buttonBar;
     private JButton closeButton;

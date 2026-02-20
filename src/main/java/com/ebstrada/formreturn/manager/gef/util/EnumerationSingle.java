@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
  * have many elements.
  */
 
-public class EnumerationSingle implements Enumeration, java.io.Serializable {
+public class EnumerationSingle implements Enumeration<Object>, java.io.Serializable {
     Object _element = null;
 
     public EnumerationSingle(Object ele) {

@@ -6,14 +6,13 @@ import java.awt.Stroke;
 
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigCirclePanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
  * Primitive Fig for displaying circles and ovals.
  */
 
-@XStreamAlias("circle") public class FigCircle extends Fig implements NoObfuscation {
+@XStreamAlias("circle") public class FigCircle extends Fig {
 
     private static final long serialVersionUID = 1L;
 

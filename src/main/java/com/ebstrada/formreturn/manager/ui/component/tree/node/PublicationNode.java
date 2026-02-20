@@ -18,7 +18,7 @@ public class PublicationNode extends RecordNode {
 
     private String name;
 
-    @Override public void loadChildren() throws Exception {
+    @SuppressWarnings("unchecked") @Override public void loadChildren() throws Exception {
         EntityManager entityManager = Main.getInstance().getJPAConfiguration().getEntityManager();
         try {
 

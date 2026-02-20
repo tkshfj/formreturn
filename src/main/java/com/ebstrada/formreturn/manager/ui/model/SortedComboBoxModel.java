@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 
-public class SortedComboBoxModel extends DefaultComboBoxModel {
+public class SortedComboBoxModel extends DefaultComboBoxModel<String> {
 
     private static final long serialVersionUID = 1L;
 
@@ -14,7 +14,7 @@ public class SortedComboBoxModel extends DefaultComboBoxModel {
         super();
     }
 
-    public SortedComboBoxModel(Object[] items) {
+    public SortedComboBoxModel(String[] items) {
         super();
 
         Arrays.sort(items);
@@ -27,7 +27,7 @@ public class SortedComboBoxModel extends DefaultComboBoxModel {
         setSelectedItem(items[0]);
     }
 
-    public SortedComboBoxModel(Vector items) {
+    public SortedComboBoxModel(Vector<String> items) {
         super();
 
         Collections.sort(items);
@@ -40,17 +40,17 @@ public class SortedComboBoxModel extends DefaultComboBoxModel {
         setSelectedItem(items.elementAt(0));
     }
 
-    public void addElement(Object element) {
+    @Override public void addElement(String element) {
         insertElementAt(element, 0);
     }
 
-    public void insertElementAt(Object element, int index) {
+    @Override public void insertElementAt(String element, int index) {
         int size = getSize();
 
         // Determine where to insert element to keep list in sorted order
 
         for (index = 0; index < size; index++) {
-            Comparable c = (Comparable) getElementAt(index);
+            String c = getElementAt(index);
 
             if (c.compareTo(element) > 0)
                 break;

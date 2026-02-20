@@ -38,15 +38,12 @@ import com.ebstrada.formreturn.manager.ui.editor.panel.FigTextMultiPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigTextPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
 import com.ebstrada.formreturn.manager.ui.frame.EditorFrame;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("text") public class FigText extends Fig
-    implements KeyListener, MouseListener, NoObfuscation {
+    implements KeyListener, MouseListener {
 
     private static final long serialVersionUID = 1L;
-
-    private static Log log = LogFactory.getLog(FigText.class);
 
     public String fontFamily;
 
@@ -391,20 +388,20 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     public Font getFont() {
         if (_font == null) {
 
-            CachedFont cf = Main.getInstance().getCachedFontManager()
+            CachedFont cf = Main.getCachedFontManager()
                 .getCachedFont(getFontStyle(), getFontFamily());
 
             // if can't load the selected font, try load the embedded font
             if (cf == null && isEmbedded()) {
-                Main.getInstance().getCachedFontManager()
+                Main.getCachedFontManager()
                     .registerEmbeddedFont(getWorkingDirName(), getFontFileName());
-                cf = Main.getInstance().getCachedFontManager()
+                cf = Main.getCachedFontManager()
                     .getCachedFont(getFontStyle(), getFontFamily());
             }
 
             // if can't load the embedded font, load the default font
             if (cf == null) {
-                Font defaultFont = Main.getInstance().getCachedFontManager().getDefaultFont();
+                Font defaultFont = Main.getCachedFontManager().getDefaultFont();
                 setFont(defaultFont.deriveFont(getFontSize()));
             } else {
                 setFont(cf.getFont().deriveFont(getFontSize()));
@@ -418,7 +415,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         _font = f;
         _fm = null;
         fontSize = f.getSize();
-        CachedFont cf = Main.getInstance().getCachedFontManager().getCachedFont(f.getFontName());
+        CachedFont cf = Main.getCachedFontManager().getCachedFont(f.getFontName());
         fsType = cf.getFsType();
         fontFamily = cf.getFamily();
         fontStyle = cf.getStyle();
@@ -430,7 +427,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
     public void setFontFamily(String familyName) {
         this.fontFamily = familyName;
-        CachedFont cf = Main.getInstance().getCachedFontManager()
+        CachedFont cf = Main.getCachedFontManager()
             .getCachedFont(getFontStyle(), getFontFamily());
         Font f = cf.getFont().deriveFont(getFontSize());
         setFont(f);
@@ -442,14 +439,14 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
     public void setFontSize(float size) {
         this.fontSize = size;
-        CachedFont cf = Main.getInstance().getCachedFontManager()
+        CachedFont cf = Main.getCachedFontManager()
             .getCachedFont(getFontStyle(), getFontFamily());
         Font f = cf.getFont().deriveFont(getFontSize());
         setFont(f);
     }
 
     public File getFontFile() {
-        CachedFont cf = Main.getInstance().getCachedFontManager()
+        CachedFont cf = Main.getCachedFontManager()
             .getCachedFont(getFontStyle(), getFontFamily());
         return new File(cf.getFontDirectory() + "/" + cf.getFontFileName());
     }
@@ -840,7 +837,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     }
 
     protected boolean isStartEditingKey(KeyEvent ke) {
-        if (ke.getModifiers() == Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) {
+        if (ke.getModifiersEx() == Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()) {
             return false;
         }
         return (!Character.isISOControl(ke.getKeyChar()));
@@ -898,7 +895,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
     public void setFontStyle(int fontStyle) {
         this.fontStyle = fontStyle;
-        CachedFont cf = Main.getInstance().getCachedFontManager()
+        CachedFont cf = Main.getCachedFontManager()
             .getCachedFont(getFontStyle(), getFontFamily());
         Font f = cf.getFont().deriveFont(getFontSize());
         setFont(f);

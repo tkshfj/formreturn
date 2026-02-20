@@ -4,7 +4,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -508,8 +507,6 @@ public class EquivalenceBlobExtraction implements BlobExtractor {
         // if contains other regions inside - lookup the bubbleDetection
         // merge the details of the other bubble detection with this one (eg, pixel count etc)
         // set the internal bubble to a new (empty) bubble
-
-        Set<Integer> allInternalRegions = new HashSet<Integer>();
 
         for (int i = 0; i < bubbleDetections.size(); i++) {
 

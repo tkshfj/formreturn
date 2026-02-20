@@ -17,7 +17,7 @@ import com.ebstrada.formreturn.manager.ui.cdm.dialog.ExportOptionsDialog;
 import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.server.quartz.ITriggerTypes;
 
-@SuppressWarnings("serial") public class ExportTaskSettingsDialog extends JDialog {
+public class ExportTaskSettingsDialog extends JDialog {
 
     public static final int CANCEL = 0;
 

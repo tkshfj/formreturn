@@ -13,8 +13,6 @@ public class TemplatePropertiesPanel extends ReprocessorPanel {
     private static final long serialVersionUID = 1L;
     private ReprocessorFrame reprocessorFrame;
 
-    private Fig selectedFig;
-
     public TemplatePropertiesPanel(ReprocessorFrame reprocessorFrame) {
         initComponents();
         this.reprocessorFrame = reprocessorFrame;
@@ -125,7 +123,6 @@ public class TemplatePropertiesPanel extends ReprocessorPanel {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     @Override public void setSelectedElement(Fig selectedFig) {
-        this.selectedFig = selectedFig;
     }
 
 }

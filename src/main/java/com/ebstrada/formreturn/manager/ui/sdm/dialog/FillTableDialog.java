@@ -10,7 +10,7 @@ import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.cdm.logic.FillTableController;
 import com.ebstrada.formreturn.manager.ui.component.*;
 
-@SuppressWarnings("serial") public class FillTableDialog extends JDialog {
+public class FillTableDialog extends JDialog {
 
     private int dialogResult = javax.swing.JOptionPane.CANCEL_OPTION;
 

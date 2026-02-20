@@ -5,7 +5,6 @@ import com.ebstrada.aggregation.exception.InvalidRulePartException;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("serial")
 public class RulePart extends ArrayList<OrCondition> {
 
     private Result result;

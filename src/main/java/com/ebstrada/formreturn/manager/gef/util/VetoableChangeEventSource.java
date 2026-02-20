@@ -8,5 +8,5 @@ public interface VetoableChangeEventSource {
 
     void removeVetoableChangeListener(VetoableChangeListener l);
 
-    Vector getVetoableChangeListeners();
+    Vector<VetoableChangeListener> getVetoableChangeListeners();
 }

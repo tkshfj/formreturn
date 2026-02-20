@@ -34,7 +34,7 @@ public class ModeBroom extends FigModifyingModeImpl {
     // //////////////////////////////////////////////////////////////
     // instance variables
     private Point _start = new Point(0, 0);
-    private Vector _LastTouched = new Vector();
+    private Vector<Fig> _LastTouched = new Vector<Fig>();
     private int x1;
     private int y1;
     private int x2;
@@ -235,8 +235,6 @@ public class ModeBroom extends FigModifyingModeImpl {
         }
 
         if (_movable) {
-            Vector nonMovingEdges = new Vector();
-            Vector movingEdges = new Vector();
             for (i = 0; i < _nTouched; i++) {
                 Fig f = _touched[i];
                 int newX = x;
@@ -291,7 +289,6 @@ public class ModeBroom extends FigModifyingModeImpl {
             }
 
             for (i = 0; i < _nTouched; i++) {
-                Fig f = _touched[i];
             }
         }
 
@@ -304,7 +301,7 @@ public class ModeBroom extends FigModifyingModeImpl {
      * On mouse up, select or toggle the selection of items under the mouse or
      * in the selection rectangle.
      */
-    @Override public void mouseReleased(MouseEvent me) {
+    @SuppressWarnings("deprecation") @Override public void mouseReleased(MouseEvent me) {
         if (me.isConsumed()) {
             return;
         }
@@ -331,7 +328,7 @@ public class ModeBroom extends FigModifyingModeImpl {
         int i;
         _addRect.setBounds(_lastX1, _lastY1, _lastX2 - _lastX1, _lastY2 - _lastY1);
         _addRect.add(_selectRect);
-        Enumeration figs = editor.figs();
+        Enumeration<?> figs = editor.figs();
         iterateFigs:
         while (figs.hasMoreElements()) {
             Fig f = (Fig) figs.nextElement();
@@ -394,7 +391,7 @@ public class ModeBroom extends FigModifyingModeImpl {
     // actions
     public void doDistibute(boolean alignToGrid, boolean doCentering) {
         _movable = false;
-        Vector figs = _LastTouched;
+        Vector<Fig> figs = _LastTouched;
 
         int request = 0;
         int size = figs.size();

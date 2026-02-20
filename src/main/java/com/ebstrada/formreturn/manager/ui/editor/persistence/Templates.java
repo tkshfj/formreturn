@@ -40,8 +40,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         this.xslTemplates = xslTemplates;
     }
 
-    public DefaultListModel getXSLTemplatesListModel() {
-        DefaultListModel dlm = new DefaultListModel();
+    public DefaultListModel<XSLTemplate> getXSLTemplatesListModel() {
+        DefaultListModel<XSLTemplate> dlm = new DefaultListModel<>();
 
         for (XSLTemplate xslTemplate : this.xslTemplates) {
             dlm.addElement(xslTemplate);

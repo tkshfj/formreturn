@@ -39,7 +39,7 @@ public class FilterSearchResultsDialog extends JDialog {
     }
 
     public void restore() {
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         dcbm.addElement(Localizer.localize("UI", "SearchFilterActiveText"));
         dcbm.addElement(Localizer.localize("UI", "SearchFilterInactiveText"));
         activatedComboBox.setModel(dcbm);
@@ -49,7 +49,7 @@ public class FilterSearchResultsDialog extends JDialog {
 
     public void restore(Vector<SearchFilter> searchFilters) {
 
-        DefaultComboBoxModel fieldNameComboBoxModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> fieldNameComboBoxModel = new DefaultComboBoxModel<>();
 
         for (int i = 0; i < searchFilters.size(); i++) {
             SearchFilter searchFilter = searchFilters.get(i);
@@ -162,11 +162,11 @@ public class FilterSearchResultsDialog extends JDialog {
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         activatedLabel = new JLabel();
-        activatedComboBox = new JComboBox();
+        activatedComboBox = new JComboBox<>();
         fieldLabel = new JLabel();
-        fieldNameComboBox = new JComboBox();
+        fieldNameComboBox = new JComboBox<>();
         searchTypeLabel = new JLabel();
-        searchTypeComboBox = new JComboBox();
+        searchTypeComboBox = new JComboBox<>();
         searchForLabel = new JLabel();
         searchTextField = new JTextField();
         buttonBar = new JPanel();
@@ -238,7 +238,7 @@ public class FilterSearchResultsDialog extends JDialog {
                     new Insets(0, 0, 5, 5), 0, 0));
 
                 //---- searchTypeComboBox ----
-                searchTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
+                searchTypeComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                     "LIKE",
                     "EQUALS"
                 }));
@@ -329,11 +329,11 @@ public class FilterSearchResultsDialog extends JDialog {
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel activatedLabel;
-    private JComboBox activatedComboBox;
+    private JComboBox<String> activatedComboBox;
     private JLabel fieldLabel;
-    private JComboBox fieldNameComboBox;
+    private JComboBox<String> fieldNameComboBox;
     private JLabel searchTypeLabel;
-    private JComboBox searchTypeComboBox;
+    private JComboBox<String> searchTypeComboBox;
     private JLabel searchForLabel;
     private JTextField searchTextField;
     private JPanel buttonBar;

@@ -29,7 +29,7 @@ public class PropertiesPanelController {
 
     public Stack<Fig> figStack = new Stack<Fig>();
 
-    public Stack<Vector> multiFigStack = new Stack<Vector>();
+    public Stack<Vector<Fig>> multiFigStack = new Stack<Vector<Fig>>();
 
     public Stack<PropertyChangeListener> propertyChangeListenerStack =
         new Stack<PropertyChangeListener>();
@@ -94,7 +94,7 @@ public class PropertiesPanelController {
 
     }
 
-    public void createMultiPanel(EditorMultiPanel _editorMultiPanel, Vector selectedFigs) {
+    public void createMultiPanel(EditorMultiPanel _editorMultiPanel, Vector<Fig> selectedFigs) {
         if (_editorMultiPanel == null) {
             return;
         }
@@ -172,7 +172,7 @@ public class PropertiesPanelController {
 
         if (!(editorMultiPanelStack.empty())) {
             editorMultiPanelStack = new Stack<EditorMultiPanel>();
-            multiFigStack = new Stack<Vector>();
+            multiFigStack = new Stack<Vector<Fig>>();
         }
 
         while (!(sourceDataManagerPanelStack.empty())) {
@@ -208,7 +208,7 @@ public class PropertiesPanelController {
         propertyBoxPanel.add(segmentPropertiesPanel);
     }
 
-    public void initFigs(Vector selectedFigs) {
+    public void initFigs(Vector<Fig> selectedFigs) {
 
         if (!(multiFigStack.contains(selectedFigs))) {
 

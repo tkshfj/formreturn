@@ -77,7 +77,7 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
         PublicationPreferences publicationPreferences =
             PreferencesManager.getPublicationPreferences();
         List<String> publicationTypes = PublicationPreferences.getPublicationTypes();
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         for (String publicationType : publicationTypes) {
             dcbm.addElement(publicationType);
         }
@@ -103,8 +103,6 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
             if (e.getSource() == table.getSelectionModel() && table.getRowSelectionAllowed()
                 && e.getValueIsAdjusting() == false) {
                 // Column selection changed
-                int first = e.getFirstIndex();
-                int last = e.getLastIndex();
                 if (tablesTable.getSelectedRow() != -1) {
                     tableDataModel.setSelectedIds(getSelectedDataSetIds());
                     selectedTableTextField.setText(getSelectedDataSetName());
@@ -130,8 +128,6 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
             } else if (e.getSource() == table.getColumnModel().getSelectionModel() && table
                 .getColumnSelectionAllowed()) {
                 // Row selection changed
-                int first = e.getFirstIndex();
-                int last = e.getLastIndex();
             }
 
             if (e.getValueIsAdjusting()) {
@@ -231,6 +227,7 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
         return selectedPublicationIds;
     }
 
+    @SuppressWarnings("unused")
     private void checkFormIDsButtonActionPerformed(ActionEvent e) {
         if (checkFormIds()) {
             String msg = Localizer.localize("UI", "FormIDsFoundMessage");
@@ -796,7 +793,7 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
         selectedTableTextField = new JTextField();
         step3Panel = new JPanel();
         publicationComboBoxPanel = new JPanel();
-        publicationTypeComboBox = new JComboBox();
+        publicationTypeComboBox = new JComboBox<>();
         publicationTypeHelpLabel = new JHelpLabel();
         step4Panel = new JPanel();
         publishButtonPanel = new JPanel();
@@ -1374,7 +1371,7 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
     private JTextField selectedTableTextField;
     private JPanel step3Panel;
     private JPanel publicationComboBoxPanel;
-    private JComboBox publicationTypeComboBox;
+    private JComboBox<String> publicationTypeComboBox;
     private JHelpLabel publicationTypeHelpLabel;
     private JPanel step4Panel;
     private JPanel publishButtonPanel;

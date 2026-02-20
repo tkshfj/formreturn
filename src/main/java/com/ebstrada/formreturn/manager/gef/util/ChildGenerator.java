@@ -11,5 +11,5 @@ public interface ChildGenerator extends java.io.Serializable {
     /**
      * Reply a Enumeration of the children of the given Object
      */
-    public Enumeration gen(Object o);
+    public Enumeration<?> gen(Object o);
 } /* end interface ChildGenerator */

@@ -5,9 +5,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.ebstrada.formreturn.manager.gef.graph.GraphController;
 import com.ebstrada.formreturn.manager.gef.graph.GraphEvent;
 import com.ebstrada.formreturn.manager.gef.graph.GraphListener;
@@ -42,14 +39,12 @@ public class LayerPerspective extends LayerDiagram implements GraphListener {
      * Classes of NetNodes and NetEdges that are to be visualized in this
      * perspective.
      */
-    protected Vector _allowedNetClasses = new Vector();
+    protected Vector<Class<?>> _allowedNetClasses = new Vector<Class<?>>();
 
     /**
      * Rectangles of where to place nodes that are automatically added.
      */
     protected HashMap<Class<?>, Rectangle> _nodeTypeRegions = new HashMap<Class<?>, Rectangle>();
-
-    private static Log LOG = LogFactory.getLog(LayerPerspective.class);
 
     // //////////////////////////////////////////////////////////////
     // constructors
@@ -104,7 +99,7 @@ public class LayerPerspective extends LayerDiagram implements GraphListener {
      * Add a node class of NetNodes or NetEdges to what will be shown in this
      * perspective.
      */
-    public void allowNetClass(Class c) {
+    public void allowNetClass(Class<?> c) {
         _allowedNetClasses.addElement(c);
     }
 
@@ -124,12 +119,12 @@ public class LayerPerspective extends LayerDiagram implements GraphListener {
     // public void remove(Fig f) { super.remove(f); }
     // //////////////////////////////////////////////////////////////
     // node placement
-    public void addNodeTypeRegion(Class nodeClass, Rectangle region) {
+    public void addNodeTypeRegion(Class<?> nodeClass, Rectangle region) {
         _nodeTypeRegions.put(nodeClass, region);
     }
 
     public void putInPosition(Fig f) {
-        Class nodeClass = f.getOwner().getClass();
+        Class<?> nodeClass = f.getOwner().getClass();
         Rectangle placementRegion = (Rectangle) _nodeTypeRegions.get(nodeClass);
         if (placementRegion != null) {
             f.setLocation(placementRegion.x, placementRegion.y);
@@ -143,7 +138,7 @@ public class LayerPerspective extends LayerDiagram implements GraphListener {
         int origX = bbox.x, origY = bbox.y;
         int col = 0, row = 0, i = 1;
         while (bounds.intersects(bbox)) {
-            Enumeration overlappers = nodesIn(bbox);
+            Enumeration<?> overlappers = nodesIn(bbox);
             if (!overlappers.hasMoreElements()) {
                 return;
             }

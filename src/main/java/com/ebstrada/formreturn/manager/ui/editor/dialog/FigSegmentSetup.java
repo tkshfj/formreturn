@@ -35,9 +35,6 @@ import javax.swing.table.TableModel;
 
 import com.ebstrada.formreturn.manager.ui.component.*;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.ebstrada.formreturn.manager.gef.base.Globals;
 import com.ebstrada.formreturn.manager.gef.graph.presentation.JGraph;
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
@@ -59,8 +56,6 @@ import com.ebstrada.formreturn.manager.util.Misc;
 public class FigSegmentSetup extends JDialog {
 
     private static final long serialVersionUID = 1L;
-
-    private static Log log = LogFactory.getLog(FigSegmentSetup.class);
 
     private FigSegment figSegment;
 
@@ -345,7 +340,7 @@ public class FigSegmentSetup extends JDialog {
         defaultSegmentComboBox.removeAllItems();
         defaultSegmentComboBox.addItem("Random");
         for (int i = 0; i < jtbm.getRowCount(); i++) {
-            defaultSegmentComboBox.addItem(jtbm.getValueAt(i, 0));
+            defaultSegmentComboBox.addItem((String) jtbm.getValueAt(i, 0));
         }
         defaultSegmentComboBox.setSelectedItem(selectedSegment);
         defaultSelectedSegment = selectedSegment;
@@ -365,7 +360,7 @@ public class FigSegmentSetup extends JDialog {
             return false;
         }
 
-        Vector uniqueIDVector = getUniqueIDVector();
+        Vector<String> uniqueIDVector = getUniqueIDVector();
         if (uniqueIDVector.contains(pageAttributes.getGUID())) {
             String message = Localizer.localize("UI", "SegmentSetupSegmentAlreadyLoadedMessage");
             String caption = Localizer.localize("UI", "WarningTitle");
@@ -418,13 +413,13 @@ public class FigSegmentSetup extends JDialog {
         return linkID;
     }
 
-    private Vector getUniqueIDVector() {
+    private Vector<String> getUniqueIDVector() {
 
         JTableComponentModel jtbm = (JTableComponentModel) segmentsTable.getModel();
-        Vector<Object> uniqueIDVector = new Vector<Object>();
+        Vector<String> uniqueIDVector = new Vector<String>();
         int rowCount = jtbm.getRowCount();
         for (int i = 0; i < rowCount; i++) {
-            uniqueIDVector.add(jtbm.getValueAt(i, 2)); // column 2 is uniqueID
+            uniqueIDVector.add((String) jtbm.getValueAt(i, 2)); // column 2 is uniqueID
         }
         return uniqueIDVector;
 
@@ -432,7 +427,7 @@ public class FigSegmentSetup extends JDialog {
 
     public void removeSegment(String uniqueID) {
 
-        Vector uniqueIDVector = getUniqueIDVector();
+        Vector<String> uniqueIDVector = getUniqueIDVector();
         if (!(uniqueIDVector.contains(uniqueID))) {
             return;
         }
@@ -639,7 +634,7 @@ public class FigSegmentSetup extends JDialog {
         linkFieldnameLabel = new JLabel();
         linkIDField = new JTextField();
         defaultSegmentLabel = new JLabel();
-        defaultSegmentComboBox = new JComboBox();
+        defaultSegmentComboBox = new JComboBox<>();
         linkIDDescriptionLabel = new JLabel();
         segmentsScrollPane = new JScrollPane();
         segmentsTable = new JTable();
@@ -745,7 +740,7 @@ public class FigSegmentSetup extends JDialog {
                             new Insets(0, 0, 0, 5), 0, 0));
 
                         //---- defaultSegmentComboBox ----
-                        defaultSegmentComboBox.setModel(new DefaultComboBoxModel(new String[] {
+                        defaultSegmentComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                             "Random"
                         }));
                         defaultSegmentComboBox.setFont(UIManager.getFont("ComboBox.font"));
@@ -878,7 +873,7 @@ public class FigSegmentSetup extends JDialog {
     private JLabel linkFieldnameLabel;
     private JTextField linkIDField;
     private JLabel defaultSegmentLabel;
-    private JComboBox defaultSegmentComboBox;
+    private JComboBox<String> defaultSegmentComboBox;
     private JLabel linkIDDescriptionLabel;
     private JScrollPane segmentsScrollPane;
     private JTable segmentsTable;

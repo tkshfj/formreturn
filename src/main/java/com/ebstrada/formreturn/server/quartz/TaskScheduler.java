@@ -9,13 +9,11 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.quartz.JobExecutionContext;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.server.preferences.ServerPreferencesManager;
 import com.ebstrada.formreturn.server.preferences.persistence.CustomJobPreferences;
 import com.ebstrada.formreturn.server.preferences.persistence.ExportJobPreferences;
@@ -37,7 +35,7 @@ public class TaskScheduler {
 
     private TaskSchedulerPreferences preferences;
 
-    private ArrayList<TaskSchedulerJob> jobList = new ArrayList<TaskSchedulerJob>();
+    private List<TaskSchedulerJob> jobList = new ArrayList<>();
 
     public TaskScheduler() throws SchedulerException {
         scheduler =
@@ -56,14 +54,10 @@ public class TaskScheduler {
             return;
         }
         for (TaskSchedulerJobPreferences jobPreferences : preferences.getJobPreferences()) {
-            try {
-                TaskSchedulerJob job = createJob(jobPreferences);
-                loadJob(job);
-                if (jobPreferences.isAutoStart()) {
-                    startJob(job);
-                }
-            } catch (IOException e) {
-                Misc.printStackTrace(e);
+            TaskSchedulerJob job = createJob(jobPreferences);
+            loadJob(job);
+            if (jobPreferences.isAutoStart()) {
+                startJob(job);
             }
         }
     }
@@ -113,29 +107,28 @@ public class TaskScheduler {
         scheduler.deleteJob(jobKey);
     }
 
-    public void removeJob(TaskSchedulerJob job) throws Exception {
+    public void removeJob(TaskSchedulerJob job) throws SchedulerException {
         boolean currentlyRunning = false;
         try {
             List<JobExecutionContext> currentJobs = scheduler.getCurrentlyExecutingJobs();
             for (JobExecutionContext jec : currentJobs) {
-                if (jec.getJobDetail().equals(job)) {
+                if (jec.getJobDetail().getKey().equals(job.getJob().getKey())) {
                     currentlyRunning = true;
                     break;
                 }
             }
-        } catch (SchedulerException e) {
+        } catch (SchedulerException e) { // NOSONAR - ignore if scheduler can't report running jobs
         }
         if (!currentlyRunning) {
             stopJob(job);
             this.jobList.remove(job);
             removeJobFromPreferences(job.getPreferences());
         } else {
-            throw new Exception("Cannot remove job that is currently running.");
+            throw new SchedulerException("Cannot remove job that is currently running.");
         }
     }
 
-    public TaskSchedulerJob createJob(TaskSchedulerJobPreferences jobPreferences)
-        throws SchedulerException, IOException {
+    public TaskSchedulerJob createJob(TaskSchedulerJobPreferences jobPreferences) {
         TaskSchedulerJob job = null;
         if (jobPreferences instanceof ImageFolderMonitorJobPreferences) {
             job = new ImageFolderMonitorJob((ImageFolderMonitorJobPreferences) jobPreferences);
@@ -152,7 +145,7 @@ public class TaskScheduler {
         return job;
     }
 
-    public void loadJob(TaskSchedulerJob job) throws SchedulerException {
+    public void loadJob(TaskSchedulerJob job) {
         if (job instanceof ImageFolderMonitorJob) {
             job.createJob(ImageFolderMonitorJob.class);
         } else if (job instanceof SourceDataFolderMonitorJob) {
@@ -170,13 +163,13 @@ public class TaskScheduler {
     public void startJob(TaskSchedulerJob job) throws SchedulerException {
         Set<JobKey> jobKeys = scheduler.getJobKeys(
             GroupMatcher.jobGroupEquals(job.getGUID() + "Group"));
-        if (jobKeys != null && jobKeys.size() > 0) {
+        if (jobKeys != null && !jobKeys.isEmpty()) {
             scheduler.deleteJob(JobKey.jobKey(job.getGUID(), job.getGUID() + "Group"));
         }
         scheduler.scheduleJob(job.getJob(), job.getTrigger());
     }
 
-    public ArrayList<TaskSchedulerJob> getJobList() {
+    public List<TaskSchedulerJob> getJobList() {
         return jobList;
     }
 

@@ -130,6 +130,7 @@ public class SelectNextAction extends AbstractAction {
     // //////////////////////////////////////////////////////////////
     // Action API
 
+    @SuppressWarnings("deprecation")
     public void actionPerformed(ActionEvent e) {
 
         System.out.println("select next action performed");
@@ -152,7 +153,7 @@ public class SelectNextAction extends AbstractAction {
             newIndex = 0;
         } else if (sm.size() == 1) {
             Fig curFig;
-            curSel = (Selection) sm.selections().firstElement();
+            curSel = sm.selections().firstElement();
             curFig = curSel.getContent();
             int curIndex = diagramContents.indexOf(curFig);
             newIndex = (curIndex + offset + diagramSize) % diagramSize;

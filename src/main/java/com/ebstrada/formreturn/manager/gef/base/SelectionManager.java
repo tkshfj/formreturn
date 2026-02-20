@@ -36,6 +36,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import java.beans.VetoableChangeListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -130,8 +131,8 @@ public class SelectionManager
     /**
      * @deprecated in 0.13 use addFigs
      */
-    @Deprecated protected void addAllFigs(Collection c) {
-        Iterator it = c.iterator();
+    @Deprecated protected void addAllFigs(Collection<?> c) {
+        Iterator<?> it = c.iterator();
         while (it.hasNext()) {
             addFig((Fig) it.next());
         }
@@ -236,7 +237,7 @@ public class SelectionManager
      * @param items
      * @deprecated in 0.13 use selectFigs
      */
-    @Deprecated public void select(Collection items) {
+    @Deprecated public void select(Collection<?> items) {
         if (UndoManager.getInstance().isGenerateMementos()) {
             UndoManager.getInstance().addMemento(new SelectionMemento());
         }
@@ -258,12 +259,13 @@ public class SelectionManager
         fireSelectionChanged();
     }
 
-    public void toggle(Vector items) {
+    @SuppressWarnings("unchecked")
+    public void toggle(Vector<Fig> items) {
         if (UndoManager.getInstance().isGenerateMementos()) {
             UndoManager.getInstance().addMemento(new SelectionMemento());
         }
         allDamaged();
-        Enumeration figs = ((Vector) items.clone()).elements();
+        Enumeration<?> figs = ((Vector<Fig>) items.clone()).elements();
         while (figs.hasMoreElements()) {
             Fig f = (Fig) figs.nextElement();
             if (containsFig(f)) {
@@ -337,8 +339,8 @@ public class SelectionManager
     /**
      * @deprecated use getSelections()
      */
-    @Deprecated public Vector selections() {
-        return new Vector(selections);
+    @Deprecated public Vector<Selection> selections() {
+        return new Vector<>(selections);
     }
 
     public List<Selection> getSelections() {
@@ -514,12 +516,12 @@ public class SelectionManager
     // public void align(int dir) {
     // Editor ed = Globals.curEditor();
     // Rectangle bbox = getContentBounds();
-    // Enumeration ss = _selections.elements();
+    // Enumeration<?> ss = _selections.elements();
     // while (ss.hasMoreElements())
     // ((Selection) ss.nextElement()).align(bbox, dir, ed);
     // }
     // public void align(Rectangle r, int dir, Editor ed) {
-    // Enumeration ss = _selections.elements();
+    // Enumeration<?> ss = _selections.elements();
     // while(ss.hasMoreElements())
     // ((Selection)ss.nextElement()).align(r,dir,ed);
     // }
@@ -537,11 +539,7 @@ public class SelectionManager
      * When Manager selections are moved, each of them is moved
      */
     public void translate(int dx, int dy) {
-        Vector affected = new Vector();
-        Vector nonMovingEdges = new Vector();
-        Vector movingEdges = new Vector();
-        Vector nodes = new Vector();
-        int selSize = selections.size();
+        Vector<Fig> affected = new Vector<Fig>();
         for (Selection sel : selections) {
             addEnclosed(affected, sel.getContent());
         }
@@ -562,7 +560,7 @@ public class SelectionManager
 
     }
 
-    protected void addEnclosed(Collection affected, Fig f) {
+    protected void addEnclosed(Collection<Fig> affected, Fig f) {
         if (!affected.contains(f)) {
             affected.add(f);
             List<Fig> enclosed = f.getEnclosedFigs();
@@ -628,8 +626,6 @@ public class SelectionManager
         Rectangle figBounds = _dragLeftMostFig.getBounds();
         dx = Math.max(-_dragLeftMostFig.getX(), dx);
         dy = Math.max(-_dragTopMostFig.getY(), dy);
-        int nodeCount = _draggingNodes.size();
-
 
         int otherCount = _draggingOthers.size();
         for (int i = 0; i < otherCount; ++i) {
@@ -755,6 +751,7 @@ public class SelectionManager
     /**
      * When a multiple selection are deleted, each selection is deleted
      */
+    @SuppressWarnings("unchecked")
     public void dispose() {
         // TODO: Why we cannot operate on the list itself?
         List<Selection> sels = new ArrayList<Selection>(selections);
@@ -762,9 +759,9 @@ public class SelectionManager
             Fig f = s.getContent();
             Object o = f.getOwner();
             if (o instanceof VetoableChangeEventSource) {
-                Vector v =
-                    (Vector) ((VetoableChangeEventSource) o).getVetoableChangeListeners().clone();
-                Enumeration vv = v.elements();
+                Vector<VetoableChangeListener> v =
+                    (Vector<VetoableChangeListener>) ((VetoableChangeEventSource) o).getVetoableChangeListeners().clone();
+                Enumeration<?> vv = v.elements();
                 vv = v.elements();
                 Object firstElem = null;
                 boolean firstIteration = true;
@@ -935,13 +932,13 @@ public class SelectionManager
     /**
      * Determines and returns the first common superclass of all selected items.
      */
-    public Class findCommonSuperClass() {
-        Iterator selectionIter = selections.iterator();
+    public Class<?> findCommonSuperClass() {
+        Iterator<?> selectionIter = selections.iterator();
         Map<String, Integer> superclasses = new HashMap<String, Integer>();
         int maxCount = 0;
-        Class maxClass = null;
+        Class<?> maxClass = null;
         while (selectionIter.hasNext()) {
-            Class figClass = ((Selection) selectionIter.next()).getContent().getClass();
+            Class<?> figClass = ((Selection) selectionIter.next()).getContent().getClass();
             int count = 0;
             if (superclasses.containsKey(figClass.getName())) {
                 count = ((Integer) superclasses.get(figClass.getName())).intValue();
@@ -956,7 +953,7 @@ public class SelectionManager
                 maxClass = figClass;
             }
 
-            Class superClass = figClass.getSuperclass();
+            Class<?> superClass = figClass.getSuperclass();
             while (!(superClass == null || superClass.equals(Fig.class))) {
                 if (superclasses.containsKey(superClass.getName())) {
                     count = ((Integer) superclasses.get(superClass.getName())).intValue();
@@ -989,8 +986,8 @@ public class SelectionManager
      * @param type Type of selection class to look for.
      * @return The first selected object being instance of the designated type.
      */
-    public Object findFirstSelectionOfType(Class type) {
-        Iterator selectionIter = selections.iterator();
+    public Object findFirstSelectionOfType(Class<?> type) {
+        Iterator<?> selectionIter = selections.iterator();
         while (selectionIter.hasNext()) {
             Object selectionObj = ((Selection) selectionIter.next()).getContent();
             if (selectionObj instanceof Fig) {
@@ -1045,7 +1042,7 @@ public class SelectionManager
             bounds = new ArrayList<Rectangle>(draggingOthers.size());
 
             this.draggingOthers = draggingOthers;
-            Iterator otherIt = draggingOthers.iterator();
+            Iterator<?> otherIt = draggingOthers.iterator();
             while (otherIt.hasNext()) {
                 Fig fig = (Fig) otherIt.next();
                 Rectangle rect = fig.getBounds();
@@ -1056,13 +1053,13 @@ public class SelectionManager
 
         public void undo() {
             UndoManager.getInstance().addMementoLock(this);
-            Iterator boundsIt = bounds.iterator();
+            Iterator<?> boundsIt = bounds.iterator();
 
             // Create an array to store each node's current boundaries
             List<Rectangle> oldBounds = new ArrayList<Rectangle>(draggingOthers.size());
 
 
-            Iterator otherIt = draggingOthers.iterator();
+            Iterator<?> otherIt = draggingOthers.iterator();
             while (otherIt.hasNext()) {
                 Fig fig = (Fig) otherIt.next();
                 Rectangle rect = (Rectangle) boundsIt.next();

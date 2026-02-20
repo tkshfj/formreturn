@@ -3,18 +3,16 @@ package com.ebstrada.formreturn.manager.gef.presentation;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
-import java.io.Serializable;
 
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigRectPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
  * Primitive Fig to paint rectangles on a LayerDiagram.
  */
 
-@XStreamAlias("rectangle") public class FigRect extends Fig implements Serializable, NoObfuscation {
+@XStreamAlias("rectangle") public class FigRect extends Fig {
 
     // //////////////////////////////////////////////////////////////
     // constructors

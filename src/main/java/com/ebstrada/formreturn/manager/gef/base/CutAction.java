@@ -55,15 +55,15 @@ public class CutAction extends UndoableAction {
         super(localize ? Localizer.localize("GefBase", name) : name, icon);
     }
 
-    @Override public void actionPerformed(ActionEvent e) {
+    @SuppressWarnings("deprecation") @Override public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 Editor ce = Globals.curEditor();
                 SelectionManager selectionManager = ce.getSelectionManager();
-                Vector copiedElements = selectionManager.selections();
-                Vector figs = new Vector();
-                Enumeration copies = copiedElements.elements();
+                Vector<Selection> copiedElements = selectionManager.selections();
+                Vector<Fig> figs = new Vector<Fig>();
+                Enumeration<?> copies = copiedElements.elements();
                 while (copies.hasMoreElements()) {
                     Selection s = (Selection) copies.nextElement();
                     Fig f = s.getContent();

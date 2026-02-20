@@ -20,8 +20,6 @@
 		<copyright>Copyright (c) 2006-2020 EB Strada Holdings Pty Ltd. All Rights Reserved.</copyright>
 		<formReturnName>FormReturn</formReturnName>
 		<windowsVersion>1.7.5.0</windowsVersion>
-		<macJavaArchive>OpenJDK8U-jre_x64_mac_hotspot_8u262b10</macJavaArchive>
-		<macJava>jdk8u262-b10-jre</macJava>
 		<win32JavaArchive>OpenJDK8U-jre_x86-32_windows_hotspot_8u262b10</win32JavaArchive>
 		<win32Java>jdk8u262-b10-jre</win32Java>
 		<win64JavaArchive>OpenJDK8U-jre_x64_windows_hotspot_8u262b10</win64JavaArchive>
@@ -34,10 +32,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0.2</version>
+				<version>3.11.0</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<release>21</release>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -133,6 +130,25 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.6.1</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/jpackage-input</outputDirectory>
+							<includeScope>runtime</includeScope>
+							<stripVersion>true</stripVersion>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
 					<execution>
@@ -160,13 +176,6 @@
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-antrun-plugin</artifactId>
 			    <version>1.8</version>
-			    <dependencies>
-			    	<dependency>
-						<groupId>ant-contrib</groupId>
-						<artifactId>ant-contrib</artifactId>
-						<version>20020829</version>
-					</dependency>
-			    </dependencies>
 				<executions>
 					<execution>
 						<id>create-app-bundle</id>
@@ -176,126 +185,68 @@
 						</goals>
 						<configuration>
 							<tasks>
-								
-								<exec executable="tar" spawn="false">
-									<arg
-										line="zxvf ${basedir}/jre/${macJavaArchive}.tar.gz -C ${project.build.directory}" />
-								</exec>
-								
-								<exec executable="mv" spawn="false">
-									<arg
-										line="${project.build.directory}/${macJava}/Contents/Home ${project.build.directory}/${macJava}/Contents/jre" />
-								</exec>
-								
-								<mkdir dir="${project.build.directory}/${macJava}/Contents/Home" />
-								
-								<exec executable="mv" spawn="false">
-									<arg
-										line="${project.build.directory}/${macJava}/Contents/jre ${project.build.directory}/${macJava}/Contents/Home/" />
-								</exec>
-			
 								<mkdir dir="${project.build.directory}/app" />
-								<mkdir dir="${project.build.directory}/appbundle" />
-			
-								<unjar
-									src="${project.build.directory}/formreturn_setup_${project.version}.jar"
-									dest="${project.build.directory}/appbundle" />
-			
-								<taskdef name="bundleapp" classpath="${basedir}/osx/appbundler-1.0ea.jar"
-									classname="com.oracle.appbundler.AppBundlerTask" />
-			
-								<path id="compile.classpath">
-									<fileset dir="${project.build.directory}/appbundle/lib">
-										<include name="**/*" />
-									</fileset>
-								</path>
-			
-								<bundleapp classpathref="compile.classpath"
-									outputdirectory="${project.build.directory}/app" name="${formReturnName}"
-									displayname="${formReturnName}" executableName="${formReturnName}"
-									identifier="com.ebstrada.formreturn.manager" shortversion="${project.version}"
-									version="${project.version}" icon="${basedir}/icons/formreturn.icns"
-									mainclassname="${formReturnMainClass}" copyright="${copyright}"
-									applicationCategory="public.app-category.productivity">
-			
-									<runtime dir="${project.build.directory}/${macJava}/Contents/Home" />
-			
-									<arch name="x86_64" />
-			
-									<bundledocument extensions="frf,frmf"
-										icon="${basedir}/icons/formreturn_frf.icns" name="${formReturnName} Form"
-										role="editor">
-									</bundledocument>
-			
-									<bundledocument extensions="frs, frms"
-										icon="${basedir}/icons/formreturn_frs.icns" name="${formReturnName} Segment"
-										role="editor">
-									</bundledocument>
-			
-									<!-- Workaround since the icon parameter for bundleapp doesn't work -->
-									<option value="-Xdock:icon=Contents/Resources/formreturn.icns" />
-			
-									<option value="-Dapple.laf.useScreenMenuBar=true" />
-									<option value="-Dcom.apple.macos.use-file-dialog-packages=true" />
-									<option value="-Dcom.apple.macos.useScreenMenuBar=true" />
-									<option value="-Dapple.awt.application.name=${formReturnName}" />
-									<option
-										value="-Dcom.apple.mrj.application.apple.menu.about.name=${formReturnName}" />
-									<option value="-Dcom.apple.smallTabs=true" />
-									<option value="-Dfile.encoding=UTF-8" />
-			
-									<option value="-Xmx1024M" name="Xmx" />
-								</bundleapp>
-			
-								<bundleapp classpathref="compile.classpath"
-									outputdirectory="${project.build.directory}/app/FormReturn.app/Contents/Resources"
-									name="${formReturnServerName}" displayname="${formReturnServerName}"
-									executableName="${formReturnServerName}" identifier="com.ebstrada.formreturn.server"
-									shortversion="${project.version}" version="${project.version}"
-									icon="${basedir}/icons/formreturn_server.icns" mainclassname="${formReturnServerMainClass}"
-									copyright="${copyright}" applicationCategory="public.app-category.productivity">
-			
-									<runtime dir="${project.build.directory}/${macJava}/Contents/Home" />
-			
-									<arch name="x86_64" />
-			
-									<!-- Workaround since the icon parameter for bundleapp doesn't work -->
-									<option value="-Xdock:icon=Contents/Resources/formreturn_server.icns" />
-			
-									<option value="-Dapple.laf.useScreenMenuBar=true" />
-									<option value="-Dcom.apple.macos.use-file-dialog-packages=true" />
-									<option value="-Dcom.apple.macos.useScreenMenuBar=true" />
-									<option value="-Dapple.awt.application.name=${formReturnServerName}" />
-									<option
-										value="-Dcom.apple.mrj.application.apple.menu.about.name=${formReturnServerName}" />
-									<option value="-Dcom.apple.smallTabs=true" />
-									<option value="-Dfile.encoding=UTF-8" />
-			
-									<option value="-Xmx512M" name="Xmx" />
-								</bundleapp>
-			
-								<delete
-									dir="${project.build.directory}/app/${formReturnName}.app/Contents/Resources/${formReturnServerName}.app/Contents/Java" />
-								<delete
-									dir="${project.build.directory}/app/${formReturnName}.app/Contents/Resources/${formReturnServerName}.app/Contents/PlugIns/${macJava}" />
-			
-								<exec executable="cp" spawn="false">
-									<arg
-										line="-p ${basedir}/osx/jsonscan ${project.build.directory}/app/${formReturnName}.app/Contents/Resources" />
-								</exec>
-			
-								<exec
-									dir="${project.build.directory}/app/${formReturnName}.app/Contents/Resources/${formReturnServerName}.app/Contents/PlugIns"
-									executable="ln" spawn="false">
-									<arg line="-s ../../../../PlugIns/${macJava}" />
-								</exec>
-			
-								<exec
-									dir="${project.build.directory}/app/${formReturnName}.app/Contents/Resources/${formReturnServerName}.app/Contents"
-									executable="ln" spawn="false">
-									<arg line="-s ../../../Java" />
+
+								<exec executable="jpackage" dir="${basedir}" spawn="false" failonerror="true">
+									<arg value="--type" />
+									<arg value="app-image" />
+									<arg value="--input" />
+									<arg value="${project.build.directory}/jpackage-input" />
+									<arg value="--main-jar" />
+									<arg value="formreturn.jar" />
+									<arg value="--main-class" />
+									<arg value="${formReturnMainClass}" />
+									<arg value="--name" />
+									<arg value="${formReturnName}" />
+									<arg value="--app-version" />
+									<arg value="${project.version}" />
+									<arg value="--vendor" />
+									<arg value="${vendor}" />
+									<arg value="--copyright" />
+									<arg value="${copyright}" />
+									<arg value="--icon" />
+									<arg value="${basedir}/icons/formreturn.icns" />
+									<arg value="--dest" />
+									<arg value="${project.build.directory}/app" />
+									<arg value="--mac-package-identifier" />
+									<arg value="com.ebstrada.formreturn.manager" />
+									<arg value="--mac-app-category" />
+									<arg value="public.app-category.productivity" />
+									<arg value="--add-launcher" />
+									<arg value="FormReturn Server=${basedir}/jpackage/server-launcher.properties" />
+									<arg value="--file-associations" />
+									<arg value="${basedir}/jpackage/frf-file-association.properties" />
+									<arg value="--file-associations" />
+									<arg value="${basedir}/jpackage/frs-file-association.properties" />
+									<arg value="--java-options" />
+									<arg value="--add-opens=java.desktop/java.awt=ALL-UNNAMED" />
+									<arg value="--java-options" />
+									<arg value="--add-opens=java.base/java.lang=ALL-UNNAMED" />
+									<arg value="--java-options" />
+									<arg value="--add-opens=java.desktop/com.apple.laf=ALL-UNNAMED" />
+									<arg value="--java-options" />
+									<arg value="-Xdock:icon=Contents/Resources/formreturn.icns" />
+									<arg value="--java-options" />
+									<arg value="-Dapple.laf.useScreenMenuBar=true" />
+									<arg value="--java-options" />
+									<arg value="-Dcom.apple.macos.use-file-dialog-packages=true" />
+									<arg value="--java-options" />
+									<arg value="-Dcom.apple.macos.useScreenMenuBar=true" />
+									<arg value="--java-options" />
+									<arg value="-Dapple.awt.application.name=${formReturnName}" />
+									<arg value="--java-options" />
+									<arg value="-Dcom.apple.mrj.application.apple.menu.about.name=${formReturnName}" />
+									<arg value="--java-options" />
+									<arg value="-Dcom.apple.smallTabs=true" />
+									<arg value="--java-options" />
+									<arg value="-Dfile.encoding=UTF-8" />
+									<arg value="--java-options" />
+									<arg value="-Xmx1024M" />
 								</exec>
 
+								<exec executable="cp" spawn="false">
+									<arg line="-p ${basedir}/osx/jsonscan ${project.build.directory}/app/${formReturnName}.app/Contents/Resources" />
+								</exec>
 							</tasks>
 						</configuration>
 					</execution>
@@ -307,6 +258,11 @@
 						</goals>
 						<configuration>
 							<tasks>
+								<mkdir dir="${project.build.directory}/appbundle" />
+								<unjar
+									src="${project.build.directory}/formreturn_setup_${project.version}.jar"
+									dest="${project.build.directory}/appbundle" />
+
 								<path id="compile.classpath">
 									<fileset dir="${project.build.directory}/appbundle/lib">
 										<include name="**/*" />
@@ -330,105 +286,8 @@
 							</tasks>
 						</configuration>
 					</execution>
-					<execution>
-						<id>create-a-windows-signed-nsis-installer</id>
-						<phase>package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-							
-								<exec executable="unzip" spawn="false">
-									<arg
-										line="${basedir}/jre/${win32JavaArchive}.zip -d ${project.build.directory}" />
-								</exec>
-
-								<move todir="${project.build.directory}/jre">
-									<fileset dir="${project.build.directory}/${win32Java}" />
-								</move>
-						
-								<exec executable="C:\Program Files (x86)\NSIS\makensis.exe" osfamily="winnt">
-									<arg value="${basedir}/setup.nsi" />
-								</exec>
-						
-								<exec executable="makensis" osfamily="unix">
-									<arg value="${basedir}/setup.nsi" />
-								</exec>
-
-								<copy file="${basedir}/setup_unsigned.exe" tofile="${project.build.directory}/formreturn_setup_${project.version}.exe" />
-
-								<delete file="${basedir}/setup_unsigned.exe" />
-							</tasks>
-						</configuration>
-					</execution>					
-					<execution>
-						<id>create-mac-pack</id>
-						<phase>package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<taskdef resource="net/sf/antcontrib/antcontrib.properties"
-									classpathref="maven.plugin.classpath" />
-
-								<exec
-									dir="${project.build.directory}/app/${formReturnName}.app/Contents/PlugIns/${macJava}/Contents/MacOS"
-									executable="rm" spawn="false">
-									<arg line="-f libjli.dylib" />
-								</exec>
-
-								<exec
-									dir="${project.build.directory}/app/${formReturnName}.app/Contents/PlugIns/${macJava}/Contents/MacOS"
-									executable="cp" spawn="false">
-									<arg line="-a ../Home/jre/lib/jli/libjli.dylib ." />
-								</exec>
-							</tasks>
-						</configuration>
-					</execution>
-			    </executions>
+				    </executions>
 			</plugin>
-			<!-- TODO: use this instead of requiring appbundler-1.0ea.jar
-			<plugin>
-				<groupId>com.evolvedbinary.appbundler</groupId>
-				<artifactId>appbundler-maven-plugin</artifactId>
-				<version>1.0-SNAPSHOT</version>
-				<executions>
-					<execution>
-						<id>bundle-my-mac-app</id>
-						<phase>package</phase>
-						<goals>
-							<goal>bundle</goal>
-						</goals>
-						<configuration>
-							<displayName>Your-App-Name</displayName>
-							<identifier>com.your.app.Main</identifier>
-							<mainClassName>com.your.app.Main</mainClassName>
-							<jvmRequired>1.8</jvmRequired>
-							<version>${project.version}</version>
-							<shortVersion>${project.version}</shortVersion>
-							<icon>icon.icns</icon>
-							<copyright>${project.inceptionYear} Your Name</copyright>
-							<applicationCategory>public.app-category.developer-tools</applicationCategory>
-							<additionalResourcePaths>
-								<fileSet>
-									<directory>${project.basedir}/src/main/config</directory>
-									<outputDirectory>etc</outputDirectory>
-								</fileSet>
-							</additionalResourcePaths>
-							<options>
-								<option>-Xms128m</option>
-								<option>-Dfile.encoding=UTF-8</option>
-								<option>-Xdock:name=Your-App-Name</option>
-							</options>
-							<explicitClassPath>false</explicitClassPath>
-							<isDebug>true</isDebug>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			-->
 		</plugins>
 		<resources>
 			<resource>
@@ -489,6 +348,55 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+	<profiles>
+		<profile>
+			<id>windows-installer</id>
+			<activation>
+				<os><family>windows</family></os>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>create-a-windows-signed-nsis-installer</id>
+								<phase>package</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<exec executable="unzip" spawn="false">
+											<arg line="${basedir}/jre/${win32JavaArchive}.zip -d ${project.build.directory}" />
+										</exec>
+
+										<move todir="${project.build.directory}/jre">
+											<fileset dir="${project.build.directory}/${win32Java}" />
+										</move>
+
+										<exec executable="C:\Program Files (x86)\NSIS\makensis.exe" osfamily="winnt">
+											<arg value="${basedir}/setup.nsi" />
+										</exec>
+
+										<exec executable="makensis" osfamily="unix">
+											<arg value="${basedir}/setup.nsi" />
+										</exec>
+
+										<copy file="${basedir}/setup_unsigned.exe" tofile="${project.build.directory}/formreturn_setup_${project.version}.exe" />
+
+										<delete file="${basedir}/setup_unsigned.exe" />
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<dependencies>
 		<dependency>

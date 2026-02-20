@@ -4,17 +4,17 @@ public class PredicateType implements Predicate {
 
     // //////////////////////////////////////////////////////////////
     // instance variables
-    Class _patterns[];
+    Class<?>[] _patterns;
     int _numPats;
     String _printString = null;
 
     // //////////////////////////////////////////////////////////////
     // constructor
-    protected PredicateType(Class pats[]) {
+    protected PredicateType(Class<?>[] pats) {
         this(pats, pats.length);
     }
 
-    protected PredicateType(Class pats[], int numPats) {
+    protected PredicateType(Class<?>[] pats, int numPats) {
         _patterns = pats;
         _numPats = numPats;
     }
@@ -23,21 +23,21 @@ public class PredicateType implements Predicate {
         return new PredicateType(null, 0);
     }
 
-    public static PredicateType create(Class c0) {
-        Class classes[] = new Class[1];
+    public static PredicateType create(Class<?> c0) {
+        Class<?>[] classes = new Class<?>[1];
         classes[0] = c0;
         return new PredicateType(classes);
     }
 
-    public static PredicateType create(Class c0, Class c1) {
-        Class classes[] = new Class[2];
+    public static PredicateType create(Class<?> c0, Class<?> c1) {
+        Class<?>[] classes = new Class<?>[2];
         classes[0] = c0;
         classes[1] = c1;
         return new PredicateType(classes);
     }
 
-    public static PredicateType create(Class c0, Class c1, Class c2) {
-        Class classes[] = new Class[3];
+    public static PredicateType create(Class<?> c0, Class<?> c1, Class<?> c2) {
+        Class<?>[] classes = new Class<?>[3];
         classes[0] = c0;
         classes[1] = c1;
         classes[2] = c2;

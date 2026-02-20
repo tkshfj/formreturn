@@ -73,10 +73,6 @@ public class ImportRecordsDialog extends JDialog {
         new String[][] {new String[] {"", "none"}, new String[] {"'", "' (Single Quote)"},
             new String[] {"\"", "\" (Double Quote)"}};
 
-    private static final String[][] LINE_ENDINGS =
-        new String[][] {new String[] {"\r\n", "\\r\\n (Windows)"},
-            new String[] {"\n", "\\n (Unix)"}, new String[] {"\r", "\\r (Mac)"}};
-
     private SourceDataManagerFrame sourceDataManagerFrame;
 
     private long dataSetId;
@@ -108,13 +104,13 @@ public class ImportRecordsDialog extends JDialog {
 
     private void restoreCSVParams() {
 
-        DefaultComboBoxModel dtcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dtcbm = new DefaultComboBoxModel<>();
         for (int i = 0; i < SEPARATORS.length; i++) {
             dtcbm.addElement(SEPARATORS[i][1]);
         }
         delimiterTypeComboBox.setModel(dtcbm);
 
-        DefaultComboBoxModel qtcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> qtcbm = new DefaultComboBoxModel<>();
         for (int i = 0; i < QUOTES.length; i++) {
             qtcbm.addElement(QUOTES[i][1]);
         }
@@ -130,7 +126,7 @@ public class ImportRecordsDialog extends JDialog {
             jdbcClassMapping.put("org.apache.derby.jdbc.ClientDriver", "derby");
         }
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
 
         Iterator<String> jcmki = jdbcClassMapping.keySet().iterator();
         while (jcmki.hasNext()) {
@@ -241,7 +237,7 @@ public class ImportRecordsDialog extends JDialog {
 
                 try {
                     Driver d = (Driver) Misc.registerJarFile(jdbcDriverFile,
-                        (String) wizardProtocolComboBox.getSelectedItem()).newInstance();
+                        (String) wizardProtocolComboBox.getSelectedItem()).getDeclaredConstructor().newInstance();
                     conn = d.connect(JDBCURLTextField.getText(), properties);
 
                     Statement stmt = conn.createStatement();
@@ -329,10 +325,6 @@ public class ImportRecordsDialog extends JDialog {
 
                 } catch (MalformedURLException ex) {
                     com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
-                } catch (InstantiationException ex) {
-                    com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
-                } catch (IllegalAccessException ex) {
-                    com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
                 } catch (ClassNotFoundException ex) {
                     String message = Localizer.localize("UI",
                         "ImportRecordsConnectionErrorInvalidDriverClassNameMessage");
@@ -340,6 +332,8 @@ public class ImportRecordsDialog extends JDialog {
                     javax.swing.JOptionPane.showConfirmDialog(Main.getInstance(), message, caption,
                         javax.swing.JOptionPane.DEFAULT_OPTION,
                         javax.swing.JOptionPane.ERROR_MESSAGE);
+                } catch (ReflectiveOperationException ex) {
+                    com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
                 } catch (SQLException ex) {
                     String message =
                         Localizer.localize("UI", "ImportRecordsConnectionErrorInvalidDatabaseName")
@@ -437,7 +431,7 @@ public class ImportRecordsDialog extends JDialog {
         try {
             Driver d = (Driver) Misc
                 .registerJarFile(jdbcDriverFile, (String) wizardProtocolComboBox.getSelectedItem())
-                .newInstance();
+                .getDeclaredConstructor().newInstance();
             conn = d.connect(JDBCURLTextField.getText(), properties);
             String message = Localizer.localize("UI", "ImportRecordsConnectionSuccessMessage");
             String caption = Localizer.localize("UI", "ImportRecordsConnectionSuccessTitle");
@@ -446,10 +440,6 @@ public class ImportRecordsDialog extends JDialog {
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
         } catch (MalformedURLException ex) {
             com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
-        } catch (InstantiationException ex) {
-            com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
-        } catch (IllegalAccessException ex) {
-            com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
         } catch (ClassNotFoundException ex) {
             String message = Localizer
                 .localize("UI", "ImportRecordsConnectionErrorInvalidDriverClassNameMessage");
@@ -457,6 +447,8 @@ public class ImportRecordsDialog extends JDialog {
             javax.swing.JOptionPane
                 .showConfirmDialog(this, message, caption, javax.swing.JOptionPane.DEFAULT_OPTION,
                     javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (ReflectiveOperationException ex) {
+            com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
         } catch (SQLException ex) {
             String message =
                 Localizer.localize("UI", "ImportRecordsConnectionErrorInvalidDatabaseName") + "\n";
@@ -484,7 +476,7 @@ public class ImportRecordsDialog extends JDialog {
 
     public void restoreProfileList() {
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
 
         Iterator<JDBCProfile> jdbcProfilesIterator =
             PreferencesManager.getJDBCProfiles().iterator();
@@ -935,7 +927,7 @@ public class ImportRecordsDialog extends JDialog {
         ObjectInputStream ois;
 
         try {
-            ois = Main.getInstance().getXstream().createObjectInputStream(s);
+            ois = Main.getXstream().createObjectInputStream(s);
             JDBCProfile jdbcProfile = (JDBCProfile) ois.readObject();
             return jdbcProfile;
         } catch (IOException e) {
@@ -956,7 +948,7 @@ public class ImportRecordsDialog extends JDialog {
         ObjectOutputStream oos;
 
         try {
-            oos = Main.getInstance().getXstream().createObjectOutputStream(baos);
+            oos = Main.getXstream().createObjectOutputStream(baos);
             oos.writeObject(jdbcProfile);
             oos.close();
             return baos.toByteArray();
@@ -984,9 +976,9 @@ public class ImportRecordsDialog extends JDialog {
         buttonBar = new JPanel();
         panel15 = new JPanel();
         separatorLabel = new JLabel();
-        delimiterTypeComboBox = new JComboBox();
+        delimiterTypeComboBox = new JComboBox<>();
         quoteCharacterLabel = new JLabel();
-        quoteTypeComboBox = new JComboBox();
+        quoteTypeComboBox = new JComboBox<>();
         panel16 = new JPanel();
         browseCSVFileButton = new JButton();
         importCSVButton = new JButton();
@@ -995,7 +987,7 @@ public class ImportRecordsDialog extends JDialog {
         profileManagementPanel = new JPanel();
         panel13 = new JPanel();
         existingProfileLabel = new JLabel();
-        existingProfileComboBox = new JComboBox();
+        existingProfileComboBox = new JComboBox<>();
         restoreProfileButton = new JButton();
         removeProfileButton = new JButton();
         panel3 = new JPanel();
@@ -1012,7 +1004,7 @@ public class ImportRecordsDialog extends JDialog {
         databaseNameTextField = new JTextField();
         panel19 = new JPanel();
         jdbcProtocolLabel = new JLabel();
-        wizardProtocolComboBox = new JComboBox();
+        wizardProtocolComboBox = new JComboBox<>();
         newJDBCURLLabel = new JLabel();
         createJDBCURLButton = new JButton();
         jdbcDetailsPanel = new JPanel();
@@ -1905,9 +1897,9 @@ public class ImportRecordsDialog extends JDialog {
     private JPanel buttonBar;
     private JPanel panel15;
     private JLabel separatorLabel;
-    private JComboBox delimiterTypeComboBox;
+    private JComboBox<String> delimiterTypeComboBox;
     private JLabel quoteCharacterLabel;
-    private JComboBox quoteTypeComboBox;
+    private JComboBox<String> quoteTypeComboBox;
     private JPanel panel16;
     private JButton browseCSVFileButton;
     private JButton importCSVButton;
@@ -1916,7 +1908,7 @@ public class ImportRecordsDialog extends JDialog {
     private JPanel profileManagementPanel;
     private JPanel panel13;
     private JLabel existingProfileLabel;
-    private JComboBox existingProfileComboBox;
+    private JComboBox<String> existingProfileComboBox;
     private JButton restoreProfileButton;
     private JButton removeProfileButton;
     private JPanel panel3;
@@ -1933,7 +1925,7 @@ public class ImportRecordsDialog extends JDialog {
     private JTextField databaseNameTextField;
     private JPanel panel19;
     private JLabel jdbcProtocolLabel;
-    private JComboBox wizardProtocolComboBox;
+    private JComboBox<String> wizardProtocolComboBox;
     private JLabel newJDBCURLLabel;
     private JButton createJDBCURLButton;
     private JPanel jdbcDetailsPanel;

@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.WatchService;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.persistence.EntityManager;
@@ -176,6 +177,7 @@ public class Main implements NoObfuscation {
             @Override protected MapperWrapper wrapMapper(MapperWrapper next) {
                 return new MapperWrapper(next) {
                     @Override
+                    @SuppressWarnings("rawtypes")
                     public boolean shouldSerializeMember(Class definedIn, String fieldName) {
                         if (definedIn == Object.class) {
                             return false;
@@ -188,8 +190,21 @@ public class Main implements NoObfuscation {
         xs.allowTypesByWildcard(new String[] {
             "com.ebstrada.formreturn.**",
             "com.swingsane.preferences.model.**",
-            "java.util.**",
             "java.awt.**"
+        });
+        xs.allowTypes(new Class[] {
+            java.util.ArrayList.class,
+            java.util.HashMap.class,
+            java.util.LinkedHashMap.class,
+            java.util.LinkedList.class,
+            java.util.HashSet.class,
+            java.util.TreeMap.class,
+            java.util.TreeSet.class,
+            java.util.Vector.class,
+            java.util.Hashtable.class,
+            java.util.Properties.class,
+            java.util.Date.class,
+            java.util.Locale.class
         });
         return xs;
     }
@@ -262,80 +277,85 @@ public class Main implements NoObfuscation {
             return;
         }
 
-        EntityManager entityManager = null;
-        if (entityManager == null) {
-            entityManager = getJPAConfiguration().getEntityManager();
-        }
-
+        EntityManager entityManager = getJPAConfiguration().getEntityManager();
         if (entityManager != null) {
-            entityManager.getTransaction().begin();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'CHECK_BOX', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'DATA_SET', 1)")
-                .executeUpdate();
-            entityManager
-                .createNativeQuery("call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FORM', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FORM_PAGE', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FRAGMENT_BARCODE', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FRAGMENT_IMAGE_ZONE', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FRAGMENT_OMR', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FRAGMENT_OCR', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'GRADING', 1)").executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'GRADING_RULE', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'INCOMING_IMAGE', 1)")
-                .executeUpdate();
-            entityManager
-                .createNativeQuery("call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'LOG', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'PROCESSED_IMAGE', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'PUBLICATION', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'PUBLICATION_JAR', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'PUBLICATION_XSL', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'QUERY_PROFILE', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'RECORD', 1)").executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'SEGMENT', 1)").executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'SOURCE_FIELD', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'SOURCE_IMAGE', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'SOURCE_TEXT', 1)")
-                .executeUpdate();
-            entityManager.createNativeQuery(
-                "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'SYSTEM_PROPERTIES', 1)")
-                .executeUpdate();
-            entityManager.getTransaction().commit();
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'CHECK_BOX', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'DATA_SET', 1)")
+                    .executeUpdate();
+                entityManager
+                    .createNativeQuery("call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FORM', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FORM_PAGE', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FRAGMENT_BARCODE', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FRAGMENT_IMAGE_ZONE', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FRAGMENT_OMR', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'FRAGMENT_OCR', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'GRADING', 1)").executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'GRADING_RULE', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'INCOMING_IMAGE', 1)")
+                    .executeUpdate();
+                entityManager
+                    .createNativeQuery("call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'LOG', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'PROCESSED_IMAGE', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'PUBLICATION', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'PUBLICATION_JAR', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'PUBLICATION_XSL', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'QUERY_PROFILE', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'RECORD', 1)").executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'SEGMENT', 1)").executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'SOURCE_FIELD', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'SOURCE_IMAGE', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'SOURCE_TEXT', 1)")
+                    .executeUpdate();
+                entityManager.createNativeQuery(
+                    "call SYSCS_UTIL.SYSCS_COMPRESS_TABLE('FORMRETURN', 'SYSTEM_PROPERTIES', 1)")
+                    .executeUpdate();
+                entityManager.getTransaction().commit();
+            } catch (Exception ex) {
+                if (entityManager.getTransaction().isActive()) {
+                    entityManager.getTransaction().rollback();
+                }
+                throw new SchedulerException(ex);
+            } finally {
+                entityManager.close();
+            }
         }
 
     }
@@ -343,7 +363,7 @@ public class Main implements NoObfuscation {
     public void vacuumTask() throws SchedulerException, InterruptedException {
         ArrayList<TaskSchedulerJob> activeJobs = new ArrayList<TaskSchedulerJob>();
         if (isTaskSchedulerRunning()) {
-            ArrayList<TaskSchedulerJob> jobList = taskScheduler.getJobList();
+            List<TaskSchedulerJob> jobList = taskScheduler.getJobList();
             try {
                 for (TaskSchedulerJob job : jobList) {
                     taskScheduler.stopJob(job);
@@ -439,7 +459,7 @@ public class Main implements NoObfuscation {
 
     public synchronized void stopScheduler() throws SchedulerException, InterruptedException {
         if (taskScheduler != null) {
-            ArrayList<TaskSchedulerJob> jobList = taskScheduler.getJobList();
+            List<TaskSchedulerJob> jobList = taskScheduler.getJobList();
             try {
                 for (TaskSchedulerJob job : jobList) {
                     taskScheduler.stopJob(job);

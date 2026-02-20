@@ -26,7 +26,8 @@ public class ListAppenderScrollPane extends AbstractAppenderScrollPane {
 
     private static final long serialVersionUID = 1L;
 
-    protected JList<?> jlist;
+    @SuppressWarnings("rawtypes")
+    protected JList jlist;
 
     private JFrame parentFrame;
 
@@ -38,8 +39,9 @@ public class ListAppenderScrollPane extends AbstractAppenderScrollPane {
         init();
     }
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     protected void init() {
-        jlist = new JList<>();
+        jlist = new JList();
         jlist.setModel(super.logModel);
         jlist.setCellRenderer(new PriorityListCellRenderer(true, true, getAppender()));
         jlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -109,7 +111,7 @@ public class ListAppenderScrollPane extends AbstractAppenderScrollPane {
 
     @Override public void setAppender(ComponentAppender appender) {
         super.setAppender(appender);
-        ListCellRenderer lcr = jlist.getCellRenderer();
+        ListCellRenderer<?> lcr = jlist.getCellRenderer();
         if (lcr instanceof PriorityListCellRenderer) {
             ((PriorityListCellRenderer) lcr).setAppender(appender);
         }

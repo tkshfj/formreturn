@@ -25,7 +25,7 @@ import com.ebstrada.formreturn.manager.gef.base.Globals;
 import com.ebstrada.formreturn.manager.gef.undo.UndoManager;
 import com.ebstrada.formreturn.manager.ui.Main;
 
-@SuppressWarnings("serial") public class FigTextLayoutEditorComponent extends JTextPane
+public class FigTextLayoutEditorComponent extends JTextPane
     implements PropertyChangeListener, DocumentListener, KeyListener {
 
     private FigText figText;
@@ -60,7 +60,7 @@ import com.ebstrada.formreturn.manager.ui.Main;
     public void init(FigText ft, InputEvent ie, FigTextEditor figTextEditor) {
 
         if (Main.MAC_OS_X) {
-            int MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+            int MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
             getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_A, MASK), "select-all");
             getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_C, MASK), "copy");
             getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_X, MASK), "cut");

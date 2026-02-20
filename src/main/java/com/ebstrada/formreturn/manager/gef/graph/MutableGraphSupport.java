@@ -16,9 +16,9 @@ import com.ebstrada.formreturn.manager.gef.presentation.Fig;
  * utility methods.
  */
 
-public abstract class MutableGraphSupport implements MutableGraphModel, java.io.Serializable {
+public abstract class MutableGraphSupport implements MutableGraphModel {
 
-    private Vector _graphListeners;
+    private Vector<GraphListener> _graphListeners;
 
     private static Action saveAction;
 
@@ -39,7 +39,7 @@ public abstract class MutableGraphSupport implements MutableGraphModel, java.io.
 
     public void addGraphEventListener(GraphListener listener) {
         if (_graphListeners == null) {
-            _graphListeners = new Vector();
+            _graphListeners = new Vector<GraphListener>();
         }
         _graphListeners.addElement(listener);
     }
@@ -62,7 +62,7 @@ public abstract class MutableGraphSupport implements MutableGraphModel, java.io.
             return;
         }
         GraphEvent ge = new GraphEvent(this, node);
-        Enumeration listeners = _graphListeners.elements();
+        Enumeration<?> listeners = _graphListeners.elements();
         while (listeners.hasMoreElements()) {
             GraphListener listen = (GraphListener) listeners.nextElement();
             listen.nodeAdded(ge);
@@ -77,7 +77,7 @@ public abstract class MutableGraphSupport implements MutableGraphModel, java.io.
             return;
         }
         GraphEvent ge = new GraphEvent(this, node);
-        Enumeration listeners = _graphListeners.elements();
+        Enumeration<?> listeners = _graphListeners.elements();
         while (listeners.hasMoreElements()) {
             GraphListener listen = (GraphListener) listeners.nextElement();
             listen.nodeRemoved(ge);
@@ -93,7 +93,7 @@ public abstract class MutableGraphSupport implements MutableGraphModel, java.io.
             return;
         }
         GraphEvent ge = new GraphEvent(this, null);
-        Enumeration listeners = _graphListeners.elements();
+        Enumeration<?> listeners = _graphListeners.elements();
         while (listeners.hasMoreElements()) {
             GraphListener listen = (GraphListener) listeners.nextElement();
             listen.graphChanged(ge);

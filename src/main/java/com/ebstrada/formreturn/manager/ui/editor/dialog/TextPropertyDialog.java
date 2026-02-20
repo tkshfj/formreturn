@@ -25,7 +25,7 @@ public class TextPropertyDialog extends JDialog {
         initComponents();
 
         if (Main.MAC_OS_X) {
-            int MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+            int MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
             editorTextArea.getInputMap()
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_A, MASK), "select-all");
             editorTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_C, MASK), "copy");

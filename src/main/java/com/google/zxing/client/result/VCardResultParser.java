@@ -66,7 +66,7 @@ final class VCardResultParser extends ResultParser {
   }
 
   private static String[] matchVCardPrefixedField(String prefix, String rawText, boolean trim) {
-    Vector matches = null;
+    Vector<String> matches = null;
     int i = 0;
     int max = rawText.length();
     while (i < max) {
@@ -95,7 +95,7 @@ final class VCardResultParser extends ResultParser {
       } else if (i > start) {
         // found a match
         if (matches == null) {
-          matches = new Vector(3); // lazy init
+          matches = new Vector<String>(3); // lazy init
         }
         String element = rawText.substring(start, i);
         if (trim) {

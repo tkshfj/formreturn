@@ -79,6 +79,7 @@ public abstract class FolderMonitorJob extends TaskSchedulerJob {
     }
 
     // check if the file is still being updated, do not process if it is
+    @SuppressWarnings("resource")
     protected boolean isFileComplete(File imageFile, HashMap<String, Long> recentFileTimes) {
 
         FileChannel channel;

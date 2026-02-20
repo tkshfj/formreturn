@@ -43,7 +43,7 @@ public class FinderPatternFinder {
   private static final int INTEGER_MATH_SHIFT = 8;
 
   private final BitMatrix image;
-  private final Vector possibleCenters;
+  private final Vector<FinderPattern> possibleCenters;
   private boolean hasSkipped;
   private final int[] crossCheckStateCount;
   private final ResultPointCallback resultPointCallback;
@@ -59,7 +59,7 @@ public class FinderPatternFinder {
 
   public FinderPatternFinder(BitMatrix image, ResultPointCallback resultPointCallback) {
     this.image = image;
-    this.possibleCenters = new Vector();
+    this.possibleCenters = new Vector<FinderPattern>();
     this.crossCheckStateCount = new int[5];
     this.resultPointCallback = resultPointCallback;
   }
@@ -68,7 +68,7 @@ public class FinderPatternFinder {
     return image;
   }
 
-  protected Vector getPossibleCenters() {
+  protected Vector<FinderPattern> getPossibleCenters() {
     return possibleCenters;
   }
 
@@ -399,7 +399,7 @@ public class FinderPatternFinder {
         boolean found = false;
         int max = possibleCenters.size();
         for (int index = 0; index < max; index++) {
-          FinderPattern center = (FinderPattern) possibleCenters.elementAt(index);
+          FinderPattern center = possibleCenters.elementAt(index);
           // Look for about the same center and module size:
           if (center.aboutEquals(estimatedModuleSize, centerI, centerJ)) {
             center.incrementCount();
@@ -408,7 +408,7 @@ public class FinderPatternFinder {
           }
         }
         if (!found) {
-          ResultPoint point = new FinderPattern(centerJ, centerI, estimatedModuleSize);
+          FinderPattern point = new FinderPattern(centerJ, centerI, estimatedModuleSize);
           possibleCenters.addElement(point);
           if (resultPointCallback != null) {
             resultPointCallback.foundPossibleResultPoint(point);
@@ -433,7 +433,7 @@ public class FinderPatternFinder {
     }
     FinderPattern firstConfirmedCenter = null;
     for (int i = 0; i < max; i++) {
-      FinderPattern center = (FinderPattern) possibleCenters.elementAt(i);
+      FinderPattern center = possibleCenters.elementAt(i);
       if (center.getCount() >= CENTER_QUORUM) {
         if (firstConfirmedCenter == null) {
           firstConfirmedCenter = center;
@@ -462,7 +462,7 @@ public class FinderPatternFinder {
     float totalModuleSize = 0.0f;
     int max = possibleCenters.size();
     for (int i = 0; i < max; i++) {
-      FinderPattern pattern = (FinderPattern) possibleCenters.elementAt(i);
+      FinderPattern pattern = possibleCenters.elementAt(i);
       if (pattern.getCount() >= CENTER_QUORUM) {
         confirmedCount++;
         totalModuleSize += pattern.getEstimatedModuleSize();
@@ -478,7 +478,7 @@ public class FinderPatternFinder {
     float average = totalModuleSize / (float) max;
     float totalDeviation = 0.0f;
     for (int i = 0; i < max; i++) {
-      FinderPattern pattern = (FinderPattern) possibleCenters.elementAt(i);
+      FinderPattern pattern = possibleCenters.elementAt(i);
       totalDeviation += Math.abs(pattern.getEstimatedModuleSize() - average);
     }
     return totalDeviation <= 0.05f * totalModuleSize;
@@ -503,11 +503,11 @@ public class FinderPatternFinder {
       // But we can only afford to do so if we have at least 4 possibilities to choose from
       float totalModuleSize = 0.0f;
       for (int i = 0; i < startSize; i++) {
-        totalModuleSize += ((FinderPattern) possibleCenters.elementAt(i)).getEstimatedModuleSize();
+        totalModuleSize += possibleCenters.elementAt(i).getEstimatedModuleSize();
       }
       float average = totalModuleSize / (float) startSize;
       for (int i = 0; i < possibleCenters.size() && possibleCenters.size() > 3; i++) {
-        FinderPattern pattern = (FinderPattern) possibleCenters.elementAt(i);
+        FinderPattern pattern = possibleCenters.elementAt(i);
         if (Math.abs(pattern.getEstimatedModuleSize() - average) > 0.2f * average) {
           possibleCenters.removeElementAt(i);
           i--;
@@ -522,9 +522,9 @@ public class FinderPatternFinder {
     }
 
     return new FinderPattern[]{
-        (FinderPattern) possibleCenters.elementAt(0),
-        (FinderPattern) possibleCenters.elementAt(1),
-        (FinderPattern) possibleCenters.elementAt(2)
+        possibleCenters.elementAt(0),
+        possibleCenters.elementAt(1),
+        possibleCenters.elementAt(2)
     };
   }
 

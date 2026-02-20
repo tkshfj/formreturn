@@ -36,7 +36,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import com.ebstrada.formreturn.manager.ui.component.*;
 
-import org.apache.log4j.Logger;
 import org.quartz.CronExpression;
 
 import com.ebstrada.formreturn.api.task.JobPlugin;
@@ -46,7 +45,7 @@ import com.ebstrada.formreturn.manager.ui.filefilter.ExtensionFileFilter;
 import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.server.quartz.ITriggerTypes;
 
-@SuppressWarnings("serial") public class CustomTaskSettingsDialog extends JDialog {
+public class CustomTaskSettingsDialog extends JDialog {
 
     public static final int CANCEL = 0;
 
@@ -55,8 +54,6 @@ import com.ebstrada.formreturn.server.quartz.ITriggerTypes;
     private int dialogResult = CANCEL;
 
     private HashMap<String, ?> customPreferences;
-
-    private static final Logger logger = Logger.getLogger(CustomTaskSettingsDialog.class);
 
     public CustomTaskSettingsDialog(Frame owner) {
         super(owner);

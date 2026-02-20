@@ -8,9 +8,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.ebstrada.formreturn.manager.gef.font.CachedFontManager;
 import com.ebstrada.formreturn.manager.gef.graph.presentation.JGraph;
 import com.ebstrada.formreturn.manager.gef.ui.DocumentAttributes;
@@ -24,15 +21,12 @@ import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.ui.editor.dialog.FigBarcodeReaderProperties;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigBarcodeReaderPanel;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("barcodeReader") public class FigBarcodeReader extends Fig
-    implements NoObfuscation, MouseListener, RecognitionStructureFig {
+    implements MouseListener, RecognitionStructureFig {
 
     private static final long serialVersionUID = 1L;
-
-    private transient static Log LOG = LogFactory.getLog(FigBarcodeReader.class);
 
     private transient Font font;
 

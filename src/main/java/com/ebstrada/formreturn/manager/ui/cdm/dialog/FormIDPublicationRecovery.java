@@ -16,14 +16,12 @@ import com.ebstrada.formreturn.manager.ui.cdm.model.FormPageDataModel;
 import com.ebstrada.formreturn.manager.ui.component.*;
 import com.ebstrada.formreturn.manager.util.Misc;
 
-@SuppressWarnings("serial") public class FormIDPublicationRecovery extends JDialog
+public class FormIDPublicationRecovery extends JDialog
     implements GenericDataViewer {
 
     private FormPageDataModel formPageDataModel;
     private long publicationId;
     private int dialogResult = JOptionPane.CANCEL_OPTION;
-    private int firstFormPageId;
-
     public FormIDPublicationRecovery(Frame owner) {
         super(owner);
         initComponents();
@@ -63,7 +61,6 @@ import com.ebstrada.formreturn.manager.util.Misc;
         int formPageId = Misc.parseIntegerString(value);
         try {
             firstFormPageIDSpinner.setValue(Integer.valueOf(formPageId));
-            this.firstFormPageId = formPageId;
         } catch (Exception ex) {
             Misc.printStackTrace(ex);
         }
@@ -136,8 +133,6 @@ import com.ebstrada.formreturn.manager.util.Misc;
             if (e.getSource() == table.getSelectionModel() && table.getRowSelectionAllowed()
                 && e.getValueIsAdjusting() == false) {
                 // Column selection changed
-                int first = e.getFirstIndex();
-                int last = e.getLastIndex();
                 if (selection == FORM_PAGE_SELECTION) {
                     updateSelectedFormPage();
                 }
@@ -145,8 +140,6 @@ import com.ebstrada.formreturn.manager.util.Misc;
             } else if (e.getSource() == table.getColumnModel().getSelectionModel() && table
                 .getColumnSelectionAllowed()) {
                 // Row selection changed
-                int first = e.getFirstIndex();
-                int last = e.getLastIndex();
             }
 
             if (e.getValueIsAdjusting()) {

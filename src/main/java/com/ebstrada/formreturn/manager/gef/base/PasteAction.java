@@ -69,6 +69,7 @@ public class PasteAction extends UndoableAction {
     // needs-more-work: if the Fig was removed from the model, then I would
     // need to create a new owner.
 
+    @SuppressWarnings("deprecation")
     @Override public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
 

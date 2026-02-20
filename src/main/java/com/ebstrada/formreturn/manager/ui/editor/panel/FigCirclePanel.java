@@ -64,7 +64,7 @@ public class FigCirclePanel extends EditorPanel {
         borderWeightLabel = new JLabel();
         lineWidthSpinner = new JSpinner();
         borderStyleLabel = new JLabel();
-        lineStyleComboBox = new JComboBox();
+        lineStyleComboBox = new JComboBox<>();
         colorLabel = new JLabel();
         foregroundColorButton = new JButton();
         backgroundColorButton = new JButton();
@@ -118,7 +118,7 @@ public class FigCirclePanel extends EditorPanel {
 
             //---- lineStyleComboBox ----
             lineStyleComboBox.setModel(
-                new DefaultComboBoxModel(new String[] {"Solid", "Dashed", "Dotted", "Double"}));
+                new DefaultComboBoxModel<>(new String[] {"Solid", "Dashed", "Dotted", "Double"}));
             lineStyleComboBox.setFont(UIManager.getFont("ComboBox.font"));
             lineStyleComboBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -206,7 +206,7 @@ public class FigCirclePanel extends EditorPanel {
     private JLabel borderWeightLabel;
     private JSpinner lineWidthSpinner;
     private JLabel borderStyleLabel;
-    private JComboBox lineStyleComboBox;
+    private JComboBox<String> lineStyleComboBox;
     private JLabel colorLabel;
     private JButton foregroundColorButton;
     private JButton backgroundColorButton;

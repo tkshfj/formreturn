@@ -109,7 +109,6 @@ public class RecordTree extends JTree {
 
     private void thisTreeWillExpand(TreeExpansionEvent e) throws ExpandVetoException {
         // TODO add your code here
-        Object source = e.getSource();
     }
 
     public void expandAll(RecordTreeNode node) {
@@ -126,13 +125,14 @@ public class RecordTree extends JTree {
         }
     }
 
+    @SuppressWarnings("unused")
     private static void expandAll(final JTree tree, final TreePath parent, final boolean expand) {
         // Traverse children
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 TreeNode node = (TreeNode) parent.getLastPathComponent();
                 if (node.getChildCount() >= 0) {
-                    for (Enumeration e = node.children(); e.hasMoreElements(); ) {
+                    for (Enumeration<?> e = node.children(); e.hasMoreElements(); ) {
                         TreeNode n = (TreeNode) e.nextElement();
                         TreePath path = parent.pathByAddingChild(n);
                         expandAll(tree, path, expand);

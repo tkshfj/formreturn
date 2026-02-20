@@ -24,7 +24,7 @@ public class FigBarcodePanel extends EditorPanel {
     }
 
     public void restoreSettings() {
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         List<String> barcodeTypes = BarcodeCreator.getBarcodeTypes();
         for (String barcodeType : barcodeTypes) {
             dcbm.addElement(barcodeType);
@@ -81,7 +81,7 @@ public class FigBarcodePanel extends EditorPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel1 = new JPanel();
         barcodeTypeLabel = new JLabel();
-        barcodeTypeComboBox = new JComboBox();
+        barcodeTypeComboBox = new JComboBox<>();
         barcodeValueLabel = new JLabel();
         barcodeValueTextField = new JTextField();
         barcodeBarHeightLabel = new JLabel();
@@ -219,7 +219,7 @@ public class FigBarcodePanel extends EditorPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
     private JLabel barcodeTypeLabel;
-    private JComboBox barcodeTypeComboBox;
+    private JComboBox<String> barcodeTypeComboBox;
     private JLabel barcodeValueLabel;
     private JTextField barcodeValueTextField;
     private JLabel barcodeBarHeightLabel;

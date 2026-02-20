@@ -627,6 +627,7 @@ public class FormReader {
         return record;
     }
 
+    @SuppressWarnings("unchecked")
     public void processTemplate(BufferedImage image, Timestamp capturedTimestamp,
         int scannedPageNumber) throws FormReaderException {
 
@@ -731,21 +732,28 @@ public class FormReader {
             String from = "FROM SOURCE_TEXT st1 ";
             String where = "WHERE st1.SOURCE_TEXT_STRING = ";
 
+            int paramIndex = 1;
+            List<Object> paramValues = new ArrayList<Object>();
+
             int i = 1;
             for (SourceField sourceField : fields.keySet()) {
 
                 String matchingValue = fields.get(sourceField);
 
                 if (i == 1) {
-                    where += "'" + matchingValue + "' AND st1.SOURCE_FIELD_ID = " + sourceField
-                        .getSourceFieldId() + " ";
+                    where += "?" + paramIndex + " AND st1.SOURCE_FIELD_ID = ?" + (paramIndex + 1) + " ";
+                    paramValues.add(matchingValue);
+                    paramValues.add(sourceField.getSourceFieldId());
+                    paramIndex += 2;
                 }
 
                 if (i > 1) {
                     from += "INNER JOIN SOURCE_TEXT st" + i + " ON st1.RECORD_ID = st" + i
                         + ".RECORD_ID ";
-                    where += "AND st" + i + ".SOURCE_TEXT_STRING = '" + matchingValue
-                        + "' AND st1.SOURCE_FIELD_ID = " + sourceField.getSourceFieldId() + " ";
+                    where += "AND st" + i + ".SOURCE_TEXT_STRING = ?" + paramIndex + " AND st1.SOURCE_FIELD_ID = ?" + (paramIndex + 1) + " ";
+                    paramValues.add(matchingValue);
+                    paramValues.add(sourceField.getSourceFieldId());
+                    paramIndex += 2;
                 }
 
                 ++i;
@@ -755,6 +763,9 @@ public class FormReader {
             String sql = select + from + where.trim();
 
             Query recordIdQuery = entityManager.createNativeQuery(sql);
+            for (int p = 0; p < paramValues.size(); p++) {
+                recordIdQuery.setParameter(p + 1, paramValues.get(p));
+            }
             List<Long> recordIds = recordIdQuery.getResultList();
 
             if (recordIds != null && recordIds.size() > 0) {

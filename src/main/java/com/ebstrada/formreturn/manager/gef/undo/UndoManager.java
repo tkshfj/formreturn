@@ -23,9 +23,9 @@ public class UndoManager {
     private int undoChainCount = 0;
     private int redoChainCount = 0;
 
-    private Vector mementoLocks = new Vector();
+    private Vector<Object> mementoLocks = new Vector<Object>();
 
-    private Vector listeners = new Vector();
+    private Vector<PropertyChangeListener> listeners = new Vector<PropertyChangeListener>();
 
     private boolean newChain = true;
 
@@ -33,8 +33,8 @@ public class UndoManager {
 
     // TODO: A MementoChainStack may produce some reasuable code for
     // the undoStack and the redoStack/
-    protected Vector undoStack = new Vector();
-    protected Vector redoStack = new Vector();
+    protected Vector<Memento> undoStack = new Vector<Memento>();
+    protected Vector<Memento> redoStack = new Vector<Memento>();
 
     /**
      * Default to the standard undo manager but applications can set this
@@ -217,8 +217,8 @@ public class UndoManager {
         list.clear();
     }
 
-    private Memento pop(Vector stack) {
-        return (Memento) stack.remove(stack.size() - 1);
+    private Memento pop(Vector<Memento> stack) {
+        return stack.remove(stack.size() - 1);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -226,7 +226,7 @@ public class UndoManager {
     }
 
     private void fireCanUndo() {
-        Iterator i = listeners.iterator();
+        Iterator<?> i = listeners.iterator();
         while (i.hasNext()) {
             PropertyChangeListener listener = (PropertyChangeListener) i.next();
             listener.propertyChange(
@@ -235,7 +235,7 @@ public class UndoManager {
     }
 
     private void fireCanRedo() {
-        Iterator i = listeners.iterator();
+        Iterator<?> i = listeners.iterator();
         while (i.hasNext()) {
             PropertyChangeListener listener = (PropertyChangeListener) i.next();
             listener.propertyChange(

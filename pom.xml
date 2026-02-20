@@ -10,6 +10,10 @@
 	
 	<properties>
 		<openJPAVersion>3.2.2</openJPAVersion>
+		<derbyVersion>10.17.1.0</derbyVersion>
+		<xstreamVersion>1.4.21</xstreamVersion>
+		<commonsBeanutilsVersion>1.11.0</commonsBeanutilsVersion>
+		<antVersion>1.10.15</antVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -51,15 +55,6 @@
 					<enforcePropertyRestrictions>true</enforcePropertyRestrictions>
 					<persistenceXmlFile>${basedir}/src/main/resources/META-INF/persistence.xml</persistenceXmlFile>
 				</configuration>
-				<executions>
-					<execution>
-						<id>enhancer</id>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>enhance</goal>
-						</goals>
-					</execution>
-				</executions>
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.openjpa</groupId>
@@ -128,19 +123,6 @@
 			</snapshots>
 			<url>file://${basedir}/repository</url>
 		</repository>
-		<!--
-		<repository>
-			<id>maven.formreturn.com</id>
-			<releases>
-				<enabled>true</enabled>
-				<checksumPolicy>ignore</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<url>http://maven.formreturn.com/maven2</url>
-		</repository>
-		-->
 	</repositories>
 
 	<dependencies>
@@ -158,7 +140,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.20</version>
+			<version>${xstreamVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -168,17 +150,17 @@
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
-			<version>10.14.2.0</version>
+			<version>${derbyVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derbyclient</artifactId>
-			<version>10.14.2.0</version>
+			<version>${derbyVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derbynet</artifactId>
-			<version>10.14.2.0</version>
+			<version>${derbyVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>colt</groupId>
@@ -189,6 +171,11 @@
 			<groupId>net.sf.barcode4j</groupId>
 			<artifactId>barcode4j</artifactId>
 			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>${antVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.batik</groupId>
@@ -204,6 +191,12 @@
 			<groupId>avalon-framework</groupId>
 			<artifactId>avalon-framework-api</artifactId>
 			<version>4.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>avalon-framework</groupId>
@@ -310,6 +303,11 @@
 			<groupId>com.opencsv</groupId>
 			<artifactId>opencsv</artifactId>
 			<version>5.9</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${commonsBeanutilsVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openjpa</groupId>

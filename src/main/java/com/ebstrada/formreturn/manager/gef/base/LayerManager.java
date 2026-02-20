@@ -242,7 +242,7 @@ public class LayerManager implements java.io.Serializable {
     /**
      * See comments above, this message is passed to my active layer.
      */
-    public Enumeration elements() {
+    public Enumeration<?> elements() {
         return (_activeLayer == null) ? null : _activeLayer.elements();
     }
 

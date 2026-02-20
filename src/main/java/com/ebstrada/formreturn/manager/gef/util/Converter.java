@@ -17,24 +17,24 @@ public class Converter {
         return newOne;
     }
 
-    public static java.util.Vector convert(java.util.Vector oldOne) {
+    public static java.util.Vector<Object> convert(java.util.Vector<Object> oldOne) {
         if (oldOne == null) {
             return null;
         }
-        java.util.Vector newOne = new java.util.Vector();
+        java.util.Vector<Object> newOne = new java.util.Vector<Object>();
         for (int i = 0; i < oldOne.size(); i++) {
             newOne.addElement(oldOne.elementAt(i));
         }
         return newOne;
     }
 
-    public static java.util.Vector convertCollection(java.util.Collection oldCol) {
+    public static java.util.Vector<Object> convertCollection(java.util.Collection<?> oldCol) {
         if (oldCol == null) {
             return null;
         }
 
-        java.util.Vector newVec = new java.util.Vector();
-        java.util.Iterator iter = oldCol.iterator();
+        java.util.Vector<Object> newVec = new java.util.Vector<Object>();
+        java.util.Iterator<?> iter = oldCol.iterator();
         while (iter.hasNext()) {
             newVec.addElement(iter.next());
         }

@@ -111,7 +111,7 @@ public class ModeSelect extends FigModifyingModeImpl {
             return;
         }
 
-        if (me.getModifiers() == InputEvent.BUTTON3_MASK) {
+        if (me.getModifiersEx() == InputEvent.BUTTON3_DOWN_MASK) {
             selectAnchor = new Point(me.getX(), me.getY());
             if (LOG.isDebugEnabled()) {
                 LOG.debug("MousePressed detected button 3 so setting anchor point");
@@ -229,7 +229,7 @@ public class ModeSelect extends FigModifyingModeImpl {
      * On mouse up, select or toggle the selection of items under the mouse or
      * in the selection rectangle.
      */
-    @Override public void mouseReleased(MouseEvent me) {
+    @SuppressWarnings("deprecation") @Override public void mouseReleased(MouseEvent me) {
         if (me.isConsumed()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("MouseReleased but rejected as already consumed");
@@ -248,9 +248,9 @@ public class ModeSelect extends FigModifyingModeImpl {
         int x = me.getX();
         int y = me.getY();
         showSelectRect = false;
-        Vector selectList = new Vector();
+        Vector<Fig> selectList = new Vector<Fig>();
         Rectangle hitRect = new Rectangle(x - 4, y - 4, 8, 8);
-        Enumeration figs = editor.figs();
+        Enumeration<?> figs = editor.figs();
         while (figs.hasMoreElements()) {
             Fig f = (Fig) figs.nextElement();
             if (f.isSelectable() && ((!toggleSelection && selectRect.isEmpty() && f.hit(hitRect))
@@ -278,7 +278,7 @@ public class ModeSelect extends FigModifyingModeImpl {
         selectRect.grow(1, 1); /* make sure it is not empty for redraw */
         editor.scaleRect(selectRect);
         editor.damaged(selectRect);
-        if (me.getModifiers() == InputEvent.BUTTON3_MASK) {
+        if (me.getModifiersEx() == InputEvent.BUTTON3_DOWN_MASK) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("MouseReleased button 3 detected so not consumed");
             }
@@ -346,6 +346,7 @@ public class ModeSelect extends FigModifyingModeImpl {
      * a Mac this is by Command-Click. On a non-mac this is by Ctrl-Click. There
      * seems to be no platform independant way of determining this.
      */
+    @SuppressWarnings("unused")
     private boolean isMultiSelectTrigger(MouseEvent me) {
         // If the control key is down and this is not a popup trigger then
         // this cannot be a mac and will return true.

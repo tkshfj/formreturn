@@ -9,7 +9,7 @@ import javax.swing.border.*;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
 
-@SuppressWarnings("serial") public class ScannerClientFrame extends JFrame {
+public class ScannerClientFrame extends JFrame {
 
     private ScannerPanel scannerPanel;
 

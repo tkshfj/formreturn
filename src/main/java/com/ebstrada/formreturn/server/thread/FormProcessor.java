@@ -31,7 +31,7 @@ public class FormProcessor extends Thread {
 
     private long sleepTime = 30000;
 
-    private boolean runProcess = true;
+    private volatile boolean runProcess = true;
 
     private int totalNumberOfImagesLeftToProcess = 0;
 
@@ -89,7 +89,6 @@ public class FormProcessor extends Thread {
                             new FormReaderException(FormReaderException.INVALID_IMAGE_FORMAT, msg);
                         throw fre;
                     }
-                    sourceImage.flush();
 
                     BufferedImage checkedImage =
                         ImageUtil.resizePageImageIfTooBig(8000, sourceImage);
@@ -172,6 +171,7 @@ public class FormProcessor extends Thread {
 
     }
 
+    @SuppressWarnings("unchecked")
     private long getNextFormPageID(EntityManager entityManager, long formPageId,
         int scannedPageNumber) {
 
@@ -205,9 +205,9 @@ public class FormProcessor extends Thread {
             int formPageNumber = scannedPageNumber - (formPageCount * formNumber);
 
             Query formQuery = entityManager.createNativeQuery(
-                "SELECT * FROM FORM WHERE PUBLICATION_ID = " + form.getPublicationId().getPublicationId()
-                    + " AND FORM_ID >= " + form.getFormId()
-                    + " ORDER BY FORM_ID ASC", Form.class);
+                "SELECT * FROM FORM WHERE PUBLICATION_ID = ?1 AND FORM_ID >= ?2 ORDER BY FORM_ID ASC", Form.class);
+            formQuery.setParameter(1, form.getPublicationId().getPublicationId());
+            formQuery.setParameter(2, form.getFormId());
             List<Form> fc = formQuery.getResultList();
 
             int i = 0;
@@ -323,6 +323,7 @@ public class FormProcessor extends Thread {
         entityManager.persist(incomingImage);
     }
 
+    @SuppressWarnings("unchecked")
     public void pollIncomimgImages() {
         while (runProcess) {
 

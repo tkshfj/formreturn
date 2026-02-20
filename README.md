@@ -5,7 +5,7 @@
 # FormReturn (maintenance fork)
 **Optical Mark Recognition (OMR) made simple — design, scan, and process forms.**
 
-This repository is a **downstream maintenance fork** of FormReturn, a Java desktop OMR application originally created and released by others. We focus on **updates, fixes, and workflow improvements** while preserving upstream behavior and architecture as much as possible.
+This repository is a downstream maintenance fork of FormReturn, a Java desktop OMR tool originally developed and released by EB Strada Pty Ltd. We focus on updates, fixes, and workflow improvements while preserving upstream behavior and architecture as much as possible.
 
 > This repository does **not** publish official installers or releases.  
 > Please use upstream distribution channels for official downloads.
@@ -14,7 +14,7 @@ This repository is a **downstream maintenance fork** of FormReturn, a Java deskt
 
 ## Overview
 
-FormReturn is a **Java 8, Swing-based desktop application** used to:
+FormReturn is a **Java 21, Swing-based desktop application** used to:
 
 - design forms in a GUI,
 - scan or import completed forms,
@@ -29,12 +29,12 @@ It also includes a **server/daemon component** (Derby + Quartz) with scanner int
 
 Typical work in this repository includes:
 
-- maintenance updates while keeping **Java 8 compatibility**,
+- **Java 21 upgrade** (from Java 8) — updated build target, generics, deprecated API replacements, reflection-based access to internal JDK APIs,
 - **security hardening** (XStream deserialization, Zip Slip, SQL injection fixes),
-- **code quality** (resource leak fixes, deprecation cleanup, API migrations),
+- **code quality** (resource leak fixes, deprecation cleanup, API migrations, SonarQube/IDE warning elimination),
 - bug fixes and usability improvements,
 - workflow and report/export refinements,
-- **dependency management** (vendored legacy JARs, missing transitive dependency fixes),
+- **dependency management** (vendored legacy JARs, missing transitive dependency fixes, OpenJPA 3.2.2 upgrade),
 - build/packaging adjustments needed for our environment.
 
 We aim to keep changes targeted and upstream-friendly whenever possible.
@@ -63,14 +63,14 @@ Key areas under `src/main/java/com/ebstrada/`:
 
 ### Prerequisites
 
-- **OpenJDK 8**
+- **OpenJDK 21** (or later)
 - **Maven**
 - **NSIS** (Windows installer packaging only)
 
-#### macOS: select Java 8
+#### macOS: select Java 21
 
 ```bash
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 ```
 
 ### Build order (two separate Maven projects)
@@ -122,27 +122,112 @@ After cloning, run `mvn dependency:resolve -U` to populate your local Maven cach
 
 ---
 
+## Running
+
+The application has two components: a **server** (embeds Derby database + Quartz scheduler) and a **desktop GUI** (connects to the server). The server must be started first.
+
+### 1. Start the server
+
+```bash
+# Build first
+mvn clean install
+
+# Copy dependencies for classpath
+mvn dependency:copy-dependencies -DoutputDirectory=target/dependency
+
+# Server with GUI
+java -cp "target/classes:target/dependency/*" \
+  com.ebstrada.formreturn.server.ServerGUI
+
+# Or headless CLI daemon
+java -cp "target/classes:target/dependency/*" \
+  com.ebstrada.formreturn.server.ServerGUI cli
+
+# CLI with custom data directory
+java -cp "target/classes:target/dependency/*" \
+  com.ebstrada.formreturn.server.ServerGUI cli /path/to/data/dir
+```
+
+The server automatically starts an embedded Derby database on `127.0.0.1:1527` and creates the `FORMRETURN` schema on first run (via OpenJPA's `buildSchema`). No manual database setup is needed.
+
+### 2. Start the desktop GUI
+
+With the server running:
+
+```bash
+java -cp "target/classes:target/dependency/*" \
+  com.ebstrada.formreturn.manager.ui.Main
+```
+
+### macOS note
+
+If you encounter reflection errors related to Aqua Look & Feel, add:
+
+```bash
+java --add-opens java.desktop/com.apple.laf=ALL-UNNAMED \
+  -cp "target/classes:target/dependency/*" \
+  com.ebstrada.formreturn.manager.ui.Main
+```
+
+### 3. Run from installer artifacts
+
+After building the installer (`cd installer && mvn clean package`), the fat JAR in `installer/target/` bundles everything and can be run directly.
+
+---
+
 ## Testing
 
-Tests use **JUnit 4**, but they live in a **non-standard directory**: `test/main/java/` (not `src/test/java/`). As a result, `mvn test` may not discover them automatically. Coverage is primarily focused on `com.ebstrada.aggregation`.
+### Unit tests
+
+Tests use **JUnit 4** and live in a **non-standard directory**: `test/main/java/` (not `src/test/java/`). Maven's Surefire plugin does not discover them automatically. Coverage is focused on `com.ebstrada.aggregation` (6 test classes, ~37 test cases).
+
+To run them manually after building:
+
+```bash
+# Compile test sources
+javac -cp "target/classes:$(mvn dependency:build-classpath -q -Dmdep.outputFile=/dev/stdout)" \
+  -d target/test-classes \
+  test/main/java/com/ebstrada/aggregation/*.java
+
+# Run all tests
+java -cp "target/test-classes:target/classes:$(mvn dependency:build-classpath -q -Dmdep.outputFile=/dev/stdout)" \
+  org.junit.runner.JUnitCore \
+  com.ebstrada.aggregation.AggregationTest \
+  com.ebstrada.aggregation.AndConditionTest \
+  com.ebstrada.aggregation.OrConditionTest \
+  com.ebstrada.aggregation.RuleTest \
+  com.ebstrada.aggregation.RulePartTest \
+  com.ebstrada.aggregation.ResultTest
+```
+
+### Manual testing checklist
+
+After launching the server and GUI:
+
+1. **Form designer** — create a new form, add fields (text, barcode, checkbox, OMR bubbles), save and reopen
+2. **Publication** — publish a form to generate printable pages
+3. **Scanning** — import scanned images (or use sample images) via the scan data manager
+4. **Processing** — run the processing queue to recognize marks from scanned images
+5. **Export** — export captured data as CSV/XML/PDF from the captured data manager
+6. **Server tasks** — create and schedule background tasks (export, vacuum, folder monitor) via the server GUI
 
 ---
 
 ## Persistence and data storage
 
-* JPA provider: **Apache OpenJPA 2.4.3** (with build-time enhancement)
+* JPA provider: **Apache OpenJPA 3.2.2** (with build-time enhancement; enhancer execution disabled for Java 21 class format compatibility)
 * Database: **Apache Derby** (embedded or networked), schema `FORMRETURN`
 * Preferences / form files: serialized via **XStream**
 
 ---
 
-## Dependencies (Java 8 compatible)
+## Dependencies
 
 Key libraries and their current versions:
 
 | Library | Version | Purpose |
 | --- | ---: | --- |
-| Apache OpenJPA | 2.4.3 | JPA persistence provider |
+| Apache OpenJPA | 3.2.2 | JPA persistence provider |
 | Apache Derby | 10.14.2.0 | Embedded/networked database |
 | Apache FOP | 2.9 | XSL-FO to PDF rendering |
 | Apache PDFBox | 2.0.32 | PDF handling |
@@ -164,7 +249,7 @@ Key libraries and their current versions:
 | Xerces | 2.12.2 | XML parsing |
 | JUnit | 4.13.2 | Testing |
 
-**Note:** Derby 10.14.2.0 is the last Derby release compatible with Java 8. Other dependencies are kept at the latest versions that still support Java 8.
+**Note:** Derby 10.14.2.0 was retained from the Java 8 era; a future upgrade to Derby 10.15+ (which requires Java 11+) is possible now that the project targets Java 21.
 
 ---
 
@@ -172,12 +257,15 @@ Key libraries and their current versions:
 
 This fork includes targeted hardening beyond the upstream codebase:
 
-- **XStream deserialization** — restricted allowed types to prevent arbitrary object instantiation
+- **XStream deserialization** — restricted allowed types to prevent arbitrary object instantiation; narrowed `java.util.**` wildcard to explicit safe collection types only
 - **Zip Slip** — validated archive entry paths during extraction to block directory traversal
-- **SQL injection** — replaced string-concatenated queries with parameterized JPA queries
-- **Resource leaks** — ensured streams, connections, and entity managers are properly closed (try-with-resources)
-- **Deprecated API removal** — replaced Guava `Files.createTempDir()` with `java.nio.file.Files`, migrated Batik and Quartz APIs to current versions
+- **SQL injection** — replaced all string-concatenated native queries with parameterized JPA queries across FormReader, CSVExporter, CapturedDataManagerFrame, PublicationController, Misc, and FormProcessor; fixed critical injection vector via scanned barcode data in FormReader
+- **Resource leaks** — ensured streams, connections, and entity managers are properly closed (try-with-resources); fixed EntityManager leaks in `vacuumDatabase()` and XSL-FO export path; fixed `RandomAccessFile` leak in `isFileComplete()`
+- **Concurrency** — added `volatile` to cross-thread `runProcess` flag; bounded infinite transaction retry loops with sleep and max retry count
+- **Bug fixes** — fixed CSVExporter null-check on wrong array index (formPassword vs recordId); removed premature `BufferedImage.flush()` that invalidated image data before processing
+- **Deprecated API removal** — replaced Guava `Files.createTempDir()` with `java.nio.file.Files`, migrated Batik and Quartz APIs to current versions, replaced `new URL()` with `URI`-based construction, replaced `getModifiers()` with `getModifiersEx()`, replaced `Class.newInstance()` with `getDeclaredConstructor().newInstance()`
 - **OpenCSV 5.x** — added handling for new checked exceptions (`CsvValidationException`, `CsvException`)
+- **Java 21 migration** — added generic type parameters across ~120 files (JComboBox, DefaultComboBoxModel, Vector, Enumeration, Iterator, Class, etc.), replaced `sun.font` compile-time references with reflection-safe alternatives, upgraded OpenJPA to 3.2.2
 
 ---
 
@@ -195,7 +283,7 @@ English is default; Spanish (`_es`) is available.
 
 Upstream tutorials (for learning how to use the application):
 
-* `http://content.formreturn.com/`
+* `http://content.formreturn.com/` (upstream site; may be unavailable)
 
 ---
 
@@ -220,4 +308,4 @@ This repository is maintained as a downstream fork for targeted improvements.
 
 ## License and attribution
 
-FormReturn is an upstream project authored and published by others. This repository contains downstream modifications and maintenance work. Please review and preserve upstream LICENSE/NOTICE files when redistributing or deriving work.
+FormReturn is an upstream project authored and published by EB Strada Pty Ltd. This repository contains downstream modifications and maintenance work. Please review and preserve upstream LICENSE/NOTICE files when redistributing or deriving work.

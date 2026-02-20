@@ -296,7 +296,7 @@ public class Localizer {
                 }
                 stroke = KeyStroke.getKeyStroke(shortcutBuf.toString());
                 int modifiers = stroke.getModifiers() | (hasShortcutModifier ?
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() :
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() :
                     0);
                 int keyCode = stroke.getKeyCode();
                 stroke = KeyStroke.getKeyStroke(keyCode, modifiers);

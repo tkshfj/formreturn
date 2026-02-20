@@ -6,8 +6,8 @@
  */
 package com.ebstrada.formreturn.manager.ui.tab;
 
-import java.awt.Event;
 import java.awt.event.MouseEvent;
+import java.util.EventObject;
 
 /**
  * @author David_211245
@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
  * To change the template for this generated type comment go to
  * Window>Preferences>Java>Code Generation>Code and Comments
  */
-public class CloseTabbedPaneEvent extends Event {
+public class CloseTabbedPaneEvent extends EventObject {
 
     private String description;
     private MouseEvent e;
@@ -23,7 +23,7 @@ public class CloseTabbedPaneEvent extends Event {
 
 
     public CloseTabbedPaneEvent(MouseEvent e, String description, int overTabIndex) {
-        super(null, 0, null);
+        super(e != null ? e.getSource() : new Object());
         this.e = e;
         this.description = description;
         this.overTabIndex = overTabIndex;

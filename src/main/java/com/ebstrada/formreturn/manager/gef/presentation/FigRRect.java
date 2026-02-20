@@ -8,14 +8,13 @@ import java.awt.Stroke;
 import com.ebstrada.formreturn.manager.gef.properties.PropCategoryManager;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigRRectPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
  * Primitive Fig to paint rounded rectangles on a LayerDiagram.
  */
 
-@XStreamAlias("roundRectangle") public class FigRRect extends FigRect implements NoObfuscation {
+@XStreamAlias("roundRectangle") public class FigRRect extends FigRect {
 
     private static final long serialVersionUID = 1L;
 

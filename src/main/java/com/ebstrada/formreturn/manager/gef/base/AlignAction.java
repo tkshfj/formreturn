@@ -83,7 +83,7 @@ public class AlignAction extends UndoableAction {
         return "";
     }
 
-    @Override public void actionPerformed(ActionEvent e) {
+    @SuppressWarnings("deprecation") @Override public void actionPerformed(ActionEvent e) {
 
         super.actionPerformed(e);
 

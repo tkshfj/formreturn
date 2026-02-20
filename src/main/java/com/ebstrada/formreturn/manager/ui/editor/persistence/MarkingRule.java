@@ -61,9 +61,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         this.thresholdType = thresholdType;
     }
 
-    public static DefaultComboBoxModel getComboBoxModel() {
+    public static DefaultComboBoxModel<String> getComboBoxModel() {
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
 
         for (String qualifierDescription : QUALIFIERS) {
             dcbm.addElement(qualifierDescription);

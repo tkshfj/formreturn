@@ -26,10 +26,6 @@ public abstract class SelectionButtons extends SelectionResize {
      */
     private static final int MAX_PLACINGS = 1;
 
-    // //////////////////////////////////////////////////////////////
-    // static variables
-    private static int numButtonClicks = 0;
-
     /**
      * The bool showRapidButtons is only false if the user selected to never
      * show the buttons. The user can not do this currently.
@@ -273,9 +269,6 @@ public abstract class SelectionButtons extends SelectionResize {
      * @param buttonCode the button identifier
      */
     public void buttonClicked(int buttonCode) {
-        if (buttonCode >= 10) {
-            numButtonClicks++;
-        }
     }
 
     // //////////////////////////////////////////////////////////////

@@ -33,7 +33,7 @@ public class FigTextPanel extends EditorPanel {
 
     private Fig selectedElement;
 
-    private DefaultComboBoxModel cachedFontList;
+    private DefaultComboBoxModel<String> cachedFontList;
 
     private CachedFontManager cachedFontManager;
 
@@ -57,7 +57,7 @@ public class FigTextPanel extends EditorPanel {
         String localizedFontFamily = cachedFontManager.getLocalizedCachedFontFamilyName(fontFamily);
 
         int fontFamilyIndex =
-            ((DefaultComboBoxModel) fontFamilyComboBox.getModel()).getIndexOf(localizedFontFamily);
+            ((DefaultComboBoxModel<String>) fontFamilyComboBox.getModel()).getIndexOf(localizedFontFamily);
         String selectedFontStyleItem = null;
         switch (fontStyle) {
             case Font.BOLD:
@@ -114,7 +114,7 @@ public class FigTextPanel extends EditorPanel {
     }
 
     private void fontFamilyComboBoxActionPerformed(ActionEvent e) {
-        String fontFamily = (String) ((JComboBox) e.getSource()).getSelectedItem();
+        String fontFamily = (String) ((JComboBox<?>) e.getSource()).getSelectedItem();
 
         if (fontFamily != null) {
             fontStyleComboBox.setModel(cachedFontManager.getLocalizedCachedFontFamily(fontFamily)
@@ -228,7 +228,7 @@ public class FigTextPanel extends EditorPanel {
     }
 
     private void alignmentComboBoxActionPerformed(ActionEvent e) {
-        String alignment = (String) ((JComboBox) e.getSource()).getSelectedItem();
+        String alignment = (String) ((JComboBox<?>) e.getSource()).getSelectedItem();
         ((FigText) selectedElement).setJustificationByName(alignment);
         selectedElement.damage();
     }
@@ -301,15 +301,15 @@ public class FigTextPanel extends EditorPanel {
         // //GEN-BEGIN:initComponents
         panel1 = new JPanel();
         fontFamilyLabel = new JLabel();
-        fontFamilyComboBox = new JComboBox();
+        fontFamilyComboBox = new JComboBox<>();
         fontStyleLabel = new JLabel();
-        fontStyleComboBox = new JComboBox();
+        fontStyleComboBox = new JComboBox<>();
         fontSizeLabel = new JLabel();
-        fontSizeComboBox = new JComboBox();
+        fontSizeComboBox = new JComboBox<>();
         embeddingLabel = new JLabel();
         embedFontCheckBox = new JCheckBox();
         alignmentLabel = new JLabel();
-        alignmentComboBox = new JComboBox();
+        alignmentComboBox = new JComboBox<>();
         colorLabel = new JLabel();
         foregroundColorButton = new JButton();
         backgroundColorButton = new JButton();
@@ -387,7 +387,7 @@ public class FigTextPanel extends EditorPanel {
 
             //---- fontSizeComboBox ----
             fontSizeComboBox.setEditable(true);
-            fontSizeComboBox.setModel(new DefaultComboBoxModel(
+            fontSizeComboBox.setModel(new DefaultComboBoxModel<>(
                 new String[] {"4", "6", "8", "9", "10", "11", "12", "13", "14", "16", "18", "20",
                     "22", "24", "28", "32", "36", "40", "48", "56", "64", "72", "144"}));
             fontSizeComboBox.setSelectedIndex(4);
@@ -432,7 +432,7 @@ public class FigTextPanel extends EditorPanel {
 
             //---- alignmentComboBox ----
             alignmentComboBox.setModel(
-                new DefaultComboBoxModel(new String[] {"Left", "Center", "Right", "Justified"}));
+                new DefaultComboBoxModel<>(new String[] {"Left", "Center", "Right", "Justified"}));
             alignmentComboBox.setFont(UIManager.getFont("ComboBox.font"));
             alignmentComboBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -538,15 +538,15 @@ public class FigTextPanel extends EditorPanel {
     // //GEN-BEGIN:variables
     private JPanel panel1;
     private JLabel fontFamilyLabel;
-    private JComboBox fontFamilyComboBox;
+    private JComboBox<String> fontFamilyComboBox;
     private JLabel fontStyleLabel;
-    private JComboBox fontStyleComboBox;
+    private JComboBox<String> fontStyleComboBox;
     private JLabel fontSizeLabel;
-    private JComboBox fontSizeComboBox;
+    private JComboBox<String> fontSizeComboBox;
     private JLabel embeddingLabel;
     private JCheckBox embedFontCheckBox;
     private JLabel alignmentLabel;
-    private JComboBox alignmentComboBox;
+    private JComboBox<String> alignmentComboBox;
     private JLabel colorLabel;
     private JButton foregroundColorButton;
     private JButton backgroundColorButton;

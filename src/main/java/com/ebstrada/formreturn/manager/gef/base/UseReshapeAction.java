@@ -61,14 +61,13 @@ public class UseReshapeAction extends UndoableAction {
         super(localize ? Localizer.localize("GefBase", name) : name, icon);
     }
 
-    @Override public void actionPerformed(ActionEvent e) {
+    @SuppressWarnings({"unchecked", "deprecation"}) @Override public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
         Editor ce = Globals.curEditor();
         SelectionManager sm = ce.getSelectionManager();
-        Enumeration sels = ((Vector) sm.selections().clone()).elements();
-        // Enumeration sels = sm.selections().elements();
+        Enumeration<Selection> sels = ((Vector<Selection>) sm.selections().clone()).elements();
         while (sels.hasMoreElements()) {
-            Selection s = (Selection) sels.nextElement();
+            Selection s = sels.nextElement();
             if (s instanceof Selection && !(s instanceof SelectionReshape)) {
                 Fig f = s.getContent();
                 if (f.isReshapable()) {

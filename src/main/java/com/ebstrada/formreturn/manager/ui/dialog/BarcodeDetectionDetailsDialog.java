@@ -147,7 +147,7 @@ public class BarcodeDetectionDetailsDialog extends JDialog {
         scrollPane1 = new JScrollPane();
         barcodeImageLabel = new JImageLabel();
         panel5 = new JPanel();
-        zoomBox = new JComboBox();
+        zoomBox = new JComboBox<>();
         zoomInLabel = new JLabel();
         zoomOutLabel = new JLabel();
         barcodeDetailsPanel = new JPanel();
@@ -238,7 +238,7 @@ public class BarcodeDetectionDetailsDialog extends JDialog {
                             new double[] {0.0, 1.0E-4};
 
                         //---- zoomBox ----
-                        zoomBox.setModel(new DefaultComboBoxModel(
+                        zoomBox.setModel(new DefaultComboBoxModel<>(
                             new String[] {"25%", "50%", "100%", "200%", "400%", "800%"}));
                         zoomBox.setSelectedIndex(2);
                         zoomBox.setFont(UIManager.getFont("ComboBox.font"));
@@ -455,7 +455,7 @@ public class BarcodeDetectionDetailsDialog extends JDialog {
     private JScrollPane scrollPane1;
     private JImageLabel barcodeImageLabel;
     private JPanel panel5;
-    private JComboBox zoomBox;
+    private JComboBox<String> zoomBox;
     private JLabel zoomInLabel;
     private JLabel zoomOutLabel;
     private JPanel barcodeDetailsPanel;

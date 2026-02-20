@@ -28,7 +28,7 @@ public class PublisherPreferencesPanel extends JPanel {
             PreferencesManager.getPublicationPreferences();
 
         List<String> publicationTypes = PublicationPreferences.getPublicationTypes();
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         for (String publicationType : publicationTypes) {
             dcbm.addElement(publicationType);
         }
@@ -81,7 +81,7 @@ public class PublisherPreferencesPanel extends JPanel {
         panel5 = new JPanel();
         panel2 = new JPanel();
         defaultPublicationTypeLabel = new JLabel();
-        defaultPublicationTypeComboBox = new JComboBox();
+        defaultPublicationTypeComboBox = new JComboBox<>();
         panel4 = new JPanel();
         collatePDFPagesCheckBox = new JCheckBox();
         panel6 = new JPanel();
@@ -253,7 +253,7 @@ public class PublisherPreferencesPanel extends JPanel {
     private JPanel panel5;
     private JPanel panel2;
     private JLabel defaultPublicationTypeLabel;
-    private JComboBox defaultPublicationTypeComboBox;
+    private JComboBox<String> defaultPublicationTypeComboBox;
     private JPanel panel4;
     private JCheckBox collatePDFPagesCheckBox;
     private JPanel panel6;

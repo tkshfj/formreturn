@@ -70,13 +70,14 @@ public class CopyAction extends AbstractAction {
         super(localize ? Localizer.localize("GefBase", name) : name, icon);
     }
 
+    @SuppressWarnings("deprecation")
     public void actionPerformed(ActionEvent event) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 Editor ce = Globals.curEditor();
-                Vector copiedElements = ce.getSelectionManager().selections();
-                Vector figs = new Vector();
-                Enumeration copies = copiedElements.elements();
+                Vector<Selection> copiedElements = ce.getSelectionManager().selections();
+                Vector<Fig> figs = new Vector<Fig>();
+                Enumeration<?> copies = copiedElements.elements();
                 while (copies.hasMoreElements()) {
                     Selection s = (Selection) copies.nextElement();
                     Fig f = s.getContent();

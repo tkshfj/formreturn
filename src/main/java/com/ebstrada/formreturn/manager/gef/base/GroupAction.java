@@ -69,12 +69,12 @@ public class GroupAction extends UndoableAction {
         super(localize ? Localizer.localize("GefBase", name) : name, icon);
     }
 
-    @Override public void actionPerformed(ActionEvent e) {
+    @SuppressWarnings("deprecation") @Override public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
         Editor ce = Globals.curEditor();
-        Vector selectedFigs = ce.getSelectionManager().getFigs();
+        Vector<Fig> selectedFigs = ce.getSelectionManager().getFigs();
         FigGroup _newItem = new FigGroup();
-        Enumeration eachDE = selectedFigs.elements();
+        Enumeration<?> eachDE = selectedFigs.elements();
         while (eachDE.hasMoreElements()) {
             Object o = eachDE.nextElement();
             if (o instanceof Fig) {

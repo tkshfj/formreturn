@@ -35,7 +35,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, nl {
         public Locale getLocale() {
-            return new Locale("nl");
+            return Locale.of("nl");
         }
 
         public String getLanguageName() {
@@ -55,7 +55,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, de {
         public Locale getLocale() {
-            return new Locale("de");
+            return Locale.of("de");
         }
 
         public String getLanguageName() {
@@ -75,7 +75,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, ar {
         public Locale getLocale() {
-            return new Locale("ar");
+            return Locale.of("ar");
         }
 
         public String getLanguageName() {
@@ -98,7 +98,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, fr {
         public Locale getLocale() {
-            return new Locale("fr");
+            return Locale.of("fr");
         }
 
         public String getLanguageName() {
@@ -118,7 +118,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, it {
         public Locale getLocale() {
-            return new Locale("it");
+            return Locale.of("it");
         }
 
         public String getLanguageName() {
@@ -138,7 +138,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, pt_BR {
         public Locale getLocale() {
-            return new Locale("pt", "BR");
+            return Locale.of("pt", "BR");
         }
 
         public String getLanguageName() {
@@ -158,7 +158,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, zh_CN {
         public Locale getLocale() {
-            return new Locale("zh", "CN");
+            return Locale.of("zh", "CN");
         }
 
         public String getLanguageName() {
@@ -178,7 +178,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, el_GR {
         public Locale getLocale() {
-            return new Locale("el", "GR");
+            return Locale.of("el", "GR");
         }
 
         public String getLanguageName() {
@@ -198,7 +198,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, iw {
         public Locale getLocale() {
-            return new Locale("iw");
+            return Locale.of("iw");
         }
 
         public String getLanguageName() {
@@ -218,7 +218,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, tr_TR {
         public Locale getLocale() {
-            return new Locale("tr", "TR");
+            return Locale.of("tr", "TR");
         }
 
         public String getLanguageName() {
@@ -238,7 +238,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, zh_TW {
         public Locale getLocale() {
-            return new Locale("zh", "TW");
+            return Locale.of("zh", "TW");
         }
 
         public String getLanguageName() {
@@ -258,7 +258,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, ko_KR {
         public Locale getLocale() {
-            return new Locale("ko", "KR");
+            return Locale.of("ko", "KR");
         }
 
         public String getLanguageName() {
@@ -278,7 +278,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, es {
         public Locale getLocale() {
-            return new Locale("es");
+            return Locale.of("es");
         }
 
         public String getLanguageName() {
@@ -300,7 +300,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, ja {
         public Locale getLocale() {
-            return new Locale("ja");
+            return Locale.of("ja");
         }
 
         public String getLanguageName() {
@@ -320,7 +320,7 @@ public enum FontLocalesImpl implements FontLocales {
         }
     }, th {
         public Locale getLocale() {
-            return new Locale("th");
+            return Locale.of("th");
         }
 
         public String getLanguageName() {

@@ -20,6 +20,7 @@ public class ServerDaemon implements Daemon {
 
     private boolean stopped = false;
 
+    @SuppressWarnings("resource")
     public static void startCommandLineDaemon(String[] args) {
 
         File dataDirectory = null;

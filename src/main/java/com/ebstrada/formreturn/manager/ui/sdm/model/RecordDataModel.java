@@ -56,6 +56,7 @@ public class RecordDataModel extends AbstractDataModel {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public TableModel getTableModel() {
 
         DefaultTableModel dtm = new DefaultTableModel();

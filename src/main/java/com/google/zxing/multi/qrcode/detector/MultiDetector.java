@@ -51,7 +51,7 @@ public final class MultiDetector extends Detector {
       throw NotFoundException.getNotFoundInstance();
     }
 
-    Vector result = new Vector();
+    Vector<DetectorResult> result = new Vector<DetectorResult>();
     for (int i = 0; i < info.length; i++) {
       try {
         result.addElement(processFinderPatternInfo(info[i]));
@@ -64,7 +64,7 @@ public final class MultiDetector extends Detector {
     } else {
       DetectorResult[] resultArray = new DetectorResult[result.size()];
       for (int i = 0; i < result.size(); i++) {
-        resultArray[i] = (DetectorResult) result.elementAt(i);
+        resultArray[i] = result.elementAt(i);
       }
       return resultArray;
     }

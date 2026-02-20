@@ -10,13 +10,11 @@ import com.ebstrada.formreturn.manager.gef.util.Localizer;
 public class MultiplePagesDialog extends JDialog {
 
     private static final long serialVersionUID = 1L;
-    private int pageCount;
 
     public MultiplePagesDialog(Frame owner, int pageCount) {
         super(owner);
-        this.pageCount = pageCount;
         initComponents();
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<Integer> dcbm = new DefaultComboBoxModel<>();
         for (int i = 1; i <= pageCount; i++) {
             dcbm.addElement(Integer.valueOf(i));
         }
@@ -54,7 +52,7 @@ public class MultiplePagesDialog extends JDialog {
         containsMultipleImagesLabel = new JLabel();
         panel1 = new JPanel();
         selectPageNumberToViewLabel = new JLabel();
-        pageNumberComboBox = new JComboBox();
+        pageNumberComboBox = new JComboBox<>();
         buttonBar = new JPanel();
         chooseButton = new JButton();
 
@@ -115,7 +113,7 @@ public class MultiplePagesDialog extends JDialog {
 
                     //---- pageNumberComboBox ----
                     pageNumberComboBox.setFont(UIManager.getFont("ComboBox.font"));
-                    pageNumberComboBox.setPrototypeDisplayValue("xxxxxxxx");
+                    pageNumberComboBox.setPrototypeDisplayValue(99999999);
                     panel1.add(pageNumberComboBox,
                         new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
                             GridBagConstraints.BOTH, new Insets(0, 0, 0, 5), 0, 0));
@@ -159,7 +157,7 @@ public class MultiplePagesDialog extends JDialog {
     private JLabel containsMultipleImagesLabel;
     private JPanel panel1;
     private JLabel selectPageNumberToViewLabel;
-    private JComboBox pageNumberComboBox;
+    private JComboBox<Integer> pageNumberComboBox;
     private JPanel buttonBar;
     private JButton chooseButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

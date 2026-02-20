@@ -17,24 +17,23 @@ import com.ebstrada.formreturn.manager.ui.Main;
 
 public class ProcessingQueueModel {
 
-    private int unidentifiedImagesSize = 0;
     private int unidentifiedImagesOffset = 0;
     private int unidentifiedImagesLimit = 1000;
-    private int unprocessedImagesSize = 0;
     private int unprocessedImagesOffset = 0;
     private int unprocessedImagesLimit = 1000;
 
     private long[] selectedUnprocessedImageIds = new long[] {};
     private long[] selectedUnidentifiedImageIds = new long[] {};
 
+    @SuppressWarnings("unchecked")
     public TableModel getUnidentifiedImagesModel() {
 
         DefaultTableModel dtm = new DefaultTableModel() {
 
             private static final long serialVersionUID = 1L;
 
-            Class[] columnTypes =
-                new Class[] {String.class, String.class, String.class, String.class};
+            Class<?>[] columnTypes =
+                new Class<?>[] {String.class, String.class, String.class, String.class};
             boolean[] columnEditable = new boolean[] {false, false, false, false};
 
             @Override public Class<?> getColumnClass(int columnIndex) {
@@ -57,10 +56,6 @@ public class ProcessingQueueModel {
         }
 
         try {
-
-            Query query = entityManager.createNamedQuery("IncomingImage.count");
-            Number countResult = (Number) query.getSingleResult();
-            unidentifiedImagesSize = countResult.intValue();
 
             Query incomingImageQuery = entityManager.createNativeQuery(
                 "SELECT ii.INCOMING_IMAGE_NAME, ii.INCOMING_IMAGE_ID FROM INCOMING_IMAGE ii WHERE MATCH_STATUS = -1",
@@ -95,13 +90,14 @@ public class ProcessingQueueModel {
         return dtm;
     }
 
+    @SuppressWarnings("unchecked")
     public TableModel getUnprocessedImagesModel() {
 
         DefaultTableModel dtm = new DefaultTableModel() {
 
             private static final long serialVersionUID = 1L;
 
-            Class[] columnTypes = new Class[] {String.class, String.class};
+            Class<?>[] columnTypes = new Class<?>[] {String.class, String.class};
             boolean[] columnEditable = new boolean[] {false, false};
 
             @Override public Class<?> getColumnClass(int columnIndex) {
@@ -121,10 +117,6 @@ public class ProcessingQueueModel {
             return dtm;
         }
         try {
-
-            Query query = entityManager.createNamedQuery("IncomingImage.count");
-            Number countResult = (Number) query.getSingleResult();
-            unprocessedImagesSize = countResult.intValue();
 
             Query incomingImageQuery = entityManager.createNativeQuery(
                 "SELECT ii.INCOMING_IMAGE_NAME, ii.INCOMING_IMAGE_ID FROM INCOMING_IMAGE ii WHERE MATCH_STATUS = 0",

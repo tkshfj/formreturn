@@ -15,18 +15,18 @@ import java.util.Vector;
 public class ModeChangeEvent extends EventObject {
 
     private static final long serialVersionUID = -6352595981387658622L;
-    private Vector _modes;
+    private Vector<?> _modes;
 
     // //////////////////////////////////////////////////////////////
     // constructor
-    public ModeChangeEvent(Object src, Vector modes) {
+    public ModeChangeEvent(Object src, Vector<?> modes) {
         super(src);
         _modes = modes;
     }
 
     // //////////////////////////////////////////////////////////////
     // accessors
-    public Vector getModes() {
+    public Vector<?> getModes() {
         return _modes;
     }
 

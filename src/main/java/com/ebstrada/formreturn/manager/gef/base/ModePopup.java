@@ -13,9 +13,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.UIManager;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.ui.PopupGenerator;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
@@ -29,7 +26,6 @@ import com.ebstrada.formreturn.manager.gef.util.Localizer;
 public class ModePopup extends FigModifyingModeImpl {
 
     private static final long serialVersionUID = 288785293995576958L;
-    private static final Log LOG = LogFactory.getLog(ModePopup.class);
 
     // //////////////////////////////////////////////////////////////
     // constructor
@@ -52,6 +48,7 @@ public class ModePopup extends FigModifyingModeImpl {
         return " ";
     }
 
+    @SuppressWarnings("deprecation")
     public boolean showPopup(MouseEvent me) {
         int x = me.getX();
         int y = me.getY();
@@ -96,12 +93,12 @@ public class ModePopup extends FigModifyingModeImpl {
         if (!selectionManager.containsFig(underMouse)) {
             selectionManager.select(underMouse);
         } else {
-            Vector selection = selectionManager.getFigs();
-            Vector reassertSelection = new Vector(selection);
+            Vector<Fig> selection = selectionManager.getFigs();
+            Vector<Fig> reassertSelection = new Vector<Fig>(selection);
             selectionManager.select(reassertSelection);
         }
 
-        Class commonClass = selectionManager.findCommonSuperClass();
+        Class<?> commonClass = selectionManager.findCommonSuperClass();
         if (commonClass != null) {
 
             Object commonInstance = selectionManager.findFirstSelectionOfType(commonClass);
@@ -150,9 +147,8 @@ public class ModePopup extends FigModifyingModeImpl {
     }
 
     @Override public void mousePressed(MouseEvent me) {
-        boolean popUpDisplayed = false;
-        if (me.isPopupTrigger() || me.getModifiers() == InputEvent.BUTTON3_MASK) {
-            popUpDisplayed = showPopup(me);
+        if (me.isPopupTrigger() || me.getModifiersEx() == InputEvent.BUTTON3_DOWN_MASK) {
+            showPopup(me);
         }
     }
 

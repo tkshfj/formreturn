@@ -29,7 +29,7 @@ public class ManageDatabaseUsers extends JDialog {
         ArrayList<String> databaseUsers =
             ServerGUI.getInstance().getDatabaseServer().getDatabaseInstance(databaseName)
                 .getDatabaseUsers();
-        DefaultListModel dlm = new DefaultListModel();
+        DefaultListModel<String> dlm = new DefaultListModel<>();
         for (String databaseUser : databaseUsers) {
             dlm.addElement(databaseUser);
         }

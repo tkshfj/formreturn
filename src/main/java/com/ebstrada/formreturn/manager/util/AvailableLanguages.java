@@ -24,8 +24,8 @@ public class AvailableLanguages {
         }
     }
 
-    public ComboBoxModel getLanguageComboBoxModel() {
-        DefaultComboBoxModel lcbm = new DefaultComboBoxModel();
+    public ComboBoxModel<String> getLanguageComboBoxModel() {
+        DefaultComboBoxModel<String> lcbm = new DefaultComboBoxModel<>();
         for (String language : languages) {
             lcbm.addElement(language);
         }

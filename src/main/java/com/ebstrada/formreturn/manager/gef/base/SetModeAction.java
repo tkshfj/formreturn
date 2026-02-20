@@ -83,12 +83,12 @@ public class SetModeAction extends AbstractAction {
     /**
      * Set the next global mode to the named mode.
      */
-    public SetModeAction(Class modeClass) {
+    public SetModeAction(Class<?> modeClass) {
         super("SetEditorMode");
         setArg("desiredModeClass", modeClass);
     }
 
-    public SetModeAction(Class modeClass, String name) {
+    public SetModeAction(Class<?> modeClass, String name) {
         super(name);
         setArg("desiredModeClass", modeClass);
     }
@@ -96,7 +96,7 @@ public class SetModeAction extends AbstractAction {
     /**
      * Set the next global mode to the named mode, and maybe make it sticky.
      */
-    public SetModeAction(Class modeClass, boolean sticky) {
+    public SetModeAction(Class<?> modeClass, boolean sticky) {
         super("SetEditorMode");
         setArg("desiredModeClass", modeClass);
         setArg("shouldBeSticky", sticky ? Boolean.TRUE : Boolean.FALSE);
@@ -105,27 +105,27 @@ public class SetModeAction extends AbstractAction {
     /**
      * Set the next global mode to the named mode, and set all arguments.
      */
-    public SetModeAction(Class modeClass, HashMap<String, Object> modeArgs) {
+    public SetModeAction(Class<?> modeClass, HashMap<String, Object> modeArgs) {
         super("SetEditorMode");
         setArg("desiredModeClass", modeClass);
         this.modeArgs = modeArgs;
     }
 
-    public SetModeAction(Class modeClass, String arg, Object value) {
+    public SetModeAction(Class<?> modeClass, String arg, Object value) {
         this(modeClass, arg, value, "SetEditorMode");
         modeArgs = new HashMap<String, Object>(1);
         modeArgs.put(arg, value);
         setArg("desiredModeClass", modeClass);
     }
 
-    public SetModeAction(Class modeClass, String arg, Object value, String name) {
+    public SetModeAction(Class<?> modeClass, String arg, Object value, String name) {
         super(name);
         modeArgs = new HashMap<String, Object>(1);
         modeArgs.put(arg, value);
         setArg("desiredModeClass", modeClass);
     }
 
-    public SetModeAction(Class modeClass, String arg, Object value, String name, ImageIcon icon) {
+    public SetModeAction(Class<?> modeClass, String arg, Object value, String name, ImageIcon icon) {
         super(name, icon);
         modeArgs = new HashMap<String, Object>(1);
         modeArgs.put(arg, value);
@@ -134,13 +134,11 @@ public class SetModeAction extends AbstractAction {
 
     public void actionPerformed(ActionEvent e) {
         Mode mode;
-        Class desiredModeClass = (Class) getArg("desiredModeClass");
+        Class<?> desiredModeClass = (Class<?>) getArg("desiredModeClass");
         // needs-more-work: if mode is not defined, prompt the user
         try {
-            mode = (Mode) desiredModeClass.newInstance();
-        } catch (java.lang.InstantiationException ignore) {
-            return;
-        } catch (java.lang.IllegalAccessException ignore) {
+            mode = (Mode) desiredModeClass.getDeclaredConstructor().newInstance();
+        } catch (ReflectiveOperationException ignore) {
             return;
         }
         mode.init(modeArgs);

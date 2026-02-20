@@ -28,6 +28,7 @@ import javax.persistence.Version;
     @NamedQuery(name = "Record.findAll", query = "SELECT r FROM Record r"),
     @NamedQuery(name = "Record.count", query = "SELECT COUNT(r.recordId) FROM Record r")})
 public class Record implements Serializable {
+    @SuppressWarnings("unused")
     private static final CascadeType[] DETACH = null;
 
     @Id @Column(name = "RECORD_ID") @GeneratedValue(strategy = IDENTITY) private long recordId;

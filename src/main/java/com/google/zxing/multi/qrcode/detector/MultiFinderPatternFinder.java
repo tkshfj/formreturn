@@ -102,7 +102,7 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
    * @throws NotFoundException if 3 such finder patterns do not exist
    */
   private FinderPattern[][] selectBestPatterns() throws NotFoundException {
-    Vector possibleCenters = getPossibleCenters();
+    Vector<FinderPattern> possibleCenters = getPossibleCenters();
     int size = possibleCenters.size();
 
     if (size < 3) {
@@ -116,9 +116,9 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
     if (size == 3) {
       return new FinderPattern[][]{
           new FinderPattern[]{
-              (FinderPattern) possibleCenters.elementAt(0),
-              (FinderPattern) possibleCenters.elementAt(1),
-              (FinderPattern) possibleCenters.elementAt(2)
+              possibleCenters.elementAt(0),
+              possibleCenters.elementAt(1),
+              possibleCenters.elementAt(2)
           }
       };
     }
@@ -141,16 +141,16 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
      * So, if the layout seems right, lets have the decoder try to decode.     
      */
 
-    Vector results = new Vector(); // holder for the results
+    Vector<FinderPattern[]> results = new Vector<FinderPattern[]>(); // holder for the results
 
     for (int i1 = 0; i1 < (size - 2); i1++) {
-      FinderPattern p1 = (FinderPattern) possibleCenters.elementAt(i1);
+      FinderPattern p1 = possibleCenters.elementAt(i1);
       if (p1 == null) {
         continue;
       }
 
       for (int i2 = i1 + 1; i2 < (size - 1); i2++) {
-        FinderPattern p2 = (FinderPattern) possibleCenters.elementAt(i2);
+        FinderPattern p2 = possibleCenters.elementAt(i2);
         if (p2 == null) {
           continue;
         }
@@ -166,7 +166,7 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
         }
 
         for (int i3 = i2 + 1; i3 < size; i3++) {
-          FinderPattern p3 = (FinderPattern) possibleCenters.elementAt(i3);
+          FinderPattern p3 = possibleCenters.elementAt(i3);
           if (p3 == null) {
             continue;
           }
@@ -221,7 +221,7 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
     if (!results.isEmpty()) {
       FinderPattern[][] resultArray = new FinderPattern[results.size()][];
       for (int i = 0; i < results.size(); i++) {
-        resultArray[i] = (FinderPattern[]) results.elementAt(i);
+        resultArray[i] = results.elementAt(i);
       }
       return resultArray;
     }
@@ -303,7 +303,7 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
       } // end if foundPatternCross
     } // for i=iSkip-1 ...
     FinderPattern[][] patternInfo = selectBestPatterns();
-    Vector result = new Vector();
+    Vector<FinderPatternInfo> result = new Vector<FinderPatternInfo>();
     for (int i = 0; i < patternInfo.length; i++) {
       FinderPattern[] pattern = patternInfo[i];
       ResultPoint.orderBestPatterns(pattern);
@@ -315,7 +315,7 @@ final class MultiFinderPatternFinder extends FinderPatternFinder {
     } else {
       FinderPatternInfo[] resultArray = new FinderPatternInfo[result.size()];
       for (int i = 0; i < result.size(); i++) {
-        resultArray[i] = (FinderPatternInfo) result.elementAt(i);
+        resultArray[i] = result.elementAt(i);
       }
       return resultArray;
     }

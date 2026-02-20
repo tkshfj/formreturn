@@ -32,7 +32,7 @@ public class EditorPreferencesPanel extends JPanel {
     private void restoreDefaultSegmentPageSizeList() {
         List<String> segmentSizeNames = PreferencesManager.getSegmentSizeNames();
 
-        DefaultComboBoxModel sdcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> sdcbm = new DefaultComboBoxModel<>();
         for (String segmentSizeName : segmentSizeNames) {
             sdcbm.addElement(segmentSizeName);
         }
@@ -54,7 +54,7 @@ public class EditorPreferencesPanel extends JPanel {
 
     private void restoreDefaultFormPageSizeList() {
 
-        DefaultComboBoxModel fdcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> fdcbm = new DefaultComboBoxModel<>();
         List<String> formSizeNames = PreferencesManager.getFormSizeNames();
         for (String formSizeName : formSizeNames) {
             fdcbm.addElement(formSizeName);
@@ -90,7 +90,7 @@ public class EditorPreferencesPanel extends JPanel {
 
     private void rebuildSegmentList() {
         List<String> segmentSizeNames = PreferencesManager.getSegmentSizeNames();
-        DefaultListModel dlm = new DefaultListModel();
+        DefaultListModel<String> dlm = new DefaultListModel<>();
         for (String segmentSizeName : segmentSizeNames) {
             if (segmentSizeName.equalsIgnoreCase("Custom")) {
                 continue;
@@ -103,7 +103,7 @@ public class EditorPreferencesPanel extends JPanel {
     private void rebuildFormList() {
         List<String> formSizeNames = PreferencesManager.getFormSizeNames();
 
-        DefaultListModel dlm = new DefaultListModel();
+        DefaultListModel<String> dlm = new DefaultListModel<>();
         for (String formSizeName : formSizeNames) {
             if (formSizeName.equalsIgnoreCase("Custom")) {
                 continue;
@@ -545,13 +545,13 @@ public class EditorPreferencesPanel extends JPanel {
         panel5 = new JPanel();
         panel3 = new JPanel();
         segmentPageSizeLabel = new JLabel();
-        defaultSegmentPageSizeComboBox = new JComboBox();
+        defaultSegmentPageSizeComboBox = new JComboBox<>();
         segmentBarcodeSizeLabel = new JLabel();
         segmentBarcodeScaleSpinner = new JSpinner();
         formPageSizeLabel = new JLabel();
-        defaultFormPageSizeComboBox = new JComboBox();
+        defaultFormPageSizeComboBox = new JComboBox<>();
         formOrientationLabel = new JLabel();
-        defaultFormOrientationComboBox = new JComboBox();
+        defaultFormOrientationComboBox = new JComboBox<>();
         panel10 = new JPanel();
         panel11 = new JPanel();
         restoreDefaultSizesButton = new JButton();
@@ -684,7 +684,7 @@ public class EditorPreferencesPanel extends JPanel {
 
             //---- defaultFormOrientationComboBox ----
             defaultFormOrientationComboBox
-                .setModel(new DefaultComboBoxModel(new String[] {"Portrait", "Landscape"}));
+                .setModel(new DefaultComboBoxModel<>(new String[] {"Portrait", "Landscape"}));
             defaultFormOrientationComboBox.setFont(UIManager.getFont("ComboBox.font"));
             panel3.add(defaultFormOrientationComboBox,
                 new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
@@ -995,13 +995,13 @@ public class EditorPreferencesPanel extends JPanel {
     private JPanel panel5;
     private JPanel panel3;
     private JLabel segmentPageSizeLabel;
-    private JComboBox defaultSegmentPageSizeComboBox;
+    private JComboBox<String> defaultSegmentPageSizeComboBox;
     private JLabel segmentBarcodeSizeLabel;
     private JSpinner segmentBarcodeScaleSpinner;
     private JLabel formPageSizeLabel;
-    private JComboBox defaultFormPageSizeComboBox;
+    private JComboBox<String> defaultFormPageSizeComboBox;
     private JLabel formOrientationLabel;
-    private JComboBox defaultFormOrientationComboBox;
+    private JComboBox<String> defaultFormOrientationComboBox;
     private JPanel panel10;
     private JPanel panel11;
     private JButton restoreDefaultSizesButton;

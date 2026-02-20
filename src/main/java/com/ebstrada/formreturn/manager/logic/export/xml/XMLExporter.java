@@ -217,6 +217,7 @@ public class XMLExporter {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private String parseXMLString(String str) {
         String value = StringEscapeUtils.escapeXml10(str.replace(" ", "_"));
         return value;
@@ -449,6 +450,7 @@ public class XMLExporter {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void appendPublicationElement(Element parentElement, Document document,
         Publication publication, MessageNotification messageNotification)
         throws InterruptedException {

@@ -17,7 +17,6 @@
 package com.google.zxing.qrcode.detector;
 
 import com.google.zxing.NotFoundException;
-import com.google.zxing.ResultPoint;
 import com.google.zxing.ResultPointCallback;
 import com.google.zxing.common.BitMatrix;
 
@@ -40,7 +39,7 @@ import java.util.Vector;
 final class AlignmentPatternFinder {
 
   private final BitMatrix image;
-  private final Vector possibleCenters;
+  private final Vector<AlignmentPattern> possibleCenters;
   private final int startX;
   private final int startY;
   private final int width;
@@ -67,7 +66,7 @@ final class AlignmentPatternFinder {
                          float moduleSize,
                          ResultPointCallback resultPointCallback) {
     this.image = image;
-    this.possibleCenters = new Vector(5);
+    this.possibleCenters = new Vector<AlignmentPattern>(5);
     this.startX = startX;
     this.startY = startY;
     this.width = width;
@@ -147,7 +146,7 @@ final class AlignmentPatternFinder {
     // Hmm, nothing we saw was observed and confirmed twice. If we had
     // any guess at all, return it.
     if (!possibleCenters.isEmpty()) {
-      return (AlignmentPattern) possibleCenters.elementAt(0);
+      return possibleCenters.elementAt(0);
     }
 
     throw NotFoundException.getNotFoundInstance();
@@ -260,14 +259,14 @@ final class AlignmentPatternFinder {
       float estimatedModuleSize = (float) (stateCount[0] + stateCount[1] + stateCount[2]) / 3.0f;
       int max = possibleCenters.size();
       for (int index = 0; index < max; index++) {
-        AlignmentPattern center = (AlignmentPattern) possibleCenters.elementAt(index);
+        AlignmentPattern center = possibleCenters.elementAt(index);
         // Look for about the same center and module size:
         if (center.aboutEquals(estimatedModuleSize, centerI, centerJ)) {
           return new AlignmentPattern(centerJ, centerI, estimatedModuleSize);
         }
       }
       // Hadn't found this before; save it
-      ResultPoint point = new AlignmentPattern(centerJ, centerI, estimatedModuleSize);
+      AlignmentPattern point = new AlignmentPattern(centerJ, centerI, estimatedModuleSize);
       possibleCenters.addElement(point);
       if (resultPointCallback != null) {
         resultPointCallback.foundPossibleResultPoint(point);

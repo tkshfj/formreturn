@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.Serializable;
 import java.util.Map;
 import java.util.Random;
 
@@ -26,26 +25,25 @@ import com.ebstrada.formreturn.manager.ui.editor.dialog.FigSegmentSetup;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigSegmentPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
 import com.ebstrada.formreturn.manager.util.Misc;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.ebstrada.formreturn.manager.util.RandomGUID;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("segmentArea") public class FigSegment extends Fig
-    implements Serializable, NoObfuscation, MouseListener, RecognitionStructureFig {
+    implements MouseListener, RecognitionStructureFig {
 
     private static final long serialVersionUID = 1L;
 
     private SegmentContainer segmentContainer = new SegmentContainer();
 
+    @SuppressWarnings("unused")
     private String formGUID;
 
     private String segmentAreaGUID;
 
     private transient Font font;
 
+    @SuppressWarnings("unused")
     private transient Image segmentImage;
-
-    private transient Graphics segmentGraphics;
 
     private transient SegmentRecognitionStructure segmentRecognitionStructure;
 

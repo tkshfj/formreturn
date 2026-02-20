@@ -11,12 +11,9 @@ public class PublicationPopupMenu extends AbstractRecordPopupMenu {
 
     private static final long serialVersionUID = 1L;
 
-    private PublicationNode publicationNode;
-
     public PublicationPopupMenu(PublicationNode publicationNode, RecordTree tree,
         RecordTreeNode node) {
         super(publicationNode, tree, node);
-        this.publicationNode = publicationNode;
         initComponents();
     }
 

@@ -65,8 +65,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         this.totalPossibleScore = totalPossibleScore;
     }
 
-    public DefaultListModel getGradingRulesListModel() {
-        DefaultListModel dlm = new DefaultListModel();
+    public DefaultListModel<MarkingRule> getGradingRulesListModel() {
+        DefaultListModel<MarkingRule> dlm = new DefaultListModel<>();
 
         for (MarkingRule gradingRule : this.gradingRules) {
             dlm.addElement(gradingRule);

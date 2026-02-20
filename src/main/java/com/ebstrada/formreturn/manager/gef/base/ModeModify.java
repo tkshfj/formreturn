@@ -260,7 +260,7 @@ public class ModeModify extends FigModifyingModeImpl {
     /**
      * On mouse up the modification interaction is done.
      */
-    @Override public void mouseReleased(MouseEvent me) {
+    @SuppressWarnings("deprecation") @Override public void mouseReleased(MouseEvent me) {
         _dragInProcess = false;
         if (me.isConsumed()) {
             return;
@@ -301,6 +301,7 @@ public class ModeModify extends FigModifyingModeImpl {
         }
     }
 
+    @SuppressWarnings("unused")
     private void damageHighlightTrap() {
         if (_highlightTrap == null) {
             return;
@@ -313,6 +314,7 @@ public class ModeModify extends FigModifyingModeImpl {
         editor.damaged(r);
     }
 
+    @SuppressWarnings("deprecation")
     private void legal(int dx, int dy, SelectionManager selectionManager) {
 
         List<Fig> figs = selectionManager.getFigs();

@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial") public final class MacDesktopTabbedPane extends CloseTabbedPane
+public final class MacDesktopTabbedPane extends CloseTabbedPane
     implements DesktopTabbedPane {
 
     private DesktopTabbedPaneBackground desktopTabbedPaneBackground;

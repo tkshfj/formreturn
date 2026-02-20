@@ -40,8 +40,6 @@ import com.sun.media.jai.codec.TIFFDirectory;
 import com.sun.media.jai.codecimpl.TIFFImage;
 import com.sun.media.jai.codecimpl.TIFFImageDecoder;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
@@ -52,8 +50,6 @@ import com.ebstrada.formreturn.manager.util.preferences.PreferencesManager;
 import com.ebstrada.formreturn.manager.util.preferences.persistence.ApplicationStatePreferences;
 
 public class ImageUtil {
-
-    private static Log log = LogFactory.getLog(ImageUtil.class);
 
     public static final int WHITEOUT_BLACK_LUMINANCE_CUTOFF = 200;
 

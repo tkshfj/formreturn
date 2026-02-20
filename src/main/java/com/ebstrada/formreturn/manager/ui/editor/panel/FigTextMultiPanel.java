@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import com.ebstrada.formreturn.manager.gef.font.CachedFont;
 import com.ebstrada.formreturn.manager.gef.font.CachedFontManager;
+import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.presentation.FigText;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.ui.Main;
@@ -26,9 +27,9 @@ public class FigTextMultiPanel extends EditorMultiPanel {
 
     private static final long serialVersionUID = 1L;
 
-    private Vector selectedElements;
+    private Vector<Fig> selectedElements;
 
-    private DefaultComboBoxModel cachedFontList;
+    private DefaultComboBoxModel<String> cachedFontList;
 
     private CachedFontManager cachedFontManager;
 
@@ -53,7 +54,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
         initialized = true;
     }
 
-    public String getFontFamily(Vector selectedElements) throws Exception {
+    public String getFontFamily(Vector<Fig> selectedElements) throws Exception {
 
         if (selectedElements == null || selectedElements.size() <= 0) {
             return "";
@@ -78,7 +79,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
 
     }
 
-    public int getFontStyle(Vector selectedElements) throws Exception {
+    public int getFontStyle(Vector<Fig> selectedElements) throws Exception {
         if (selectedElements == null || selectedElements.size() <= 0) {
             return Font.PLAIN;
         }
@@ -101,7 +102,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
 
     }
 
-    public void updateFontComboBoxes(Vector selectedElements) {
+    public void updateFontComboBoxes(Vector<Fig> selectedElements) {
 
         if (initialized) {
             return;
@@ -113,11 +114,11 @@ public class FigTextMultiPanel extends EditorMultiPanel {
         try {
             fontFamily = getFontFamily(selectedElements);
             fontFamilyIndex =
-                ((DefaultComboBoxModel) fontFamilyComboBox.getModel()).getIndexOf(fontFamily);
+                ((DefaultComboBoxModel<String>) fontFamilyComboBox.getModel()).getIndexOf(fontFamily);
             fontFamilyComboBox.setSelectedIndex(fontFamilyIndex);
         } catch (Exception ex) {
-            DefaultComboBoxModel fontFamilyComboBoxModel =
-                (DefaultComboBoxModel) fontFamilyComboBox.getModel();
+            DefaultComboBoxModel<String> fontFamilyComboBoxModel =
+                (DefaultComboBoxModel<String>) fontFamilyComboBox.getModel();
             int indexOfFontFamilyDiffers =
                 fontFamilyComboBoxModel.getIndexOf(Localizer.localize("UI", "DiffersText"));
             if (indexOfFontFamilyDiffers == -1) {
@@ -153,8 +154,8 @@ public class FigTextMultiPanel extends EditorMultiPanel {
             fontStyleComboBox.setSelectedItem(selectedFontStyleItem);
         } catch (Exception e) {
             selectedFontStyleItem = Localizer.localize("UI", "DiffersText");
-            DefaultComboBoxModel fontStyleComboBoxModel =
-                (DefaultComboBoxModel) fontStyleComboBox.getModel();
+            DefaultComboBoxModel<String> fontStyleComboBoxModel =
+                (DefaultComboBoxModel<String>) fontStyleComboBox.getModel();
             int indexOfFontStyleDiffers =
                 fontStyleComboBoxModel.getIndexOf(Localizer.localize("UI", "DiffersText"));
             if (indexOfFontStyleDiffers == -1) {
@@ -183,7 +184,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
 
     }
 
-    public void updateAlignmentComboBox(Vector selectedFigs) {
+    public void updateAlignmentComboBox(Vector<Fig> selectedFigs) {
 
         if (selectedFigs == null || selectedFigs.size() <= 0) {
             return;
@@ -203,7 +204,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
         }
 
         if (alignmentDiffers) {
-            DefaultComboBoxModel dcbm = (DefaultComboBoxModel) alignmentComboBox.getModel();
+            DefaultComboBoxModel<String> dcbm = (DefaultComboBoxModel<String>) alignmentComboBox.getModel();
             int indexOfDiffers = dcbm.getIndexOf(Localizer.localize("UI", "DiffersText"));
             if (indexOfDiffers == -1) {
                 alignmentComboBox.addItem(Localizer.localize("UI", "DiffersText"));
@@ -217,13 +218,13 @@ public class FigTextMultiPanel extends EditorMultiPanel {
 
     }
 
-    @Override public void setSelectedElements(Vector selectedFigs) {
+    @Override public void setSelectedElements(Vector<Fig> selectedFigs) {
         selectedElements = selectedFigs;
         updateColorButtons(selectedFigs);
         updateFilledComboBox(selectedFigs);
     }
 
-    private void updateColorButtons(Vector selectedFigs) {
+    private void updateColorButtons(Vector<Fig> selectedFigs) {
 
         if (selectedFigs == null || selectedFigs.size() <= 0) {
             return;
@@ -274,7 +275,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
 
     }
 
-    private void updateFilledComboBox(Vector selectedFigs) {
+    private void updateFilledComboBox(Vector<Fig> selectedFigs) {
         if (selectedFigs.size() <= 0) {
             return;
         }
@@ -305,7 +306,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
     }
 
     private void fontFamilyComboBoxActionPerformed(ActionEvent e) {
-        String fontFamily = (String) ((JComboBox) e.getSource()).getSelectedItem();
+        String fontFamily = (String) ((JComboBox<?>) e.getSource()).getSelectedItem();
 
         if (fontFamily != null && fontFamily != Localizer.localize("UI", "DiffersText")) {
             fontStyleComboBox.setModel(
@@ -439,7 +440,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
     }
 
     private void alignmentComboBoxActionPerformed(ActionEvent e) {
-        String alignment = (String) ((JComboBox) e.getSource()).getSelectedItem();
+        String alignment = (String) ((JComboBox<?>) e.getSource()).getSelectedItem();
         for (Object o : selectedElements) {
             FigText fig = (FigText) o;
             fig.setJustificationByName(alignment);
@@ -500,18 +501,18 @@ public class FigTextMultiPanel extends EditorMultiPanel {
         // //GEN-BEGIN:initComponents
         panel1 = new JPanel();
         fontFamilyLabel = new JLabel();
-        fontFamilyComboBox = new JComboBox();
+        fontFamilyComboBox = new JComboBox<>();
         fontStyleLabel = new JLabel();
-        fontStyleComboBox = new JComboBox();
+        fontStyleComboBox = new JComboBox<>();
         fontSizeLabel = new JLabel();
-        fontSizeComboBox = new JComboBox();
+        fontSizeComboBox = new JComboBox<>();
         alignmentLabel = new JLabel();
-        alignmentComboBox = new JComboBox();
+        alignmentComboBox = new JComboBox<>();
         colorLabel = new JLabel();
         foregroundColorButton = new JButton();
         backgroundColorButton = new JButton();
         backgroundLabel = new JLabel();
-        backgroundFilledComboBox = new JComboBox();
+        backgroundFilledComboBox = new JComboBox<>();
 
         //======== this ========
         setAlignmentX(0.0F);
@@ -582,7 +583,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
 
             //---- fontSizeComboBox ----
             fontSizeComboBox.setEditable(true);
-            fontSizeComboBox.setModel(new DefaultComboBoxModel(
+            fontSizeComboBox.setModel(new DefaultComboBoxModel<>(
                 new String[] {"4", "6", "8", "9", "10", "11", "12", "13", "14", "16", "18", "20",
                     "22", "24", "28", "32", "36", "40", "48", "56", "64", "72", "144"}));
             fontSizeComboBox.setSelectedIndex(4);
@@ -607,7 +608,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
 
             //---- alignmentComboBox ----
             alignmentComboBox.setModel(
-                new DefaultComboBoxModel(new String[] {"Left", "Center", "Right", "Justified"}));
+                new DefaultComboBoxModel<>(new String[] {"Left", "Center", "Right", "Justified"}));
             alignmentComboBox.setFont(UIManager.getFont("ComboBox.font"));
             alignmentComboBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -674,7 +675,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
                     GridBagConstraints.HORIZONTAL, new Insets(0, 0, 5, 0), 0, 0));
 
             //---- backgroundFilledComboBox ----
-            backgroundFilledComboBox.setModel(new DefaultComboBoxModel(
+            backgroundFilledComboBox.setModel(new DefaultComboBoxModel<>(
                 new String[] {"Not Filled", "Filled", "Different Values"}));
             backgroundFilledComboBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -693,18 +694,18 @@ public class FigTextMultiPanel extends EditorMultiPanel {
     // //GEN-BEGIN:variables
     private JPanel panel1;
     private JLabel fontFamilyLabel;
-    private JComboBox fontFamilyComboBox;
+    private JComboBox<String> fontFamilyComboBox;
     private JLabel fontStyleLabel;
-    private JComboBox fontStyleComboBox;
+    private JComboBox<String> fontStyleComboBox;
     private JLabel fontSizeLabel;
-    private JComboBox fontSizeComboBox;
+    private JComboBox<String> fontSizeComboBox;
     private JLabel alignmentLabel;
-    private JComboBox alignmentComboBox;
+    private JComboBox<String> alignmentComboBox;
     private JLabel colorLabel;
     private JButton foregroundColorButton;
     private JButton backgroundColorButton;
     private JLabel backgroundLabel;
-    private JComboBox backgroundFilledComboBox;
+    private JComboBox<String> backgroundFilledComboBox;
     // JFormDesigner - End of variables declaration //GEN-END:variables
 
     public void cancelEmbed() {

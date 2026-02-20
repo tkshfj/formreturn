@@ -24,6 +24,7 @@ public class TableFilterPanel extends JPanel {
 
     private BasicComboPopup pageSelectionPopup;
 
+    @SuppressWarnings("rawtypes")
     private JComboBox pageSelectionList;
 
     public TableFilterPanel() {
@@ -117,6 +118,7 @@ public class TableFilterPanel extends JPanel {
         }
     }
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private void pageNumberLabelMouseClicked(MouseEvent e) {
 
         int numberOfPages = getTotalNumberOfPages();

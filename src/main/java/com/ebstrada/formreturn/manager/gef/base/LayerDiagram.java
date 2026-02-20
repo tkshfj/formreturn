@@ -59,7 +59,7 @@ public class LayerDiagram extends Layer {
         _onMenu = true;
     }
 
-    @Override public Enumeration elements() {
+    @Override public Enumeration<?> elements() {
         return Collections.enumeration(_contents);
     }
 

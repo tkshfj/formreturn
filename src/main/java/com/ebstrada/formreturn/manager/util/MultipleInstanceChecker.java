@@ -49,7 +49,7 @@ public class MultipleInstanceChecker {
         public static final boolean readRegistry(String location, String key) {
             try {
                 Process process =
-                    Runtime.getRuntime().exec("reg query " + '"' + location + "\" /v " + key);
+                    Runtime.getRuntime().exec(new String[] {"reg", "query", location, "/v", key});
                 StreamReader reader = new StreamReader(process.getInputStream());
                 reader.start();
                 process.waitFor();

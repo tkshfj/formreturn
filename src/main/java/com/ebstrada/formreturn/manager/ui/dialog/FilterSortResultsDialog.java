@@ -32,7 +32,7 @@ public class FilterSortResultsDialog extends JDialog {
     }
 
     public void restore() {
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         dcbm.addElement(Localizer.localize("UI", "SortFilterActiveText"));
         dcbm.addElement(Localizer.localize("UI", "SortFilterInactiveText"));
         activatedComboBox.setModel(dcbm);
@@ -42,7 +42,7 @@ public class FilterSortResultsDialog extends JDialog {
 
     public void restore(Vector<OrderByFilter> orderByFilters) {
 
-        DefaultComboBoxModel fieldNameComboBoxModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> fieldNameComboBoxModel = new DefaultComboBoxModel<>();
 
         for (int i = 0; i < orderByFilters.size(); i++) {
             OrderByFilter orderByFilter = orderByFilters.get(i);
@@ -152,11 +152,11 @@ public class FilterSortResultsDialog extends JDialog {
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         activatedLabel = new JLabel();
-        activatedComboBox = new JComboBox();
+        activatedComboBox = new JComboBox<>();
         fieldLabel = new JLabel();
-        fieldNameComboBox = new JComboBox();
+        fieldNameComboBox = new JComboBox<>();
         sortDirectionLabel = new JLabel();
-        directionComboBox = new JComboBox();
+        directionComboBox = new JComboBox<>();
         buttonBar = new JPanel();
         applyButton = new JButton();
         defaultButton = new JButton();
@@ -226,7 +226,7 @@ public class FilterSortResultsDialog extends JDialog {
 
                 //---- directionComboBox ----
                 directionComboBox
-                    .setModel(new DefaultComboBoxModel(new String[] {"Ascending", "Descending"}));
+                    .setModel(new DefaultComboBoxModel<>(new String[] {"Ascending", "Descending"}));
                 directionComboBox.setFont(UIManager.getFont("ComboBox.font"));
                 contentPanel.add(directionComboBox,
                     new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
@@ -290,11 +290,11 @@ public class FilterSortResultsDialog extends JDialog {
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel activatedLabel;
-    private JComboBox activatedComboBox;
+    private JComboBox<String> activatedComboBox;
     private JLabel fieldLabel;
-    private JComboBox fieldNameComboBox;
+    private JComboBox<String> fieldNameComboBox;
     private JLabel sortDirectionLabel;
-    private JComboBox directionComboBox;
+    private JComboBox<String> directionComboBox;
     private JPanel buttonBar;
     private JButton applyButton;
     private JButton defaultButton;

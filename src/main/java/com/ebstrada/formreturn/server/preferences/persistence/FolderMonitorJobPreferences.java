@@ -1,9 +1,6 @@
 package com.ebstrada.formreturn.server.preferences.persistence;
 
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
-
-public abstract class FolderMonitorJobPreferences extends TaskSchedulerJobPreferences
-    implements NoObfuscation {
+public abstract class FolderMonitorJobPreferences extends TaskSchedulerJobPreferences {
 
     private String sourceDirectory;
 

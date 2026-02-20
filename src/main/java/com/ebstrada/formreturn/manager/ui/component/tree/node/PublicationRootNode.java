@@ -17,7 +17,7 @@ import com.ebstrada.formreturn.manager.ui.component.tree.node.menu.PublicationRo
 
 public class PublicationRootNode extends RecordNode {
 
-    @Override public void loadChildren() throws Exception {
+    @SuppressWarnings("unchecked") @Override public void loadChildren() throws Exception {
 
         EntityManager entityManager = Main.getInstance().getJPAConfiguration().getEntityManager();
         try {

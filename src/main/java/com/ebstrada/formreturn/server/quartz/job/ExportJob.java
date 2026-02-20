@@ -227,8 +227,12 @@ public class ExportJob extends TaskSchedulerJob {
                 }
                 xslTemplate = xmlExportPreferences.getSelectedXSLTemplate();
                 entityManager = Main.getInstance().getJPAConfiguration().getEntityManager();
-                pxsl = entityManager.find(PublicationXSL.class, xslTemplate.getPublicationXSLId());
-                xslData = pxsl.getXslData();
+                try {
+                    pxsl = entityManager.find(PublicationXSL.class, xslTemplate.getPublicationXSLId());
+                    xslData = pxsl.getXslData();
+                } finally {
+                    entityManager.close();
+                }
                 createXSLReport(exportOptions.getPublicationIds(), xslData, pdfFileStr,
                     quartzMessageNotification, filters);
 
@@ -385,7 +389,8 @@ public class ExportJob extends TaskSchedulerJob {
             return false;
         } else {
             boolean hasTransaction = false;
-            while (hasTransaction == false) {
+            int retryCount = 0;
+            while (!hasTransaction && retryCount < 30) {
                 try {
                     if (entityManager.getTransaction().isActive()) {
                         entityManager.getTransaction().rollback();
@@ -395,10 +400,17 @@ public class ExportJob extends TaskSchedulerJob {
                     hasTransaction = true;
                 } catch (Exception ex) {
                     logger.warn(ex.getLocalizedMessage(), ex);
+                    retryCount++;
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return false;
+                    }
                 }
             }
+            return hasTransaction;
         }
-        return true;
     }
 
     protected void closeEntityManager(EntityManager entityManager) {
@@ -417,36 +429,32 @@ public class ExportJob extends TaskSchedulerJob {
     // check if the file is still being updated, do not process if it is
     protected boolean isFileComplete(File imageFile, HashMap<String, Long> recentFileTimes) {
 
-        FileChannel channel;
-        try {
-            channel = new RandomAccessFile(imageFile, "rw").getChannel();
+        boolean isComplete = false;
+
+        try (RandomAccessFile raf = new RandomAccessFile(imageFile, "rw");
+             FileChannel channel = raf.getChannel()) {
+            FileLock lock = null;
+            try {
+                // Get an exclusive lock on the whole file
+                lock = channel.lock();
+                isComplete = true;
+            } catch (IOException e) {
+                isComplete = false;
+            } finally {
+                if (lock != null) {
+                    try {
+                        lock.release();
+                    } catch (IOException e) {
+                        logger.warn(e.getLocalizedMessage(), e);
+                    }
+                }
+            }
         } catch (FileNotFoundException e) {
             logger.warn(e.getLocalizedMessage(), e);
             return false;
-        }
-
-        FileLock lock = null;
-        boolean isComplete = false;
-
-        try {
-            // Get an exclusive lock on the whole file
-            lock = channel.lock();
-            isComplete = true;
         } catch (IOException e) {
-            isComplete = false;
-        } finally {
-            if (lock != null) {
-                try {
-                    lock.release();
-                } catch (IOException e) {
-                    logger.warn(e.getLocalizedMessage(), e);
-                }
-            }
-            try {
-                channel.close();
-            } catch (IOException e) {
-                logger.warn(e.getLocalizedMessage(), e);
-            }
+            logger.warn(e.getLocalizedMessage(), e);
+            return false;
         }
 
         if (!isComplete) {

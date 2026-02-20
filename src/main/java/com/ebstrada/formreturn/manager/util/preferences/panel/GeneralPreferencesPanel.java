@@ -333,7 +333,7 @@ public class GeneralPreferencesPanel extends JPanel {
         clearRecentFilesLabel = new JLabel();
         clearRecentlyOpenedFilesButton = new JButton();
         panel18 = new JPanel();
-        languageComboBox = new JComboBox();
+        languageComboBox = new JComboBox<>();
         changeLanguageButton = new JButton();
         panel2 = new JPanel();
         fontDirectoriesHeadingLabel = new JLabel();
@@ -843,7 +843,7 @@ public class GeneralPreferencesPanel extends JPanel {
     private JLabel clearRecentFilesLabel;
     private JButton clearRecentlyOpenedFilesButton;
     private JPanel panel18;
-    private JComboBox languageComboBox;
+    private JComboBox<String> languageComboBox;
     private JButton changeLanguageButton;
     private JPanel panel2;
     private JLabel fontDirectoriesHeadingLabel;

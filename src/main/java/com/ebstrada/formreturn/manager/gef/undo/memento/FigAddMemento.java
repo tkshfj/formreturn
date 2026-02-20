@@ -11,13 +11,11 @@ public class FigAddMemento extends Memento {
     private Layer lay;
     private Fig fig;
     private Fig encFig;
-    private boolean vis;
 
     public FigAddMemento(Fig f) {
         fig = f;
         lay = fig.getLayer();
         encFig = f.getEnclosingFig();
-        vis = fig.isVisible();
     }
 
     @Override public void redo() {

@@ -64,7 +64,7 @@ public class SegmentSetupDialog extends javax.swing.JDialog {
     private void setSegmentNames() {
         List<String> segmentSizeNames = PreferencesManager.getSegmentSizeNames();
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         for (String segmentSizeName : segmentSizeNames) {
             dcbm.addElement(segmentSizeName);
         }
@@ -244,10 +244,10 @@ public class SegmentSetupDialog extends javax.swing.JDialog {
         segmentName = new JTextField();
         panel10 = new JPanel();
         presetSizeLabel = new JLabel();
-        presetSizeComboBox = new JComboBox();
+        presetSizeComboBox = new JComboBox<>();
         measurementLabel = new JLabel();
-        measurementComboBox = new JComboBox();
-        orientation = new JComboBox();
+        measurementComboBox = new JComboBox<>();
+        orientation = new JComboBox<>();
         orientationLabel = new JLabel();
         panel6 = new JPanel();
         widthLabel = new JLabel();
@@ -367,7 +367,7 @@ public class SegmentSetupDialog extends javax.swing.JDialog {
                         new Insets(0, 0, 5, 5), 0, 0));
 
                     //---- measurementComboBox ----
-                    measurementComboBox.setModel(new DefaultComboBoxModel(new String[] {
+                    measurementComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                         "Pixels",
                         "Millimeters",
                         "Centimeters",
@@ -385,7 +385,7 @@ public class SegmentSetupDialog extends javax.swing.JDialog {
                         new Insets(0, 0, 5, 0), 0, 0));
 
                     //---- orientation ----
-                    orientation.setModel(new DefaultComboBoxModel(new String[] {
+                    orientation.setModel(new DefaultComboBoxModel<>(new String[] {
                         "Portrait",
                         "Landscape"
                     }));
@@ -715,10 +715,10 @@ public class SegmentSetupDialog extends javax.swing.JDialog {
     private JTextField segmentName;
     private JPanel panel10;
     private JLabel presetSizeLabel;
-    private JComboBox presetSizeComboBox;
+    private JComboBox<String> presetSizeComboBox;
     private JLabel measurementLabel;
-    private JComboBox measurementComboBox;
-    private JComboBox orientation;
+    private JComboBox<String> measurementComboBox;
+    private JComboBox<String> orientation;
     private JLabel orientationLabel;
     private JPanel panel6;
     private JLabel widthLabel;

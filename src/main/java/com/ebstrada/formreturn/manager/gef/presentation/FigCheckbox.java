@@ -10,12 +10,8 @@ import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.ebstrada.formreturn.manager.gef.font.CachedFontManager;
 import com.ebstrada.formreturn.manager.gef.graph.presentation.JGraph;
@@ -34,19 +30,16 @@ import com.ebstrada.formreturn.manager.ui.editor.panel.EditorMultiPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigCheckboxMultiPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.FigCheckboxPanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("checkbox") public class FigCheckbox extends Fig
-    implements Serializable, NoObfuscation, MouseListener, RecognitionStructureFig {
+    implements MouseListener, RecognitionStructureFig {
 
     private static final long serialVersionUID = 1L;
 
     public static final int READ_STRING_LEFT_TO_RIGHT = 0;
 
     public static final int READ_STRING_TOP_TO_BOTTOM = 1;
-
-    private static Log log = LogFactory.getLog(FigCheckbox.class);
 
     private int boxWidth = 16;
 

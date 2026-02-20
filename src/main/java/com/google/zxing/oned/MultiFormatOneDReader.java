@@ -19,7 +19,6 @@ package com.google.zxing.oned;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.NotFoundException;
-import com.google.zxing.Reader;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.BitArray;
@@ -34,14 +33,15 @@ import java.util.Vector;
  */
 public final class MultiFormatOneDReader extends OneDReader {
 
-  private final Vector readers;
+  private final Vector<OneDReader> readers;
 
   public MultiFormatOneDReader(HashMap<DecodeHintType, Object> hints) {
-    Vector possibleFormats = hints == null ? null :
-        (Vector) hints.get(DecodeHintType.POSSIBLE_FORMATS);
+    @SuppressWarnings("unchecked")
+    Vector<BarcodeFormat> possibleFormats = hints == null ? null :
+        (Vector<BarcodeFormat>) hints.get(DecodeHintType.POSSIBLE_FORMATS);
     boolean useCode39CheckDigit = hints != null &&
         hints.get(DecodeHintType.ASSUME_CODE_39_CHECK_DIGIT) != null;
-    readers = new Vector();
+    readers = new Vector<OneDReader>();
     if (possibleFormats != null) {
       if (possibleFormats.contains(BarcodeFormat.EAN_13) ||
           possibleFormats.contains(BarcodeFormat.UPC_A) ||
@@ -74,7 +74,7 @@ public final class MultiFormatOneDReader extends OneDReader {
   public Result decodeRow(int rowNumber, BitArray row, HashMap<DecodeHintType, Object> hints) throws NotFoundException {
     int size = readers.size();
     for (int i = 0; i < size; i++) {
-      OneDReader reader = (OneDReader) readers.elementAt(i);
+      OneDReader reader = readers.elementAt(i);
       try {
         return reader.decodeRow(rowNumber, row, hints);
       } catch (ReaderException re) {
@@ -88,7 +88,7 @@ public final class MultiFormatOneDReader extends OneDReader {
   public void reset() {
     int size = readers.size();
     for (int i = 0; i < size; i++) {
-      Reader reader = (Reader) readers.elementAt(i);
+      OneDReader reader = readers.elementAt(i);
       reader.reset();
     }
   }

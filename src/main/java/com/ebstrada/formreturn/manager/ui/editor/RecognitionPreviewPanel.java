@@ -1035,17 +1035,6 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
     private void scanImageButtonActionPerformed(ActionEvent e) {
 
         ApplicationStatePreferences applicationState = PreferencesManager.getApplicationState();
-        String classPath = System.getProperty("java.class.path");
-
-        String[] classPathArray = classPath.split(System.getProperty("path.separator"));
-        String firstPath = "";
-        if (classPathArray.length > 1) {
-            firstPath = classPathArray[0];
-        } else {
-            firstPath = classPath;
-        }
-        ProcessBuilder processBuilder;
-        String endsWith = "lib" + System.getProperty("file.separator") + "formreturn.jar";
 
         ScannerClientDialog scd = null;
 
@@ -1123,7 +1112,7 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
         recognitionPreviewTabbedPane = new JTabbedPane();
         printPreviewPanel = new JPanel();
         panel1 = new JPanel();
-        zoomBox = new JComboBox();
+        zoomBox = new JComboBox<>();
         zoomInLabel = new JLabel();
         zoomOutLabel = new JLabel();
         setPreviewFieldDataButton = new JButton();
@@ -1141,7 +1130,7 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
         scrollPane2 = new JScrollPane();
         testPageImageLabel = new JImageLabel();
         panel2 = new JPanel();
-        testImageZoomBox = new JComboBox();
+        testImageZoomBox = new JComboBox<>();
         testImageZoomInLabel = new JLabel();
         testImageZoomOutLabel = new JLabel();
 
@@ -1186,7 +1175,7 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
                     ((GridBagLayout) panel1.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
 
                     //---- zoomBox ----
-                    zoomBox.setModel(new DefaultComboBoxModel(
+                    zoomBox.setModel(new DefaultComboBoxModel<>(
                         new String[] {"10%", "25%", "50%", "75%", "100%", "125%", "150%", "200%",
                             "250%", "350%", "500%", "700%", "1000%"}));
                     zoomBox.setSelectedIndex(4);
@@ -1411,7 +1400,7 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
                     ((GridBagLayout) panel2.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
 
                     //---- testImageZoomBox ----
-                    testImageZoomBox.setModel(new DefaultComboBoxModel(
+                    testImageZoomBox.setModel(new DefaultComboBoxModel<>(
                         new String[] {"10%", "25%", "50%", "75%", "100%", "125%", "150%", "200%",
                             "250%", "350%", "500%", "700%", "1000%"}));
                     testImageZoomBox.setSelectedIndex(4);
@@ -1470,7 +1459,7 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
     private JTabbedPane recognitionPreviewTabbedPane;
     private JPanel printPreviewPanel;
     private JPanel panel1;
-    private JComboBox zoomBox;
+    private JComboBox<String> zoomBox;
     private JLabel zoomInLabel;
     private JLabel zoomOutLabel;
     private JButton setPreviewFieldDataButton;
@@ -1488,7 +1477,7 @@ public class RecognitionPreviewPanel extends JPanel implements IScanEventHandler
     private JScrollPane scrollPane2;
     private JImageLabel testPageImageLabel;
     private JPanel panel2;
-    private JComboBox testImageZoomBox;
+    private JComboBox<String> testImageZoomBox;
     private JLabel testImageZoomInLabel;
     private JLabel testImageZoomOutLabel;
     // JFormDesigner - End of variables declaration //GEN-END:variables

@@ -49,8 +49,6 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
 
     private ScannerPreferences scannerPreferences;
 
-    private LinkedTreeMap<String, Object> documentTypeMap;
-
     public ICAPanel() {
         initComponents();
         localize();
@@ -63,18 +61,19 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
         tabbedPane.setTitleAt(1, Localizer.localize("UI", "AdvancedSettingsTabTitle"));
 
         // advanced controls
-        DefaultComboBoxModel colorModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> colorModel = new DefaultComboBoxModel<>();
         colorModel.addElement(Localizer.localize("UI", "Color1"));
         colorModel.addElement(Localizer.localize("UI", "Color2"));
         colorComboBox.setModel(colorModel);
 
-        DefaultComboBoxModel duplexModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> duplexModel = new DefaultComboBoxModel<>();
         duplexModel.addElement(Localizer.localize("UI", "Duplex1"));
         duplexModel.addElement(Localizer.localize("UI", "Duplex2"));
         duplexComboBox.setModel(duplexModel);
 
     }
 
+    @SuppressWarnings("unchecked")
     public void initScanner() throws Exception {
 
         try {
@@ -110,7 +109,6 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
         Collection<Object> documentTypes = supportedDocumentTypes.values();
 
         this.pageSizes = (String[]) documentTypes.toArray(new String[documentTypes.size()]);
-        this.documentTypeMap = supportedDocumentTypes;
 
         for (String size : pageSizes) {
             pageSizeComboBox.addItem(size);
@@ -319,19 +317,19 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
         formReturnScannerIconLabel = new JLabel();
         tabbedPane = new JTabbedPane();
         scannerActionsPanel = new JPanel();
-        deviceComboBox = new JComboBox();
+        deviceComboBox = new JComboBox<>();
         scanButton = new JButton();
         cancelButton = new JButton();
         scannerBusyLabel = new JXBusyLabel();
         advancedSettingsPanel = new JPanel();
         resolutionLabel = new JLabel();
-        resolutionComboBox = new JComboBox();
+        resolutionComboBox = new JComboBox<>();
         colorLabel = new JLabel();
-        colorComboBox = new JComboBox();
+        colorComboBox = new JComboBox<>();
         pageSizeLabel = new JLabel();
-        pageSizeComboBox = new JComboBox();
+        pageSizeComboBox = new JComboBox<>();
         duplexLabel = new JLabel();
-        duplexComboBox = new JComboBox();
+        duplexComboBox = new JComboBox<>();
         blackThresholdLabel = new JLabel();
         panel3 = new JPanel();
         blackThresholdSpinner = new JSpinner();
@@ -455,7 +453,7 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
                                 GridBagConstraints.NONE, new Insets(0, 0, 5, 5), 0, 0));
 
                         // ---- colorComboBox ----
-                        colorComboBox.setModel(new DefaultComboBoxModel(
+                        colorComboBox.setModel(new DefaultComboBoxModel<>(
                             new String[] {"Black & White", "Grayscale", "Color"}));
                         colorComboBox.setFont(UIManager.getFont("ComboBox.font"));
                         advancedSettingsPanel.add(colorComboBox,
@@ -481,7 +479,7 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
                                 GridBagConstraints.NONE, new Insets(0, 0, 5, 5), 0, 0));
 
                         // ---- duplexComboBox ----
-                        duplexComboBox.setModel(new DefaultComboBoxModel(
+                        duplexComboBox.setModel(new DefaultComboBoxModel<>(
                             new String[] {"Scan Single Side", "Scan Both Sides"}));
                         duplexComboBox.setFont(UIManager.getFont("ComboBox.font"));
                         advancedSettingsPanel.add(duplexComboBox,
@@ -605,19 +603,19 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
     private JLabel formReturnScannerIconLabel;
     private JTabbedPane tabbedPane;
     private JPanel scannerActionsPanel;
-    private JComboBox deviceComboBox;
+    private JComboBox<String> deviceComboBox;
     private JButton scanButton;
     private JButton cancelButton;
     private JXBusyLabel scannerBusyLabel;
     private JPanel advancedSettingsPanel;
     private JLabel resolutionLabel;
-    private JComboBox resolutionComboBox;
+    private JComboBox<String> resolutionComboBox;
     private JLabel colorLabel;
-    private JComboBox colorComboBox;
+    private JComboBox<String> colorComboBox;
     private JLabel pageSizeLabel;
-    private JComboBox pageSizeComboBox;
+    private JComboBox<String> pageSizeComboBox;
     private JLabel duplexLabel;
-    private JComboBox duplexComboBox;
+    private JComboBox<String> duplexComboBox;
     private JLabel blackThresholdLabel;
     private JPanel panel3;
     private JSpinner blackThresholdSpinner;

@@ -5,7 +5,6 @@ import com.ebstrada.aggregation.exception.InvalidRulePartException;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("serial")
 public class OrCondition extends ArrayList<AndCondition> {
     
     private ArrayList<AndCondition> andConditions = new ArrayList<AndCondition>();

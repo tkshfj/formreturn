@@ -7,7 +7,7 @@ import javax.swing.border.*;
 
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 
-@SuppressWarnings("serial") public class NewTaskSelectionDialog extends JDialog {
+public class NewTaskSelectionDialog extends JDialog {
 
     public static final int NONE_SELECTED = 0;
 
@@ -43,6 +43,7 @@ import com.ebstrada.formreturn.manager.gef.util.Localizer;
         dispose();
     }
 
+    @SuppressWarnings("unused")
     private void pluginTaskButtonActionPerformed(ActionEvent e) {
         this.selection = CUSTOM;
         dispose();

@@ -126,7 +126,7 @@ public class DocumentPackage {
         out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         getGraph().getEditor().preSave();
         ObjectOutputStream oos =
-            Main.getInstance().getXstream().createObjectOutputStream(out, rootNodeName);
+            Main.getXstream().createObjectOutputStream(out, rootNodeName);
         oos.writeObject(document);
         getGraph().getEditor().postSave();
         oos.close();
@@ -379,7 +379,7 @@ public class DocumentPackage {
                 tfos.close();
                 if (zipEntry.getName().equals("document.xml")) {
                     FileInputStream fi = new FileInputStream(tempFile);
-                    ObjectInputStream s = Main.getInstance().getXstream()
+                    ObjectInputStream s = Main.getXstream()
                         .createObjectInputStream(new InputStreamReader(fi, "UTF-8"));
                     setDocument((Document) s.readObject());
                     if (s != null) {

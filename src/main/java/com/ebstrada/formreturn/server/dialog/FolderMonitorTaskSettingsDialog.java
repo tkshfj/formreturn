@@ -32,7 +32,7 @@ public class FolderMonitorTaskSettingsDialog extends JDialog {
     }
 
     private void localize() {
-        typeOfMonitorComboBox.setModel(new DefaultComboBoxModel(
+        typeOfMonitorComboBox.setModel(new DefaultComboBoxModel<>(
             new String[] {Localizer.localize("Server", "FolderMonitorType0"),
                 Localizer.localize("Server", "FolderMonitorType1")}));
     }
@@ -177,7 +177,7 @@ public class FolderMonitorTaskSettingsDialog extends JDialog {
         descriptionTextField = new JTextField();
         typeOfMonitorLabel = new JLabel();
         folderMonitorTypePanel = new JPanel();
-        typeOfMonitorComboBox = new JComboBox();
+        typeOfMonitorComboBox = new JComboBox<>();
         folderLocationsPanel = new JPanel();
         unprocessedFolderLabel = new JLabel();
         unprocessedFolderTextField = new JTextField();
@@ -509,7 +509,7 @@ public class FolderMonitorTaskSettingsDialog extends JDialog {
     private JTextField descriptionTextField;
     private JLabel typeOfMonitorLabel;
     private JPanel folderMonitorTypePanel;
-    private JComboBox typeOfMonitorComboBox;
+    private JComboBox<String> typeOfMonitorComboBox;
     private JPanel folderLocationsPanel;
     private JLabel unprocessedFolderLabel;
     private JTextField unprocessedFolderTextField;

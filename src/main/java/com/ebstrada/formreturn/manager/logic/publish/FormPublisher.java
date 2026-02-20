@@ -240,6 +240,7 @@ public class FormPublisher {
     }
 
 
+    @SuppressWarnings("unchecked")
     private void exportPublication(EntityManager entityManager, Publication publication,
         MessageNotification messageNotification) throws Exception {
 
@@ -356,6 +357,7 @@ public class FormPublisher {
 
     }
 
+    @SuppressWarnings("unchecked")
     public void createForms(Document document, MessageNotification messageNotification)
         throws Exception {
         EntityManager entityManager = Main.getInstance().getJPAConfiguration().getEntityManager();

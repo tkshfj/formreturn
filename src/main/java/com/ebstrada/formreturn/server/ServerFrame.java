@@ -408,7 +408,6 @@ public class ServerFrame extends JFrame {
         panel8 = new JPanel();
         processingQueueStatusPanel = new JPanel();
         processingQueueStatsPanel1 = new ProcessingQueueStatsPanel();
-        label7 = new JLabel();
         serverTabbedPane = new JTabbedPane();
         databasePanel = new JPanel();
         databaseStatusPanel = new JPanel();
@@ -446,11 +445,11 @@ public class ServerFrame extends JFrame {
         uploadImageFolderButton = new JButton();
         uploadFolderLabel = new JLabel();
         uploadImageButton = new JButton();
-        taskSchedulerPanel = taskSchedulerPanel;
+        // taskSchedulerPanel initialized elsewhere
         panel2 = new JPanel();
         panel7 = new JPanel();
         helpLabel = new JHelpLabel();
-        languageComboBox = new JComboBox();
+        languageComboBox = new JComboBox<>();
         changeLanguageButton = new JButton();
         restartServerButton = new JButton();
         closeServerButton = new JButton();
@@ -1066,7 +1065,6 @@ public class ServerFrame extends JFrame {
     private JPanel panel8;
     private JPanel processingQueueStatusPanel;
     private ProcessingQueueStatsPanel processingQueueStatsPanel1;
-    private JLabel label7;
     private JTabbedPane serverTabbedPane;
     private JPanel databasePanel;
     private JPanel databaseStatusPanel;
@@ -1108,7 +1106,7 @@ public class ServerFrame extends JFrame {
     private JPanel panel2;
     private JPanel panel7;
     private JHelpLabel helpLabel;
-    private JComboBox languageComboBox;
+    private JComboBox<String> languageComboBox;
     private JButton changeLanguageButton;
     private JButton restartServerButton;
     private JButton closeServerButton;

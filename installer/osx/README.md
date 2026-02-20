@@ -1,5 +1,5 @@
-Note: mac packaging requires appbundler-1.0ea.jar in this directory.
+Note: macOS app bundling uses jpackage (built into JDK 14+).
 
-To install it, download and create the jar with `mvn clean install` from https://github.com/TheInfiniteKind/appbundler
-
-This file has not been included since it is GPL licensed. The pom.xml needs to be refactored to use the maven plugin for this instead.
+The `installer/pom.xml` invokes jpackage during the package phase to create
+`FormReturn.app` with an embedded JDK runtime. No external tools are required
+beyond a JDK 21+ installation.

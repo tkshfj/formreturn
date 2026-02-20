@@ -66,6 +66,7 @@ public class SelectInvertAction extends AbstractAction {
         super(localize ? Localizer.localize("GefBase", name) : name, icon);
     }
 
+    @SuppressWarnings("deprecation")
     public void actionPerformed(ActionEvent e) {
         Editor ce = Globals.curEditor();
         List<Fig> selected = ce.getSelectionManager().getFigs();

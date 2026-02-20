@@ -14,7 +14,7 @@ import com.ebstrada.formreturn.manager.gef.util.Localizer;
 import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.server.quartz.ITriggerTypes;
 
-@SuppressWarnings("serial") public class VacuumTaskSettingsDialog extends JDialog {
+public class VacuumTaskSettingsDialog extends JDialog {
 
     public static final int CANCEL = 0;
 

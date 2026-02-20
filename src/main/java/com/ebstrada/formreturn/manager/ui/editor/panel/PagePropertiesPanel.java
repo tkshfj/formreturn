@@ -43,7 +43,7 @@ public class PagePropertiesPanel extends JXTaskPane {
     private void setFormNames() {
         List<String> formSizeNames = PreferencesManager.getFormSizeNames();
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         for (String formSizeName : formSizeNames) {
             dcbm.addElement(formSizeName);
         }
@@ -317,11 +317,11 @@ public class PagePropertiesPanel extends JXTaskPane {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel4 = new JPanel();
         measurementLabel = new JLabel();
-        measurementComboBox = new JComboBox();
+        measurementComboBox = new JComboBox<>();
         orientationLabel = new JLabel();
-        orientationComboBox = new JComboBox();
+        orientationComboBox = new JComboBox<>();
         presetSizeLabel = new JLabel();
-        presetSizeComboBox = new JComboBox();
+        presetSizeComboBox = new JComboBox<>();
         widthLabel = new JLabel();
         widthSpinner = new JSpinner();
         heightLabel = new JLabel();
@@ -368,7 +368,7 @@ public class PagePropertiesPanel extends JXTaskPane {
                     GridBagConstraints.BOTH, new Insets(0, 0, 3, 0), 0, 0));
 
             //---- measurementComboBox ----
-            measurementComboBox.setModel(new DefaultComboBoxModel(
+            measurementComboBox.setModel(new DefaultComboBoxModel<>(
                 new String[] {"Pixels", "Millimeters", "Centimeters", "Inches"}));
             measurementComboBox.setFont(UIManager.getFont("ComboBox.font"));
             measurementComboBox.addActionListener(new ActionListener() {
@@ -389,7 +389,7 @@ public class PagePropertiesPanel extends JXTaskPane {
 
             //---- orientationComboBox ----
             orientationComboBox
-                .setModel(new DefaultComboBoxModel(new String[] {"Portrait", "Landscape"}));
+                .setModel(new DefaultComboBoxModel<>(new String[] {"Portrait", "Landscape"}));
             orientationComboBox.setFont(UIManager.getFont("ComboBox.font"));
             orientationComboBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -524,11 +524,11 @@ public class PagePropertiesPanel extends JXTaskPane {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel4;
     private JLabel measurementLabel;
-    private JComboBox measurementComboBox;
+    private JComboBox<String> measurementComboBox;
     private JLabel orientationLabel;
-    private JComboBox orientationComboBox;
+    private JComboBox<String> orientationComboBox;
     private JLabel presetSizeLabel;
-    private JComboBox presetSizeComboBox;
+    private JComboBox<String> presetSizeComboBox;
     private JLabel widthLabel;
     private JSpinner widthSpinner;
     private JLabel heightLabel;

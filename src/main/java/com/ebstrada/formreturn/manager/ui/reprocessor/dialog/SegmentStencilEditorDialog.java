@@ -20,7 +20,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.plaf.ButtonUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
@@ -152,7 +151,6 @@ public class SegmentStencilEditorDialog extends JDialog {
                 CapturedDataItem data = (CapturedDataItem) value;
                 if (data.getType() == CapturedDataItem.OMR_FIELD) {
                     checkBox = new JCheckBox();
-                    ButtonUI checkBoxUI = checkBox.getUI();
                     checkBox.setFont(UIManager.getFont("CheckBox.font"));
                     checkBox.setHorizontalAlignment(SwingConstants.CENTER);
                     checkBox.setBackground(Color.white);
@@ -214,7 +212,6 @@ public class SegmentStencilEditorDialog extends JDialog {
                 CapturedDataItem data = (CapturedDataItem) value;
                 if (data.getType() == CapturedDataItem.OMR_FIELD) {
                     checkBox = new JCheckBox();
-                    ButtonUI checkBoxUI = checkBox.getUI();
                     checkBox.setFont(UIManager.getFont("CheckBox.font"));
                     checkBox.setHorizontalAlignment(SwingConstants.CENTER);
                     checkBox.setBackground(Color.white);
@@ -634,7 +631,7 @@ public class SegmentStencilEditorDialog extends JDialog {
         }
 
         if (segmentIds != null && segmentNames != null) {
-            DefaultComboBoxModel sncb = new DefaultComboBoxModel();
+            DefaultComboBoxModel<String> sncb = new DefaultComboBoxModel<>();
             for (String segmentName : segmentNames) {
                 sncb.addElement(segmentName);
             }
@@ -799,7 +796,7 @@ public class SegmentStencilEditorDialog extends JDialog {
         imagePreviewScrollPane = new JScrollPane();
         imagePreviewLabel = new ImagePreviewLabel();
         panel1 = new JPanel();
-        zoomBox = new JComboBox();
+        zoomBox = new JComboBox<>();
         zoomInLabel = new JLabel();
         zoomOutLabel = new JLabel();
         bottomPanel = new JPanel();
@@ -811,7 +808,7 @@ public class SegmentStencilEditorDialog extends JDialog {
         fragmentPaddingLabel = new JLabel();
         fragmentPaddingSpinner = new JSpinner();
         segmentNumberPanel = new JPanel();
-        segmentNumberComboBox = new JComboBox();
+        segmentNumberComboBox = new JComboBox<>();
         buttonBar = new JPanel();
         detectDataButton = new JButton();
         selectSegmentButton = new JButton();
@@ -964,7 +961,7 @@ public class SegmentStencilEditorDialog extends JDialog {
                                     new double[] {0.0, 1.0E-4};
 
                                 //---- zoomBox ----
-                                zoomBox.setModel(new DefaultComboBoxModel(
+                                zoomBox.setModel(new DefaultComboBoxModel<>(
                                     new String[] {"25%", "50%", "100%", "200%", "400%", "800%"}));
                                 zoomBox.setSelectedIndex(2);
                                 zoomBox.setFont(UIManager.getFont("ComboBox.font"));
@@ -1209,7 +1206,7 @@ public class SegmentStencilEditorDialog extends JDialog {
     private JScrollPane imagePreviewScrollPane;
     private ImagePreviewLabel imagePreviewLabel;
     private JPanel panel1;
-    private JComboBox zoomBox;
+    private JComboBox<String> zoomBox;
     private JLabel zoomInLabel;
     private JLabel zoomOutLabel;
     private JPanel bottomPanel;
@@ -1221,7 +1218,7 @@ public class SegmentStencilEditorDialog extends JDialog {
     private JLabel fragmentPaddingLabel;
     private JSpinner fragmentPaddingSpinner;
     private JPanel segmentNumberPanel;
-    private JComboBox segmentNumberComboBox;
+    private JComboBox<String> segmentNumberComboBox;
     private JPanel buttonBar;
     private JButton detectDataButton;
     private JButton selectSegmentButton;

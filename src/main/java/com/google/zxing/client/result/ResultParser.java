@@ -255,7 +255,7 @@ public abstract class ResultParser {
   }
 
   static String[] matchPrefixedField(String prefix, String rawText, char endChar, boolean trim) {
-    Vector matches = null;
+    Vector<String> matches = null;
     int i = 0;
     int max = rawText.length();
     while (i < max) {
@@ -278,7 +278,7 @@ public abstract class ResultParser {
         } else {
           // found a match
           if (matches == null) {
-            matches = new Vector(3); // lazy init
+            matches = new Vector<String>(3); // lazy init
           }
           String element = unescapeBackslash(rawText.substring(start, i));
           if (trim) {
@@ -301,11 +301,11 @@ public abstract class ResultParser {
     return matches == null ? null : matches[0];
   }
 
-  static String[] toStringArray(Vector strings) {
+  static String[] toStringArray(Vector<String> strings) {
     int size = strings.size();
     String[] result = new String[size];
     for (int j = 0; j < size; j++) {
-      result[j] = (String) strings.elementAt(j);
+      result[j] = strings.elementAt(j);
     }
     return result;
   }

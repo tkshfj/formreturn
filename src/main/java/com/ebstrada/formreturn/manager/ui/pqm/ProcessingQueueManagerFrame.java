@@ -93,8 +93,6 @@ public class ProcessingQueueManagerFrame extends JPanel implements GenericDataVi
             if (e.getSource() == table.getSelectionModel() && table.getRowSelectionAllowed()
                 && e.getValueIsAdjusting() == false) {
                 // Column selection changed
-                int first = e.getFirstIndex();
-                int last = e.getLastIndex();
                 if (selection == UNPROCESSED_SELECTION) {
                     if (unprocessedImagesTable.getSelectedRow() != -1) {
                         unprocessedImageDataModel.setSelectedIds(getSelectedUnprocessedImageIds());
@@ -120,8 +118,6 @@ public class ProcessingQueueManagerFrame extends JPanel implements GenericDataVi
             } else if (e.getSource() == table.getColumnModel().getSelectionModel() && table
                 .getColumnSelectionAllowed()) {
                 // Row selection changed
-                int first = e.getFirstIndex();
-                int last = e.getLastIndex();
             }
 
             if (e.getValueIsAdjusting()) {

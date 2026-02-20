@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.Vector;
 
@@ -86,7 +87,7 @@ public class SoftwareUpdateManager {
         StringBuilder stringBuilder;
 
         try {
-            url = new URL(desiredUrl);
+            url = URI.create(desiredUrl).toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             connection.setRequestMethod("GET");

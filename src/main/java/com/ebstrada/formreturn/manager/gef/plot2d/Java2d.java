@@ -11,25 +11,6 @@ import java.awt.Stroke;
  */
 public class Java2d implements Plotter {
 
-    /**
-     * The size of the dashes drawn when the Fig is dashed.
-     */
-    private static final String[] DASHED_CHOICES =
-        {"Solid", "Dashed", "LongDashed", "Dotted", "DotDash"};
-    private static final float[][] DASH_ARRAYS =
-        {null, {5.0f, 5.0f}, {15.0f, 5.0f}, {3.0f, 10.0f}, {3.0f, 6.0f, 10.0f, 6.0f}}; // opaque,
-    // transparent,
-    // [opaque,
-    // transparent]
-    private static final int[] DASH_PERIOD = {0, 10, 20, 13, 25,}; // the
-    // sum
-    // of
-    // each
-    // subarray
-
-    /**
-     *
-     */
     public Java2d() {
     }
 

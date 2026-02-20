@@ -241,7 +241,7 @@ public class ReprocessorFrame extends JPanel {
 
             public void selectionChanged(GraphSelectionEvent gse) {
                 getPropertiesPanelController().destroyPanels();
-                Vector sels = gse.getSelections();
+                Vector<Fig> sels = gse.getSelections();
                 updatePropertyBox(sels);
                 unpressAllButtons();
             }
@@ -256,7 +256,7 @@ public class ReprocessorFrame extends JPanel {
         ce.getLayerManager().replaceLayer(oldGrid, newGrid);
         ce.setAntiAlias(true);
 
-        Vector sels = _graph.selectedFigs();
+        Vector<Fig> sels = _graph.selectedFigs();
         updatePropertyBox(sels);
         unpressAllButtons();
 
@@ -507,7 +507,7 @@ public class ReprocessorFrame extends JPanel {
 
             private static final long serialVersionUID = 1L;
 
-            @SuppressWarnings("unchecked") @Override public Class getColumnClass(int column) {
+            @Override public Class<?> getColumnClass(int column) {
                 return super.getValueAt(0, column).getClass();
             }
 
@@ -546,7 +546,7 @@ public class ReprocessorFrame extends JPanel {
 
             private static final long serialVersionUID = 1L;
 
-            @SuppressWarnings("unchecked") @Override public Class getColumnClass(int column) {
+            @Override public Class<?> getColumnClass(int column) {
                 return super.getValueAt(0, column).getClass();
             }
 
@@ -591,7 +591,7 @@ public class ReprocessorFrame extends JPanel {
 
             private static final long serialVersionUID = 1L;
 
-            Class[] columnTypes = new Class[] {String.class, Object.class, String.class};
+            Class<?>[] columnTypes = new Class<?>[] {String.class, Object.class, String.class};
             boolean[] columnEditable = new boolean[] {false, false, false};
 
             @Override public Class<?> getColumnClass(int columnIndex) {
@@ -730,7 +730,7 @@ public class ReprocessorFrame extends JPanel {
 
             private static final long serialVersionUID = 1L;
 
-            Class[] columnTypes = new Class[] {String.class, Object.class, String.class};
+            Class<?>[] columnTypes = new Class<?>[] {String.class, Object.class, String.class};
             boolean[] columnEditable = new boolean[] {false, false, false};
 
             @Override public Class<?> getColumnClass(int columnIndex) {
@@ -807,9 +807,9 @@ public class ReprocessorFrame extends JPanel {
     }
 
     public void removeAllFigs() {
-        Enumeration<Fig> figs = _graph.getEditor().figs();
+        Enumeration<?> figs = _graph.getEditor().figs();
         while (figs.hasMoreElements()) {
-            _graph.getEditor().removePropertyChangeListener(figs.nextElement());
+            _graph.getEditor().removePropertyChangeListener((Fig) figs.nextElement());
         }
         _graph.getEditor().getSelectionManager().deselectAll();
         _graph.getEditor().getLayerManager().removeAll();
@@ -1027,13 +1027,13 @@ public class ReprocessorFrame extends JPanel {
         }
     }
 
-    public void updatePropertyBox(Vector sels) {
+    public void updatePropertyBox(Vector<Fig> sels) {
 
         if (!isFinishedLoading()) {
             return;
         }
 
-        Iterator i = sels.iterator();
+        Iterator<?> i = sels.iterator();
 
         // only change properties panel on single selections
         if (sels.size() == 1) {
@@ -1594,6 +1594,7 @@ public class ReprocessorFrame extends JPanel {
 
     }
 
+    @SuppressWarnings("unchecked")
     private FormPage processTemplateFormPage(EntityManager entityManager, FormPage formPage)
         throws FormReaderException {
 
@@ -2114,7 +2115,7 @@ public class ReprocessorFrame extends JPanel {
         pagePanel = new JPanel();
         _graph = new ReprocessorGraph();
         zoomPanel = new JPanel();
-        editorZoomComboBox = new JComboBox();
+        editorZoomComboBox = new JComboBox<>();
         zoomInLabel = new JLabel();
         zoomOutLabel = new JLabel();
         zoomToFitCheckBox = new JCheckBox();
@@ -2317,7 +2318,7 @@ public class ReprocessorFrame extends JPanel {
                         ((GridBagLayout)zoomPanel.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
 
                         //---- editorZoomComboBox ----
-                        editorZoomComboBox.setModel(new DefaultComboBoxModel(new String[] {
+                        editorZoomComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                             "10%",
                             "25%",
                             "50%",
@@ -2423,13 +2424,11 @@ public class ReprocessorFrame extends JPanel {
     private JPanel pagePanel;
     private ReprocessorGraph _graph;
     private JPanel zoomPanel;
-    private JComboBox editorZoomComboBox;
+    private JComboBox<String> editorZoomComboBox;
     private JLabel zoomInLabel;
     private JLabel zoomOutLabel;
     private JCheckBox zoomToFitCheckBox;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-
-    private double angle;
 
     public boolean isFinishedLoading() {
         return finishedLoading;
@@ -2494,7 +2493,6 @@ public class ReprocessorFrame extends JPanel {
         aid.setModal(true);
         aid.setVisible(true);
         if (aid.getDialogResult() == JOptionPane.OK_OPTION) {
-            angle = aid.getRotationAngle();
             this.sourceImage = aid.getDisplayImage();
             this.backgroundImage = null; // remove existing fig
             return true;

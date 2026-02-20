@@ -7,7 +7,6 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.FocusManager;
 import javax.swing.JPanel;
@@ -83,7 +82,7 @@ public class BlockingGlassPane extends JPanel {
     /**
      * The mouse listener used to block the mouse.
      */
-    private class BlockMouse extends MouseAdapter implements MouseListener {
+    private class BlockMouse extends MouseAdapter {
         public void mouseClicked(MouseEvent ev) {
             Toolkit.getDefaultToolkit().beep();
         }

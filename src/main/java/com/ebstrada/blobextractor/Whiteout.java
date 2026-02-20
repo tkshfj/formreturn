@@ -19,9 +19,6 @@ public class Whiteout {
 
     private int height;
 
-    // current label value
-    private int c = 1;
-
     // current position
     private int p = 0;
 

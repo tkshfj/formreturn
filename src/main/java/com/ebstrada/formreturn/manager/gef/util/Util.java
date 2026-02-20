@@ -35,10 +35,12 @@ public class Util {
         return str;
     }
 
+    @SuppressWarnings("deprecation")
     public static final URL fileToURL(File file) throws MalformedURLException, IOException {
         return new URL("file", "", filenameToURI(file.getCanonicalPath()));
     }
 
+    @SuppressWarnings("deprecation")
     public static final URL fixURLExtension(URL url, String desiredExtension) {
         if (!url.getFile().endsWith(desiredExtension)) {
             try {
@@ -50,6 +52,7 @@ public class Util {
         return url;
     }
 
+    @SuppressWarnings("deprecation")
     public static final URL exchangeURLExtension(URL url, String desiredExtension,
         String oldExtension) {
         if (!url.getFile().endsWith(oldExtension)) {

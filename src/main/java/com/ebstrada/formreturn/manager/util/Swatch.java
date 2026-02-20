@@ -24,7 +24,6 @@ public class Swatch implements Icon {
     }
 
     public void paintIcon(Component c, Graphics g, int x, int y) {
-        int w = getIconWidth(), h = getIconHeight();
         g.setColor(_color);
         g.fillRect(x, y, getIconWidth(), getIconHeight());
     }

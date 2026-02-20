@@ -200,16 +200,10 @@ public class MainMenu {
             Class<?> aquaClazz;
             try {
                 aquaClazz = Class.forName("com.apple.laf.AquaMenuBarUI");
-                MenuBarUI aquaMenuBarUI = (MenuBarUI) aquaClazz.newInstance();
+                MenuBarUI aquaMenuBarUI = (MenuBarUI) aquaClazz.getDeclaredConstructor().newInstance();
                 menuBar = new JMenuBar();
                 menuBar.setUI(aquaMenuBarUI);
-            } catch (ClassNotFoundException e) {
-                Misc.printStackTrace(e);
-                menuBar = new JMenuBar();
-            } catch (InstantiationException e) {
-                Misc.printStackTrace(e);
-                menuBar = new JMenuBar();
-            } catch (IllegalAccessException e) {
+            } catch (ReflectiveOperationException e) {
                 Misc.printStackTrace(e);
                 menuBar = new JMenuBar();
             }

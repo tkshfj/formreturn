@@ -187,7 +187,7 @@ public class AdjustImageDialog extends JDialog {
         plus180DegreesLabel = new JLabel();
         panel2 = new JPanel();
         zoomLabel = new JLabel();
-        zoomBox = new JComboBox();
+        zoomBox = new JComboBox<>();
         zoomInLabel = new JLabel();
         zoomOutLabel = new JLabel();
         buttonBar = new JPanel();
@@ -322,7 +322,7 @@ public class AdjustImageDialog extends JDialog {
                             GridBagConstraints.BOTH, new Insets(0, 0, 0, 5), 0, 0));
 
                     //---- zoomBox ----
-                    zoomBox.setModel(new DefaultComboBoxModel(
+                    zoomBox.setModel(new DefaultComboBoxModel<>(
                         new String[] {"5%", "10%", "25%", "50%", "100%", "200%", "500%", "1000%"}));
                     zoomBox.setSelectedIndex(4);
                     zoomBox.setFont(UIManager.getFont("ComboBox.font"));
@@ -424,7 +424,7 @@ public class AdjustImageDialog extends JDialog {
     private JLabel plus180DegreesLabel;
     private JPanel panel2;
     private JLabel zoomLabel;
-    private JComboBox zoomBox;
+    private JComboBox<String> zoomBox;
     private JLabel zoomInLabel;
     private JLabel zoomOutLabel;
     private JPanel buttonBar;

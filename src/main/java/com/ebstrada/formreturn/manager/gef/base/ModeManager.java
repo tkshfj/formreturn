@@ -18,7 +18,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.ebstrada.formreturn.manager.gef.event.ModeChangeEvent;
 import com.ebstrada.formreturn.manager.gef.event.ModeChangeListener;
-import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 
 /**
  * ModeManager keeps track of all the Modes for a given Editor. Events are
@@ -39,7 +38,7 @@ public class ModeManager implements Serializable, MouseListener, MouseMotionList
      * critical part of the system and should be faster, use an array instead of
      * a Vector.
      */
-    private Vector _modes = new Vector();
+    private Vector<FigModifyingMode> _modes = new Vector<FigModifyingMode>();
 
     /**
      * The Editor that owns this ModeManager.
@@ -126,8 +125,8 @@ public class ModeManager implements Serializable, MouseListener, MouseMotionList
         }
     }
 
-    public boolean includes(Class modeClass) {
-        Enumeration subs = _modes.elements();
+    public boolean includes(Class<?> modeClass) {
+        Enumeration<?> subs = _modes.elements();
         while (subs.hasMoreElements()) {
             FigModifyingMode m = (FigModifyingMode) subs.nextElement();
             if (m.getClass() == modeClass) {
@@ -174,11 +173,12 @@ public class ModeManager implements Serializable, MouseListener, MouseMotionList
     /**
      * Pass events to all modes in order, until one consumes it.
      */
+    @SuppressWarnings("unchecked")
     public void keyPressed(KeyEvent ke) {
         // Executing keyPressed of a Mode may in fact remove other modes
         // from the stack. So it is neccessary each time to check that a mode
         // is still on the stack before calling it.
-        Vector modes = (Vector) _modes.clone();
+        Vector<FigModifyingMode> modes = (Vector<FigModifyingMode>) _modes.clone();
         for (int i = modes.size() - 1; i >= 0 && !ke.isConsumed(); --i) {
             FigModifyingModeImpl m = ((FigModifyingModeImpl) modes.get(i));
             if (_modes.contains(m)) {
@@ -277,9 +277,6 @@ public class ModeManager implements Serializable, MouseListener, MouseMotionList
      */
     public void checkModeTransitions(InputEvent ie) {
         if (!top().canExit() && ie.getID() == MouseEvent.MOUSE_PRESSED) {
-            MouseEvent me = (MouseEvent) ie;
-            int x = me.getX(), y = me.getY();
-            Fig underMouse = editor.hit(x, y);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("ModeManager mousepressed detected but not on a port dragable node");
             }
@@ -318,7 +315,7 @@ public class ModeManager implements Serializable, MouseListener, MouseMotionList
      * Paint each mode in the stack: bottom to top.
      */
     public void paint(Graphics g) {
-        Enumeration modes = _modes.elements();
+        Enumeration<?> modes = _modes.elements();
         while (modes.hasMoreElements()) {
             FigModifyingMode m = (FigModifyingMode) modes.nextElement();
             m.paint(g);

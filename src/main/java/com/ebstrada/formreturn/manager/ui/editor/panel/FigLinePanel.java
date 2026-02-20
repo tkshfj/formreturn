@@ -82,7 +82,7 @@ public class FigLinePanel extends EditorPanel {
         lineWeightLabel = new JLabel();
         lineWidthSpinner = new JSpinner();
         lineStyleLabel = new JLabel();
-        lineStyleComboBox = new JComboBox();
+        lineStyleComboBox = new JComboBox<>();
         colorLabel = new JLabel();
         foregroundColorButton = new JButton();
 
@@ -134,7 +134,7 @@ public class FigLinePanel extends EditorPanel {
 
             //---- lineStyleComboBox ----
             lineStyleComboBox.setModel(
-                new DefaultComboBoxModel(new String[] {"Solid", "Dashed", "Dotted", "Double"}));
+                new DefaultComboBoxModel<>(new String[] {"Solid", "Dashed", "Dotted", "Double"}));
             lineStyleComboBox.setFont(UIManager.getFont("ComboBox.font"));
             lineStyleComboBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -182,7 +182,7 @@ public class FigLinePanel extends EditorPanel {
     private JLabel lineWeightLabel;
     private JSpinner lineWidthSpinner;
     private JLabel lineStyleLabel;
-    private JComboBox lineStyleComboBox;
+    private JComboBox<String> lineStyleComboBox;
     private JLabel colorLabel;
     private JButton foregroundColorButton;
     // JFormDesigner - End of variables declaration //GEN-END:variables

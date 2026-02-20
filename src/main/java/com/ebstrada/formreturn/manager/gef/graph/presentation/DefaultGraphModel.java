@@ -1,8 +1,5 @@
 package com.ebstrada.formreturn.manager.gef.graph.presentation;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.ebstrada.formreturn.manager.gef.graph.MutableGraphSupport;
 
 /**
@@ -18,11 +15,9 @@ import com.ebstrada.formreturn.manager.gef.graph.MutableGraphSupport;
  * @see AdjacencyListGraphModel
  */
 
-public class DefaultGraphModel extends MutableGraphSupport implements java.io.Serializable {
+public class DefaultGraphModel extends MutableGraphSupport {
 
     private static final long serialVersionUID = 8098329898758384131L;
-
-    private static Log LOG = LogFactory.getLog(DefaultGraphModel.class);
 
     // //////////////////////////////////////////////////////////////
     // constructors

@@ -69,17 +69,18 @@ public class UngroupAction extends UndoableAction {
         super(localize ? Localizer.localize("GefBase", name) : name, icon);
     }
 
+    @SuppressWarnings("deprecation")
     @Override public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
-        Vector ungroupedItems = new Vector();
+        Vector<Fig> ungroupedItems = new Vector<Fig>();
         Editor currentEditor = Globals.curEditor();
-        Vector selectedFigs = currentEditor.getSelectionManager().getFigs();
-        Enumeration eachDE = selectedFigs.elements();
+        Vector<Fig> selectedFigs = currentEditor.getSelectionManager().getFigs();
+        Enumeration<?> eachDE = selectedFigs.elements();
         while (eachDE.hasMoreElements()) {
             Object o = eachDE.nextElement();
             if (o instanceof FigGroup) {
                 FigGroup fg = (FigGroup) o;
-                Iterator it = fg.getFigs().iterator();
+                Iterator<?> it = fg.getFigs().iterator();
                 while (it.hasNext()) {
                     Fig f = (Fig) it.next();
                     currentEditor.add(f);

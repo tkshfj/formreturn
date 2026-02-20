@@ -12,8 +12,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.krysalis.barcode4j.BarcodeDimension;
 import org.krysalis.barcode4j.BarcodeGenerator;
 import org.krysalis.barcode4j.output.java2d.Java2DCanvasProvider;
@@ -28,11 +26,10 @@ import com.ebstrada.formreturn.manager.ui.editor.panel.FigBarcodePanel;
 import com.ebstrada.formreturn.manager.ui.editor.panel.EditorPanel;
 import com.ebstrada.formreturn.manager.util.BarcodeCreator;
 import com.ebstrada.formreturn.manager.util.Misc;
-import com.ebstrada.formreturn.manager.util.NoObfuscation;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("barcode") public class FigBarcode extends Fig
-    implements ImageObserver, NoObfuscation {
+    implements ImageObserver {
 
     private static final long serialVersionUID = 1L;
 
@@ -69,8 +66,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     private transient PageAttributes pageAttributes;
 
     private transient boolean revalidate = false;
-
-    private transient static Log LOG = LogFactory.getLog(FigBarcode.class);
 
     private transient boolean allowFormIDBarcode = true;
 
@@ -363,10 +358,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         Graphics2D g2d = (Graphics2D) graphicContext;
 
         // this code below is to pin the barcode to the top right (for the marker type barcodes)
-        PageAttributes currentPageAttributes = getPageAttributes();
-
-        int croppedWidth = currentPageAttributes.getCroppedWidth();
-        int croppedHeight = currentPageAttributes.getCroppedHeight();
 
         if (canvas == null) {
             canvas = new Java2DCanvasProvider(g2d, 0);

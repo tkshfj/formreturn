@@ -41,15 +41,15 @@ public class DuplicateAction extends UndoableAction {
         super(localize ? Localizer.localize("GefBase", name) : name, icon);
     }
 
-    @Override public void actionPerformed(ActionEvent e) {
+    @SuppressWarnings("deprecation") @Override public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
         Editor ce = Globals.curEditor();
         if (ce == null) {
             return;
         }
         SelectionManager selectionManager = ce.getSelectionManager();
-        Vector copiedElements = selectionManager.selections();
-        Enumeration copies = copiedElements.elements();
+        Vector<Selection> copiedElements = selectionManager.selections();
+        Enumeration<?> copies = copiedElements.elements();
 
         if (copiedElements.size() <= 0) {
             Misc.showErrorMsg(ce.getGraph().getRootPane(),

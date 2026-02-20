@@ -28,8 +28,8 @@ public class ExportPreferencesPanel extends JPanel {
     }
 
     private void restoreColumns(CSVExportPreferences ep) {
-        DefaultListModel includeDLM = new DefaultListModel();
-        DefaultListModel availableDLM = new DefaultListModel();
+        DefaultListModel<ColumnOption> includeDLM = new DefaultListModel<>();
+        DefaultListModel<ColumnOption> availableDLM = new DefaultListModel<>();
 
         ExportOptionsDialog
             .setDefaultColumns(ep.getOrderedColumnKeys(), includeDLM, availableDLM, ep);
@@ -88,7 +88,7 @@ public class ExportPreferencesPanel extends JPanel {
 
     }
 
-    private void setExportPreferences(DefaultListModel dlm, CSVExportPreferences ep,
+    private void setExportPreferences(DefaultListModel<ColumnOption> dlm, CSVExportPreferences ep,
         boolean selected) {
 
         for (int i = 0; i < dlm.getSize(); i++) {
@@ -158,7 +158,7 @@ public class ExportPreferencesPanel extends JPanel {
 
     private boolean isValidColumnNames() {
 
-        ListModel model = this.includedColumnsList.getModel();
+        ListModel<?> model = this.includedColumnsList.getModel();
 
         for (int i = 0; i < model.getSize(); i++) {
 
@@ -188,7 +188,7 @@ public class ExportPreferencesPanel extends JPanel {
 
         ArrayList<Integer> orderedColumnKeys = new ArrayList<Integer>();
 
-        ListModel model = this.includedColumnsList.getModel();
+        ListModel<?> model = this.includedColumnsList.getModel();
 
         if (model.getSize() > 0) {
 
@@ -264,8 +264,8 @@ public class ExportPreferencesPanel extends JPanel {
 
         CSVExportPreferences ep = PreferencesManager.getCSVExportPreferences();
 
-        DefaultListModel includedDLM = (DefaultListModel) this.includedColumnsList.getModel();
-        DefaultListModel availableDLM = (DefaultListModel) this.availableColumnsList.getModel();
+        DefaultListModel<ColumnOption> includedDLM = (DefaultListModel<ColumnOption>) this.includedColumnsList.getModel();
+        DefaultListModel<ColumnOption> availableDLM = (DefaultListModel<ColumnOption>) this.availableColumnsList.getModel();
 
         setExportPreferences(includedDLM, ep, true);
         setExportPreferences(availableDLM, ep, false);
@@ -345,8 +345,8 @@ public class ExportPreferencesPanel extends JPanel {
             public void run() {
                 ColumnOption col =
                     (ColumnOption) availableColumnsList.getModel().getElementAt(index);
-                ((DefaultListModel) includedColumnsList.getModel()).addElement(col);
-                ((DefaultListModel) availableColumnsList.getModel()).removeElement(col);
+                ((DefaultListModel<ColumnOption>) includedColumnsList.getModel()).addElement(col);
+                ((DefaultListModel<ColumnOption>) availableColumnsList.getModel()).removeElement(col);
             }
         });
     }
@@ -360,8 +360,8 @@ public class ExportPreferencesPanel extends JPanel {
             public void run() {
                 ColumnOption col =
                     (ColumnOption) includedColumnsList.getModel().getElementAt(index);
-                ((DefaultListModel) availableColumnsList.getModel()).addElement(col);
-                ((DefaultListModel) includedColumnsList.getModel()).removeElement(col);
+                ((DefaultListModel<ColumnOption>) availableColumnsList.getModel()).addElement(col);
+                ((DefaultListModel<ColumnOption>) includedColumnsList.getModel()).removeElement(col);
             }
         });
     }
@@ -377,7 +377,7 @@ public class ExportPreferencesPanel extends JPanel {
                     (ColumnOption) includedColumnsList.getModel().getElementAt(index - 1);
                 ColumnOption col2 =
                     (ColumnOption) includedColumnsList.getModel().getElementAt(index);
-                DefaultListModel dlm = (DefaultListModel) includedColumnsList.getModel();
+                DefaultListModel<ColumnOption> dlm = (DefaultListModel<ColumnOption>) includedColumnsList.getModel();
                 dlm.set(index - 1, col2);
                 dlm.set(index, col1);
                 includedColumnsList.setSelectedIndex(index - 1);
@@ -396,7 +396,7 @@ public class ExportPreferencesPanel extends JPanel {
                     (ColumnOption) includedColumnsList.getModel().getElementAt(index);
                 ColumnOption col2 =
                     (ColumnOption) includedColumnsList.getModel().getElementAt(index + 1);
-                DefaultListModel dlm = (DefaultListModel) includedColumnsList.getModel();
+                DefaultListModel<ColumnOption> dlm = (DefaultListModel<ColumnOption>) includedColumnsList.getModel();
                 dlm.set(index, col2);
                 dlm.set(index + 1, col1);
                 includedColumnsList.setSelectedIndex(index + 1);
@@ -459,7 +459,7 @@ public class ExportPreferencesPanel extends JPanel {
         panel5 = new JPanel();
         panel2 = new JPanel();
         orderColumnsLabel = new JLabel();
-        sortTypeComboBox = new JComboBox();
+        sortTypeComboBox = new JComboBox<>();
         panel9 = new JPanel();
         includeColumnsInExportHeadingLabel = new JLabel();
         panel10 = new JPanel();
@@ -487,9 +487,9 @@ public class ExportPreferencesPanel extends JPanel {
         panel8 = new JPanel();
         panel11 = new JPanel();
         delimiterLabel = new JLabel();
-        delimiterComboBox = new JComboBox();
+        delimiterComboBox = new JComboBox<>();
         quotesLabel = new JLabel();
-        quotesComboBox = new JComboBox();
+        quotesComboBox = new JComboBox<>();
         panel6 = new JPanel();
         includeFieldnamesHeaderCheckBox = new JCheckBox();
         includeStatisticsCheckBox = new JCheckBox();
@@ -558,7 +558,7 @@ public class ExportPreferencesPanel extends JPanel {
 
             //---- sortTypeComboBox ----
             sortTypeComboBox.setFont(UIManager.getFont("ComboBox.font"));
-            sortTypeComboBox.setModel(new DefaultComboBoxModel(
+            sortTypeComboBox.setModel(new DefaultComboBoxModel<>(
                 new String[] {Localizer.localize("Util", "ColumnOrderingOption0"),
                     Localizer.localize("Util", "ColumnOrderingOption1"),
                     Localizer.localize("Util", "ColumnOrderingOption2")}));
@@ -873,7 +873,7 @@ public class ExportPreferencesPanel extends JPanel {
                     GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 5), 0, 0));
 
             //---- delimiterComboBox ----
-            delimiterComboBox.setModel(new DefaultComboBoxModel(
+            delimiterComboBox.setModel(new DefaultComboBoxModel<>(
                 new String[] {"CSV - Comma Separated Values", "TSV - Tab Separated Values"}));
             delimiterComboBox.setFont(UIManager.getFont("ComboBox.font"));
             delimiterComboBox.setPrototypeDisplayValue("xxxxxxxxxxxxxxxxxxxxxxxx");
@@ -889,7 +889,7 @@ public class ExportPreferencesPanel extends JPanel {
                     GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 5), 0, 0));
 
             //---- quotesComboBox ----
-            quotesComboBox.setModel(new DefaultComboBoxModel(
+            quotesComboBox.setModel(new DefaultComboBoxModel<>(
                 new String[] {"\" (Double Quotes)", "' (Single Quotes)", "None"}));
             quotesComboBox.setFont(UIManager.getFont("ComboBox.font"));
             panel11.add(quotesComboBox,
@@ -995,7 +995,7 @@ public class ExportPreferencesPanel extends JPanel {
     private JPanel panel5;
     private JPanel panel2;
     private JLabel orderColumnsLabel;
-    private JComboBox sortTypeComboBox;
+    private JComboBox<String> sortTypeComboBox;
     private JPanel panel9;
     private JLabel includeColumnsInExportHeadingLabel;
     private JPanel panel10;
@@ -1023,9 +1023,9 @@ public class ExportPreferencesPanel extends JPanel {
     private JPanel panel8;
     private JPanel panel11;
     private JLabel delimiterLabel;
-    private JComboBox delimiterComboBox;
+    private JComboBox<String> delimiterComboBox;
     private JLabel quotesLabel;
-    private JComboBox quotesComboBox;
+    private JComboBox<String> quotesComboBox;
     private JPanel panel6;
     private JCheckBox includeFieldnamesHeaderCheckBox;
     private JCheckBox includeStatisticsCheckBox;

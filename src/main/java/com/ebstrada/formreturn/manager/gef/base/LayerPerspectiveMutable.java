@@ -51,7 +51,6 @@ public class LayerPerspectiveMutable extends LayerPerspective {
     // Layer API
 
     @Override public void add(Fig fig) {
-        Object owner = fig.getOwner();
         super.add(fig);
         // if ( owner != null && _mgm.canAddNode(owner))
         // _mgm.addNode(owner);
@@ -60,6 +59,5 @@ public class LayerPerspectiveMutable extends LayerPerspective {
 
     @Override public void remove(Fig f) {
         super.remove(f);
-        Object owner = f.getOwner();
     }
 } /* end class LayerPerspectiveMutable */

@@ -324,15 +324,13 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
      */
     @Override public Object clone() {
         try {
-            Editor ed = this.getClass().newInstance();
+            Editor ed = this.getClass().getDeclaredConstructor().newInstance();
             ed.getLayerManager().addLayer(_layerManager.getActiveLayer());
             // needs-more-work: does not duplicate layer stack!
             ed.document(document());
             return ed;
-        } catch (java.lang.IllegalAccessException ignore) {
-            // LOG.error("IllegalAccessException in spawn");
-        } catch (java.lang.InstantiationException ignore) {
-            // LOG.error("InstantiationException in spawn");
+        } catch (ReflectiveOperationException ignore) {
+            // LOG.error("ReflectiveOperationException in spawn");
         }
         return null;
     }
@@ -474,7 +472,7 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
     /**
      * Returns a collection of all Figs in the layer currently being edited.
      */
-    public Enumeration figs() {
+    public Enumeration<?> figs() {
         return _layerManager.elements();
     }
 

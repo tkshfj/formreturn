@@ -36,6 +36,7 @@ public class SourceDataFolderMonitorJob extends FolderMonitorJob {
         super(jobPreferences);
     }
 
+    @SuppressWarnings("unchecked")
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
         Vector<String> dataFileWhitelist = Misc.getDataFileWhilelist();

@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
+import com.ebstrada.formreturn.manager.gef.presentation.Fig;
 import com.ebstrada.formreturn.manager.gef.util.Localizer;
 
 /**
@@ -62,9 +63,10 @@ public class SelectAllAction extends AbstractAction {
         super(localize ? Localizer.localize("GefBase", name) : name, icon);
     }
 
+    @SuppressWarnings("deprecation")
     public void actionPerformed(ActionEvent e) {
         Editor ce = Globals.curEditor();
-        Collection diagramContents = ce.getLayerManager().getContents();
+        Collection<Fig> diagramContents = ce.getLayerManager().getContents();
         ce.getSelectionManager().select(diagramContents);
     }
 

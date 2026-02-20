@@ -80,7 +80,7 @@ public class DatabasePreferencesPanel extends JPanel {
         Connection conn = null;
 
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            Class.forName("org.apache.derby.jdbc.ClientDriver").getDeclaredConstructor().newInstance();
             Properties props = new Properties();
             props.put("user", usernameTextField.getText());
             props.put("password", new String(passwordField.getPassword()));
@@ -106,10 +106,6 @@ public class DatabasePreferencesPanel extends JPanel {
             javax.swing.JOptionPane
                 .showConfirmDialog(this, message, caption, javax.swing.JOptionPane.DEFAULT_OPTION,
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        } catch (InstantiationException ex) {
-            com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
-        } catch (IllegalAccessException ex) {
-            com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
         } catch (ClassNotFoundException ex) {
             String message = Localizer.localize("Util",
                 "DatabasePreferencesConnectionErrorInvalidDriverClassNameMessage");
@@ -117,6 +113,8 @@ public class DatabasePreferencesPanel extends JPanel {
             javax.swing.JOptionPane
                 .showConfirmDialog(this, message, caption, javax.swing.JOptionPane.DEFAULT_OPTION,
                     javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (ReflectiveOperationException ex) {
+            com.ebstrada.formreturn.manager.util.Misc.printStackTrace(ex);
         } catch (SQLException ex) {
             String message =
                 Localizer.localize("Util", "DatabasePreferencesConnectionErrorInvalidDatabaseName");

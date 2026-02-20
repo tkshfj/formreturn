@@ -10,7 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-@SuppressWarnings("serial") public class DefaultDesktopTabbedPane extends JTabbedPane
+public class DefaultDesktopTabbedPane extends JTabbedPane
     implements DesktopTabbedPane {
 
     private DesktopTabbedPaneBackground desktopTabbedPaneBackground;

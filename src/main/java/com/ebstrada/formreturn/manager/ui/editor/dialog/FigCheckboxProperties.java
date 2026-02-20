@@ -144,7 +144,7 @@ public class FigCheckboxProperties extends JDialog {
     private void updatePresetStyles() {
         markAreaPresetStyles = PreferencesManager.getMarkAreaPresetStyles();
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         for (MarkAreaPresetStyle markAreaPresetStyle : markAreaPresetStyles) {
             dcbm.addElement(markAreaPresetStyle.getName());
         }
@@ -538,7 +538,7 @@ public class FigCheckboxProperties extends JDialog {
         combineColumnCharactersCheckBox = new JCheckBox();
         panel1 = new JPanel();
         combinedColumnReadDirectionLabel = new JLabel();
-        combinedColumnReadDirectionComboBox = new JComboBox();
+        combinedColumnReadDirectionComboBox = new JComboBox<>();
         panel2 = new JPanel();
         rowsLabel = new JLabel();
         rowSpinner = new JSpinner();
@@ -578,7 +578,7 @@ public class FigCheckboxProperties extends JDialog {
         markAggregationHelpLabel = new JHelpLabel();
         aggregationRuleDescriptionLabel = new JLabel();
         presetStylesPanel = new JPanel();
-        markAreaPresetStylesComboBox = new JComboBox();
+        markAreaPresetStylesComboBox = new JComboBox<>();
         restorePresetStyleButton = new JButton();
         removePresetStyleButton = new JButton();
         saveAsPresetStyleButton = new JButton();
@@ -1578,7 +1578,7 @@ public class FigCheckboxProperties extends JDialog {
 
     private void updateValues() {
 
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<>();
         dcbm.addElement(
             Localizer.localize("UI", "CheckboxPropertiesCombinedColumnReadDirectionLR"));
         dcbm.addElement(
@@ -1800,7 +1800,7 @@ public class FigCheckboxProperties extends JDialog {
     private JCheckBox combineColumnCharactersCheckBox;
     private JPanel panel1;
     private JLabel combinedColumnReadDirectionLabel;
-    private JComboBox combinedColumnReadDirectionComboBox;
+    private JComboBox<String> combinedColumnReadDirectionComboBox;
     private JPanel panel2;
     private JLabel rowsLabel;
     private JSpinner rowSpinner;
@@ -1840,7 +1840,7 @@ public class FigCheckboxProperties extends JDialog {
     private JHelpLabel markAggregationHelpLabel;
     private JLabel aggregationRuleDescriptionLabel;
     private JPanel presetStylesPanel;
-    private JComboBox markAreaPresetStylesComboBox;
+    private JComboBox<String> markAreaPresetStylesComboBox;
     private JButton restorePresetStyleButton;
     private JButton removePresetStyleButton;
     private JButton saveAsPresetStyleButton;

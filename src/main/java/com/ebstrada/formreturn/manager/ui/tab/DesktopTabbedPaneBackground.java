@@ -70,7 +70,7 @@ public class DesktopTabbedPaneBackground {
 
     private boolean debug = false;
 
-    @SuppressWarnings("serial") private class ScalingRectangle extends Rectangle2D.Double {
+    private class ScalingRectangle extends Rectangle2D.Double {
 
         public ScalingRectangle(float x, float y, float w, float h) {
             super((double) x, (double) y, (double) w, (double) h);

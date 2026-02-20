@@ -26,7 +26,6 @@ public class CloseTabPaneEnhancedUI extends CloseTabPaneUI {
 
     private static final Color whiteColor = Color.white;
 
-    private static final Color transparent = new Color(0x184EB6);//0, 0, 0, 0);
     private static final Color nearBlack = new Color(0, 0, 0, 80);
 
     private static final Color lightBlue = new Color(0xaaaaaa);//70, 150, 200, 50);
@@ -94,11 +93,9 @@ public class CloseTabPaneEnhancedUI extends CloseTabPaneUI {
             GradientPaint leftGradient;
             GradientPaint rightGradient;
 
-            int delta = 10;
             int delta2 = 8;
 
             if (isCloseEnabled()) {
-                delta += BUTTONSIZE + WIDTHDELTA;
                 delta2 += BUTTONSIZE;
             }
 

@@ -57,7 +57,7 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
 
   public Result[] decodeMultiple(BinaryBitmap image, HashMap<DecodeHintType, Object> hints)
       throws NotFoundException {
-    Vector results = new Vector();
+    Vector<Result> results = new Vector<Result>();
     doDecodeMultiple(image, hints, results, 0, 0);
     if (results.isEmpty()) {
       throw NotFoundException.getNotFoundInstance();
@@ -65,14 +65,14 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
     int numResults = results.size();
     Result[] resultArray = new Result[numResults];
     for (int i = 0; i < numResults; i++) {
-      resultArray[i] = (Result) results.elementAt(i);
+      resultArray[i] = results.elementAt(i);
     }
     return resultArray;
   }
 
   private void doDecodeMultiple(BinaryBitmap image,
                                 HashMap<DecodeHintType, Object> hints,
-                                Vector results,
+                                Vector<Result> results,
                                 int xOffset,
                                 int yOffset) {
     Result result;
@@ -83,7 +83,7 @@ public final class GenericMultipleBarcodeReader implements MultipleBarcodeReader
     }
     boolean alreadyFound = false;
     for (int i = 0; i < results.size(); i++) {
-      Result existingResult = (Result) results.elementAt(i);
+      Result existingResult = results.elementAt(i);
       if (existingResult.getText().equals(result.getText())) {
         alreadyFound = true;
         break;

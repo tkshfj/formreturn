@@ -300,8 +300,6 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
             if (e.getSource() == table.getSelectionModel() && table.getRowSelectionAllowed()
                 && e.getValueIsAdjusting() == false) {
                 // Column selection changed
-                int first = e.getFirstIndex();
-                int last = e.getLastIndex();
                 if (selection == PUBLICATION_SELECTION) {
                     updateSelectedPublication();
                 }
@@ -315,8 +313,6 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
             } else if (e.getSource() == table.getColumnModel().getSelectionModel() && table
                 .getColumnSelectionAllowed()) {
                 // Row selection changed
-                int first = e.getFirstIndex();
-                int last = e.getLastIndex();
             }
 
             if (e.getValueIsAdjusting()) {
@@ -862,6 +858,7 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void clearPublication(EntityManager entityManager, long publicationID) {
 
         Query formPageQuery = entityManager.createNativeQuery(
@@ -888,6 +885,7 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
 
     }
 
+    @SuppressWarnings("unchecked")
     public void clearForm(EntityManager entityManager, long formID) {
 
         Query formPageQuery = entityManager.createNativeQuery(
@@ -1590,8 +1588,8 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
                                 .format(Localizer.localize("UI", "DeletingFormStatusMessageText"),
                                     (i + 1) + "", selectedRows.length + ""));
 
-                            String deleteSql = "DELETE FROM FORM WHERE FORM_ID = " + formID;
-                            Query deleteFormQuery = entityManager.createNativeQuery(deleteSql);
+                            Query deleteFormQuery = entityManager.createNativeQuery("DELETE FROM FORM WHERE FORM_ID = ?1");
+                            deleteFormQuery.setParameter(1, formID);
                             int result = deleteFormQuery.executeUpdate();
 
                             if (result <= 0) {
@@ -2114,6 +2112,7 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void extendCapturedDataActionPerformed(ActionEvent e) {
 
         // 1. check that something was selected

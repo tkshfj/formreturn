@@ -62,7 +62,7 @@ final class BizcardResultParser extends AbstractDoCoMoResultParser {
   }
 
   private static String[] buildPhoneNumbers(String number1, String number2, String number3) {
-    Vector numbers = new Vector(3);
+    Vector<String> numbers = new Vector<String>(3);
     if (number1 != null) {
       numbers.addElement(number1);
     }
@@ -78,7 +78,7 @@ final class BizcardResultParser extends AbstractDoCoMoResultParser {
     }
     String[] result = new String[size];
     for (int i = 0; i < size; i++) {
-      result[i] = (String) numbers.elementAt(i);
+      result[i] = numbers.elementAt(i);
     }
     return result;
   }

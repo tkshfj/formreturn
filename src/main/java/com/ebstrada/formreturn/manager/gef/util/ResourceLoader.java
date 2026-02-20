@@ -50,9 +50,9 @@ public class ResourceLoader {
         ImageIcon res = null;
         java.net.URL imgURL = null;
         try {
-            for (Iterator extensions = _resourceExtensions.iterator(); extensions.hasNext(); ) {
+            for (Iterator<?> extensions = _resourceExtensions.iterator(); extensions.hasNext(); ) {
                 String tmpExt = (String) extensions.next();
-                for (Iterator locations = _resourceLocations.iterator(); locations.hasNext(); ) {
+                for (Iterator<?> locations = _resourceLocations.iterator(); locations.hasNext(); ) {
                     String imageName =
                         (String) locations.next() + "/" + strippedName + "." + tmpExt;
                     // System.out.println("[ResourceLoader] try loading " +
@@ -113,7 +113,7 @@ public class ResourceLoader {
      * @param location String representation of the location to be removed.
      */
     public static void removeResourceLocation(String location) {
-        for (Iterator iter = _resourceLocations.iterator(); iter.hasNext(); ) {
+        for (Iterator<?> iter = _resourceLocations.iterator(); iter.hasNext(); ) {
             String loc = (String) iter.next();
             if (loc.equals(location)) {
                 _resourceLocations.remove(loc);
@@ -128,7 +128,7 @@ public class ResourceLoader {
      * @param extension String representation of the extension to be removed.
      */
     public static void removeResourceExtension(String extension) {
-        for (Iterator iter = _resourceExtensions.iterator(); iter.hasNext(); ) {
+        for (Iterator<?> iter = _resourceExtensions.iterator(); iter.hasNext(); ) {
             String ext = (String) iter.next();
             if (ext.equals(extension)) {
                 _resourceExtensions.remove(ext);

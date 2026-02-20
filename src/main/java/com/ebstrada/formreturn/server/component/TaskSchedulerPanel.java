@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -40,7 +41,7 @@ import com.ebstrada.formreturn.server.quartz.job.SourceDataFolderMonitorJob;
 import com.ebstrada.formreturn.server.quartz.job.TaskSchedulerJob;
 import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
 
-@SuppressWarnings("serial") public class TaskSchedulerPanel extends JPanel {
+public class TaskSchedulerPanel extends JPanel {
 
     private TaskScheduler taskScheduler;
 
@@ -144,7 +145,7 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
 
     public synchronized void updateJobState() {
         try {
-            ArrayList<TaskSchedulerJob> jobList = taskScheduler.getJobList();
+            List<TaskSchedulerJob> jobList = taskScheduler.getJobList();
             for (TaskSchedulerJob job : jobList) {
                 Trigger.TriggerState state = taskScheduler.getScheduler()
                     .getTriggerState(TriggerKey.triggerKey(
@@ -161,7 +162,7 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 DefaultListModel<TaskSchedulerJob> dlm = new DefaultListModel<TaskSchedulerJob>();
-                ArrayList<TaskSchedulerJob> jobList = taskScheduler.getJobList();
+                List<TaskSchedulerJob> jobList = taskScheduler.getJobList();
                 for (TaskSchedulerJob job : jobList) {
                     dlm.addElement(job);
                 }
@@ -201,8 +202,6 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
                                 job = taskScheduler.createJob(jobPreferences);
                                 taskScheduler.addJobToPreferences(job.getPreferences());
                                 ServerPreferencesManager.savePreferences(ServerGUI.getXstream());
-                            } catch (SchedulerException e) {
-                                logError(e);
                             } catch (IOException e) {
                                 logError(e);
                             }
@@ -257,8 +256,6 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
                                         logError(e);
                                     }
                                 }
-                            } catch (SchedulerException e) {
-                                logError(e);
                             } catch (IOException e) {
                                 logError(e);
                             }
@@ -308,8 +305,6 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
                                         logError(e);
                                     }
                                 }
-                            } catch (SchedulerException e) {
-                                logError(e);
                             } catch (IOException e) {
                                 logError(e);
                             }
@@ -351,8 +346,6 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
                                         logError(e);
                                     }
                                 }
-                            } catch (SchedulerException e) {
-                                logError(e);
                             } catch (IOException e) {
                                 logError(e);
                             }
@@ -565,7 +558,7 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
     private void startTaskButtonActionPerformed(ActionEvent e) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ArrayList<TaskSchedulerJob> jobList = taskScheduler.getJobList();
+                List<TaskSchedulerJob> jobList = taskScheduler.getJobList();
                 int selectedIndex = taskList.getSelectedIndex();
                 if (selectedIndex < 0) {
                     return;
@@ -599,7 +592,7 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
     }
 
     private void stopAllTasksButtonActionPerformed(ActionEvent e) {
-        ArrayList<TaskSchedulerJob> jobList = taskScheduler.getJobList();
+        List<TaskSchedulerJob> jobList = taskScheduler.getJobList();
         for (TaskSchedulerJob job : jobList) {
             try {
                 taskScheduler.stopJob(job);
@@ -612,7 +605,7 @@ import com.ebstrada.formreturn.server.quartz.job.VacuumJob;
     }
 
     private void startAllTasksButtonActionPerformed(ActionEvent e) {
-        ArrayList<TaskSchedulerJob> jobList = taskScheduler.getJobList();
+        List<TaskSchedulerJob> jobList = taskScheduler.getJobList();
         for (TaskSchedulerJob job : jobList) {
             try {
                 taskScheduler.startJob(job);

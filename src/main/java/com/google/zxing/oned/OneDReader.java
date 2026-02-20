@@ -57,6 +57,7 @@ public abstract class OneDReader implements Reader {
     }
   }
   
+  @SuppressWarnings("unchecked")
   private void locateIgnoreArea(Result result, BinaryBitmap image, HashMap<DecodeHintType, Object> hints) throws ReaderException {
 
       ResultPoint[] resultPoints = result.getResultPoints();
@@ -120,13 +121,14 @@ public abstract class OneDReader implements Reader {
 	  }
 	  
       }
-      hints.put(DecodeHintType.SKIP_TO_ROW, new Integer((int) maxY + 1));
+      hints.put(DecodeHintType.SKIP_TO_ROW, Integer.valueOf((int) maxY + 1));
 
   }
 
   /**
  * 
  */
+@SuppressWarnings("unused")
 private void doSomething() {
     // TODO Auto-generated method stub
     
@@ -168,6 +170,7 @@ private void whiteOutIgnoreAreas(int rowNumber, BitArray row, Vector<Rectangle2D
    * @return The contents of the decoded barcode
    * @throws NotFoundException Any spontaneous errors which occur
    */
+  @SuppressWarnings("unchecked")
   private Result doDecode(BinaryBitmap image, HashMap<DecodeHintType, Object> hints) throws NotFoundException {
       int width = image.getWidth();
       int height = image.getHeight();
