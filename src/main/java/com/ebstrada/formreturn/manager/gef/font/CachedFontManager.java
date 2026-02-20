@@ -35,8 +35,6 @@ import javax.swing.DefaultComboBoxModel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import sun.font.Font2D;
-
 import com.ebstrada.formreturn.manager.ui.Main;
 import com.ebstrada.formreturn.manager.util.Misc;
 import com.ebstrada.formreturn.manager.util.preferences.PreferencesManager;
@@ -161,7 +159,8 @@ public class CachedFontManager {
                     if (methods[i].getName().equals("registerGenericFont")) {
                         // OSX java 1.5
                         registerFontMethod = clazz2
-                            .getMethod("registerGenericFont", new Class[] {sun.font.Font2D.class});
+                            .getMethod("registerGenericFont",
+                                new Class[] {Class.forName("sun.font.Font2D")});
                         invokeType = 0;
                     } else if (methods[i].getName().equals("registerFont")) {
                         Class<?>[] parameterTypes = methods[i].getParameterTypes();
@@ -172,7 +171,8 @@ public class CachedFontManager {
                             invokeType = 1;
                         } else {
                             registerFontMethod = clazz2
-                                .getMethod("registerFont", new Class[] {sun.font.Font2D.class});
+                                .getMethod("registerFont",
+                                    new Class[] {Class.forName("sun.font.Font2D")});
                             invokeType = 2;
                         }
                     }
@@ -525,7 +525,7 @@ public class CachedFontManager {
         try {
             switch (invokeType) {
                 case 0:
-                    sun.font.Font2D f2d1 = (Font2D) getFont2DMethod.invoke(null, font);
+                    Object f2d1 = getFont2DMethod.invoke(null, font);
                     registerFontMethod.invoke(null, new Object[] {f2d1});
                     break;
                 case 3:
@@ -535,7 +535,7 @@ public class CachedFontManager {
                     registerFontMethod.invoke(null, new Object[] {font});
                     break;
                 case 2:
-                    sun.font.Font2D f2d2 = (Font2D) getFont2DMethod.invoke(null, font);
+                    Object f2d2 = getFont2DMethod.invoke(null, font);
                     registerFontMethod.invoke(null, new Object[] {f2d2});
                     break;
                 default:
