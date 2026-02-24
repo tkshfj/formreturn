@@ -29,7 +29,7 @@ It also includes a **server/daemon component** (Derby + Quartz) with scanner int
 
 Typical work in this repository includes:
 
-- **Java 17 upgrade** (from Java 8) — updated build target, generics, deprecated API replacements, reflection-based access to internal JDK APIs,
+- **Java 17 upgrade** (from Java 8) — updated build target, generics, deprecated API replacements, reflection-based access to internal JDK APIs, modern language features (switch expressions, pattern matching for `instanceof`, text blocks, `String.isBlank()`/`strip()`, `List.of()`),
 - **security hardening** (XStream deserialization, Zip Slip, SQL injection fixes),
 - **code quality** (resource leak fixes, deprecation cleanup, API migrations, SonarQube/IDE warning elimination),
 - bug fixes and usability improvements,
@@ -266,6 +266,7 @@ This fork includes targeted hardening beyond the upstream codebase:
 - **Deprecated API removal** — replaced Guava `Files.createTempDir()` with `java.nio.file.Files`, migrated Batik and Quartz APIs to current versions, replaced `new URL()` with `URI`-based construction, replaced `getModifiers()` with `getModifiersEx()`, replaced `Class.newInstance()` with `getDeclaredConstructor().newInstance()`
 - **OpenCSV 5.x** — added handling for new checked exceptions (`CsvValidationException`, `CsvException`)
 - **Java 17 migration** — added generic type parameters across ~120 files (JComboBox, DefaultComboBoxModel, Vector, Enumeration, Iterator, Class, etc.), replaced `sun.font` compile-time references with reflection-safe alternatives, upgraded OpenJPA to 3.2.2
+- **Modern Java language features** (164 files, net -391 lines) — switch expressions with arrow syntax (Java 14) in 25+ files, pattern matching for `instanceof` (Java 16) in 60+ files, `String.isBlank()` (Java 11) replacing `.trim().length() == 0` in 28 files, `String.strip()` (Java 11) replacing `.trim()` across the codebase, text blocks (Java 15) for multiline XML/license strings, `List.of()` (Java 9) replacing `Arrays.asList()`, `Hashtable` replaced with `HashMap` across 60 files
 
 ---
 

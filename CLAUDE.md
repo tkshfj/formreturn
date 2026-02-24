@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-FormReturn is a Java 17 Swing-based Optical Mark Recognition (OMR) desktop application for designing, scanning, and processing forms. It includes a form designer GUI, a background server daemon with Quartz-scheduled tasks, scanner integration (TWAIN/SANE/ICA), and an installer wizard. Originally built for Java 8, the codebase was upgraded to Java 17 with generics, deprecated API replacements, and reflection-based access to internal JDK APIs.
+FormReturn is a Java 17 Swing-based Optical Mark Recognition (OMR) desktop application for designing, scanning, and processing forms. It includes a form designer GUI, a background server daemon with Quartz-scheduled tasks, scanner integration (TWAIN/SANE/ICA), and an installer wizard. Originally built for Java 8, the codebase was upgraded to Java 17 with generics, deprecated API replacements, reflection-based access to internal JDK APIs, and modern Java language features (switch expressions, pattern matching for `instanceof`, text blocks, `String.isBlank()`/`strip()`, `List.of()`).
 
 ## Build Commands
 
