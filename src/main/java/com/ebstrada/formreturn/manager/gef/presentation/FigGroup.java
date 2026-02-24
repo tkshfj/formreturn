@@ -238,8 +238,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         int size = this.figs.size();
         for (int i = 0; i < size; i++) {
             Object ft = this.figs.get(i);
-            if (ft instanceof FigText) {
-                return ((FigText) ft).getFont();
+            if (ft instanceof FigText figText) {
+                return figText.getFont();
             }
         }
         return null;
@@ -249,8 +249,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         int size = this.figs.size();
         for (int i = 0; i < size; i++) {
             Object ft = this.figs.get(i);
-            if (ft instanceof FigText) {
-                return ((FigText) ft).getFontFamily();
+            if (ft instanceof FigText figText) {
+                return figText.getFontFamily();
             }
         }
         return "Serif";
@@ -260,8 +260,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         int size = this.figs.size();
         for (int i = 0; i < size; i++) {
             Object ft = this.figs.get(i);
-            if (ft instanceof FigText) {
-                return ((FigText) ft).getFontSize();
+            if (ft instanceof FigText figText) {
+                return figText.getFontSize();
             }
         }
         return 10;
@@ -452,8 +452,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         int size = this.figs.size();
         for (int i = 0; i < size; i++) {
             Object ft = this.figs.get(i);
-            if (ft instanceof FigText) {
-                ((FigText) ft).setFont(f);
+            if (ft instanceof FigText figText) {
+                figText.setFont(f);
             }
         }
     }
@@ -462,8 +462,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         int size = this.figs.size();
         for (int i = 0; i < size; i++) {
             Object ft = this.figs.get(i);
-            if (ft instanceof FigText) {
-                ((FigText) ft).setFontFamily(s);
+            if (ft instanceof FigText figText) {
+                figText.setFontFamily(s);
             }
         }
     }
@@ -472,8 +472,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         int size = this.figs.size();
         for (int i = 0; i < size; i++) {
             Object ft = this.figs.get(i);
-            if (ft instanceof FigText) {
-                ((FigText) ft).setFontSize(s);
+            if (ft instanceof FigText figText) {
+                figText.setFontSize(s);
             }
         }
     }
@@ -505,10 +505,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         int size = this.figs.size();
         for (int i = 0; i < size; i++) {
             Object ft = this.figs.get(i);
-            if (ft instanceof FigText) {
-                ((FigText) ft).setTextColor(c);
-            } else if (ft instanceof FigGroup) {
-                ((FigGroup) ft).setTextColor(c);
+            if (ft instanceof FigText figText) {
+                figText.setTextColor(c);
+            } else if (ft instanceof FigGroup figGroup) {
+                figGroup.setTextColor(c);
             }
         }
         textColor = c;
@@ -519,10 +519,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         int size = this.figs.size();
         for (int i = 0; i < size; i++) {
             Object ft = this.figs.get(i);
-            if (ft instanceof FigText) {
-                ((FigText) ft).setTextFillColor(c);
-            } else if (ft instanceof FigGroup) {
-                ((FigGroup) ft).setTextFillColor(c);
+            if (ft instanceof FigText figText) {
+                figText.setTextFillColor(c);
+            } else if (ft instanceof FigGroup figGroup) {
+                figGroup.setTextFillColor(c);
             }
         }
         textFillColor = c;
@@ -533,10 +533,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         int size = this.figs.size();
         for (int i = 0; i < size; i++) {
             Object ft = this.figs.get(i);
-            if (ft instanceof FigText) {
-                ((FigText) ft).setTextFilled(b);
-            } else if (ft instanceof FigGroup) {
-                ((FigGroup) ft).setTextFilled(b);
+            if (ft instanceof FigText figText) {
+                figText.setTextFilled(b);
+            } else if (ft instanceof FigGroup figGroup) {
+                figGroup.setTextFilled(b);
             }
         }
         textFilled = b;

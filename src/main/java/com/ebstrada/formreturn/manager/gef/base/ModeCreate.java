@@ -91,8 +91,8 @@ public abstract class ModeCreate extends FigModifyingModeImpl {
     @Override public void mousePressed(MouseEvent me) {
         createFig(me);
         if (!(_newItem instanceof GraphElement) && editor
-            .getGraphModel() instanceof MutableGraphSupport) {
-            ((MutableGraphSupport) (editor.getGraphModel())).fireGraphChanged();
+            .getGraphModel() instanceof MutableGraphSupport mutableGraphSupport) {
+            mutableGraphSupport.fireGraphChanged();
         }
     }
 

@@ -33,7 +33,7 @@ public class HiddenFieldsPanel extends JPanel {
     private void hideFromViewButtonActionPerformed(ActionEvent e) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                String fieldName = hiddenFieldNameTextField.getText().trim();
+                String fieldName = hiddenFieldNameTextField.getText().strip();
                 List<String> hiddenFields = PreferencesManager.getHiddenFields();
                 if (!(hiddenFields.contains(fieldName))) {
                     hiddenFields.add(fieldName);
@@ -51,7 +51,7 @@ public class HiddenFieldsPanel extends JPanel {
     private void removeFromViewButtonActionPerformed(ActionEvent e) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                String fieldName = ((String) hiddenFieldsList.getSelectedValue()).trim();
+                String fieldName = ((String) hiddenFieldsList.getSelectedValue()).strip();
                 List<String> hiddenFields = PreferencesManager.getHiddenFields();
                 if (hiddenFields.contains(fieldName)) {
                     hiddenFields.remove(fieldName);

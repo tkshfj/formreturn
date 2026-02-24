@@ -35,32 +35,15 @@ public class FormPublisherException extends Exception {
     }
 
     public String getErrorTitle() {
-
-        String errorTitle = "";
-
-        switch (error) {
-
-            case INTERRUPTED:
-                errorTitle = Localizer.localize("UI", "TransactionAbortedMessage");
-                break;
-            case NO_ENTITY_MANAGER:
-                errorTitle = Localizer.localize("UI", "NoEntityManagerMessage");
-                break;
-            case NO_SOURCE_DATA_RECORDS_TO_PUBLISH:
-                errorTitle = Localizer.localize("UI", "NoSourceDataRecordsToPublishMessage");
-                break;
-            case CANNOT_OVERWITE_FILE:
-                errorTitle = String.format(Localizer.localize("UI", "CannotOverwriteFileMessage"),
-                    overwriteFilename);
-                break;
-            case CANNOT_FIND_FILE:
-                errorTitle = String
-                    .format(Localizer.localize("UI", "CannotFindFileMessage"), unfoundFilename);
-                break;
-        }
-
-        return errorTitle;
-
+        return switch (error) {
+            case INTERRUPTED -> Localizer.localize("UI", "TransactionAbortedMessage");
+            case NO_ENTITY_MANAGER -> Localizer.localize("UI", "NoEntityManagerMessage");
+            case NO_SOURCE_DATA_RECORDS_TO_PUBLISH -> Localizer.localize("UI", "NoSourceDataRecordsToPublishMessage");
+            case CANNOT_OVERWITE_FILE -> String.format(Localizer.localize("UI", "CannotOverwriteFileMessage"),
+                overwriteFilename);
+            case CANNOT_FIND_FILE -> String.format(Localizer.localize("UI", "CannotFindFileMessage"), unfoundFilename);
+            default -> "";
+        };
     }
 
     public void setOverwriteFilename(String overwriteFilename) {

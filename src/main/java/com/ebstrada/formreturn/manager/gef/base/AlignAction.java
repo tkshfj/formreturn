@@ -60,27 +60,17 @@ public class AlignAction extends UndoableAction {
     }
 
     private static String wordFor(int d) {
-        switch (d) {
-            case ALIGN_TOPS:
-                return "Tops";
-            case ALIGN_BOTTOMS:
-                return "Bottoms";
-            case ALIGN_LEFTS:
-                return "Lefts";
-            case ALIGN_RIGHTS:
-                return "Rights";
-
-            case ALIGN_CENTERS:
-                return "Centers";
-            case ALIGN_H_CENTERS:
-                return "HorizontalCenters";
-            case ALIGN_V_CENTERS:
-                return "VerticalCenters";
-
-            case ALIGN_TO_GRID:
-                return "ToGrid";
-        }
-        return "";
+        return switch (d) {
+            case ALIGN_TOPS -> "Tops";
+            case ALIGN_BOTTOMS -> "Bottoms";
+            case ALIGN_LEFTS -> "Lefts";
+            case ALIGN_RIGHTS -> "Rights";
+            case ALIGN_CENTERS -> "Centers";
+            case ALIGN_H_CENTERS -> "HorizontalCenters";
+            case ALIGN_V_CENTERS -> "VerticalCenters";
+            case ALIGN_TO_GRID -> "ToGrid";
+            default -> "";
+        };
     }
 
     @SuppressWarnings("deprecation") @Override public void actionPerformed(ActionEvent e) {

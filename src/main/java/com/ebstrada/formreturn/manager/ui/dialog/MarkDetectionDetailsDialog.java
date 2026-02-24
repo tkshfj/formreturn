@@ -319,7 +319,7 @@ public class MarkDetectionDetailsDialog extends JDialog {
 
         if (omrrs.isReconciliationKey() || omrrs.isCombineColumnCharacters()) {
             String capturedString = omrMatrix.getCapturedString();
-            if (capturedString.trim().length() > 0) {
+            if (!capturedString.isBlank()) {
                 capturedDataTextField.setText(capturedString);
             } else {
                 capturedDataTextField
@@ -421,7 +421,7 @@ public class MarkDetectionDetailsDialog extends JDialog {
                         for (FormPage formPage : form.getFormPageCollection()) {
                             for (Segment segment : formPage.getSegmentCollection()) {
                                 for (FragmentOmr fomr : segment.getFragmentOmrCollection()) {
-                                    if (fomr.getCapturedDataFieldName().trim().equals(fieldname)) {
+                                    if (fomr.getCapturedDataFieldName().strip().equals(fieldname)) {
                                         fomr.setAggregationRule(mard.getAggregationRule());
                                         entityManager.persist(fomr);
                                     }
@@ -469,7 +469,7 @@ public class MarkDetectionDetailsDialog extends JDialog {
                             for (FormPage formPage : form.getFormPageCollection()) {
                                 for (Segment segment : formPage.getSegmentCollection()) {
                                     for (FragmentOmr fomr : segment.getFragmentOmrCollection()) {
-                                        if (fomr.getCapturedDataFieldName().trim()
+                                        if (fomr.getCapturedDataFieldName().strip()
                                             .equals(fieldname)) {
                                             fomr.setAggregationRule(mard.getAggregationRule());
                                             entityManager.persist(fomr);

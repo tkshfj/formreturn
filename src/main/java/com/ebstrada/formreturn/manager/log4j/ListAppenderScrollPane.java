@@ -112,8 +112,8 @@ public class ListAppenderScrollPane extends AbstractAppenderScrollPane {
     @Override public void setAppender(ComponentAppender appender) {
         super.setAppender(appender);
         ListCellRenderer<?> lcr = jlist.getCellRenderer();
-        if (lcr instanceof PriorityListCellRenderer) {
-            ((PriorityListCellRenderer) lcr).setAppender(appender);
+        if (lcr instanceof PriorityListCellRenderer priorityListCellRenderer) {
+            priorityListCellRenderer.setAppender(appender);
         }
     }
 

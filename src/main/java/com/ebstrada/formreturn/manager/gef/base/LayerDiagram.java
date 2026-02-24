@@ -67,38 +67,18 @@ public class LayerDiagram extends Layer {
      * A utility function to give the spelled-out word for numbers.
      */
     protected static String numberWordFor(int n) {
-        switch (n) {
-
-            case 1:
-                return "One";
-
-            case 2:
-                return "Two";
-
-            case 3:
-                return "Three";
-
-            case 4:
-                return "Four";
-
-            case 5:
-                return "Five";
-
-            case 6:
-                return "Six";
-
-            case 7:
-                return "Seven";
-
-            case 8:
-                return "Eight";
-
-            case 9:
-                return "Nine";
-
-            default:
-                return "Layer " + n;
-        }
+        return switch (n) {
+            case 1 -> "One";
+            case 2 -> "Two";
+            case 3 -> "Three";
+            case 4 -> "Four";
+            case 5 -> "Five";
+            case 6 -> "Six";
+            case 7 -> "Seven";
+            case 8 -> "Eight";
+            case 9 -> "Nine";
+            default -> "Layer " + n;
+        };
     }
 
     // //////////////////////////////////////////////////////////////
@@ -287,8 +267,8 @@ public class LayerDiagram extends Layer {
             Fig fig = (Fig) figsIter.next();
             if (clipBounds == null || fig.intersects(clipBounds)) {
                 if (painter == null) {
-                    if (fig instanceof FigText) {
-                        ((FigText) fig).setRenderableText(null);
+                    if (fig instanceof FigText figText) {
+                        figText.setRenderableText(null);
                     }
                     fig.paint(g);
                 } else {

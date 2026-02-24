@@ -225,14 +225,14 @@ public class ScanClientController {
     private void parseLine(String line) throws Exception {
 
         String[] strarr1 = line.split(":");
-        String token = strarr1[0].trim();
-        String action = strarr1[1].trim();
+        String token = strarr1[0].strip();
+        String action = strarr1[1].strip();
 
         String[] strarr2 = line.split(":", 3);
 
         String data = "";
         if (strarr2.length > 2) {
-            data = strarr2[2].trim();
+            data = strarr2[2].strip();
         }
 
         for (ReceiveActions receiveAction : ReceiveActions.values()) {

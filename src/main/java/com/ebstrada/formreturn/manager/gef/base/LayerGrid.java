@@ -342,18 +342,18 @@ public class LayerGrid extends Layer {
         setHidden(false);
 
         m = map.get("spacing");
-        if (m instanceof Integer) {
-            _spacing = ((Integer) m).intValue();
+        if (m instanceof Integer intVal) {
+            _spacing = intVal.intValue();
         }
 
         m = map.get("paintLines");
-        if (m instanceof Boolean) {
-            _paintLines = ((Boolean) m).booleanValue();
+        if (m instanceof Boolean boolVal) {
+            _paintLines = boolVal.booleanValue();
         }
 
         m = map.get("paintDots");
-        if (m instanceof Boolean) {
-            _paintDots = ((Boolean) m).booleanValue();
+        if (m instanceof Boolean boolVal2) {
+            _paintDots = boolVal2.booleanValue();
         }
 
         refreshEditors();

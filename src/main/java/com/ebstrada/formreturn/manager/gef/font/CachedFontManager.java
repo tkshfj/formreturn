@@ -499,7 +499,7 @@ public class CachedFontManager {
             }
         }
 
-        if (font != null && !(font.getFontName().trim().equalsIgnoreCase("new"))) {
+        if (font != null && !(font.getFontName().strip().equalsIgnoreCase("new"))) {
             cf.setFont(font);
             cachedFontGroup.addCachedFont(cf);
         }

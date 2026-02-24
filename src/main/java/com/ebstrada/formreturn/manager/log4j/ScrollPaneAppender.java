@@ -49,8 +49,8 @@ public class ScrollPaneAppender extends ComponentAppender {
      *             the component to initialize
      */
     @Override protected void initializeNewComponent(Component comp) {
-        if (comp instanceof AbstractAppenderScrollPane) {
-            ((AbstractAppenderScrollPane) comp).setAppender(this);
+        if (comp instanceof AbstractAppenderScrollPane abstractAppenderScrollPane) {
+            abstractAppenderScrollPane.setAppender(this);
         }
     }
 
@@ -62,8 +62,8 @@ public class ScrollPaneAppender extends ComponentAppender {
      *              if the component supports just 1 line.
      */
     @Override public void setMaxEntries(int value) {
-        if (comp instanceof AbstractAppenderScrollPane) {
-            ((AbstractAppenderScrollPane) comp).setMaxEntries(value);
+        if (comp instanceof AbstractAppenderScrollPane abstractAppenderScrollPane) {
+            abstractAppenderScrollPane.setMaxEntries(value);
         }
         super.setMaxEntries(value);
     }
@@ -75,8 +75,8 @@ public class ScrollPaneAppender extends ComponentAppender {
      *              logging event information
      */
     @Override public void append(LoggingEvent event) {
-        if (comp instanceof AbstractAppenderScrollPane) {
-            ((AbstractAppenderScrollPane) comp).addElement(event);
+        if (comp instanceof AbstractAppenderScrollPane abstractAppenderScrollPane) {
+            abstractAppenderScrollPane.addElement(event);
         } else {
             super.append(event);
         }
@@ -87,8 +87,8 @@ public class ScrollPaneAppender extends ComponentAppender {
      */
     @Override public void reset() {
         super.reset();
-        if (comp instanceof AbstractAppenderScrollPane) {
-            ((AbstractAppenderScrollPane) comp).removeAllElements();
+        if (comp instanceof AbstractAppenderScrollPane abstractAppenderScrollPane) {
+            abstractAppenderScrollPane.removeAllElements();
         }
     }
 

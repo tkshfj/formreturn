@@ -108,16 +108,11 @@ public class DocumentAttributes implements NoObfuscation {
     }
 
     public void setDocumentType(int newDocumentType) {
-        switch (newDocumentType) {
-            case DocumentAttributes.FORM:
-                documentType = DocumentAttributes.FORM;
-                break;
-            case DocumentAttributes.SEGMENT:
-                documentType = DocumentAttributes.SEGMENT;
-                break;
-            default:
-                documentType = DocumentAttributes.FORM;
-        }
+        documentType = switch (newDocumentType) {
+            case DocumentAttributes.FORM -> DocumentAttributes.FORM;
+            case DocumentAttributes.SEGMENT -> DocumentAttributes.SEGMENT;
+            default -> DocumentAttributes.FORM;
+        };
     }
 
     public int getDocumentType() {

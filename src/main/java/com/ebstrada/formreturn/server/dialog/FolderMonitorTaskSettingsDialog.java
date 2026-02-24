@@ -48,18 +48,18 @@ public class FolderMonitorTaskSettingsDialog extends JDialog {
         this.taskSchedulerJobPreferences = (FolderMonitorJobPreferences) preferences;
         this.descriptionTextField.setText(preferences.getDescription());
         int type = 0;
-        if (preferences instanceof ImageFolderMonitorJobPreferences) {
+        if (preferences instanceof ImageFolderMonitorJobPreferences imageFolderMonitorJobPreferences) {
             type = FolderMonitorJob.IMAGE_FOLDER_MONITOR_JOB;
             this.unprocessedFolderTextField
-                .setText(((ImageFolderMonitorJobPreferences) preferences).getSourceDirectory());
+                .setText(imageFolderMonitorJobPreferences.getSourceDirectory());
             this.processedFolderTextField.setText(
-                ((ImageFolderMonitorJobPreferences) preferences).getDestinationDirectory());
-        } else if (preferences instanceof SourceDataFolderMonitorJobPreferences) {
+                imageFolderMonitorJobPreferences.getDestinationDirectory());
+        } else if (preferences instanceof SourceDataFolderMonitorJobPreferences sourceDataFolderMonitorJobPreferences) {
             type = FolderMonitorJob.SOURCE_DATA_FOLDER_MONITOR_JOB;
             this.unprocessedFolderTextField.setText(
-                ((SourceDataFolderMonitorJobPreferences) preferences).getSourceDirectory());
+                sourceDataFolderMonitorJobPreferences.getSourceDirectory());
             this.processedFolderTextField.setText(
-                ((SourceDataFolderMonitorJobPreferences) preferences).getDestinationDirectory());
+                sourceDataFolderMonitorJobPreferences.getDestinationDirectory());
         }
         this.typeOfMonitorComboBox.setSelectedIndex(type);
         this.pollFrequencySpinner.setValue(preferences.getInterval() / 1000);
@@ -146,10 +146,10 @@ public class FolderMonitorTaskSettingsDialog extends JDialog {
             .setDestinationDirectory(this.processedFolderTextField.getText());
         this.taskSchedulerJobPreferences
             .setInterval((Integer) this.pollFrequencySpinner.getValue() * 1000);
-        this.taskSchedulerJobPreferences.setDescription(this.descriptionTextField.getText().trim());
+        this.taskSchedulerJobPreferences.setDescription(this.descriptionTextField.getText().strip());
         this.taskSchedulerJobPreferences.setAutoStart(this.launchOnStartupCheckBox.isSelected());
         this.taskSchedulerJobPreferences
-            .setCronExpression(this.cronExpressionTriggerTextField.getText().trim());
+            .setCronExpression(this.cronExpressionTriggerTextField.getText().strip());
 
         if (pollTriggerRadioButton.isSelected()) {
             this.taskSchedulerJobPreferences.setTriggerType(ITriggerTypes.SIMPLE_TRIGGER);

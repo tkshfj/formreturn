@@ -26,8 +26,8 @@ public class SizePresets {
             for (SizeAttributes[] formSizeAttributePair : formSizeAttributes) {
                 SizeAttributes portraitFormSizeAttribute =
                     formSizeAttributePair[(SizeAttributes.PORTRAIT - 1)];
-                if (portraitFormSizeAttribute.getName().trim()
-                    .equalsIgnoreCase(presetName.trim())) {
+                if (portraitFormSizeAttribute.getName().strip()
+                    .equalsIgnoreCase(presetName.strip())) {
                     return formSizeAttributePair[(orientation - 1)];
                 }
             }
@@ -37,8 +37,8 @@ public class SizePresets {
             for (SizeAttributes[] segmentSizeAttributePair : segmentSizeAttributes) {
                 SizeAttributes portraitSegmentSizeAttribute =
                     segmentSizeAttributePair[(SizeAttributes.PORTRAIT - 1)];
-                if (portraitSegmentSizeAttribute.getName().trim()
-                    .equalsIgnoreCase(presetName.trim())) {
+                if (portraitSegmentSizeAttribute.getName().strip()
+                    .equalsIgnoreCase(presetName.strip())) {
                     return segmentSizeAttributePair[(orientation - 1)];
                 }
             }

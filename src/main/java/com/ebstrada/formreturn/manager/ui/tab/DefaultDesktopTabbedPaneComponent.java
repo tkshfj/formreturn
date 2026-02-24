@@ -116,16 +116,14 @@ public class DefaultDesktopTabbedPaneComponent extends JPanel {
     private final static MouseListener buttonMouseListener = new MouseAdapter() {
         public void mouseEntered(MouseEvent e) {
             Component component = e.getComponent();
-            if (component instanceof AbstractButton) {
-                AbstractButton button = (AbstractButton) component;
+            if (component instanceof AbstractButton button) {
                 button.setBorderPainted(true);
             }
         }
 
         public void mouseExited(MouseEvent e) {
             Component component = e.getComponent();
-            if (component instanceof AbstractButton) {
-                AbstractButton button = (AbstractButton) component;
+            if (component instanceof AbstractButton button) {
                 button.setBorderPainted(false);
             }
         }

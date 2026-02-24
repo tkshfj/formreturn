@@ -14,7 +14,7 @@ public class RulePart extends ArrayList<OrCondition> {
     }
 
     private boolean isScoreValueAFlag(String scoreValue) {
-	if (scoreValue.trim().equalsIgnoreCase("!!error!!")) {
+	if (scoreValue.strip().equalsIgnoreCase("!!error!!")) {
 	    return true;
 	}
 	return false;
@@ -31,7 +31,7 @@ public class RulePart extends ArrayList<OrCondition> {
     
     public void parse(String ruleStr) throws InvalidRulePartException {
 	clear();
-	if (ruleStr.trim().equals("?")) {
+	if (ruleStr.strip().equals("?")) {
 	    throw new InvalidRulePartException();
 	}
 	int ternaryOpOffset = ruleStr.indexOf('?');

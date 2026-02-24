@@ -80,8 +80,7 @@ public abstract class Palette extends JPanel implements MouseListener {
     }
 
     @Override public Component add(Component comp) {
-        if (comp instanceof JToggleButton) {
-            JToggleButton button = (JToggleButton) comp;
+        if (comp instanceof JToggleButton button) {
             Action action = button.getAction();
             if (action instanceof SetModeAction) {
                 _modeButtons.addElement(button);
@@ -185,10 +184,9 @@ public abstract class Palette extends JPanel implements MouseListener {
             Globals.setSticky(false);
         }
         if (me.getClickCount() >= 2) {
-            if (!(src instanceof JToggleButton)) {
+            if (!(src instanceof JToggleButton b)) {
                 return;
             }
-            JToggleButton b = (JToggleButton) src;
             if (canLock(b)) {
                 b.setSelected(true);
                 b.getModel().setPressed(true);
@@ -198,8 +196,7 @@ public abstract class Palette extends JPanel implements MouseListener {
                 Globals.setSticky(true);
             }
         } else {
-            if (src instanceof JToggleButton && isModeButton(src)) {
-                JToggleButton b = (JToggleButton) src;
+            if (src instanceof JToggleButton b && isModeButton(src)) {
                 b.setSelected(true);
                 b.getModel().setPressed(true);
                 b.setBorderPainted(true);
@@ -226,17 +223,17 @@ public abstract class Palette extends JPanel implements MouseListener {
         int size = getComponentCount();
         for (int i = 0; i < size; i++) {
             Component c = getComponent(i);
-            if (!(c instanceof JToggleButton)) {
+            if (!(c instanceof JToggleButton toggleButton)) {
                 continue;
             }
             if (c == src) {
                 continue;
             }
-            ((JToggleButton) c).setSelected(false);
-            ((JToggleButton) c).getModel().setPressed(false);
-            ((JToggleButton) c).setBorderPainted(false);
-            ((JToggleButton) c).setContentAreaFilled(false);
-            ((JToggleButton) c).setOpaque(false);
+            toggleButton.setSelected(false);
+            toggleButton.getModel().setPressed(false);
+            toggleButton.setBorderPainted(false);
+            toggleButton.setContentAreaFilled(false);
+            toggleButton.setOpaque(false);
         }
     }
 
@@ -249,23 +246,22 @@ public abstract class Palette extends JPanel implements MouseListener {
         int size = getComponentCount();
         for (int i = 0; i < size; i++) {
             Component c = getComponent(i);
-            if (!(c instanceof JToggleButton)) {
+            if (!(c instanceof JToggleButton toggleButton)) {
                 continue;
             }
-            ((JToggleButton) c).setSelected(false);
-            ((JToggleButton) c).getModel().setPressed(false);
-            ((JToggleButton) c).setBorderPainted(false);
-            ((JToggleButton) c).setContentAreaFilled(false);
-            ((JToggleButton) c).setOpaque(false);
+            toggleButton.setSelected(false);
+            toggleButton.getModel().setPressed(false);
+            toggleButton.setBorderPainted(false);
+            toggleButton.setContentAreaFilled(false);
+            toggleButton.setOpaque(false);
 
         }
         // press the first button (usually ModeSelect)
         for (int i = 0; i < size; i++) {
             Component c = getComponent(i);
-            if (!(c instanceof JToggleButton)) {
+            if (!(c instanceof JToggleButton select)) {
                 continue;
             }
-            JToggleButton select = (JToggleButton) c;
             select.setSelected(true);
             select.getModel().setPressed(true);
             select.setBorderPainted(true);

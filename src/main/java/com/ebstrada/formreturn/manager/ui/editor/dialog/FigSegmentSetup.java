@@ -174,8 +174,8 @@ public class FigSegmentSetup extends JDialog {
         List<Fig> graphFigs = figSegment.getGraph().getEditor().getLayerManager().getContents();
         if (graphFigs != null && graphFigs.size() > 0) {
             for (Fig fig : graphFigs) {
-                if (fig != figSegment && fig instanceof FigSegment) {
-                    SegmentContainer segmentContainer = ((FigSegment) fig).getSegmentContainer();
+                if (fig != figSegment && fig instanceof FigSegment figSegment2) {
+                    SegmentContainer segmentContainer = figSegment2.getSegmentContainer();
                     int numberOfSegments = segmentContainer.getNumberOfSegments();
                     for (int j = 0; j < numberOfSegments; j++) {
                         Document internalSegment = segmentContainer.getSegment(j);
@@ -183,9 +183,9 @@ public class FigSegmentSetup extends JDialog {
                         ArrayList<Fig> internalSegmentFigs = internalSegmentPage.getFigs();
                         if (internalSegmentFigs != null && internalSegmentFigs.size() > 0) {
                             for (Fig internalSegmentFig : internalSegmentFigs) {
-                                if (internalSegmentFig instanceof FigCheckbox) {
+                                if (internalSegmentFig instanceof FigCheckbox figCheckbox) {
                                     formFieldnames
-                                        .add(((FigCheckbox) internalSegmentFig).getFieldname());
+                                        .add(figCheckbox.getFieldname());
                                 }
                             }
                         }
@@ -201,9 +201,9 @@ public class FigSegmentSetup extends JDialog {
             ArrayList<Fig> figs = page.getFigs();
             if (figs != null && figs.size() > 0) {
                 for (Fig fig : figs) {
-                    if (fig != figSegment && fig instanceof FigSegment) {
+                    if (fig != figSegment && fig instanceof FigSegment figSegment3) {
                         SegmentContainer segmentContainer =
-                            ((FigSegment) fig).getSegmentContainer();
+                            figSegment3.getSegmentContainer();
                         int numberOfSegments = segmentContainer.getNumberOfSegments();
                         for (int j = 0; j < numberOfSegments; j++) {
                             Document internalSegment = segmentContainer.getSegment(j);
@@ -211,9 +211,9 @@ public class FigSegmentSetup extends JDialog {
                             ArrayList<Fig> internalSegmentFigs = internalSegmentPage.getFigs();
                             if (internalSegmentFigs != null && internalSegmentFigs.size() > 0) {
                                 for (Fig internalSegmentFig : internalSegmentFigs) {
-                                    if (internalSegmentFig instanceof FigCheckbox) {
+                                    if (internalSegmentFig instanceof FigCheckbox figCheckbox3) {
                                         formFieldnames
-                                            .add(((FigCheckbox) internalSegmentFig).getFieldname());
+                                            .add(figCheckbox3.getFieldname());
                                     }
                                 }
                             }
@@ -229,9 +229,8 @@ public class FigSegmentSetup extends JDialog {
         ArrayList<Fig> figs = page.getFigs();
         if (figs != null && figs.size() > 0) {
             for (Fig fig : figs) {
-                if (fig instanceof FigCheckbox) {
-                    FigCheckbox figCheckbox = (FigCheckbox) fig;
-                    if (!(figCheckbox.isReconciliationKey())) {
+                if (fig instanceof FigCheckbox figCheckbox2) {
+                    if (!(figCheckbox2.isReconciliationKey())) {
                         segmentFieldnames.add(figCheckbox.getFieldname());
                     }
                 }

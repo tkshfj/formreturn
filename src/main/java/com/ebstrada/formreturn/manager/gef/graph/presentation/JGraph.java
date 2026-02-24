@@ -290,8 +290,8 @@ public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
         while (iter.hasMoreElements()) {
             Fig fig = (Fig) iter.nextElement();
 
-            if (fig instanceof FigBarcode) {
-                if (((FigBarcode) fig).getRecognitionMarkerType() != FigBarcode.NOT_MARKER) {
+            if (fig instanceof FigBarcode figBarcode) {
+                if (figBarcode.getRecognitionMarkerType() != FigBarcode.NOT_MARKER) {
                     continue;
                 }
             }
@@ -412,8 +412,8 @@ public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
      */
     public void selectByOwner(Object owner) {
         Layer lay = editor.getLayerManager().getActiveLayer();
-        if (lay instanceof LayerDiagram) {
-            select(((LayerDiagram) lay).presentationFor(owner));
+        if (lay instanceof LayerDiagram layerDiagram) {
+            select(layerDiagram.presentationFor(owner));
         }
     }
 
@@ -422,8 +422,8 @@ public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
      * select it.
      */
     public void selectByOwnerOrFig(Object owner) {
-        if (owner instanceof Fig) {
-            select((Fig) owner);
+        if (owner instanceof Fig fig) {
+            select(fig);
         } else {
             selectByOwner(owner);
         }
@@ -434,8 +434,8 @@ public class JGraph extends JPanel implements Cloneable, AdjustmentListener {
      */
     public void selectByOwnerOrNoChange(Object owner) {
         Layer lay = editor.getLayerManager().getActiveLayer();
-        if (lay instanceof LayerDiagram) {
-            Fig f = ((LayerDiagram) lay).presentationFor(owner);
+        if (lay instanceof LayerDiagram layerDiagram) {
+            Fig f = layerDiagram.presentationFor(owner);
             if (f != null) {
                 select(f);
             }
@@ -712,8 +712,7 @@ class JGraphInternalPane extends JPanel {
         }
         Component parent = getParent();
 
-        if (parent instanceof JViewport) {
-            JViewport view = (JViewport) parent;
+        if (parent instanceof JViewport view) {
             Rectangle bounds = view.getBounds();
             Point pos = view.getViewPosition();
             res.clipRect(bounds.x + pos.x - 1, bounds.y + pos.y - 1, bounds.width + 1,

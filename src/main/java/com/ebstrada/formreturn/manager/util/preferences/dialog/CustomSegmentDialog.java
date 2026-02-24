@@ -26,7 +26,7 @@ public class CustomSegmentDialog extends JDialog {
 
     private void saveButtonActionPerformed(ActionEvent e) {
 
-        String newSegmentSizeName = customSegmentNameTextField.getText().trim();
+        String newSegmentSizeName = customSegmentNameTextField.getText().strip();
 
         // 1. validate name
         if (newSegmentSizeName.length() <= 0) {
@@ -76,7 +76,7 @@ public class CustomSegmentDialog extends JDialog {
     }
 
     public String getCustomSegmentName() {
-        return customSegmentNameTextField.getText().trim();
+        return customSegmentNameTextField.getText().strip();
     }
 
     public void setPortraitWidth(int width) {

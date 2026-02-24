@@ -37,8 +37,7 @@ public class RecordTree extends JTree {
 
             Object userObject = ((DefaultMutableTreeNode) value).getUserObject();
             RecordNode recordNode = null;
-            if (userObject instanceof LinkObject) {
-                LinkObject link = (LinkObject) userObject;
+            if (userObject instanceof LinkObject link) {
                 recordNode = (RecordNode) link.getObject();
             } else if (userObject instanceof String) {
                 recordNode = null;
@@ -166,8 +165,7 @@ public class RecordTree extends JTree {
 
     private void setLoading(RecordTreeNode parent) {
         TreeModel model = getModel();
-        if (model instanceof DefaultTreeModel) {
-            DefaultTreeModel defaultModel = (DefaultTreeModel) model;
+        if (model instanceof DefaultTreeModel defaultModel) {
             int[] indices = new int[parent.getChildCount()];
             for (int i = 0; i < indices.length; i++) {
                 indices[i] = i;
@@ -180,8 +178,7 @@ public class RecordTree extends JTree {
         RecordTreeNode rtn = (RecordTreeNode) this.getSelectionPath().getLastPathComponent();
         Object userObject = rtn.getUserObject();
         RecordNode recordNode = null;
-        if (userObject instanceof LinkObject) {
-            LinkObject link = (LinkObject) userObject;
+        if (userObject instanceof LinkObject link) {
             recordNode = (RecordNode) link.getObject();
         } else if (userObject instanceof String) {
             recordNode = null;
@@ -196,8 +193,7 @@ public class RecordTree extends JTree {
 
         }
         TreeModel model = getModel();
-        if (model instanceof DefaultTreeModel) {
-            DefaultTreeModel defaultModel = (DefaultTreeModel) model;
+        if (model instanceof DefaultTreeModel defaultModel) {
             int childCount = parent.getChildCount();
             if (childCount > 0) {
                 for (int i = 0; i < childCount; i++) {
@@ -342,8 +338,7 @@ public class RecordTree extends JTree {
 
                 Object userObject = node.getUserObject();
                 RecordNode recordNode = null;
-                if (userObject instanceof LinkObject) {
-                    LinkObject link = (LinkObject) userObject;
+                if (userObject instanceof LinkObject link) {
                     recordNode = (RecordNode) link.getObject();
                 } else if (userObject instanceof String) {
                     recordNode = null;

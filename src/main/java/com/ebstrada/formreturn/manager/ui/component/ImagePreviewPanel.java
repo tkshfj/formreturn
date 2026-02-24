@@ -355,19 +355,19 @@ public class ImagePreviewPanel extends JPanel {
 
                 Object obj = getTopLevelAncestor();
 
-                if (obj instanceof JFrame) {
+                if (obj instanceof JFrame jFrame) {
 
                     BarcodeDetectionDetailsDialog bddd =
-                        new BarcodeDetectionDetailsDialog((JFrame) obj);
+                        new BarcodeDetectionDetailsDialog(jFrame);
                     bddd.setBarcodeRecognitionData(barcode);
 
                     bddd.setModal(true);
                     bddd.setVisible(true);
 
-                } else if (obj instanceof JDialog) {
+                } else if (obj instanceof JDialog jDialog) {
 
                     BarcodeDetectionDetailsDialog bddd =
-                        new BarcodeDetectionDetailsDialog((JDialog) obj);
+                        new BarcodeDetectionDetailsDialog(jDialog);
                     bddd.setBarcodeRecognitionData(barcode);
 
                     bddd.setModal(true);
@@ -435,12 +435,12 @@ public class ImagePreviewPanel extends JPanel {
 
         FileDialog fd = null;
 
-        if (obj instanceof JFrame) {
+        if (obj instanceof JFrame jFrame) {
             fd =
-                new FileDialog((JFrame) obj, Localizer.localize("UI", "SaveImageToDiskDialogTitle"),
+                new FileDialog(jFrame, Localizer.localize("UI", "SaveImageToDiskDialogTitle"),
                     FileDialog.SAVE);
-        } else if (obj instanceof JDialog) {
-            fd = new FileDialog((JDialog) obj,
+        } else if (obj instanceof JDialog jDialog) {
+            fd = new FileDialog(jDialog,
                 Localizer.localize("UI", "SaveImageToDiskDialogTitle"), FileDialog.SAVE);
         } else {
             return null;

@@ -149,10 +149,10 @@ public class PasteAction extends UndoableAction {
                     Fig fclone = (Fig) f.clone();
 
                     Object owner = fclone.getOwner();
-                    if (owner instanceof VetoableChangeEventSource
-                        && fclone instanceof VetoableChangeListener) {
-                        ((VetoableChangeEventSource) owner)
-                            .addVetoableChangeListener((VetoableChangeListener) fclone);
+                    if (owner instanceof VetoableChangeEventSource vetoableChangeEventSource
+                        && fclone instanceof VetoableChangeListener vetoableChangeListener) {
+                        vetoableChangeEventSource
+                            .addVetoableChangeListener(vetoableChangeListener);
                     }
 
                     fclone.translate(xOffset, yOffset + (int) f.getCopyY());

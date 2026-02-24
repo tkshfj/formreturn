@@ -51,7 +51,7 @@ public class ExportTaskSettingsDialog extends JDialog {
     }
 
     public String getDescription() {
-        return taskDescriptionTextField.getText().trim();
+        return taskDescriptionTextField.getText().strip();
     }
 
     public void setDescription(String description) {
@@ -102,7 +102,7 @@ public class ExportTaskSettingsDialog extends JDialog {
     }
 
     public String getCronExpression() {
-        return cronExpressionTriggerTextField.getText().trim();
+        return cronExpressionTriggerTextField.getText().strip();
     }
 
     public void setCronExpression(String cronExpression) {

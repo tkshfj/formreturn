@@ -35,8 +35,8 @@ public class ChangeUserPasswordDialog extends JDialog {
 
     private void changePasswordButtonActionPerformed(ActionEvent e) {
 
-        String password = new String(passwordPasswordField.getPassword()).trim();
-        String confirmPassword = new String(confirmPasswordPasswordField.getPassword()).trim();
+        String password = new String(passwordPasswordField.getPassword()).strip();
+        String confirmPassword = new String(confirmPasswordPasswordField.getPassword()).strip();
 
         if (!(password.equals(confirmPassword))) {
             Misc.showErrorMsg(this,

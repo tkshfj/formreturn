@@ -297,8 +297,7 @@ public class DesktopTabbedPaneBackground {
 
     public void addLink(String id, Graphics g) {
         Element element = this.backgroundDoc.getElementById(id);
-        if (element instanceof SVGLocatable) {
-            SVGLocatable locatableElement = ((SVGLocatable) element);
+        if (element instanceof SVGLocatable locatableElement) {
             SVGRect box = locatableElement.getBBox();
             ScalingRectangle rect =
                 new ScalingRectangle(box.getX(), box.getY(), box.getWidth(), box.getHeight());

@@ -233,8 +233,7 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
         try {
             PrintService pservice = PrintServiceLookup.lookupDefaultPrintService();
             Object obj = pservice.getDefaultAttributeValue(Media.class);
-            if (obj instanceof MediaSizeName) {
-                MediaSizeName mediaSizeName = (MediaSizeName) obj;
+            if (obj instanceof MediaSizeName mediaSizeName) {
                 if (mediaSizeName.equals(MediaSizeName.ISO_A4)) {
                     return true;
                 } else {
@@ -771,14 +770,12 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
 
             try {
 
-                if (metadata instanceof TwainIOMetadata) {
+                if (metadata instanceof TwainIOMetadata twaindata) {
 
                     String message = String.format(Localizer.localize("UI", "SavingPageMessage"),
                         (pageCount + 1) + "");
 
                     statusLabel.setText(message);
-
-                    TwainIOMetadata twaindata = (TwainIOMetadata) metadata;
 
                     TwainTransfer.MemoryTransfer.Info info = twaindata.getMemory();
 
@@ -858,8 +855,8 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
                 device.setShowProgressBar(isUsingVendorUI());
                 device.setResolution(getDPI());
 
-                if (metadata instanceof TwainIOMetadata) { // TWAIN only!
-                    TwainSource source = ((TwainIOMetadata) metadata).getSource();
+                if (metadata instanceof TwainIOMetadata twainIOMetadata) { // TWAIN only!
+                    TwainSource source = twainIOMetadata.getSource();
 
                     TwainCapability cap;
 
@@ -903,8 +900,8 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
                         int selectedSize = pageSizeComboBox.getSelectedIndex();
                         Object[] items = cap.getItems();
                         for (Object obj : items) {
-                            if (obj instanceof Integer) {
-                                if (selectedSize == ((Integer) obj).intValue()) {
+                            if (obj instanceof Integer intObj) {
+                                if (selectedSize == intObj.intValue()) {
                                     cap.setCurrentValue(selectedSize);
                                 }
                             }
@@ -935,8 +932,8 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
         } else if (type.equals(ScannerIOMetadata.STATECHANGE)) {
 
             if (metadata.isFinished()) {
-                if (metadata instanceof TwainIOMetadata) {
-                    TwainSource source = ((TwainIOMetadata) metadata).getSource();
+                if (metadata instanceof TwainIOMetadata twainIOMetadata2) {
+                    TwainSource source = twainIOMetadata2.getSource();
                     try {
                         source.close();
                     } catch (TwainIOException e) {
@@ -954,8 +951,8 @@ public class TwainPanel extends JPanel implements ScannerListener, ScannerPanel 
 
             if (metadata.isState(TwainConstants.STATE_SRCMNGOPEN)) { // state = 3
 
-                if (metadata instanceof TwainIOMetadata) {
-                    TwainSource source = ((TwainIOMetadata) metadata).getSource();
+                if (metadata instanceof TwainIOMetadata twainIOMetadata3) {
+                    TwainSource source = twainIOMetadata3.getSource();
 
                     if (source.isBusy()) {
 

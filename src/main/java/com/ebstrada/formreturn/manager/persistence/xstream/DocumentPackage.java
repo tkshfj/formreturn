@@ -188,9 +188,9 @@ public class DocumentPackage {
             if (figs != null) {
                 for (Iterator<Fig> figIterator = figs.iterator(); figIterator.hasNext(); ) {
                     Fig fig = figIterator.next();
-                    if (fig instanceof FigSegment) {
+                    if (fig instanceof FigSegment figSegment) {
                         List<Document> segments =
-                            ((FigSegment) fig).getSegmentContainer().getSegments();
+                            figSegment.getSegmentContainer().getSegments();
                         for (Iterator<Document> segmentIterator = segments.iterator(); segmentIterator
                             .hasNext(); ) {
                             Document segment = segmentIterator.next();
@@ -204,26 +204,26 @@ public class DocumentPackage {
                                 for (Iterator<Fig> segmentFigIterator =
                                      segmentFigs.iterator(); segmentFigIterator.hasNext(); ) {
                                     Fig segmentFig = segmentFigIterator.next();
-                                    if (segmentFig instanceof FigImage) {
+                                    if (segmentFig instanceof FigImage figImage) {
                                         String imageFileName =
-                                            ((FigImage) segmentFig).getImageFileName();
+                                            figImage.getImageFileName();
                                         imagesClone.remove(imageFileName);
-                                    } else if (segmentFig instanceof FigText) {
-                                        if (((FigText) segmentFig).isEmbedded()) {
+                                    } else if (segmentFig instanceof FigText figText) {
+                                        if (figText.isEmbedded()) {
                                             String fontFileName =
-                                                ((FigText) segmentFig).getFontFileName();
+                                                figText.getFontFileName();
                                             fontsClone.remove(fontFileName);
                                         }
                                     }
                                 }
                             }
                         }
-                    } else if (fig instanceof FigImage) {
-                        String imageFileName = ((FigImage) fig).getImageFileName();
+                    } else if (fig instanceof FigImage figImage2) {
+                        String imageFileName = figImage2.getImageFileName();
                         imagesClone.remove(imageFileName);
-                    } else if (fig instanceof FigText) {
-                        if (((FigText) fig).isEmbedded()) {
-                            String fontFileName = ((FigText) fig).getFontFileName();
+                    } else if (fig instanceof FigText figText2) {
+                        if (figText2.isEmbedded()) {
+                            String fontFileName = figText2.getFontFileName();
                             fontsClone.remove(fontFileName);
                         }
                     }

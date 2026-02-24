@@ -40,11 +40,11 @@ public class AddNewPreviewFieldDialog extends JDialog {
     }
 
     public String getFieldValue() {
-        return valueTextField.getText().trim();
+        return valueTextField.getText().strip();
     }
 
     public String getFieldName() {
-        return fieldNameTextField.getText().trim();
+        return fieldNameTextField.getText().strip();
     }
 
 

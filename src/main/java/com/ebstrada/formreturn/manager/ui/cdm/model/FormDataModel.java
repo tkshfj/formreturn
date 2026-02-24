@@ -177,7 +177,7 @@ public class FormDataModel extends AbstractDataModel {
             String countSql =
                 "SELECT COUNT(FORM.FORM_ID) FROM FORM WHERE FORM.RECORD_ID IS NOT NULL";
             String countSearchSQL = getNativeSearchSQL();
-            if (countSearchSQL.trim().length() > 0) {
+            if (!countSearchSQL.isBlank()) {
                 countSql += " AND " + countSearchSQL;
             }
 
@@ -196,7 +196,7 @@ public class FormDataModel extends AbstractDataModel {
 
             // SEARCH FILTER
             String nativeSearchSQL = getNativeSearchSQL();
-            if (nativeSearchSQL.trim().length() > 0) {
+            if (!nativeSearchSQL.isBlank()) {
                 sql += " AND " + nativeSearchSQL;
             }
 

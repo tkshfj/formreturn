@@ -505,8 +505,7 @@ public class FormPublisher {
             if (figs != null) {
                 for (Iterator<Fig> it = figs.iterator(); it.hasNext(); ) {
                     Fig fig = it.next();
-                    if (fig instanceof FigSegment) {
-                        FigSegment figSegment = (FigSegment) fig;
+                    if (fig instanceof FigSegment figSegment) {
 
                         SegmentRecognitionStructure segmentRecognitionStructure =
                             new SegmentRecognitionStructure();
@@ -538,8 +537,7 @@ public class FormPublisher {
                                 .setHeight(page.getPageAttributes().getCroppedHeight());
 
                             for (Fig fsf : page.getFigs()) {
-                                if (fsf instanceof RecognitionStructureFig) {
-                                    RecognitionStructureFig rsf = (RecognitionStructureFig) fsf;
+                                if (fsf instanceof RecognitionStructureFig rsf) {
                                     rsf.addRecognitionStructure(segmentRecognitionStructure);
                                 }
                             }

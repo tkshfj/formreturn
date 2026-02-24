@@ -35,20 +35,20 @@ public abstract class AbstractFunction implements IConditionPart {
 	    double low;
 	    if ( rangeParts[0].contains("/") ) {
 		String[] divisionStr = rangeParts[0].split("/");
-		double dividend = Double.parseDouble(divisionStr[0].trim());
-		double divisor = Double.parseDouble(divisionStr[1].trim());
+		double dividend = Double.parseDouble(divisionStr[0].strip());
+		double divisor = Double.parseDouble(divisionStr[1].strip());
 		low = dividend / divisor;
 	    } else {
-		low = Double.parseDouble(rangeParts[0].trim());
+		low = Double.parseDouble(rangeParts[0].strip());
 	    }
 	    double high;
 	    if ( rangeParts[1].contains("/") ) {
 		String[] divisionStr = rangeParts[1].split("/");
-		double dividend = Double.parseDouble(divisionStr[0].trim());
-		double divisor = Double.parseDouble(divisionStr[1].trim());
+		double dividend = Double.parseDouble(divisionStr[0].strip());
+		double divisor = Double.parseDouble(divisionStr[1].strip());
 		high = dividend / divisor;
 	    } else {
-		high = Double.parseDouble(rangeParts[1].trim());
+		high = Double.parseDouble(rangeParts[1].strip());
 	    }
 	    ArrayList<Double> range = new ArrayList<Double>();
 	    range.add(low);

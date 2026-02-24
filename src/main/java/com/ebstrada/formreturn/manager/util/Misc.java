@@ -186,8 +186,7 @@ public class Misc {
         try {
             PrintService pservice = PrintServiceLookup.lookupDefaultPrintService();
             Object obj = pservice.getDefaultAttributeValue(Media.class);
-            if (obj instanceof MediaSizeName) {
-                MediaSizeName mediaSizeName = (MediaSizeName) obj;
+            if (obj instanceof MediaSizeName mediaSizeName) {
                 if (mediaSizeName.equals(MediaSizeName.ISO_A4)) {
                     return true;
                 } else {
@@ -876,7 +875,7 @@ public class Misc {
             figSegment.getSegmentContainer().getDefaultSelectedSegment();
 
         // 1st - look at the linkFieldValue, if it is not null and has a value, see if it returns a segment.
-        if (linkFieldName != null && linkFieldName.trim().length() > 0) {
+        if (linkFieldName != null && !linkFieldName.isBlank()) {
             int selectedIndex = figSegment.getSegmentIndexByValue(recordMap.get(linkFieldName));
             if (selectedIndex >= 0) {
                 figSegment.setSelectedSegmentIndex(selectedIndex);
@@ -909,7 +908,7 @@ public class Misc {
             figSegment.getSegmentContainer().getDefaultSelectedSegment();
 
         // 1st - look at the linkFieldName, if it is not null and has a value, see if it returns a segment.
-        if (linkFieldName != null && linkFieldName.trim().length() > 0) {
+        if (linkFieldName != null && !linkFieldName.isBlank()) {
             int selectedIndex = figSegment.getSegmentIndexByValue(recordMap.get(linkFieldName));
             if (selectedIndex >= 0) {
                 figSegment.setSelectedSegmentIndex(selectedIndex);
@@ -927,11 +926,11 @@ public class Misc {
             ArrayList<String> BarcodeFieldNames = new ArrayList<String>();
 
             for (FragmentOmr fomr : segment.getFragmentOmrCollection()) {
-                OMRFieldNames.add(fomr.getCapturedDataFieldName().trim());
-                OMRScoreFieldNames.add(fomr.getMarkColumnName().trim());
+                OMRFieldNames.add(fomr.getCapturedDataFieldName().strip());
+                OMRScoreFieldNames.add(fomr.getMarkColumnName().strip());
             }
             for (FragmentBarcode fbc : segment.getFragmentBarcodeCollection()) {
-                BarcodeFieldNames.add(fbc.getCapturedDataFieldName().trim());
+                BarcodeFieldNames.add(fbc.getCapturedDataFieldName().strip());
             }
 
             // okay, now check these against the figSegment's fields and see if they match
@@ -942,8 +941,7 @@ public class Misc {
                 for (Page page : fsc.getPages().values()) {
                     for (Fig fig : page.getFigs()) {
                         if (fig instanceof RecognitionStructureFig) {
-                            if (fig instanceof FigCheckbox) {
-                                FigCheckbox figCheckbox = (FigCheckbox) fig;
+                            if (fig instanceof FigCheckbox figCheckbox) {
                                 if (OMRFieldNames.contains(figCheckbox.getFieldname())) {
                                     figSegment.setSelectedSegmentIndex(i);
                                     return fsc;
@@ -952,8 +950,7 @@ public class Misc {
                                     figSegment.setSelectedSegmentIndex(i);
                                     return fsc;
                                 }
-                            } else if (fig instanceof FigBarcodeReader) {
-                                FigBarcodeReader figBarcodeReader = (FigBarcodeReader) fig;
+                            } else if (fig instanceof FigBarcodeReader figBarcodeReader) {
                                 if (BarcodeFieldNames.contains(figBarcodeReader.getFieldname())) {
                                     figSegment.setSelectedSegmentIndex(i);
                                     return fsc;
@@ -1098,16 +1095,17 @@ public class Misc {
     }
 
     public static String getFOPConfiguration() {
-        return "<?xml version=\"1.0\"?>\n"
-            + "<fop version=\"1.0\">\n"
-            + "  <renderers>\n"
-            + "    <renderer mime=\"application/pdf\">\n"
-            + "      <fonts>\n"
-            + "        <auto-detect/>\n"
-            + "      </fonts>\n"
-            + "    </renderer>\n"
-            + "  </renderers>\n"
-            + "</fop>";
+        return """
+            <?xml version="1.0"?>
+            <fop version="1.0">
+              <renderers>
+                <renderer mime="application/pdf">
+                  <fonts>
+                    <auto-detect/>
+                  </fonts>
+                </renderer>
+              </renderers>
+            </fop>""";
     }
 
     public static boolean matchRegex(String regexFilter, String str) {
@@ -1447,7 +1445,7 @@ public class Misc {
         String fileName = fd.getFile();
         String extension = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length());
 
-        if (!(imageWhitelist.contains(extension.trim()))) {
+        if (!(imageWhitelist.contains(extension.strip()))) {
             Misc.showErrorMsg(Main.getInstance(),
                 Localizer.localize("UI", "ProcessingQueueInvalidImageFileMessage"));
             return null;
@@ -1492,7 +1490,7 @@ public class Misc {
                                             .substring(files[i].lastIndexOf('.') + 1,
                                                 files[i].length());
 
-                                        if (imageWhitelist.contains(extension.trim())) {
+                                        if (imageWhitelist.contains(extension.strip())) {
 
                                             byte[] imageData = getBytesFromFile(imageFile);
 

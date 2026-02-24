@@ -97,7 +97,7 @@ public class RecordDataModel extends AbstractDataModel {
 
             String countSql = "SELECT COUNT(RECORD.RECORD_ID) FROM RECORD";
             String countSearchSQL = getNativeSearchSQL();
-            if (countSearchSQL.trim().length() > 0) {
+            if (!countSearchSQL.isBlank()) {
                 countSql += " WHERE " + countSearchSQL;
             }
 
@@ -110,7 +110,7 @@ public class RecordDataModel extends AbstractDataModel {
 
             // SEARCH FILTER
             String nativeSearchSQL = getNativeSearchSQL();
-            if (nativeSearchSQL.trim().length() > 0) {
+            if (!nativeSearchSQL.isBlank()) {
                 sql += " WHERE " + nativeSearchSQL;
             }
 

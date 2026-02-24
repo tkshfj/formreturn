@@ -130,7 +130,7 @@ public class PublicationDataModel extends AbstractDataModel {
 
             String countSql = "SELECT COUNT(PUBLICATION.PUBLICATION_ID) FROM PUBLICATION";
             String countSearchSQL = getNativeSearchSQL();
-            if (countSearchSQL.trim().length() > 0) {
+            if (!countSearchSQL.isBlank()) {
                 countSql += " WHERE " + countSearchSQL;
             }
 
@@ -144,7 +144,7 @@ public class PublicationDataModel extends AbstractDataModel {
 
             // SEARCH FILTER
             String nativeSearchSQL = getNativeSearchSQL();
-            if (nativeSearchSQL.trim().length() > 0) {
+            if (!nativeSearchSQL.isBlank()) {
                 sql += " WHERE " + nativeSearchSQL;
             }
 
@@ -187,18 +187,12 @@ public class PublicationDataModel extends AbstractDataModel {
     }
 
     public String getPublicationTypeName(int publicationType) {
-
-        switch (publicationType) {
-            case PublicationPreferences.FORM_ID_RECONCILE_WITH_SOURCE_DATA_RECORD:
-                return Localizer.localize("Util", "PublicationType0");
-            case PublicationPreferences.RECONCILE_KEY_WITH_SOURCE_DATA_RECORD_NO_CREATE:
-                return Localizer.localize("Util", "PublicationType1");
-            case PublicationPreferences.RECONCILE_KEY_WITH_SOURCE_DATA_RECORD_CREATE_NEW:
-                return Localizer.localize("Util", "PublicationType2");
-            default:
-                return "";
-        }
-
+        return switch (publicationType) {
+            case PublicationPreferences.FORM_ID_RECONCILE_WITH_SOURCE_DATA_RECORD -> Localizer.localize("Util", "PublicationType0");
+            case PublicationPreferences.RECONCILE_KEY_WITH_SOURCE_DATA_RECORD_NO_CREATE -> Localizer.localize("Util", "PublicationType1");
+            case PublicationPreferences.RECONCILE_KEY_WITH_SOURCE_DATA_RECORD_CREATE_NEW -> Localizer.localize("Util", "PublicationType2");
+            default -> "";
+        };
     }
 
 }

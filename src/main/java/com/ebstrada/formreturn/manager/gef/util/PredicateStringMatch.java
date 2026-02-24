@@ -21,7 +21,7 @@ public class PredicateStringMatch implements Predicate {
     }
 
     public static Predicate create(String pat) {
-        pat = pat.trim();
+        pat = pat.strip();
         String pats[] = new String[MAX_PATS];
         int numPats = 0;
         if (pat.startsWith("*")) {

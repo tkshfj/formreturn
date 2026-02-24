@@ -392,7 +392,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     }
 
     public String getFullFontName() {
-        if (fullFontName == null || fullFontName.trim().length() <= 0) {
+        if (fullFontName == null || fullFontName.isBlank()) {
             return name;
         }
         return fullFontName;
@@ -448,19 +448,12 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
             return;
         }
 
-        switch (bold | italic) {
-            case fsSelectionItalicBit:
-                style = Font.ITALIC;
-                break;
-            case fsSelectionBoldBit:
-                style = Font.BOLD;
-                break;
-            case fsSelectionBoldBit | fsSelectionItalicBit:
-                style = Font.BOLD + Font.ITALIC;
-                break;
-            default:
-                style = Font.PLAIN;
-        }
+        style = switch (bold | italic) {
+            case fsSelectionItalicBit -> Font.ITALIC;
+            case fsSelectionBoldBit -> Font.BOLD;
+            case fsSelectionBoldBit | fsSelectionItalicBit -> Font.BOLD + Font.ITALIC;
+            default -> Font.PLAIN;
+        };
     }
 
     public void setFont(Font font) {

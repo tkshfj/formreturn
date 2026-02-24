@@ -70,9 +70,9 @@ public class AdjustGridAction extends UndoableAction {
         if (grid != null) {
             grid.adjust();
             Guide guide = ce.getGuide();
-            if (guide != null && guide instanceof GuideGrid) {
-                if (grid instanceof LayerGrid) {
-                    ((GuideGrid) guide).gridSize(((LayerGrid) grid).getSpacing());
+            if (guide != null && guide instanceof GuideGrid guideGrid) {
+                if (grid instanceof LayerGrid layerGrid) {
+                    guideGrid.gridSize(layerGrid.getSpacing());
                 }
             }
         }

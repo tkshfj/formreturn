@@ -417,16 +417,16 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
      */
     public GraphModel getGraphModel() {
         Layer active = _layerManager.getActiveLayer();
-        if (active instanceof LayerPerspective) {
-            return ((LayerPerspective) active).getGraphModel();
+        if (active instanceof LayerPerspective layerPerspective) {
+            return layerPerspective.getGraphModel();
         }
         return null;
     }
 
     public void setGraphModel(GraphModel gm) {
         Layer active = _layerManager.getActiveLayer();
-        if (active instanceof LayerPerspective) {
-            ((LayerPerspective) active).setGraphModel(gm);
+        if (active instanceof LayerPerspective layerPerspective) {
+            layerPerspective.setGraphModel(gm);
         }
     }
 
@@ -544,7 +544,7 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
 
         String currentTitle = desktopTabbedPane.getTitleAt(selectedIndex);
 
-        if (currentTitle.trim().endsWith("*")) {
+        if (currentTitle.strip().endsWith("*")) {
             return;
         }
 
@@ -562,8 +562,8 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
 
         while (parent != null) {
 
-            if (parent instanceof DesktopTabbedPane) {
-                return (DesktopTabbedPane) parent;
+            if (parent instanceof DesktopTabbedPane desktopTabbedPane) {
+                return desktopTabbedPane;
             }
             parent = parent.getParent();
         }
@@ -684,11 +684,11 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
         int x = me.getX(), y = me.getY();
         Fig f = hit(x, y);
         if (f != _curFig) {
-            if (_curFig instanceof MouseListener) {
-                ((MouseListener) _curFig).mouseExited(me);
+            if (_curFig instanceof MouseListener mouseListener) {
+                mouseListener.mouseExited(me);
             }
-            if (f instanceof MouseListener) {
-                ((MouseListener) f).mouseEntered(me);
+            if (f instanceof MouseListener mouseListener) {
+                mouseListener.mouseEntered(me);
             }
         }
         _curFig = f;
@@ -817,8 +817,7 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
 	}
 	*/
 
-        if (g instanceof Graphics2D) {
-            Graphics2D g2 = (Graphics2D) g;
+        if (g instanceof Graphics2D g2) {
             g2.setRenderingHints(_renderingHints);
             g2.scale(_scale, _scale);
         }
@@ -1012,8 +1011,8 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
         Globals.curEditor(this);
 
         setUnderMouse(me);
-        if (_curFig instanceof MouseListener) {
-            ((MouseListener) _curFig).mouseClicked(me);
+        if (_curFig instanceof MouseListener mouseListener) {
+            mouseListener.mouseClicked(me);
         }
         if (_canSelectElements) {
             _selectionManager.mouseClicked(me);
@@ -1037,8 +1036,8 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
 
         Globals.curEditor(this);
         setUnderMouse(me);
-        if (_curFig instanceof MouseListener) {
-            ((MouseListener) _curFig).mousePressed(me);
+        if (_curFig instanceof MouseListener mouseListener) {
+            mouseListener.mousePressed(me);
         }
         if (_canSelectElements) {
             _selectionManager.mousePressed(me);
@@ -1053,8 +1052,8 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
         translateMouseEvent(me);
         Globals.curEditor(this);
 
-        if (_curFig instanceof MouseListener) {
-            ((MouseListener) _curFig).mouseReleased(me);
+        if (_curFig instanceof MouseListener mouseListener) {
+            mouseListener.mouseReleased(me);
         }
         if (_canSelectElements) {
             _selectionManager.mouseReleased(me);
@@ -1081,8 +1080,8 @@ public class Editor implements Serializable, MouseListener, MouseMotionListener,
     public void mouseExited(MouseEvent me) {
         translateMouseEvent(me);
         setUnderMouse(me);
-        if (_curFig instanceof MouseListener) {
-            ((MouseListener) _curFig).mouseExited(me);
+        if (_curFig instanceof MouseListener mouseListener) {
+            mouseListener.mouseExited(me);
         }
     }
 

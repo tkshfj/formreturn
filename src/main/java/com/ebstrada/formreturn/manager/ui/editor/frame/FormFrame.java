@@ -154,14 +154,12 @@ public class FormFrame extends EditorFrame {
 
             Object o = i.next();
 
-            if (o instanceof Fig) {
+            if (o instanceof Fig selectedFig) {
 
                 // clear the properties panel
                 getPropertiesPanelController().destroyPanels();
 
                 getPropertiesPanelController().showFormPropertiesPanel(_graph, this);
-
-                Fig selectedFig = (Fig) o;
 
                 getPropertiesPanelController().initFig(selectedFig);
 

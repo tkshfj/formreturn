@@ -26,7 +26,7 @@ public class ServerDaemon implements Daemon {
         File dataDirectory = null;
 
         if (args.length > 1) {
-            dataDirectory = new File(args[1].trim());
+            dataDirectory = new File(args[1].strip());
             if (dataDirectory.exists() == false || dataDirectory.isDirectory() == false
                 || dataDirectory.canWrite() == false || dataDirectory.canRead() == false) {
                 dataDirectory = null;
@@ -41,7 +41,7 @@ public class ServerDaemon implements Daemon {
 
         do {
             try {
-                String nextLine = sc.nextLine().trim().toLowerCase();
+                String nextLine = sc.nextLine().strip().toLowerCase();
                 if (nextLine.equals("stop")) {
                     break;
                 }
@@ -76,7 +76,7 @@ public class ServerDaemon implements Daemon {
         }
 
         if (args.length > 1) {
-            dataDirectory = new File(args[1].trim());
+            dataDirectory = new File(args[1].strip());
             if (dataDirectory.exists() == false || dataDirectory.isDirectory() == false
                 || dataDirectory.canWrite() == false || dataDirectory.canRead() == false) {
                 dataDirectory = null;

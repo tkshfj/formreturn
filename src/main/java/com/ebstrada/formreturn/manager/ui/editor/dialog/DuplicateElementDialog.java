@@ -379,7 +379,7 @@ public class DuplicateElementDialog extends JDialog {
     }
 
     public String getFieldnamePrefix() {
-        return fieldnamePrefixTextField.getText().trim();
+        return fieldnamePrefixTextField.getText().strip();
     }
 
     public int getVerticalSpacing() {

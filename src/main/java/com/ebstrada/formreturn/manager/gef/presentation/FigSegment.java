@@ -141,8 +141,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
             for (Fig fsf : page.getFigs()) {
 
                 // set the segment's barcode one and two values
-                if (fsf instanceof FigBarcode) {
-                    FigBarcode figBarcode = (FigBarcode) fsf;
+                if (fsf instanceof FigBarcode figBarcode) {
                     if (figBarcode.getRecognitionMarkerType() == FigBarcode.MARKER_TOP_RIGHT) {
                         figBarcode.setRenderableBarcodeValue("0" + getBarcodeOneValue());
                         figBarcode.setRevalidate(true);
@@ -163,15 +162,14 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                     }
                 }
 
-                if (fsf instanceof FigImage) {
-                    FigImage figImage = (FigImage) fsf;
+                if (fsf instanceof FigImage figImage) {
                     figImage.setWorkingDirName(getWorkingDirName());
                 }
                 fsf.setPageAttributes(page.getPageAttributes());
                 fsf.setOffset(getX(), getY());
                 fsf.postLoad();
-                if (fsf instanceof FigImage) {
-                    ((FigImage) fsf).paint(g, false, false);
+                if (fsf instanceof FigImage figImage2) {
+                    figImage2.paint(g, false, false);
                 } else {
                     fsf.paint(g);
                 }
@@ -211,8 +209,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
         FontMetrics fontMetrics = ((Graphics) g).getFontMetrics();
 
-        if (g instanceof PDFDocumentExporter) {
-            paintPDFDocumentExporter((PDFDocumentExporter) g);
+        if (g instanceof PDFDocumentExporter pdfDocumentExporter) {
+            paintPDFDocumentExporter(pdfDocumentExporter);
         } else {
 
             if (segmentContainer.getNumberOfSegments() <= 0) {
@@ -256,8 +254,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                     for (Fig fsf : page.getFigs()) {
 
                         // set the segment's barcode one and two values
-                        if (fsf instanceof FigBarcode) {
-                            FigBarcode figBarcode = (FigBarcode) fsf;
+                        if (fsf instanceof FigBarcode figBarcode) {
                             if (figBarcode.getRecognitionMarkerType()
                                 == FigBarcode.MARKER_TOP_RIGHT) {
                                 figBarcode.setRenderableBarcodeValue("0" + getBarcodeOneValue());
@@ -280,8 +277,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                             }
                         }
 
-                        if (fsf instanceof FigImage) {
-                            FigImage figImage = (FigImage) fsf;
+                        if (fsf instanceof FigImage figImage) {
                             figImage.setWorkingDirName(getWorkingDirName());
                         }
                         fsf.setPageAttributes(page.getPageAttributes());
@@ -289,8 +285,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                         fsf.setMarginOffset(getLeftMarginOffset(), getTopMarginOffset());
                         fsf.postLoad();
 
-                        if (fsf instanceof FigImage) {
-                            ((FigImage) fsf).paint(g, includeMargins, false);
+                        if (fsf instanceof FigImage figImage2) {
+                            figImage2.paint(g, includeMargins, false);
                         } else {
                             fsf.paint(g, includeMargins);
                         }

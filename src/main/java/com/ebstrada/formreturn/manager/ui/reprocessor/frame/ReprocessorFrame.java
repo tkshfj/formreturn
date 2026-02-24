@@ -608,12 +608,10 @@ public class ReprocessorFrame extends JPanel {
 
         for (RecognitionStructureComparator rsc : fields.getSortedData()) {
             FragmentRecognitionStructure frs = rsc.getData();
-            if (frs instanceof OMRRecognitionStructure) {
-                OMRRecognitionStructure omrrs = (OMRRecognitionStructure) frs;
+            if (frs instanceof OMRRecognitionStructure omrrs) {
                 dtm.addRow(new Object[] {omrrs.getFieldName(), omrrs,
                     omrrs.isInvalidated() ? Localizer.localize("UI", "ErrorTitle") : ""});
-            } else if (frs instanceof BarcodeRecognitionStructure) {
-                BarcodeRecognitionStructure bcrs = (BarcodeRecognitionStructure) frs;
+            } else if (frs instanceof BarcodeRecognitionStructure bcrs) {
                 dtm.addRow(new Object[] {bcrs.getFieldName(), bcrs,
                     bcrs.isInvalidated() ? Localizer.localize("UI", "ErrorTitle") : ""});
             }
@@ -652,12 +650,12 @@ public class ReprocessorFrame extends JPanel {
 
             for (int i = 0; i < this.capturedDataTable.getRowCount(); i++) {
                 Object obj = this.capturedDataTable.getValueAt(i, 1);
-                if (obj instanceof OMRRecognitionStructure) {
+                if (obj instanceof OMRRecognitionStructure omrrs) {
                     currentOMRData.put((String) this.capturedDataTable.getValueAt(i, 0),
-                        (OMRRecognitionStructure) obj);
-                } else if (obj instanceof BarcodeRecognitionStructure) {
+                        omrrs);
+                } else if (obj instanceof BarcodeRecognitionStructure bcrs) {
                     currentBarcodeData.put((String) this.capturedDataTable.getValueAt(i, 0),
-                        (BarcodeRecognitionStructure) obj);
+                        bcrs);
                 }
             }
 
@@ -790,12 +788,10 @@ public class ReprocessorFrame extends JPanel {
 
         for (RecognitionStructureComparator rsc : orderedFields.getSortedData()) {
             FragmentRecognitionStructure frs = rsc.getData();
-            if (frs instanceof OMRRecognitionStructure) {
-                OMRRecognitionStructure omrrs = (OMRRecognitionStructure) frs;
+            if (frs instanceof OMRRecognitionStructure omrrs) {
                 dtm.addRow(new Object[] {omrrs.getFieldName(), omrrs,
                     omrrs.isInvalidated() ? Localizer.localize("UI", "ErrorTitle") : ""});
-            } else if (frs instanceof BarcodeRecognitionStructure) {
-                BarcodeRecognitionStructure bcrs = (BarcodeRecognitionStructure) frs;
+            } else if (frs instanceof BarcodeRecognitionStructure bcrs) {
                 dtm.addRow(new Object[] {bcrs.getFieldName(), bcrs,
                     bcrs.isInvalidated() ? Localizer.localize("UI", "ErrorTitle") : ""});
             }
@@ -1040,12 +1036,10 @@ public class ReprocessorFrame extends JPanel {
 
             Object o = i.next();
 
-            if (o instanceof Fig) {
+            if (o instanceof Fig selectedFig) {
 
                 // clear the properties panel
                 getPropertiesPanelController().destroyPanels();
-
-                Fig selectedFig = (Fig) o;
 
                 getPropertiesPanelController().initFig(selectedFig);
 
@@ -1302,8 +1296,7 @@ public class ReprocessorFrame extends JPanel {
 
         List<Fig> figs = _graph.getEditor().getLayerManager().getActiveLayer().getContents();
         for (Object obj : figs) {
-            if (obj instanceof FigSegmentArea) {
-                FigSegmentArea figSegmentArea = (FigSegmentArea) obj;
+            if (obj instanceof FigSegmentArea figSegmentArea) {
                 SegmentRecognitionStructure srs = figSegmentArea.getSegmentRecognitionStructure();
                 if (srs != null) {
 
@@ -1391,11 +1384,9 @@ public class ReprocessorFrame extends JPanel {
 
         for (RecognitionStructureComparator rsc : fields.getSortedData()) {
             FragmentRecognitionStructure frs = rsc.getData();
-            if (frs instanceof OMRRecognitionStructure) {
-                OMRRecognitionStructure omrrs = (OMRRecognitionStructure) frs;
+            if (frs instanceof OMRRecognitionStructure omrrs) {
                 capturedData.put(omrrs.getFieldName(), omrrs);
-            } else if (frs instanceof BarcodeRecognitionStructure) {
-                BarcodeRecognitionStructure bcrs = (BarcodeRecognitionStructure) frs;
+            } else if (frs instanceof BarcodeRecognitionStructure bcrs) {
                 capturedData.put(bcrs.getFieldName(), bcrs);
             }
         }
@@ -1608,14 +1599,12 @@ public class ReprocessorFrame extends JPanel {
         Map<String, String> matchMap = new HashMap<String, String>();
         for (int i = 0; i < capturedDataTable.getRowCount(); i++) {
             Object obj = capturedDataTable.getValueAt(i, 1);
-            if (obj instanceof OMRRecognitionStructure) {
-                OMRRecognitionStructure omrrs = (OMRRecognitionStructure) obj;
+            if (obj instanceof OMRRecognitionStructure omrrs) {
                 if (omrrs.isReconciliationKey()) {
                     matchMap.put(omrrs.getFieldName(),
                         omrrs.getCapturedString(omrrs.getCapturedData(), omrrs.getReadDirection()));
                 }
-            } else if (obj instanceof BarcodeRecognitionStructure) {
-                BarcodeRecognitionStructure bcrs = (BarcodeRecognitionStructure) obj;
+            } else if (obj instanceof BarcodeRecognitionStructure bcrs) {
                 if (bcrs.isReconciliationKey()) {
                     matchMap.put(bcrs.getFieldName(), bcrs.toString());
                 }
@@ -1643,7 +1632,7 @@ public class ReprocessorFrame extends JPanel {
             String matchingValue = matchMap.get(sourceField.getSourceFieldName());
 
             // don't match any values that are null
-            if (matchingValue.trim().length() <= 0) {
+            if (matchingValue.isBlank()) {
                 continue;
             }
 
@@ -2033,9 +2022,8 @@ public class ReprocessorFrame extends JPanel {
         List<Fig> figs = _graph.getEditor().getLayerManager().getContents();
 
         for (Fig fig : figs) {
-            if (fig instanceof FigSegmentArea) {
+            if (fig instanceof FigSegmentArea figSegmentArea) {
 
-                FigSegmentArea figSegmentArea = (FigSegmentArea) fig;
                 SegmentRecognitionStructure srs = figSegmentArea.getSegmentRecognitionStructure();
 
                 if (srs == null) {
@@ -2517,14 +2505,12 @@ public class ReprocessorFrame extends JPanel {
 
                     Object obj = capturedData.get(fieldname);
 
-                    if (obj instanceof OMRRecognitionStructure) {
-                        OMRRecognitionStructure omrrs = (OMRRecognitionStructure) obj;
+                    if (obj instanceof OMRRecognitionStructure omrrs) {
                         capturedDataTable.setValueAt(omrrs, i, 1);
                         capturedDataTable.setValueAt(
                             omrrs.isInvalidated() ? Localizer.localize("UI", "ErrorTitle") : "", i,
                             2);
-                    } else if (obj instanceof BarcodeRecognitionStructure) {
-                        BarcodeRecognitionStructure bcrs = (BarcodeRecognitionStructure) obj;
+                    } else if (obj instanceof BarcodeRecognitionStructure bcrs) {
                         capturedDataTable.setValueAt(bcrs, i, 1);
                         capturedDataTable.setValueAt(
                             bcrs.isInvalidated() ? Localizer.localize("UI", "ErrorTitle") : "", i,

@@ -131,15 +131,15 @@ public class ComponentAppender extends AppenderSkeleton {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     protected void initializeNewComponent(Component comp) {
-        if (comp instanceof JComboBox) {
-            ((JComboBox<String>) comp).setModel(new DefaultComboBoxModel<>());
+        if (comp instanceof JComboBox comboBox) {
+            ((JComboBox<String>) comboBox).setModel(new DefaultComboBoxModel<>());
         }
-        if (comp instanceof JList) {
-            ((JList) comp).setModel(new LoggingEventModel());
-            ((JList) comp).setCellRenderer(new PriorityListCellRenderer(true, true, this));
+        if (comp instanceof JList jList) {
+            jList.setModel(new LoggingEventModel());
+            jList.setCellRenderer(new PriorityListCellRenderer(true, true, this));
         }
-        if (comp instanceof JTable) {
-            ((JTable) comp).setModel(new LoggingEventModel());
+        if (comp instanceof JTable jTable) {
+            jTable.setModel(new LoggingEventModel());
         }
     }
 
@@ -169,8 +169,7 @@ public class ComponentAppender extends AppenderSkeleton {
             // we have to delete the oldest entries
             int toomuch = entries - value;
 
-            if (comp instanceof JTextPane) {
-                JTextPane textPane = (JTextPane) comp;
+            if (comp instanceof JTextPane textPane) {
                 try {
                     StyledDocument doc = textPane.getStyledDocument();
                     if (entries == maxEntries) {
@@ -183,8 +182,7 @@ public class ComponentAppender extends AppenderSkeleton {
                 } catch (Exception x) {
                     x.printStackTrace();
                 }
-            } else if (comp instanceof JTextArea) {
-                JTextArea textArea = (JTextArea) comp;
+            } else if (comp instanceof JTextArea textArea) {
                 try {
                     Document doc = textArea.getDocument();
                     int endOfs = textArea.getLineEndOffset(toomuch - 1);
@@ -198,24 +196,24 @@ public class ComponentAppender extends AppenderSkeleton {
                     textArea.setCaretPosition(doc.getLength());
                 } catch (Exception x) {
                 }
-            } else if (comp instanceof JComboBox) {
-                DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) ((JComboBox<?>) comp).getModel();
+            } else if (comp instanceof JComboBox<?> comboBox) {
+                DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboBox.getModel();
                 for (int i = 0; i < toomuch; i++) {
                     model.removeElementAt(0);
                 }
-            } else if (comp instanceof JList) {
-                LoggingEventModel model = (LoggingEventModel) ((JList<?>) comp).getModel();
+            } else if (comp instanceof JList<?> jList) {
+                LoggingEventModel model = (LoggingEventModel) jList.getModel();
                 for (int i = 0; i < toomuch; i++) {
                     model.removeElementAt(0);
                 }
-            } else if (comp instanceof JTable) {
-                LoggingEventModel model = (LoggingEventModel) ((JTable) comp).getModel();
+            } else if (comp instanceof JTable jTable) {
+                LoggingEventModel model = (LoggingEventModel) jTable.getModel();
                 for (int i = 0; i < toomuch; i++) {
                     model.removeElementAt(0);
                 }
-            } else if (comp instanceof java.awt.List) {
+            } else if (comp instanceof java.awt.List awtList) {
                 for (int i = 0; i < toomuch; i++) {
-                    ((java.awt.List) comp).remove(0);
+                    awtList.remove(0);
                 }
             }
 
@@ -318,10 +316,9 @@ public class ComponentAppender extends AppenderSkeleton {
     @SuppressWarnings("unchecked") @Override public void append(LoggingEvent event) {
         String text = layout.format(event);
         // swing components
-        if (comp instanceof JLabel) {
-            ((JLabel) comp).setText(text);
-        } else if (comp instanceof JTextPane) {
-            JTextPane textPane = (JTextPane) comp;
+        if (comp instanceof JLabel jLabel) {
+            jLabel.setText(text);
+        } else if (comp instanceof JTextPane textPane) {
             try {
                 StyledDocument doc = textPane.getStyledDocument();
                 if (entries == maxEntries) {
@@ -345,8 +342,7 @@ public class ComponentAppender extends AppenderSkeleton {
             }
             ;
             entries += 1;
-        } else if (comp instanceof JTextArea) {
-            JTextArea textArea = (JTextArea) comp;
+        } else if (comp instanceof JTextArea textArea) {
             try {
                 Document doc = textArea.getDocument();
                 if (entries == maxEntries) {
@@ -370,27 +366,27 @@ public class ComponentAppender extends AppenderSkeleton {
             }
             ;
             entries += 1;
-        } else if (comp instanceof JTextComponent) {
-            ((JTextComponent) comp).setText(text);
-        } else if (comp instanceof JComboBox) {
-            DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) ((JComboBox<?>) comp).getModel();
+        } else if (comp instanceof JTextComponent jTextComponent) {
+            jTextComponent.setText(text);
+        } else if (comp instanceof JComboBox<?> comboBox) {
+            DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboBox.getModel();
             if (entries == maxEntries) {
                 model.removeElementAt(0);
                 entries -= 1;
             }
             model.addElement(text);
             entries += 1;
-            ((JComboBox<?>) comp).setSelectedIndex(entries - 1);
-        } else if (comp instanceof JList) {
-            LoggingEventModel model = (LoggingEventModel) ((JList<?>) comp).getModel();
+            comboBox.setSelectedIndex(entries - 1);
+        } else if (comp instanceof JList<?> jList) {
+            LoggingEventModel model = (LoggingEventModel) jList.getModel();
             if (entries == maxEntries) {
                 model.removeElementAt(0);
                 entries -= 1;
             }
             model.addElement(event);
             entries += 1;
-        } else if (comp instanceof JTable) {
-            LoggingEventModel model = (LoggingEventModel) ((JTable) comp).getModel();
+        } else if (comp instanceof JTable jTable) {
+            LoggingEventModel model = (LoggingEventModel) jTable.getModel();
             if (entries == maxEntries) {
                 model.removeElementAt(0);
                 entries -= 1;
@@ -399,48 +395,48 @@ public class ComponentAppender extends AppenderSkeleton {
             entries += 1;
         }
         // awt components
-        else if (comp instanceof java.awt.Label) {
-            ((java.awt.Label) comp).setText(text);
-        } else if (comp instanceof java.awt.List) {
+        else if (comp instanceof java.awt.Label awtLabel) {
+            awtLabel.setText(text);
+        } else if (comp instanceof java.awt.List awtList) {
             if (entries == maxEntries) {
-                ((java.awt.List) comp).remove(0);
+                awtList.remove(0);
                 entries -= 1;
             }
-            ((java.awt.List) comp).add(text);
+            awtList.add(text);
             entries += 1;
-        } else if (comp instanceof TextComponent) {
-            ((TextComponent) comp).setText(text);
+        } else if (comp instanceof TextComponent textComponent) {
+            textComponent.setText(text);
         }
     }
 
     @SuppressWarnings("unchecked")
     public void reset() {
         // swing components
-        if (comp instanceof JLabel) {
-            ((JLabel) comp).setText("");
-        } else if (comp instanceof JTextComponent) { // includes JTextArea
+        if (comp instanceof JLabel jLabel) {
+            jLabel.setText("");
+        } else if (comp instanceof JTextComponent jTextComponent) { // includes JTextArea
             // and JTextPane!
-            ((JTextComponent) comp).setText("");
-        } else if (comp instanceof JComboBox) {
-            DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) ((JComboBox<?>) comp).getModel();
+            jTextComponent.setText("");
+        } else if (comp instanceof JComboBox<?> comboBox) {
+            DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboBox.getModel();
             model.removeAllElements();
-        } else if (comp instanceof JList) {
-            LoggingEventModel model = (LoggingEventModel) ((JList<?>) comp).getModel();
+        } else if (comp instanceof JList<?> jList) {
+            LoggingEventModel model = (LoggingEventModel) jList.getModel();
             model.removeAllElements();
-        } else if (comp instanceof JTable) {
-            LoggingEventModel model = (LoggingEventModel) ((JTable) comp).getModel();
+        } else if (comp instanceof JTable jTable) {
+            LoggingEventModel model = (LoggingEventModel) jTable.getModel();
             int i;
             for (i = 0; i < model.getRowCount(); i++) {
                 model.removeElementAt(i);
             }
         }
         // awt components
-        else if (comp instanceof java.awt.Label) {
-            ((java.awt.Label) comp).setText("");
-        } else if (comp instanceof java.awt.List) {
-            ((java.awt.List) comp).removeAll();
-        } else if (comp instanceof java.awt.TextComponent) {
-            ((java.awt.TextComponent) comp).setText("");
+        else if (comp instanceof java.awt.Label awtLabel) {
+            awtLabel.setText("");
+        } else if (comp instanceof java.awt.List awtList) {
+            awtList.removeAll();
+        } else if (comp instanceof java.awt.TextComponent textComponent) {
+            textComponent.setText("");
         }
         entries = 0;
     }

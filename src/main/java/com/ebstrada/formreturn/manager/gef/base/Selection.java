@@ -243,62 +243,62 @@ public abstract class Selection
      * reimplement this to add functionality.
      */
     public void keyTyped(KeyEvent ke) {
-        if (content instanceof KeyListener) {
-            ((KeyListener) content).keyTyped(ke);
+        if (content instanceof KeyListener keyListener) {
+            keyListener.keyTyped(ke);
         }
     }
 
     public void keyPressed(KeyEvent ke) {
-        if (content instanceof KeyListener) {
-            ((KeyListener) content).keyPressed(ke);
+        if (content instanceof KeyListener keyListener) {
+            keyListener.keyPressed(ke);
         }
     }
 
     public void keyReleased(KeyEvent ke) {
-        if (content instanceof KeyListener) {
-            ((KeyListener) content).keyReleased(ke);
+        if (content instanceof KeyListener keyListener) {
+            keyListener.keyReleased(ke);
         }
     }
 
     public void mouseMoved(MouseEvent me) {
-        if (content instanceof MouseMotionListener) {
-            ((MouseMotionListener) content).mouseMoved(me);
+        if (content instanceof MouseMotionListener mouseMotionListener) {
+            mouseMotionListener.mouseMoved(me);
         }
     }
 
     public void mouseDragged(MouseEvent me) {
-        if (content instanceof MouseMotionListener) {
-            ((MouseMotionListener) content).mouseDragged(me);
+        if (content instanceof MouseMotionListener mouseMotionListener) {
+            mouseMotionListener.mouseDragged(me);
         }
     }
 
     public void mousePressed(MouseEvent me) {
-        if (content instanceof MouseListener) {
-            ((MouseListener) content).mousePressed(me);
+        if (content instanceof MouseListener mouseListener) {
+            mouseListener.mousePressed(me);
         }
     }
 
     public void mouseReleased(MouseEvent me) {
-        if (content instanceof MouseListener) {
-            ((MouseListener) content).mouseReleased(me);
+        if (content instanceof MouseListener mouseListener) {
+            mouseListener.mouseReleased(me);
         }
     }
 
     public void mouseClicked(MouseEvent me) {
-        if (content instanceof MouseListener) {
-            ((MouseListener) content).mouseClicked(me);
+        if (content instanceof MouseListener mouseListener) {
+            mouseListener.mouseClicked(me);
         }
     }
 
     public void mouseEntered(MouseEvent me) {
-        if (content instanceof MouseListener) {
-            ((MouseListener) content).mouseEntered(me);
+        if (content instanceof MouseListener mouseListener) {
+            mouseListener.mouseEntered(me);
         }
     }
 
     public void mouseExited(MouseEvent me) {
-        if (content instanceof MouseListener) {
-            ((MouseListener) content).mouseExited(me);
+        if (content instanceof MouseListener mouseListener) {
+            mouseListener.mouseExited(me);
         }
     }
 } /* end class Selection */

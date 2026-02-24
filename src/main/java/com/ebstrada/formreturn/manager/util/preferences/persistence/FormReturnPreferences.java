@@ -88,7 +88,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         for (SizeAttributes[] formSizeAttributePair : formSizeAttributes) {
             SizeAttributes portraitFormSizeAttribute =
                 formSizeAttributePair[(SizeAttributes.PORTRAIT - 1)];
-            if (attributeName.trim().length() == 0 || portraitFormSizeAttribute.getName().trim().equalsIgnoreCase(attributeName.trim())) {
+            if (attributeName.isBlank() || portraitFormSizeAttribute.getName().strip().equalsIgnoreCase(attributeName.strip())) {
                 return formSizeAttributePair[(orientation - 1)];
             }
         }
@@ -107,8 +107,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         for (SizeAttributes[] segmentSizeAttributePair : segmentSizeAttributes) {
             SizeAttributes portraitSegmentSizeAttribute =
                 segmentSizeAttributePair[(SizeAttributes.PORTRAIT - 1)];
-            if (attributeName.trim().length() == 0 || portraitSegmentSizeAttribute.getName().trim()
-                .equalsIgnoreCase(attributeName.trim())) {
+            if (attributeName.isBlank() || portraitSegmentSizeAttribute.getName().strip()
+                .equalsIgnoreCase(attributeName.strip())) {
                 return segmentSizeAttributePair[(orientation - 1)];
             }
         }

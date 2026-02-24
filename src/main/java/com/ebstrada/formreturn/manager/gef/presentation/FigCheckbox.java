@@ -106,8 +106,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         /*
          * get a unique fieldname on paste
          */
-        if (obj instanceof FigCheckbox) {
-            ((FigCheckbox) obj).setDefaultFieldname();
+        if (obj instanceof FigCheckbox figCheckbox) {
+            figCheckbox.setDefaultFieldname();
         }
 
         return obj;
@@ -135,16 +135,16 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                 List<?> layerContents = graph.getEditor().getLayerManager().getContents();
                 for (int j = 0; j < layerContents.size(); j++) {
                     Fig fig = (Fig) layerContents.get(j);
-                    if (fig instanceof FigBarcodeReader) {
-                        if (((FigBarcodeReader) fig).getFieldnameOrderIndex() > maximumOrderIndex) {
-                            maximumOrderIndex = ((FigBarcodeReader) fig).getFieldnameOrderIndex();
+                    if (fig instanceof FigBarcodeReader figBarcodeReader) {
+                        if (figBarcodeReader.getFieldnameOrderIndex() > maximumOrderIndex) {
+                            maximumOrderIndex = figBarcodeReader.getFieldnameOrderIndex();
                         }
-                    } else if (fig instanceof FigCheckbox) {
-                        if (((FigCheckbox) fig).getFieldnameOrderIndex() > maximumOrderIndex) {
-                            maximumOrderIndex = ((FigCheckbox) fig).getFieldnameOrderIndex();
+                    } else if (fig instanceof FigCheckbox figCheckbox2) {
+                        if (figCheckbox2.getFieldnameOrderIndex() > maximumOrderIndex) {
+                            maximumOrderIndex = figCheckbox2.getFieldnameOrderIndex();
                         }
-                        if (((FigCheckbox) fig).getMarkFieldnameOrderIndex() > maximumOrderIndex) {
-                            maximumOrderIndex = ((FigCheckbox) fig).getMarkFieldnameOrderIndex();
+                        if (figCheckbox2.getMarkFieldnameOrderIndex() > maximumOrderIndex) {
+                            maximumOrderIndex = figCheckbox2.getMarkFieldnameOrderIndex();
                         }
                     }
                 }
@@ -175,19 +175,19 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                     List<?> layerContents = graph.getEditor().getLayerManager().getContents();
                     for (int j = 0; j < layerContents.size(); j++) {
                         Fig fig = (Fig) layerContents.get(j);
-                        if (fig instanceof FigBarcodeReader) {
+                        if (fig instanceof FigBarcodeReader figBarcodeReader4) {
                             if (skipThis == false && fig == this) {
                                 continue;
                             }
-                            if (((FigBarcodeReader) fig).getFieldname()
+                            if (figBarcodeReader4.getFieldname()
                                 .equalsIgnoreCase(defaultFieldName)) {
                                 nomatch = false;
                             }
-                        } else if (fig instanceof FigCheckbox) {
+                        } else if (fig instanceof FigCheckbox figCheckbox4) {
                             if (skipThis == false && fig == this) {
                                 continue;
                             }
-                            if (((FigCheckbox) fig).getFieldname()
+                            if (figCheckbox4.getFieldname()
                                 .equalsIgnoreCase(defaultFieldName)) {
                                 nomatch = false;
                             }
@@ -310,8 +310,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
             setMarginOffset(0, 0);
         }
 
-        if (g instanceof Graphics2D) {
-            ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        if (g instanceof Graphics2D g2d) {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         }
 

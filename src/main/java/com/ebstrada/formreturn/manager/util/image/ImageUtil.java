@@ -108,8 +108,7 @@ public class ImageUtil {
                 Iterable<COSName> names = resources.getXObjectNames();
                 for (COSName name : names) {
                     PDXObject xobj = resources.getXObject(name);
-                    if (xobj instanceof PDImageXObject) {
-                        PDImageXObject ximage = (PDImageXObject) xobj;
+                    if (xobj instanceof PDImageXObject ximage) {
                         BufferedImage bi = ximage.getImage();
                         if (bi.getType() <= 0) {
                             BufferedImage bi2 = new BufferedImage(bi.getWidth(), bi.getHeight(),
@@ -488,8 +487,8 @@ public class ImageUtil {
     }
 
     public static BufferedImage oldConvertRenderedImage(RenderedImage img, String[] decoders) {
-        if (img instanceof BufferedImage) {
-            return (BufferedImage) img;
+        if (img instanceof BufferedImage bufferedImage) {
+            return bufferedImage;
         }
         
 	/*
@@ -517,13 +516,10 @@ public class ImageUtil {
         BufferedImage preimg = new BufferedImage(cm, raster, false, null);
         img.copyData(raster);
 
-        if (img instanceof TIFFImage) {
-            TIFFImage ti = (TIFFImage) img;
+        if (img instanceof TIFFImage ti) {
             try {
                 Object o = ti.getProperty("tiff_directory");
-                if (o instanceof TIFFDirectory) {
-
-                    TIFFDirectory dir = (TIFFDirectory) o;
+                if (o instanceof TIFFDirectory dir) {
 
                     int compression = (int) dir.getFieldAsLong(TIFFImageDecoder.TIFF_COMPRESSION);
                     switch (compression) {
@@ -563,8 +559,8 @@ public class ImageUtil {
 
     public static BufferedImage convertRenderedImage(RenderedImage img, String[] decoders)
         throws UnsupportedImageModelException {
-        if (img instanceof BufferedImage) {
-            return (BufferedImage) img;
+        if (img instanceof BufferedImage bufferedImage) {
+            return bufferedImage;
         }
 
         WritableRaster wr = ImagePlusCreator.forceTileUpdate(img);
@@ -590,13 +586,10 @@ public class ImageUtil {
 	    }
 	    */
 
-            if (img instanceof TIFFImage) {
-                TIFFImage ti = (TIFFImage) img;
+            if (img instanceof TIFFImage ti) {
                 try {
                     Object o = ti.getProperty("tiff_directory");
-                    if (o instanceof TIFFDirectory) {
-
-                        TIFFDirectory dir = (TIFFDirectory) o;
+                    if (o instanceof TIFFDirectory dir) {
 
 			/*
 			 * This code is a test of the despeckle filter in imagej

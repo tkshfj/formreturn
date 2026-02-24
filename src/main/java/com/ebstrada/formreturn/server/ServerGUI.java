@@ -43,7 +43,7 @@ public class ServerGUI {
 
     public static void main(final String args[]) {
 
-        if (args != null && args.length > 0 && args[0].trim().equalsIgnoreCase("cli")) {
+        if (args != null && args.length > 0 && args[0].strip().equalsIgnoreCase("cli")) {
             ServerDaemon.startCommandLineDaemon(args);
         } else {
             System.setProperty("org.apache.batik.warn_destination", "false");

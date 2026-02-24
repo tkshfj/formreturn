@@ -130,17 +130,17 @@ public class TaskScheduler {
 
     public TaskSchedulerJob createJob(TaskSchedulerJobPreferences jobPreferences) {
         TaskSchedulerJob job = null;
-        if (jobPreferences instanceof ImageFolderMonitorJobPreferences) {
-            job = new ImageFolderMonitorJob((ImageFolderMonitorJobPreferences) jobPreferences);
-        } else if (jobPreferences instanceof SourceDataFolderMonitorJobPreferences) {
+        if (jobPreferences instanceof ImageFolderMonitorJobPreferences imageFolderMonitorJobPreferences) {
+            job = new ImageFolderMonitorJob(imageFolderMonitorJobPreferences);
+        } else if (jobPreferences instanceof SourceDataFolderMonitorJobPreferences sourceDataFolderMonitorJobPreferences) {
             job = new SourceDataFolderMonitorJob(
-                (SourceDataFolderMonitorJobPreferences) jobPreferences);
-        } else if (jobPreferences instanceof VacuumJobPreferences) {
-            job = new VacuumJob((VacuumJobPreferences) jobPreferences);
-        } else if (jobPreferences instanceof CustomJobPreferences) {
-            job = new CustomJob((CustomJobPreferences) jobPreferences);
-        } else if (jobPreferences instanceof ExportJobPreferences) {
-            job = new ExportJob((ExportJobPreferences) jobPreferences);
+                sourceDataFolderMonitorJobPreferences);
+        } else if (jobPreferences instanceof VacuumJobPreferences vacuumJobPreferences) {
+            job = new VacuumJob(vacuumJobPreferences);
+        } else if (jobPreferences instanceof CustomJobPreferences customJobPreferences) {
+            job = new CustomJob(customJobPreferences);
+        } else if (jobPreferences instanceof ExportJobPreferences exportJobPreferences) {
+            job = new ExportJob(exportJobPreferences);
         }
         return job;
     }

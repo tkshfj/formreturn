@@ -134,7 +134,7 @@ public class ServerPreferencesManager {
                         getDatabaseDirectoryPath() + System.getProperty("file.separator")
                             + files[i]);
                     if (databaseDataDir.exists() && databaseDataDir.isDirectory()) {
-                        if (files[i].trim().equals(formProcessingDBName.trim())) {
+                        if (files[i].strip().equals(formProcessingDBName.strip())) {
                             foundFormProcessingDBName = true;
                             databaseTableModel.addRow(new String[] {files[i],
                                 Localizer.localize("Server",
@@ -331,7 +331,7 @@ public class ServerPreferencesManager {
             if (systemPasswordFile.isDirectory()) {
                 systemPasswordFile.delete();
             }
-            if (getSystemPassword() == null || getSystemPassword().trim().length() <= 0) {
+            if (getSystemPassword() == null || getSystemPassword().isBlank()) {
                 try {
                     setSystemPassword(generateSystemPassword());
                 } catch (IOException e) {
@@ -372,7 +372,7 @@ public class ServerPreferencesManager {
         cdp.setPassword(getSystemPassword());
         cdp.setUsername("formreturn");
         cdp.setServerIPAddress(
-            serverPreferences.getDatabaseServer().getListeningAddresses().split(",")[0].trim());
+            serverPreferences.getDatabaseServer().getListeningAddresses().split(",")[0].strip());
         cdp.setPortNumber(serverPreferences.getDatabaseServer().getPortNumber());
         return cdp;
     }

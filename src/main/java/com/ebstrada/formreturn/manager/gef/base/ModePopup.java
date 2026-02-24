@@ -103,9 +103,8 @@ public class ModePopup extends FigModifyingModeImpl {
 
             Object commonInstance = selectionManager.findFirstSelectionOfType(commonClass);
 
-            if (commonInstance instanceof PopupGenerator) {
+            if (commonInstance instanceof PopupGenerator popupGenerator) {
 
-                PopupGenerator popupGenerator = (PopupGenerator) commonInstance;
                 List<Object> actions = popupGenerator.getPopUpActions(me);
 
                 JPopupMenu popup = new JPopupMenu();
@@ -114,16 +113,16 @@ public class ModePopup extends FigModifyingModeImpl {
                 int size = actions.size();
                 for (int i = 0; i < size; ++i) {
                     Object a = actions.get(i);
-                    if (a instanceof AbstractAction) {
-                        popup.add((AbstractAction) a);
-                    } else if (a instanceof JMenu) {
-                        ((JMenu) a).setFont(UIManager.getFont("Menu.font"));
-                        popup.add((JMenu) a);
-                    } else if (a instanceof JMenuItem) {
-                        ((JMenuItem) a).setFont(UIManager.getFont("MenuItem.font"));
-                        popup.add((JMenuItem) a);
-                    } else if (a instanceof JSeparator) {
-                        popup.add((JSeparator) a);
+                    if (a instanceof AbstractAction abstractAction) {
+                        popup.add(abstractAction);
+                    } else if (a instanceof JMenu jMenu) {
+                        jMenu.setFont(UIManager.getFont("Menu.font"));
+                        popup.add(jMenu);
+                    } else if (a instanceof JMenuItem jMenuItem) {
+                        jMenuItem.setFont(UIManager.getFont("MenuItem.font"));
+                        popup.add(jMenuItem);
+                    } else if (a instanceof JSeparator jSeparator) {
+                        popup.add(jSeparator);
                     }
                 }
                 me = editor.retranslateMouseEvent(me);

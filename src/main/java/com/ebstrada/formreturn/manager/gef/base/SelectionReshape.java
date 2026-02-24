@@ -88,8 +88,8 @@ public class SelectionReshape extends Selection {
         if (ke.isConsumed()) {
             return;
         }
-        if (getContent() instanceof KeyListener) {
-            ((KeyListener) getContent()).keyPressed(ke);
+        if (getContent() instanceof KeyListener keyListener) {
+            keyListener.keyPressed(ke);
         }
     }
 
@@ -97,8 +97,8 @@ public class SelectionReshape extends Selection {
         if (ke.isConsumed()) {
             return;
         }
-        if (getContent() instanceof KeyListener) {
-            ((KeyListener) getContent()).keyReleased(ke);
+        if (getContent() instanceof KeyListener keyListener) {
+            keyListener.keyReleased(ke);
         }
     }
 } /* end class SelectionReshape */

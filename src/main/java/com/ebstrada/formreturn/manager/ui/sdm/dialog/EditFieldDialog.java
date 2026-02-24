@@ -54,7 +54,7 @@ public class EditFieldDialog extends JDialog {
     }
 
     private void saveButtonActionPerformed(ActionEvent e) {
-        String newFieldName = sourceFieldNameTextField.getText().trim();
+        String newFieldName = sourceFieldNameTextField.getText().strip();
         if (Misc.validateFieldname(newFieldName)) {
 
             List<SourceField> sourceFields =

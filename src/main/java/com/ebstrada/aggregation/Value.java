@@ -19,11 +19,11 @@ public class Value implements IConditionPart {
     public boolean match(Selection selectionValues) {
 	for (String selectionValue: selectionValues) {
 	    if ( negated ) {
-		if (value.equalsIgnoreCase(selectionValue.trim()) == false) {
+		if (value.equalsIgnoreCase(selectionValue.strip()) == false) {
 		    return true;
 		}
 	    } else {
-		if (value.equalsIgnoreCase(selectionValue.trim()) == true) {
+		if (value.equalsIgnoreCase(selectionValue.strip()) == true) {
 		    return true;
 		}
 	    }

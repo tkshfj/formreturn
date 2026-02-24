@@ -49,21 +49,15 @@ public class DistributeAction extends UndoableAction {
     }
 
     private static String wordFor(int r) {
-        switch (r) {
-            case H_SPACING:
-                return "HorizontalSpacing";
-            case H_CENTERS:
-                return "HorizontalCenters";
-            case H_PACK:
-                return "Leftward";
-            case V_SPACING:
-                return "VerticalSpacing";
-            case V_CENTERS:
-                return "VerticalCenters";
-            case V_PACK:
-                return "Upward";
-        }
-        return "";
+        return switch (r) {
+            case H_SPACING -> "HorizontalSpacing";
+            case H_CENTERS -> "HorizontalCenters";
+            case H_PACK -> "Leftward";
+            case V_SPACING -> "VerticalSpacing";
+            case V_CENTERS -> "VerticalCenters";
+            case V_PACK -> "Upward";
+            default -> "";
+        };
     }
 
     public void setBoundingBox(Rectangle bbox) {
