@@ -10,7 +10,7 @@
 	
 	<properties>
 		<openJPAVersion>3.2.2</openJPAVersion>
-		<derbyVersion>10.17.1.0</derbyVersion>
+		<derbyVersion>10.16.1.1</derbyVersion>
 		<xstreamVersion>1.4.21</xstreamVersion>
 		<commonsBeanutilsVersion>1.11.0</commonsBeanutilsVersion>
 		<antVersion>1.10.15</antVersion>
@@ -31,7 +31,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
-					<release>21</release>
+					<release>17</release>
 				</configuration>
 			</plugin>
 			<plugin>

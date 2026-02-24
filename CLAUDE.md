@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-FormReturn is a Java 21 Swing-based Optical Mark Recognition (OMR) desktop application for designing, scanning, and processing forms. It includes a form designer GUI, a background server daemon with Quartz-scheduled tasks, scanner integration (TWAIN/SANE/ICA), and an installer wizard. Originally built for Java 8, the codebase was upgraded to Java 21 with generics, deprecated API replacements, and reflection-based access to internal JDK APIs.
+FormReturn is a Java 17 Swing-based Optical Mark Recognition (OMR) desktop application for designing, scanning, and processing forms. It includes a form designer GUI, a background server daemon with Quartz-scheduled tasks, scanner integration (TWAIN/SANE/ICA), and an installer wizard. Originally built for Java 8, the codebase was upgraded to Java 17 with generics, deprecated API replacements, and reflection-based access to internal JDK APIs.
 
 ## Build Commands
 
-Requires **OpenJDK 21** (or later) and **Maven**. On Mac: `export JAVA_HOME=$(/usr/libexec/java_home -v 21)`
+Requires **OpenJDK 17** (or later) and **Maven**. On Mac: `export JAVA_HOME=$(/usr/libexec/java_home -v 17)`
 
 ```bash
 # Build the main library (from project root)
@@ -69,14 +69,14 @@ Config files for jpackage are in `installer/jpackage/` (server launcher properti
 
 ### Persistence
 
-- **JPA provider**: Apache OpenJPA 3.2.2 with build-time bytecode enhancement (`openjpa-maven-plugin` at `process-classes` phase, enhancer execution disabled for Java 21 class format compatibility)
+- **JPA provider**: Apache OpenJPA 3.2.2 with build-time bytecode enhancement (`openjpa-maven-plugin` at `process-classes` phase, enhancer execution disabled for Java 17 class format compatibility)
 - **Database**: Apache Derby (embedded or networked), schema `FORMRETURN`
 - **Entity classes**: 21 entities in `com.ebstrada.formreturn.manager.persistence.jpa` — configured in `src/main/resources/META-INF/persistence.xml`
 - **Preferences/form files**: Serialized via XStream (requires `--add-opens java.desktop/java.awt=ALL-UNNAMED` at runtime for `Dimension`/`Color`/`Rectangle` reflection)
 
 ### Key dependencies
 
-- **Derby 10.14.2.0** — Retained from the Java 8 era; could be upgraded to 10.15+ now that the project targets Java 21
+- **Derby 10.16.1.1** — Requires Java 17; 10.17+ requires Java 21 and is not compatible with this project's Java 17 target
 - **Quartz 2.3.2** — Job scheduling (uses `@DisallowConcurrentExecution`, `JobBuilder`/`TriggerBuilder` pattern)
 - **Apache FOP 2.9** — PDF generation via XSL-FO; factory created with `FopFactory.newInstance(URI, InputStream)`
 - **OpenCSV 5.9** — CSV import/export; uses `CSVReaderBuilder`/`CSVParserBuilder` pattern (package: `com.opencsv`)
