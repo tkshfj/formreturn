@@ -94,10 +94,10 @@ public class GradingRuleDialog extends JDialog {
 
     private void SaveButtonActionPerformed(ActionEvent e) {
 
-        this.grade = this.gradeTextField.getText().trim();
+        this.grade = this.gradeTextField.getText().strip();
         this.qualifier = this.qualifierComboBox.getSelectedIndex();
 
-        if (this.thresholdTextField.getText().trim().endsWith("%")) {
+        if (this.thresholdTextField.getText().strip().endsWith("%")) {
             this.thresholdType = MarkingRule.THRESHOLD_IS_PERCENTAGE;
         } else {
             this.thresholdType = MarkingRule.THRESHOLD_IS_MARK;
@@ -105,7 +105,7 @@ public class GradingRuleDialog extends JDialog {
 
         try {
             this.threshold =
-                Misc.parseDoubleString(this.thresholdTextField.getText().trim().replace("%", ""));
+                Misc.parseDoubleString(this.thresholdTextField.getText().strip().replace("%", ""));
         } catch (Exception ex) {
             Misc.showErrorMsg(this, "Invalid threshold mark");
             return;

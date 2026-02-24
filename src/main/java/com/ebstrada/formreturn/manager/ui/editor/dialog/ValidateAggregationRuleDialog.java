@@ -43,8 +43,8 @@ public class ValidateAggregationRuleDialog extends JDialog {
     private void testRuleButtonActionPerformed(ActionEvent e) {
         try {
             String[] selection = null;
-            if (selectedMarksTextField.getText().trim().length() > 0) {
-                selection = selectedMarksTextField.getText().trim().split("\\,");
+            if (!selectedMarksTextField.getText().isBlank()) {
+                selection = selectedMarksTextField.getText().strip().split("\\,");
             }
             double aggregate = Misc.aggregate(0, selection, getAggregationRule());
             resultTextField.setText(aggregate + "");

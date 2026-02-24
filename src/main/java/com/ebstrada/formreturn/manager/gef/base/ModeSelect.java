@@ -140,8 +140,8 @@ public class ModeSelect extends FigModifyingModeImpl {
         /* Check if multiple things are selected and user clicked one of them. */
         Fig underMouse = editor.hit(selectAnchor);
         Rectangle smallHitRect = new Rectangle(x - 1, y - 1, 3, 3);
-        if (underMouse instanceof FigGroup) {
-            underMouse = ((FigGroup) underMouse).deepSelect(smallHitRect);
+        if (underMouse instanceof FigGroup figGroup) {
+            underMouse = figGroup.deepSelect(smallHitRect);
         }
 
         if (underMouse == null && !sm.hit(hitRect)) {

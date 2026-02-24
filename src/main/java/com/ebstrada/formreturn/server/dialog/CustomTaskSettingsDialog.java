@@ -78,7 +78,7 @@ public class CustomTaskSettingsDialog extends JDialog {
     }
 
     public String getCronExpression() {
-        return cronExpressionTriggerTextField.getText().trim();
+        return cronExpressionTriggerTextField.getText().strip();
     }
 
     public void setCronExpression(String cronExpression) {
@@ -94,7 +94,7 @@ public class CustomTaskSettingsDialog extends JDialog {
     }
 
     public String getDescription() {
-        return descriptionTextField.getText().trim();
+        return descriptionTextField.getText().strip();
     }
 
     public void setDescription(String description) {
@@ -128,7 +128,7 @@ public class CustomTaskSettingsDialog extends JDialog {
 
     private void configurePluginButtonActionPerformed(ActionEvent e) {
 
-        File jarFile = new File(this.jarPluginLocationTextField.getText().trim());
+        File jarFile = new File(this.jarPluginLocationTextField.getText().strip());
 
         if (!(jarFile.exists()) || !(jarFile.canRead())) {
             Misc.showErrorMsg((Frame) getRootPane().getTopLevelAncestor(),

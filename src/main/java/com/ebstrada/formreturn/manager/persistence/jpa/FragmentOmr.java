@@ -208,7 +208,7 @@ import org.apache.openjpa.persistence.jdbc.Index;
     }
 
     public String getMarkColumnName() {
-        if (markColumnName == null || markColumnName.trim().length() <= 0) {
+        if (markColumnName == null || markColumnName.isBlank()) {
             markColumnName = capturedDataFieldName + "_score";
         }
         return markColumnName;

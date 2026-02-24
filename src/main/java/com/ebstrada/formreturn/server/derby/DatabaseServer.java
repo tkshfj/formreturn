@@ -67,7 +67,7 @@ public class DatabaseServer {
         this.listeningAddresses.removeAllElements();
 
         for (String address : addresses) {
-            addListeningAddress(address.trim());
+            addListeningAddress(address.strip());
         }
 
         int portNumber = dsp.getPortNumber();

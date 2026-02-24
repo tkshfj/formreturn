@@ -55,7 +55,7 @@ public class OrderByFilter {
 
         if (getNextOrderByFilter() != null) {
             String nextSql = getNextOrderByFilter().getSQL(isNativeOrderBy);
-            if (nextSql.trim().length() > 0) {
+            if (!nextSql.isBlank()) {
                 sqlPart += ", " + nextSql;
             }
         }

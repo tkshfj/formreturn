@@ -285,7 +285,7 @@ public class FormReader {
             }
 
             String formPageIdBarcode = pageRecognitionData.getFormIDBarcode().getValue();
-            if (formPageIdBarcode.trim().length() <= 0) {
+            if (formPageIdBarcode.isBlank()) {
                 String msg = Localizer.localize("UI", "BarcodeReaderUnableToLocateFormIDMessage");
                 throw new FormReaderException(FormReaderException.MISSING_FORM_ID_BARCODE, msg);
             }
@@ -714,12 +714,12 @@ public class FormReader {
             String matchingValue = matchMap.get(sourceField.getSourceFieldName());
 
             // don't match any values that are null
-            if (matchingValue == null || matchingValue.trim().length() <= 0) {
+            if (matchingValue == null || matchingValue.isBlank()) {
                 continue;
             }
 
             if (!(fields.containsKey(sourceField))) {
-                fields.put(sourceField, matchingValue.trim());
+                fields.put(sourceField, matchingValue.strip());
             }
 
         }
@@ -760,7 +760,7 @@ public class FormReader {
 
             }
 
-            String sql = select + from + where.trim();
+            String sql = select + from + where.strip();
 
             Query recordIdQuery = entityManager.createNativeQuery(sql);
             for (int p = 0; p < paramValues.size(); p++) {

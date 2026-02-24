@@ -56,13 +56,10 @@ public abstract class TaskSchedulerJob implements Job {
     }
 
     public Trigger getTrigger() {
-        switch (getTriggerType()) {
-            case ITriggerTypes.CRON_TRIGGER:
-                return cronTrigger;
-            case ITriggerTypes.SIMPLE_TRIGGER:
-            default:
-                return simpleTrigger;
-        }
+        return switch (getTriggerType()) {
+            case ITriggerTypes.CRON_TRIGGER -> cronTrigger;
+            default -> simpleTrigger;
+        };
     }
 
     public void createJob(Class<? extends Job> clazz) {
@@ -147,8 +144,8 @@ public abstract class TaskSchedulerJob implements Job {
     }
 
     public void setTrigger(Trigger trigger) {
-        if (trigger instanceof PauseAwareSimpleTrigger) {
-            this.simpleTrigger = (PauseAwareSimpleTrigger) trigger;
+        if (trigger instanceof PauseAwareSimpleTrigger pauseAwareSimpleTrigger) {
+            this.simpleTrigger = pauseAwareSimpleTrigger;
         } else {
             this.cronTrigger = trigger;
         }
@@ -163,30 +160,16 @@ public abstract class TaskSchedulerJob implements Job {
     }
 
     public String getStateString(TriggerState state) {
-
         if (state == null) {
             return Localizer.localize("Server", "StateNotRunningText");
         }
-
-        switch (state) {
-            case BLOCKED:
-            case NORMAL:
-                return Localizer.localize("Server", "StateNormalText");
-
-            case PAUSED:
-                return Localizer.localize("Server", "StatePausedText");
-
-            case ERROR:
-                return Localizer.localize("Server", "StateErrorText");
-
-            case COMPLETE:
-                return Localizer.localize("Server", "StateCompleteText");
-            case NONE:
-                return Localizer.localize("Server", "StateNotRunningText");
-            default:
-                return Localizer.localize("Server", "StateNotRunningText");
-        }
-
+        return switch (state) {
+            case BLOCKED, NORMAL -> Localizer.localize("Server", "StateNormalText");
+            case PAUSED -> Localizer.localize("Server", "StatePausedText");
+            case ERROR -> Localizer.localize("Server", "StateErrorText");
+            case COMPLETE -> Localizer.localize("Server", "StateCompleteText");
+            default -> Localizer.localize("Server", "StateNotRunningText");
+        };
     }
 
     public String toString() {

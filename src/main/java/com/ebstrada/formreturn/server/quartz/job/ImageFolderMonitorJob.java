@@ -73,7 +73,7 @@ public class ImageFolderMonitorJob extends FolderMonitorJob {
                                     String extension = files[i]
                                         .substring(files[i].lastIndexOf('.') + 1,
                                             files[i].length());
-                                    if (imageWhitelist.contains(extension.trim()) && isFileComplete(
+                                    if (imageWhitelist.contains(extension.strip()) && isFileComplete(
                                         unprocessedFile, recentFileTimes)) {
 
                                         long pageCount = 1;

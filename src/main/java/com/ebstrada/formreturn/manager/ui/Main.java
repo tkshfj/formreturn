@@ -509,10 +509,10 @@ public class Main extends JFrame {
 
                 boolean performedClose = false;
 
-                if (closingPanel instanceof EditorFrame) {
-                    performedClose = ((EditorFrame) closingPanel).closeEditorFrame();
-                } else if (closingPanel instanceof ReprocessorFrame) {
-                    performedClose = ((ReprocessorFrame) closingPanel).closeReprocessorFrame();
+                if (closingPanel instanceof EditorFrame editorFrame) {
+                    performedClose = editorFrame.closeEditorFrame();
+                } else if (closingPanel instanceof ReprocessorFrame reprocessorFrame) {
+                    performedClose = reprocessorFrame.closeReprocessorFrame();
                 } else if (closingPanel instanceof ErrorLogFrame) {
                     deactivateErrorLogFrame();
                     checkDesktopPaneBG();
@@ -544,10 +544,10 @@ public class Main extends JFrame {
                 JPanel closingPanel = (JPanel) getDesktopTabbedPane().getComponentAt(overTabIndex);
                 boolean performedClose = false;
 
-                if (closingPanel instanceof EditorFrame) {
-                    performedClose = ((EditorFrame) closingPanel).closeEditorFrame();
-                } else if (closingPanel instanceof ReprocessorFrame) {
-                    performedClose = ((ReprocessorFrame) closingPanel).closeReprocessorFrame();
+                if (closingPanel instanceof EditorFrame editorFrame) {
+                    performedClose = editorFrame.closeEditorFrame();
+                } else if (closingPanel instanceof ReprocessorFrame reprocessorFrame) {
+                    performedClose = reprocessorFrame.closeReprocessorFrame();
                 } else if (closingPanel instanceof ErrorLogFrame) {
                     deactivateErrorLogFrame();
                     checkDesktopPaneBG();
@@ -574,38 +574,21 @@ public class Main extends JFrame {
     }
 
     public static String getVersion() {
-
-        String versionStr = Main.VERSION;
-
-        switch (releaseType) {
-
-            case RELEASE:
-                break;
-
-            case RELEASE_CANDIDATE:
-                versionStr += " Release Candidate " + buildNumber;
-                break;
-
-            case BETA:
-                versionStr += " Beta " + buildNumber;
-                break;
-
-            case ALPHA:
-                versionStr += " Alpha " + buildNumber;
-                break;
-
-        }
-
-        return versionStr;
-
+        return switch (releaseType) {
+            case RELEASE -> Main.VERSION;
+            case RELEASE_CANDIDATE -> Main.VERSION + " Release Candidate " + buildNumber;
+            case BETA -> Main.VERSION + " Beta " + buildNumber;
+            case ALPHA -> Main.VERSION + " Alpha " + buildNumber;
+            default -> Main.VERSION;
+        };
     }
 
     private void sendOpenFileMessage(String[] args) {
 
         File fileToLoad = null;
 
-        if (args.length > 0 && args[0].trim().length() > 0) {
-            String fileToLoadString = args[0].trim();
+        if (args.length > 0 && !args[0].isBlank()) {
+            String fileToLoadString = args[0].strip();
             fileToLoad = new File(fileToLoadString);
             if (!(fileToLoad.exists())) {
                 return;
@@ -801,12 +784,12 @@ public class Main extends JFrame {
         JPanel[] frames = getDesktopTabbedPane().getAllFrames();
 
         for (int i = 0; i < frames.length; ++i) {
-            if (frames[i] instanceof EditorFrame) {
-                ((EditorFrame) frames[i]).unpressAllButtons();
-                if (((EditorFrame) frames[i]).getEditor().getSelectionManager().size() > 0) {
-                    ((EditorFrame) frames[i]).getEditor().getSelectionManager().deselectAll();
+            if (frames[i] instanceof EditorFrame editorFrame2) {
+                editorFrame2.unpressAllButtons();
+                if (editorFrame2.getEditor().getSelectionManager().size() > 0) {
+                    editorFrame2.getEditor().getSelectionManager().deselectAll();
                 }
-                ((EditorFrame) frames[i]).getEditor().getModeManager().leaveAll();
+                editorFrame2.getEditor().getModeManager().leaveAll();
             }
         }
 
@@ -814,9 +797,9 @@ public class Main extends JFrame {
             getSelectedFrame().getEditor().setAsActiveUndoManager();
         }
 
-        if (getDesktopTabbedPane().getSelectedComponent() instanceof EditorFrame) {
-            ((EditorFrame) getDesktopTabbedPane().getSelectedComponent()).setActiveEditor();
-            updateMenuCheckboxes((EditorFrame) getDesktopTabbedPane().getSelectedComponent());
+        if (getDesktopTabbedPane().getSelectedComponent() instanceof EditorFrame editorFrame) {
+            editorFrame.setActiveEditor();
+            updateMenuCheckboxes(editorFrame);
         } else {
             mainMenu.disableGridMenuItems();
         }
@@ -830,35 +813,30 @@ public class Main extends JFrame {
         getPropertiesPanelController().destroyPanels();
 
         if (getSelectedFrame() != null) {
-            if (getSelectedFrame() instanceof FormFrame) {
-                FormFrame formFrame = (FormFrame) getSelectedFrame();
+            if (getSelectedFrame() instanceof FormFrame formFrame) {
                 formFrame.updateProperties();
                 formFrame.refreshDatabaseTables();
-            } else if (getSelectedFrame() instanceof SegmentFrame) {
-                SegmentFrame segmentFrame = (SegmentFrame) getSelectedFrame();
+            } else if (getSelectedFrame() instanceof SegmentFrame segmentFrame) {
                 segmentFrame.updateProperties();
             }
         } else {
 
-            if (getDesktopTabbedPane().getSelectedFrame() instanceof ReprocessorFrame) {
-                ((ReprocessorFrame) getDesktopTabbedPane().getSelectedFrame()).updateProperties();
+            if (getDesktopTabbedPane().getSelectedFrame() instanceof ReprocessorFrame reprocessorFrame) {
+                reprocessorFrame.updateProperties();
             }
 
-            if (getDesktopTabbedPane().getSelectedFrame() instanceof SourceDataManagerFrame) {
-                ((SourceDataManagerFrame) getDesktopTabbedPane().getSelectedFrame())
-                    .updatePropertyBox();
+            if (getDesktopTabbedPane().getSelectedFrame() instanceof SourceDataManagerFrame sourceDataManagerFrame) {
+                sourceDataManagerFrame.updatePropertyBox();
             }
 
-            if (getDesktopTabbedPane().getSelectedFrame() instanceof CapturedDataManagerFrame) {
-                ((CapturedDataManagerFrame) getDesktopTabbedPane().getSelectedFrame())
-                    .updatePropertyBox();
-                ((CapturedDataManagerFrame) getDesktopTabbedPane().getSelectedFrame()).refresh();
+            if (getDesktopTabbedPane().getSelectedFrame() instanceof CapturedDataManagerFrame capturedDataManagerFrame) {
+                capturedDataManagerFrame.updatePropertyBox();
+                capturedDataManagerFrame.refresh();
             }
 
-            if (getDesktopTabbedPane().getSelectedFrame() instanceof ProcessingQueueManagerFrame) {
-                ((ProcessingQueueManagerFrame) getDesktopTabbedPane().getSelectedFrame())
-                    .updatePropertyBox();
-                ((ProcessingQueueManagerFrame) getDesktopTabbedPane().getSelectedFrame()).refresh();
+            if (getDesktopTabbedPane().getSelectedFrame() instanceof ProcessingQueueManagerFrame processingQueueManagerFrame) {
+                processingQueueManagerFrame.updatePropertyBox();
+                processingQueueManagerFrame.refresh();
             }
 
         }
@@ -1248,8 +1226,7 @@ public class Main extends JFrame {
             String name = Localizer.localize("UI", "UntitledFormPrefix") + k;
             boolean found = false;
             for (int i = 0; i < frames.length; ++i) {
-                if (frames[i] instanceof FormFrame) {
-                    FormFrame ff = (FormFrame) frames[i];
+                if (frames[i] instanceof FormFrame ff) {
                     if (ff.getTitle().equalsIgnoreCase(name)) {
                         found = true;
                         break;
@@ -1271,8 +1248,7 @@ public class Main extends JFrame {
             String name = Localizer.localize("UI", "UntitledSegmentPrefix") + k;
             boolean found = false;
             for (int i = 0; i < frames.length; ++i) {
-                if (frames[i] instanceof SegmentFrame) {
-                    SegmentFrame segmentFrame = (SegmentFrame) frames[i];
+                if (frames[i] instanceof SegmentFrame segmentFrame) {
                     if (segmentFrame.getTitle().equalsIgnoreCase(name)) {
                         found = true;
                         break;
@@ -1394,8 +1370,7 @@ public class Main extends JFrame {
     public boolean checkReprocessorFrameOpen(long id, int editorType) {
         JPanel[] frames = getDesktopTabbedPane().getAllFrames();
         for (int i = 0; i < frames.length; ++i) {
-            if (frames[i] instanceof ReprocessorFrame) {
-                ReprocessorFrame reprocessorFrame = (ReprocessorFrame) frames[i];
+            if (frames[i] instanceof ReprocessorFrame reprocessorFrame) {
                 if (reprocessorFrame.getEditorType() == editorType
                     && reprocessorFrame.getIncomingImageId() == id) {
                     getDesktopTabbedPane().setSelectedComponent(reprocessorFrame);
@@ -1415,8 +1390,7 @@ public class Main extends JFrame {
         JPanel[] frames = getDesktopTabbedPane().getAllFrames();
 
         for (int i = 0; i < frames.length; ++i) {
-            if (frames[i] instanceof EditorFrame) {
-                EditorFrame editorFrame = (EditorFrame) frames[i];
+            if (frames[i] instanceof EditorFrame editorFrame) {
                 if (editorFrame.getGraph().getDocumentPackage().getPackageFile() != null) {
                     try {
                         if (editorFrame.getGraph().getDocumentPackage().getPackageFile()
@@ -1744,11 +1718,9 @@ public class Main extends JFrame {
 
     public void save(String title, boolean isSaveAs) {
         JPanel frame = getDesktopTabbedPane().getSelectedFrame();
-        if (frame instanceof EditorFrame) {
-            EditorFrame selectedFrame = (EditorFrame) frame;
+        if (frame instanceof EditorFrame selectedFrame) {
             save(selectedFrame, isSaveAs);
-        } else if (frame instanceof ReprocessorFrame) {
-            ReprocessorFrame selectedFrame = (ReprocessorFrame) frame;
+        } else if (frame instanceof ReprocessorFrame selectedFrame) {
             selectedFrame.saveCapturedDataButtonActionPerformed(null);
         }
     }
@@ -1782,13 +1754,13 @@ public class Main extends JFrame {
         JPanel[] frames = getDesktopTabbedPane().getAllFrames();
 
         for (int i = 0; i < frames.length; ++i) {
-            if (frames[i] instanceof EditorFrame) {
-                if (((EditorFrame) frames[i]).closeEditorFrame() == false) {
+            if (frames[i] instanceof EditorFrame editorFrame) {
+                if (editorFrame.closeEditorFrame() == false) {
                     return false;
                 }
             }
-            if (frames[i] instanceof ReprocessorFrame) {
-                if (((ReprocessorFrame) frames[i]).closeReprocessorFrame() == false) {
+            if (frames[i] instanceof ReprocessorFrame reprocessorFrame) {
+                if (reprocessorFrame.closeReprocessorFrame() == false) {
                     return false;
                 }
             }
@@ -2061,8 +2033,8 @@ public class Main extends JFrame {
         JPanel[] frames = getDesktopTabbedPane().getAllFrames();
 
         for (int i = 0; i < frames.length; ++i) {
-            if (frames[i] instanceof EditorFrame) {
-                getDesktopTabbedPane().setSelectedComponent(frames[i]);
+            if (frames[i] instanceof EditorFrame editorFrame) {
+                getDesktopTabbedPane().setSelectedComponent(editorFrame);
                 saveItemActionPerformed(e);
             }
         }

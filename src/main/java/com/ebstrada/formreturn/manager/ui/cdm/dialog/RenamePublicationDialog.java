@@ -42,9 +42,9 @@ public class RenamePublicationDialog extends JDialog {
     private void okButtonActionPerformed(ActionEvent e) {
         PublicationController pc = new PublicationController();
 
-        int stringLength = publicationNameTextField.getText().trim().length();
+        int stringLength = publicationNameTextField.getText().strip().length();
         if (stringLength > 0 && stringLength < 255) {
-            pc.renamePublication(publicationId, publicationNameTextField.getText().trim());
+            pc.renamePublication(publicationId, publicationNameTextField.getText().strip());
             capturedDataManagerFrame.restorePublications();
             dispose();
         } else {

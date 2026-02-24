@@ -446,7 +446,7 @@ public class PreferencesManager {
             if (systemPasswordFile.isDirectory()) {
                 systemPasswordFile.delete();
             }
-            if (getSystemPassword() == null || getSystemPassword().trim().length() <= 0) {
+            if (getSystemPassword() == null || getSystemPassword().isBlank()) {
                 try {
                     setSystemPassword(generateSystemPassword());
                 } catch (IOException e) {

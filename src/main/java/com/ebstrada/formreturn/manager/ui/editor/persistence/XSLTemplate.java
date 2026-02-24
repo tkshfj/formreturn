@@ -67,7 +67,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     }
 
     public String toString() {
-        return this.description.trim() + " (" + this.fileName + ")";
+        return this.description.strip() + " (" + this.fileName + ")";
     }
 
     public void restore(PublicationXSL publicationXSL) {

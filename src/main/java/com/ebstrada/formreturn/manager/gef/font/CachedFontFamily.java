@@ -73,17 +73,13 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
     }
 
     public CachedFont getCachedFont(int style) {
-        switch (style) {
-            case Font.BOLD:
-                return cachedFontStyleBold;
-            case Font.ITALIC:
-                return cachedFontStyleItalic;
-            case Font.PLAIN:
-                return cachedFontStylePlain;
-            case Font.BOLD + Font.ITALIC:
-                return cachedFontStyleBoldItalic;
-        }
-        return null;
+        return switch (style) {
+            case Font.BOLD -> cachedFontStyleBold;
+            case Font.ITALIC -> cachedFontStyleItalic;
+            case Font.PLAIN -> cachedFontStylePlain;
+            case Font.BOLD + Font.ITALIC -> cachedFontStyleBoldItalic;
+            default -> null;
+        };
     }
 
     public DefaultComboBoxModel<String> getAvailableStylesList() {

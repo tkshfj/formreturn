@@ -1572,11 +1572,11 @@ public class ExportOptionsDialog extends JDialog {
         if (index < 0) {
             return;
         }
-        if (columnNameTextField.getText().trim().length() <= 0) {
+        if (columnNameTextField.getText().isBlank()) {
             return;
         }
         ColumnOption col = (ColumnOption) this.includedColumnsList.getModel().getElementAt(index);
-        col.setFieldName(columnNameTextField.getText().trim());
+        col.setFieldName(columnNameTextField.getText().strip());
     }
 
     private void includedColumnsListValueChanged(ListSelectionEvent e) {

@@ -49,8 +49,7 @@ public class FigCheckboxPanel extends EditorPanel {
         if (selectedElement == null) {
             return;
         }
-        if (selectedElement instanceof FigCheckbox) {
-            FigCheckbox fig = (FigCheckbox) selectedElement;
+        if (selectedElement instanceof FigCheckbox fig) {
             this.aggregationRuleTextField.setText(fig.getAggregationRule());
         }
     }
@@ -96,9 +95,7 @@ public class FigCheckboxPanel extends EditorPanel {
 
         if (rmapsd.getDialogResult() == javax.swing.JOptionPane.OK_OPTION) {
 
-            if (selectedElement instanceof FigCheckbox) {
-
-                FigCheckbox fig = (FigCheckbox) selectedElement;
+            if (selectedElement instanceof FigCheckbox fig) {
 
                 if (rmapsd.isRestoreBoxDesign()) {
                     fig.setBoxWidth(selectedStyle.getBoxWidth());
@@ -143,9 +140,8 @@ public class FigCheckboxPanel extends EditorPanel {
         if (selectedElement == null) {
             return;
         }
-        if (selectedElement instanceof FigCheckbox) {
-            FigCheckbox fig = (FigCheckbox) selectedElement;
-            fig.setAggregationRule(this.aggregationRuleTextField.getText().trim());
+        if (selectedElement instanceof FigCheckbox fig) {
+            fig.setAggregationRule(this.aggregationRuleTextField.getText().strip());
             fig.damage();
         }
     }

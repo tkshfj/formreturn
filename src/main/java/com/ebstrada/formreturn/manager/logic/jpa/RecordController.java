@@ -35,13 +35,13 @@ public class RecordController {
             DataSet dataSet = entityManager.find(DataSet.class, dataSetId);
             for (int i = 0; i < columnNames.length; i++) {
 
-                if (columnNames[i] == null || columnNames[i].trim().length() <= 0) {
+                if (columnNames[i] == null || columnNames[i].isBlank()) {
                     continue;
                 }
 
                 Query sourceFieldQuery =
                     entityManager.createNamedQuery("SourceField.findBySourceFieldName");
-                sourceFieldQuery.setParameter("sourceFieldName", columnNames[i].trim());
+                sourceFieldQuery.setParameter("sourceFieldName", columnNames[i].strip());
                 sourceFieldQuery.setParameter("dataSetId", dataSet);
 
                 List<?> resultList = sourceFieldQuery.getResultList();
@@ -50,7 +50,7 @@ public class RecordController {
                 if (resultList.size() <= 0) {
                     sourceField = new SourceField();
                     sourceField.setDataSetId(dataSet);
-                    sourceField.setSourceFieldName(columnNames[i].trim());
+                    sourceField.setSourceFieldName(columnNames[i].strip());
                     sourceField.setOrderIndex(i + 1);
                     // TODO: this needs to be set when defining the field type
                     sourceField.setSourceFieldType("STRING");

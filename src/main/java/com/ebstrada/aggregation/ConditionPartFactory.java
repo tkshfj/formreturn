@@ -5,7 +5,7 @@ import com.ebstrada.aggregation.exception.InvalidRulePartException;
 public class ConditionPartFactory {
 
     public static IConditionPart getConditionPart(String conditionPartStr) throws InvalidRulePartException {
-	conditionPartStr = conditionPartStr.trim();
+	conditionPartStr = conditionPartStr.strip();
 	if ((conditionPartStr.startsWith("!!!") || conditionPartStr.startsWith("!!")) && conditionPartStr.endsWith("!!")) {
 	    return FunctionFactory.getFunction(conditionPartStr);
 	} else if (conditionPartStr.startsWith("'")) {

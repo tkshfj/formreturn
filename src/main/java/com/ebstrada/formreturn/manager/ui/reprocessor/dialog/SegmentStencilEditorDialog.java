@@ -80,8 +80,7 @@ public class SegmentStencilEditorDialog extends JDialog {
 
             Object obj = dataTable.getValueAt(row, column);
 
-            if (obj instanceof CapturedDataItem) {
-                CapturedDataItem cdi = (CapturedDataItem) obj;
+            if (obj instanceof CapturedDataItem cdi) {
                 String oldText = cdi.getValue();
                 if (oldText == null || !(oldText.equals(newText))) {
                     cdi.setValue(newText);
@@ -147,8 +146,7 @@ public class SegmentStencilEditorDialog extends JDialog {
 
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
             int row, int column) {
-            if (value instanceof CapturedDataItem) {
-                CapturedDataItem data = (CapturedDataItem) value;
+            if (value instanceof CapturedDataItem data) {
                 if (data.getType() == CapturedDataItem.OMR_FIELD) {
                     checkBox = new JCheckBox();
                     checkBox.setFont(UIManager.getFont("CheckBox.font"));
@@ -208,8 +206,7 @@ public class SegmentStencilEditorDialog extends JDialog {
 
         public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
-            if (value instanceof CapturedDataItem) {
-                CapturedDataItem data = (CapturedDataItem) value;
+            if (value instanceof CapturedDataItem data) {
                 if (data.getType() == CapturedDataItem.OMR_FIELD) {
                     checkBox = new JCheckBox();
                     checkBox.setFont(UIManager.getFont("CheckBox.font"));
@@ -351,13 +348,12 @@ public class SegmentStencilEditorDialog extends JDialog {
             for (int i = 0; i < dataTable.getRowCount(); i++) {
                 for (int j = 0; j < dataTable.getColumnCount(); j++) {
                     Object obj2 = dataTable.getValueAt(i, j);
-                    if (obj2 instanceof CapturedDataItem) {
-                        CapturedDataItem cdi = (CapturedDataItem) obj2;
+                    if (obj2 instanceof CapturedDataItem cdi) {
                         // set the data in the bcrs
                         bcrs.setBarcodeValue(cdi.getValue());
                         bcrs.setInvalidated(false);
-                    } else if (obj2 instanceof String) {
-                        bcrs.setBarcodeValue((String) obj2);
+                    } else if (obj2 instanceof String str) {
+                        bcrs.setBarcodeValue(str);
                         bcrs.setInvalidated(false);
                     }
                 }
@@ -570,8 +566,8 @@ public class SegmentStencilEditorDialog extends JDialog {
 
     public void restore() throws Exception {
         JGraph graph = figSegmentArea.getGraph();
-        if (graph instanceof ReprocessorGraph) {
-            reprocessorFrame = ((ReprocessorGraph) graph).getReprocessorFrame();
+        if (graph instanceof ReprocessorGraph reprocessorGraph) {
+            reprocessorFrame = reprocessorGraph.getReprocessorFrame();
         }
         if (reprocessorFrame == null || reprocessorFrame.getFormPageId() <= 0) {
             graph.getEditor().getSelectionManager().deselectAll();

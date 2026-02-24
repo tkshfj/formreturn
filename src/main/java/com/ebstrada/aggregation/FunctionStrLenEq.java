@@ -20,7 +20,7 @@ public class FunctionStrLenEq extends AbstractFunction {
 
     @Override
     public void parse(String conditionPartStr) throws InvalidRulePartException {
-	conditionPartStr = conditionPartStr.trim();
+	conditionPartStr = conditionPartStr.strip();
 	this.stringLength = parseIntFunctionParameter(conditionPartStr);
     }
 

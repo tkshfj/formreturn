@@ -80,11 +80,11 @@ public class FigBarcodeReaderProperties extends JDialog {
                 figBarcodeReader.getGraph().getEditor().getLayerManager().getContents();
             for (int i = 0; i < layerContents.size(); i++) {
                 Fig fig = layerContents.get(i);
-                if (fig instanceof FigCheckbox) {
+                if (fig instanceof FigCheckbox figCheckbox) {
                     if (fig == figBarcodeReader) {
                         continue;
                     }
-                    if (((FigCheckbox) fig).getFieldname().equalsIgnoreCase(newFieldName.trim())) {
+                    if (figCheckbox.getFieldname().equalsIgnoreCase(newFieldName.strip())) {
                         return true;
                     }
                 }
@@ -149,7 +149,7 @@ public class FigBarcodeReaderProperties extends JDialog {
     }
 
     private String getFieldname() {
-        return fieldNameTextField.getText().trim();
+        return fieldNameTextField.getText().strip();
     }
 
     private void thisWindowGainedFocus(WindowEvent e) {

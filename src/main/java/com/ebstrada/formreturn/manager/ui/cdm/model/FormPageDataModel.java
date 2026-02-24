@@ -198,7 +198,7 @@ public class FormPageDataModel extends AbstractDataModel {
             String countSql =
                 "SELECT COUNT(FORM_PAGE.FORM_PAGE_ID) FROM FORM_PAGE LEFT JOIN FORM ON FORM_PAGE.FORM_ID = FORM.FORM_ID WHERE FORM.RECORD_ID IS NOT NULL";
             String countSearchSQL = getNativeSearchSQL();
-            if (countSearchSQL.trim().length() > 0) {
+            if (!countSearchSQL.isBlank()) {
                 countSql += " AND " + countSearchSQL;
             }
             Query query = entityManager.createNativeQuery(countSql);
@@ -210,7 +210,7 @@ public class FormPageDataModel extends AbstractDataModel {
 
             // SEARCH FILTER
             String nativeSearchSQL = getNativeSearchSQL();
-            if (nativeSearchSQL.trim().length() > 0) {
+            if (!nativeSearchSQL.isBlank()) {
                 sql += " AND " + nativeSearchSQL;
             }
 

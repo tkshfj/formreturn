@@ -20,27 +20,23 @@ public class Column implements Comparable<Column> {
      * is less than, equal to, or greater than the specified object.
      */
     public int compareTo(Column otherColumn) {
-
-        switch (sortType) {
-            case ExportMap.SORT_NATRUAL_ASCENDING:
-                return Misc.compareString(getIdentifier(), otherColumn.getIdentifier());
-            case ExportMap.SORT_NATURAL_DECENDING:
-                return Misc.compareString(otherColumn.getIdentifier(), getIdentifier());
-            case ExportMap.SORT_BY_ORDER_INDEX:
-            default:
+        return switch (sortType) {
+            case ExportMap.SORT_NATRUAL_ASCENDING -> Misc.compareString(getIdentifier(), otherColumn.getIdentifier());
+            case ExportMap.SORT_NATURAL_DECENDING -> Misc.compareString(otherColumn.getIdentifier(), getIdentifier());
+            default -> {
                 if (getOffset() < otherColumn.getOffset()) {
-                    return -1;
+                    yield -1;
                 } else if (getOffset() > otherColumn.getOffset()) {
-                    return 1;
+                    yield 1;
                 } else if (getOrder() < otherColumn.getOrder()) {
-                    return -1;
+                    yield -1;
                 } else if (getOrder() > otherColumn.getOrder()) {
-                    return 1;
+                    yield 1;
                 } else {
-                    return 0;
+                    yield 0;
                 }
-        }
-
+            }
+        };
     }
 
     public void setFieldname(String fieldname) {

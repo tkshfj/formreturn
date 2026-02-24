@@ -20,8 +20,8 @@ public class ModeCreateFigSegment extends ModeCreate {
         EditorFrame desktopFrame = null;
 
         while (true) {
-            if (component instanceof EditorFrame) {
-                desktopFrame = (EditorFrame) component;
+            if (component instanceof EditorFrame editorFrame) {
+                desktopFrame = editorFrame;
                 break;
             }
             component = component.getParent();

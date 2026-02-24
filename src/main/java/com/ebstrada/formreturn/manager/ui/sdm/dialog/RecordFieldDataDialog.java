@@ -234,8 +234,8 @@ public class RecordFieldDataDialog extends JDialog {
                     for (int i = 0; i < rowCount; i++) {
                         String fieldName = (String) fieldDataTable.getValueAt(i, 0);
                         String fieldValue = (String) fieldDataTable.getValueAt(i, 1);
-                        if (st.getSourceFieldId().getSourceFieldName().trim()
-                            .equals(fieldName.trim())) {
+                        if (st.getSourceFieldId().getSourceFieldName().strip()
+                            .equals(fieldName.strip())) {
                             if (st.getSourceTextString() != fieldValue) {
                                 stc.updateSourceTextStringValue(st.getSourceTextId(), fieldValue);
                                 rowIndexVector.remove(Integer.valueOf(i));

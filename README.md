@@ -14,7 +14,7 @@ This repository is a downstream maintenance fork of FormReturn, a Java desktop O
 
 ## Overview
 
-FormReturn is a **Java 21, Swing-based desktop application** used to:
+FormReturn is a **Java 17, Swing-based desktop application** used to:
 
 - design forms in a GUI,
 - scan or import completed forms,
@@ -29,7 +29,7 @@ It also includes a **server/daemon component** (Derby + Quartz) with scanner int
 
 Typical work in this repository includes:
 
-- **Java 21 upgrade** (from Java 8) — updated build target, generics, deprecated API replacements, reflection-based access to internal JDK APIs,
+- **Java 17 upgrade** (from Java 8) — updated build target, generics, deprecated API replacements, reflection-based access to internal JDK APIs, modern language features (switch expressions, pattern matching for `instanceof`, text blocks, `String.isBlank()`/`strip()`, `List.of()`),
 - **security hardening** (XStream deserialization, Zip Slip, SQL injection fixes),
 - **code quality** (resource leak fixes, deprecation cleanup, API migrations, SonarQube/IDE warning elimination),
 - bug fixes and usability improvements,
@@ -63,14 +63,14 @@ Key areas under `src/main/java/com/ebstrada/`:
 
 ### Prerequisites
 
-- **OpenJDK 21** (or later)
+- **OpenJDK 17** (or later)
 - **Maven**
 - **NSIS** (Windows installer packaging only)
 
-#### macOS: select Java 21
+#### macOS: select Java 17
 
 ```bash
-export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 ```
 
 ### Build order (two separate Maven projects)
@@ -215,7 +215,7 @@ After launching the server and GUI:
 
 ## Persistence and data storage
 
-* JPA provider: **Apache OpenJPA 3.2.2** (with build-time enhancement; enhancer execution disabled for Java 21 class format compatibility)
+* JPA provider: **Apache OpenJPA 3.2.2** (with build-time enhancement; enhancer execution disabled for Java 17 class format compatibility)
 * Database: **Apache Derby** (embedded or networked), schema `FORMRETURN`
 * Preferences / form files: serialized via **XStream**
 
@@ -228,7 +228,7 @@ Key libraries and their current versions:
 | Library | Version | Purpose |
 | --- | ---: | --- |
 | Apache OpenJPA | 3.2.2 | JPA persistence provider |
-| Apache Derby | 10.14.2.0 | Embedded/networked database |
+| Apache Derby | 10.16.1.1 | Embedded/networked database |
 | Apache FOP | 2.9 | XSL-FO to PDF rendering |
 | Apache PDFBox | 2.0.32 | PDF handling |
 | Apache Batik | 1.17 | SVG rendering |
@@ -249,7 +249,7 @@ Key libraries and their current versions:
 | Xerces | 2.12.2 | XML parsing |
 | JUnit | 4.13.2 | Testing |
 
-**Note:** Derby 10.14.2.0 was retained from the Java 8 era; a future upgrade to Derby 10.15+ (which requires Java 11+) is possible now that the project targets Java 21.
+**Note:** Derby 10.16.1.1 requires Java 17. Derby 10.17+ requires Java 21 and is not compatible with this project's Java 17 target.
 
 ---
 
@@ -265,7 +265,8 @@ This fork includes targeted hardening beyond the upstream codebase:
 - **Bug fixes** — fixed CSVExporter null-check on wrong array index (formPassword vs recordId); removed premature `BufferedImage.flush()` that invalidated image data before processing
 - **Deprecated API removal** — replaced Guava `Files.createTempDir()` with `java.nio.file.Files`, migrated Batik and Quartz APIs to current versions, replaced `new URL()` with `URI`-based construction, replaced `getModifiers()` with `getModifiersEx()`, replaced `Class.newInstance()` with `getDeclaredConstructor().newInstance()`
 - **OpenCSV 5.x** — added handling for new checked exceptions (`CsvValidationException`, `CsvException`)
-- **Java 21 migration** — added generic type parameters across ~120 files (JComboBox, DefaultComboBoxModel, Vector, Enumeration, Iterator, Class, etc.), replaced `sun.font` compile-time references with reflection-safe alternatives, upgraded OpenJPA to 3.2.2
+- **Java 17 migration** — added generic type parameters across ~120 files (JComboBox, DefaultComboBoxModel, Vector, Enumeration, Iterator, Class, etc.), replaced `sun.font` compile-time references with reflection-safe alternatives, upgraded OpenJPA to 3.2.2
+- **Modern Java language features** (164 files, net -391 lines) — switch expressions with arrow syntax (Java 14) in 25+ files, pattern matching for `instanceof` (Java 16) in 60+ files, `String.isBlank()` (Java 11) replacing `.trim().length() == 0` in 28 files, `String.strip()` (Java 11) replacing `.trim()` across the codebase, text blocks (Java 15) for multiline XML/license strings, `List.of()` (Java 9) replacing `Arrays.asList()`, `Hashtable` replaced with `HashMap` across 60 files
 
 ---
 

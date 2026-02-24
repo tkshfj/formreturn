@@ -32,7 +32,7 @@ public class CustomFormDialog extends JDialog {
 
     private void saveButtonActionPerformed(ActionEvent e) {
 
-        String newFormSizeName = customFormNameTextField.getText().trim();
+        String newFormSizeName = customFormNameTextField.getText().strip();
 
         // 1. validate name
         if (newFormSizeName.length() <= 0) {
@@ -82,7 +82,7 @@ public class CustomFormDialog extends JDialog {
     }
 
     public String getCustomFormName() {
-        return customFormNameTextField.getText().trim();
+        return customFormNameTextField.getText().strip();
     }
 
     public void setPortraitWidth(int width) {

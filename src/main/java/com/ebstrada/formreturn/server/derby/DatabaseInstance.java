@@ -350,13 +350,13 @@ public class DatabaseInstance {
         boolean isSuccess = false;
         Connection conn = null;
 
-        if (username.trim().equalsIgnoreCase("formreturn")) {
+        if (username.strip().equalsIgnoreCase("formreturn")) {
             throw new DatabaseInstanceException(
                 Localizer.localize("Server", "CannotChangeSystemPasswordMessage"));
         }
 
-        validateIdentifier(username.trim(), "username");
-        validatePassword(password.trim());
+        validateIdentifier(username.strip(), "username");
+        validatePassword(password.strip());
 
         try {
 
@@ -365,7 +365,7 @@ public class DatabaseInstance {
 
             s.executeUpdate(
                 "CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.user." + username + "', '"
-                    + password.trim() + "')");
+                    + password.strip() + "')");
 
             isSuccess = true;
 
@@ -399,12 +399,12 @@ public class DatabaseInstance {
         boolean isSuccess = false;
         Connection conn = null;
 
-        if (username.trim().equalsIgnoreCase("formreturn")) {
+        if (username.strip().equalsIgnoreCase("formreturn")) {
             throw new DatabaseInstanceException(
                 Localizer.localize("Server", "CannotRemoveSystemUserMessage"));
         }
 
-        validateIdentifier(username.trim(), "username");
+        validateIdentifier(username.strip(), "username");
 
         try {
 
@@ -471,8 +471,8 @@ public class DatabaseInstance {
         boolean isSuccess = false;
         Connection conn = null;
 
-        validateIdentifier(username.trim(), "username");
-        validatePassword(password.trim());
+        validateIdentifier(username.strip(), "username");
+        validatePassword(password.strip());
 
         try {
 
@@ -548,7 +548,7 @@ public class DatabaseInstance {
                     String fullAccessUsers = rs.getString(1);
                     StringTokenizer token = new StringTokenizer(fullAccessUsers, ",");
                     while (token.hasMoreTokens()) {
-                        databaseUsers.add(token.nextToken().trim());
+                        databaseUsers.add(token.nextToken().strip());
                     }
                 }
             }
@@ -638,7 +638,7 @@ public class DatabaseInstance {
         ResultSet rs = s.executeQuery(
             "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY('derby.connection.requireAuthentication')");
         if (rs.next()) {
-            if (rs.getString(1) == null || !(rs.getString(1).trim().equalsIgnoreCase("true"))) {
+            if (rs.getString(1) == null || !(rs.getString(1).strip().equalsIgnoreCase("true"))) {
                 s2.executeUpdate(
                     "CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.connection.requireAuthentication', 'true')");
             }
@@ -648,7 +648,7 @@ public class DatabaseInstance {
         rs = s.executeQuery(
             "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY('derby.authentication.provider')");
         if (rs.next()) {
-            if (rs.getString(1) == null || !(rs.getString(1).trim().equalsIgnoreCase("BUILTIN"))) {
+            if (rs.getString(1) == null || !(rs.getString(1).strip().equalsIgnoreCase("BUILTIN"))) {
                 s2.executeUpdate(
                     "CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.authentication.provider', 'BUILTIN')");
             }
@@ -660,7 +660,7 @@ public class DatabaseInstance {
         rs = s.executeQuery(
             "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY('derby.database.sqlAuthorization')");
         if (rs.next()) {
-            if (rs.getString(1) == null || !(rs.getString(1).trim().equalsIgnoreCase("TRUE"))) {
+            if (rs.getString(1) == null || !(rs.getString(1).strip().equalsIgnoreCase("TRUE"))) {
                 s2.executeUpdate(
                     "CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.database.sqlAuthorization', 'TRUE')");
             }
@@ -670,7 +670,7 @@ public class DatabaseInstance {
         rs = s.executeQuery(
             "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY('derby.database.defaultConnectionMode')");
         if (rs.next()) {
-            if (rs.getString(1) == null || !(rs.getString(1).trim().equalsIgnoreCase("noAccess"))) {
+            if (rs.getString(1) == null || !(rs.getString(1).strip().equalsIgnoreCase("noAccess"))) {
                 s2.executeUpdate(
                     "CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.database.defaultConnectionMode', 'noAccess')");
             }
@@ -680,7 +680,7 @@ public class DatabaseInstance {
         rs = s.executeQuery(
             "VALUES SYSCS_UTIL.SYSCS_GET_DATABASE_PROPERTY('derby.database.propertiesOnly')");
         if (rs.next()) {
-            if (rs.getString(1) == null || !(rs.getString(1).trim().equalsIgnoreCase("true"))) {
+            if (rs.getString(1) == null || !(rs.getString(1).strip().equalsIgnoreCase("true"))) {
                 s2.executeUpdate(
                     "CALL SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY('derby.database.propertiesOnly', 'true')");
             }

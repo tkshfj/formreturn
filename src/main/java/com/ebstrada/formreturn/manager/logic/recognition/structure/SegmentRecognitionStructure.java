@@ -67,15 +67,15 @@ public class SegmentRecognitionStructure {
 
     public void addFragment(String fieldname,
         FragmentRecognitionStructure fragmentRecognitionStructure) {
-        if (fragmentRecognitionStructure instanceof OMRRecognitionStructure) {
+        if (fragmentRecognitionStructure instanceof OMRRecognitionStructure omrRecognitionStructure) {
             OMRRecognitionStructures
-                .put(fieldname, (OMRRecognitionStructure) fragmentRecognitionStructure);
-        } else if (fragmentRecognitionStructure instanceof OCRRecognitionStructure) {
+                .put(fieldname, omrRecognitionStructure);
+        } else if (fragmentRecognitionStructure instanceof OCRRecognitionStructure ocrRecognitionStructure) {
             OCRRecognitionStructures
-                .put(fieldname, (OCRRecognitionStructure) fragmentRecognitionStructure);
-        } else if (fragmentRecognitionStructure instanceof BarcodeRecognitionStructure) {
+                .put(fieldname, ocrRecognitionStructure);
+        } else if (fragmentRecognitionStructure instanceof BarcodeRecognitionStructure barcodeRecognitionStructure) {
             BarcodeRecognitionStructures
-                .put(fieldname, (BarcodeRecognitionStructure) fragmentRecognitionStructure);
+                .put(fieldname, barcodeRecognitionStructure);
         }
     }
 

@@ -18,8 +18,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
@@ -180,14 +180,14 @@ public class ImportRecordsDialog extends JDialog {
 
         String jdbcURLString = "jdbc:" + jdbcURLMapping + "://";
 
-        jdbcURLString += wizardServerIPAddressTextField.getText().trim();
+        jdbcURLString += wizardServerIPAddressTextField.getText().strip();
 
         if (wizardPortNumberTextField.getText().length() > 0 && !(wizardPortNumberTextField
-            .getText().trim().equals("(default)"))) {
-            jdbcURLString += ":" + wizardPortNumberTextField.getText().trim();
+            .getText().strip().equals("(default)"))) {
+            jdbcURLString += ":" + wizardPortNumberTextField.getText().strip();
         }
 
-        jdbcURLString += "/" + databaseNameTextField.getText().trim();
+        jdbcURLString += "/" + databaseNameTextField.getText().strip();
 
         JDBCURLTextField.setText(jdbcURLString);
 
@@ -212,7 +212,7 @@ public class ImportRecordsDialog extends JDialog {
             properties.put("password", new String(passwordPasswordField.getPassword()));
         }
 
-        final File jdbcDriverFile = new File(jdbcDriverPathTextField.getText().trim());
+        final File jdbcDriverFile = new File(jdbcDriverPathTextField.getText().strip());
         if (!(jdbcDriverFile.exists())) {
 
             String message =
@@ -245,7 +245,7 @@ public class ImportRecordsDialog extends JDialog {
                         stmt.setMaxRows(200);
                     }
 
-                    ResultSet rs = stmt.executeQuery(sqlQueryTextArea.getText().trim());
+                    ResultSet rs = stmt.executeQuery(sqlQueryTextArea.getText().strip());
 
                     ResultSetMetaData rsmd = rs.getMetaData();
                     String[] columnNames = new String[rsmd.getColumnCount()];
@@ -415,7 +415,7 @@ public class ImportRecordsDialog extends JDialog {
 
         Connection conn = null;
 
-        File jdbcDriverFile = new File(jdbcDriverPathTextField.getText().trim());
+        File jdbcDriverFile = new File(jdbcDriverPathTextField.getText().strip());
         if (!(jdbcDriverFile.exists())) {
 
             String message =
@@ -687,12 +687,12 @@ public class ImportRecordsDialog extends JDialog {
             if (columnNames == null) {
                 return;
             } else {
-                columnNamesVector = new Vector<String>(Arrays.asList(columnNames));
+                columnNamesVector = new Vector<String>(List.of(columnNames));
             }
 
             int i = 0;
             while ((nextLine = reader.readNext()) != null && i < 200) {
-                dataVector.add(new Vector<String>(Arrays.asList(nextLine)));
+                dataVector.add(new Vector<String>(List.of(nextLine)));
                 i++;
             }
 
@@ -719,7 +719,7 @@ public class ImportRecordsDialog extends JDialog {
             PreferencesManager.getJDBCProfiles().iterator();
         while (jdbcProfilesIterator.hasNext()) {
             JDBCProfile jdbcProfile = jdbcProfilesIterator.next();
-            if (jdbcProfile.getProfileName().trim().equals(profileName.trim())) {
+            if (jdbcProfile.getProfileName().strip().equals(profileName.strip())) {
                 currentJDBCProfile = jdbcProfile;
                 break;
             }
@@ -746,13 +746,13 @@ public class ImportRecordsDialog extends JDialog {
         Iterator<JDBCProfile> jpi = jdbcProfiles.iterator();
         while (jpi.hasNext()) {
             JDBCProfile jdbcProfile = jpi.next();
-            if (jdbcProfile.getProfileName().trim().equals(profileName.trim())) {
+            if (jdbcProfile.getProfileName().strip().equals(profileName.strip())) {
 
                 Object[] options =
                     {Localizer.localize("UI", "Yes"), Localizer.localize("UI", "No")};
 
                 String msg = Localizer.localize("UI", "ImportRecordsRemoveProfileMessage") + "\n";
-                msg += "\"" + profileName.trim() + "\" ?";
+                msg += "\"" + profileName.strip() + "\" ?";
 
                 int result = JOptionPane
                     .showOptionDialog(this, msg, Localizer.localize("UI", "WarningTitle"),
@@ -781,7 +781,7 @@ public class ImportRecordsDialog extends JDialog {
 
     private void saveAsNewProfileButtonActionPerformed(ActionEvent e) {
 
-        String newProfileName = profileNameTextField.getText().trim();
+        String newProfileName = profileNameTextField.getText().strip();
 
         if (newProfileName.length() > 255 || newProfileName.length() < 1) {
             String message = Localizer.localize("UI", "ImportRecordsInvalidProfileNameMessage");
@@ -795,7 +795,7 @@ public class ImportRecordsDialog extends JDialog {
         // check for a duplicate name in the list
         for (int i = 0; i < existingProfileComboBox.getItemCount(); i++) {
             String profileName = (String) existingProfileComboBox.getItemAt(i);
-            if (newProfileName.equals(profileName.trim())) {
+            if (newProfileName.equals(profileName.strip())) {
                 String message =
                     Localizer.localize("UI", "ImportRecordsDuplicateProfileNameMessage");
                 String caption = Localizer.localize("UI", "ImportRecordsDuplicateProfileNameTitle");

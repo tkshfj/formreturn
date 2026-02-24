@@ -43,32 +43,19 @@ public class BarcodeReaderTypes {
     private static List<String> barcodeTypes = new ArrayList<String>();
 
     public String getBarcodeDescription(int barcodeType) {
-
-        switch (barcodeType) {
-            case AUTO_DETECT:
-                return "Auto Detect";
-            case CODE_128:
-                return "Code 128";
-            case CODE_39:
-                return "Code 39";
-            case EAN_13:
-                return "EAN 13";
-            case EAN_8:
-                return "EAN 8";
-            case ITF:
-                return "ITF";
-            case UPC_A:
-                return "UPC-A";
-            case UPC_E:
-                return "UPC-E";
-            case UPC_EAN:
-                return "UPC-EAN";
-            case QR_CODE:
-                return "QR Code";
-        }
-
-        return "";
-
+        return switch (barcodeType) {
+            case AUTO_DETECT -> "Auto Detect";
+            case CODE_128 -> "Code 128";
+            case CODE_39 -> "Code 39";
+            case EAN_13 -> "EAN 13";
+            case EAN_8 -> "EAN 8";
+            case ITF -> "ITF";
+            case UPC_A -> "UPC-A";
+            case UPC_E -> "UPC-E";
+            case UPC_EAN -> "UPC-EAN";
+            case QR_CODE -> "QR Code";
+            default -> "";
+        };
     }
 
     public static List<String> getBarcodeTypes() {
@@ -99,30 +86,19 @@ public class BarcodeReaderTypes {
     }
 
     public static Reader getDelegate(int barcodeType) {
-
-        switch (barcodeType) {
-            case CODE_128:
-                return new Code128Reader();
-            case CODE_39:
-                return new Code39Reader();
-            case EAN_13:
-                return new EAN13Reader();
-            case EAN_8:
-                return new EAN8Reader();
-            case ITF:
-                return new ITFReader();
-            case UPC_A:
-                return new UPCAReader();
-            case UPC_E:
-                return new UPCEReader();
-            case UPC_EAN:
-                return new UPCEReader();
-            case QR_CODE:
-                return new QRCodeReader();
-            case AUTO_DETECT:
-            default:
-                HashMap<DecodeHintType, Object> hints = new HashMap<DecodeHintType, Object>();
-                Vector<BarcodeFormat> possibleFormats = new Vector<BarcodeFormat>();
+        return switch (barcodeType) {
+            case CODE_128 -> new Code128Reader();
+            case CODE_39 -> new Code39Reader();
+            case EAN_13 -> new EAN13Reader();
+            case EAN_8 -> new EAN8Reader();
+            case ITF -> new ITFReader();
+            case UPC_A -> new UPCAReader();
+            case UPC_E -> new UPCEReader();
+            case UPC_EAN -> new UPCEReader();
+            case QR_CODE -> new QRCodeReader();
+            default -> {
+                var hints = new HashMap<DecodeHintType, Object>();
+                var possibleFormats = new Vector<BarcodeFormat>();
                 possibleFormats.add(BarcodeFormat.CODE_128);
                 possibleFormats.add(BarcodeFormat.CODE_39);
                 possibleFormats.add(BarcodeFormat.ITF);
@@ -132,9 +108,9 @@ public class BarcodeReaderTypes {
                 possibleFormats.add(BarcodeFormat.UPC_E);
                 possibleFormats.add(BarcodeFormat.QR_CODE);
                 hints.put(DecodeHintType.POSSIBLE_FORMATS, possibleFormats);
-                return new MultiFormatOneDReader(hints);
-        }
-
+                yield new MultiFormatOneDReader(hints);
+            }
+        };
     }
 
 }

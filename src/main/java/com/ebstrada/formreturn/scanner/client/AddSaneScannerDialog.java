@@ -41,7 +41,7 @@ public class AddSaneScannerDialog extends JDialog {
     }
 
     public String getHostAddress() {
-        return remoteAddressTextField.getText().trim();
+        return remoteAddressTextField.getText().strip();
     }
 
     public int getPortNumber() {

@@ -18,11 +18,11 @@ public class FunctionRangeBetween extends AbstractFunction {
 	    try {
 		if ( str.contains("/") ) {
 		    String[] divisionStr = str.split("/");
-		    double dividend = Double.parseDouble(divisionStr[0].trim());
-		    double divisor = Double.parseDouble(divisionStr[1].trim());
+		    double dividend = Double.parseDouble(divisionStr[0].strip());
+		    double divisor = Double.parseDouble(divisionStr[1].strip());
 		    value = dividend / divisor;
 		} else {
-		    value = Double.parseDouble(str.trim());
+		    value = Double.parseDouble(str.strip());
 		}
 	    } catch (Exception ex) {
 		return negated ? true: false;
@@ -38,7 +38,7 @@ public class FunctionRangeBetween extends AbstractFunction {
 
     @Override
     public void parse(String conditionPartStr) throws InvalidRulePartException {
-	conditionPartStr = conditionPartStr.trim();
+	conditionPartStr = conditionPartStr.strip();
 	range = parseRangeFunctionParameter(conditionPartStr);
     }
 

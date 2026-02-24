@@ -583,7 +583,7 @@ public class Main implements NoObfuscation {
         if (getDatabaseServer().ping()) {
             status = String.format(Localizer.localize("Server", "DatabaseActiveStatusMessage"),
                 getDatabaseServer().getListeningAddresses() + ":" + getDatabaseServer()
-                    .getDefaultPort(), uptime.trim());
+                    .getDefaultPort(), uptime.strip());
         } else {
             formProcessorUptimeStart = System.currentTimeMillis();
             status = Localizer.localize("Server", "DatabaseDownStatusMessage");
@@ -622,7 +622,7 @@ public class Main implements NoObfuscation {
 
         if (formProcessor != null && formProcessor.isAlive()) {
             status = String.format(Localizer.localize("Server", "FormProcessorActiveStatusMessage"),
-                uptime.trim());
+                uptime.strip());
         } else {
             formProcessorUptimeStart = System.currentTimeMillis();
             status = Localizer.localize("Server", "FormProcessorDownStatusMessage");
@@ -687,18 +687,12 @@ public class Main implements NoObfuscation {
         final byte[] SIGNATURE = new byte[] {0x34, 0x55, 0x7c, 0x03, 0x64, 0x22, 0x1e, 0x4a};
         multipleInstanceChecker = new MultipleInstanceChecker(SIGNATURE, PORT);
         int result = multipleInstanceChecker.check();
-        switch (result) {
-            case (MultipleInstanceChecker.STATUS_FIRST_INSTANCE): {
-                return false;
-            }
-            case (MultipleInstanceChecker.STATUS_INSTANCE_EXISTS): {
-                return true;
-            }
-            case (MultipleInstanceChecker.STATUS_SECURITY_EXCEPTION): {
-                return false;
-            }
-        }
-        return false;
+        return switch (result) {
+            case MultipleInstanceChecker.STATUS_FIRST_INSTANCE -> false;
+            case MultipleInstanceChecker.STATUS_INSTANCE_EXISTS -> true;
+            case MultipleInstanceChecker.STATUS_SECURITY_EXCEPTION -> false;
+            default -> false;
+        };
     }
 
     public MultipleInstanceChecker getMultipleInstanceChecker() {

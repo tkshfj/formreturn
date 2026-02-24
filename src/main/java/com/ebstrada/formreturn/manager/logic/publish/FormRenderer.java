@@ -65,9 +65,8 @@ public class FormRenderer {
 
                 parseFig(fig, barcodeValue, recordMap);
 
-                if (fig instanceof FigSegment) {
+                if (fig instanceof FigSegment figSegment) {
 
-                    FigSegment figSegment = (FigSegment) fig;
                     figSegment.setWorkingDirName(workingDirName);
                     figSegment.setBarcodeOneValue(getBarcodeOneValue());
                     figSegment.setRecordMap(recordMap);
@@ -86,8 +85,8 @@ public class FormRenderer {
                         }
                     }
 
-                } else if (fig instanceof FigImage) {
-                    ((FigImage) fig).setWorkingDirName(workingDirName);
+                } else if (fig instanceof FigImage figImage) {
+                    figImage.setWorkingDirName(workingDirName);
                 }
 
                 fig.postLoad();
@@ -143,9 +142,7 @@ public class FormRenderer {
     // this is where we set the form page data
     public static void parseFig(Fig fig, String barcodeValue, Map<String, String> recordMap) {
 
-        if (fig instanceof FigBarcode) {
-
-            FigBarcode figBarcode = (FigBarcode) fig;
+        if (fig instanceof FigBarcode figBarcode) {
 
             // clear the byte array cache barcode svg (from the last time it was viewed)
             figBarcode.clearRender();
@@ -165,9 +162,7 @@ public class FormRenderer {
 
             }
 
-        } else if (fig instanceof FigText) {
-
-            FigText figText = (FigText) fig;
+        } else if (fig instanceof FigText figText) {
 
             // parse the text for any TVR data!!
             figText.setRenderableText(Misc.parseFields(figText.getText(), recordMap));
@@ -193,8 +188,7 @@ public class FormRenderer {
         List<Fig> figs = graph.getEditor().getLayerManager().getActiveLayer().getContents();
         if (figs != null) {
             for (Fig fig : figs) {
-                if (fig instanceof FigSegment) {
-                    FigSegment figSegment = (FigSegment) fig;
+                if (fig instanceof FigSegment figSegment) {
                     figSegment.setBarcodeOneValue(getBarcodeOneValue());
                     setBarcodeOneValue(this.barcodeOneValue + 2);
                 }
@@ -221,10 +215,9 @@ public class FormRenderer {
 
                 parseFig(fig, barcodeValue, recordMap);
 
-                if (fig instanceof FigSegment) {
+                if (fig instanceof FigSegment figSegment) {
 
                     // this code is only used for form previews
-                    FigSegment figSegment = (FigSegment) fig;
                     figSegment.setRecordMap(recordMap);
                     figSegment.setWorkingDirName(workingDirName);
                     figSegment.setBarcodeOneValue(getBarcodeOneValue());
@@ -260,9 +253,8 @@ public class FormRenderer {
 
                             parseFig(fsf, null, recordMap);
 
-                            if (fsf instanceof RecognitionStructureFig
+                            if (fsf instanceof RecognitionStructureFig rsf
                                 && figSegment.getSegmentRecognitionStructure() != null) {
-                                RecognitionStructureFig rsf = (RecognitionStructureFig) fsf;
                                 rsf.addRecognitionStructure(
                                     figSegment.getSegmentRecognitionStructure());
                             }
@@ -270,16 +262,15 @@ public class FormRenderer {
                         }
                     }
 
-                } else if (fig instanceof RecognitionStructureFig && !(fig instanceof FigSegment)) {
+                } else if (fig instanceof RecognitionStructureFig rsf2 && !(fig instanceof FigSegment)) {
 
                     // this code is only used for segment previews
-                    RecognitionStructureFig rsf = (RecognitionStructureFig) fig;
-                    rsf.addRecognitionStructure(graph.getFormRecognitionStructure()
+                    rsf2.addRecognitionStructure(graph.getFormRecognitionStructure()
                         .getSegmentRecognitionStructure(getBarcodeOneValue()));
 
-                } else if (fig instanceof FigImage) {
+                } else if (fig instanceof FigImage figImage2) {
 
-                    ((FigImage) fig).setWorkingDirName(workingDirName);
+                    figImage2.setWorkingDirName(workingDirName);
 
                 }
 

@@ -11,10 +11,10 @@ public class FunctionFactory {
     private static final String NUMERIC_RANGE_BETWEEN_PREFIX = "range";
     
     public static AbstractFunction getFunction(String conditionPartStr) throws InvalidRulePartException {
-	conditionPartStr = conditionPartStr.trim();
+	conditionPartStr = conditionPartStr.strip();
 	boolean negated = false;
 	int beginOffset = 2;
-	if (conditionPartStr.trim().startsWith("!!!")) {
+	if (conditionPartStr.strip().startsWith("!!!")) {
 	    negated = true;
 	    beginOffset = 3;
 	}

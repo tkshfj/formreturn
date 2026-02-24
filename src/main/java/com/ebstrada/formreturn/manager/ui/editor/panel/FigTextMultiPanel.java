@@ -366,8 +366,7 @@ public class FigTextMultiPanel extends EditorMultiPanel {
         float fontSize = 0.0f;
 
         if (fontSizeComboBox != null) {
-            if (fontSizeComboBox.getSelectedItem() instanceof String) {
-                String fontSizeString = (String) fontSizeComboBox.getSelectedItem();
+            if (fontSizeComboBox.getSelectedItem() instanceof String fontSizeString) {
                 if (fontSizeString == Localizer.localize("UI", "DiffersText")) {
                     return;
                 }

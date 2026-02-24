@@ -37,10 +37,10 @@ public class MessageDialog extends JDialog {
 
             MessageDialog md = null;
 
-            if (parent instanceof Dialog) {
-                md = new MessageDialog((Dialog) parent);
-            } else if (parent instanceof Frame) {
-                md = new MessageDialog((Frame) parent);
+            if (parent instanceof Dialog dialog) {
+                md = new MessageDialog(dialog);
+            } else if (parent instanceof Frame frame) {
+                md = new MessageDialog(frame);
             } else {
                 return;
             }
@@ -65,10 +65,10 @@ public class MessageDialog extends JDialog {
 
             MessageDialog md = null;
 
-            if (parent instanceof Dialog) {
-                md = new MessageDialog((Dialog) parent);
-            } else if (parent instanceof Frame) {
-                md = new MessageDialog((Frame) parent);
+            if (parent instanceof Dialog dialog) {
+                md = new MessageDialog(dialog);
+            } else if (parent instanceof Frame frame) {
+                md = new MessageDialog(frame);
             } else {
                 return;
             }

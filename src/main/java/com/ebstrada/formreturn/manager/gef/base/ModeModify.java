@@ -117,8 +117,8 @@ public class ModeModify extends FigModifyingModeImpl {
             _dragInProcess = true;
             UndoManager.getInstance().startChain();
             graphModel = editor.getGraphModel();
-            if (graphModel instanceof MutableGraphSupport) {
-                ((MutableGraphSupport) graphModel).fireGraphChanged();
+            if (graphModel instanceof MutableGraphSupport mutableGraphSupport) {
+                mutableGraphSupport.fireGraphChanged();
             }
         }
 

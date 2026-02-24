@@ -17,8 +17,7 @@ public class DefaultTreeNodeFactory implements TreeNodeFactory {
 
     public RecordTreeNode[] createChildren(Object userObject) throws Exception {
         RecordNode parent;
-        if (userObject instanceof LinkObject) {
-            LinkObject link = (LinkObject) userObject;
+        if (userObject instanceof LinkObject link) {
             parent = (RecordNode) link.getObject();
         } else {
             parent = this.rootNode;

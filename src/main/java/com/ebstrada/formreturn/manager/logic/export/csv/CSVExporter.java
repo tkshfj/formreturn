@@ -286,12 +286,12 @@ public class CSVExporter {
                                 continue;
                             }
                             String segmentName = segment.getName();
-                            if (segmentName == null || segmentName.trim().length() <= 0) {
+                            if (segmentName == null || segmentName.isBlank()) {
                                 segmentName =
                                     segment.getBarcodeOne() + "_" + segment.getBarcodeTwo();
                             }
                             if (segmentScoreColumnName == null
-                                || segmentScoreColumnName.trim().length() <= 0) {
+                                || segmentScoreColumnName.isBlank()) {
                                 segmentScoreColumnName = "";
                             }
                             double segmentAggregate = segment.getAggregateMark();
@@ -495,7 +495,7 @@ public class CSVExporter {
                             String fieldName = fragmentBarcode.getCapturedDataFieldName();
                             int fieldNameOrderIndex = (int) fragmentBarcode.getOrderIndex();
 
-                            if (barcodeValue != null && barcodeValue.trim().length() > 0) {
+                            if (barcodeValue != null && !barcodeValue.isBlank()) {
                                 export.addData(fieldName, barcodeValue, rowNumber,
                                     fieldNameOrderIndex, capturedDataOrderIndexOffset);
                             } else {
@@ -558,7 +558,7 @@ public class CSVExporter {
                         int fieldNameOrderIndex = (int) fragmentOmr.getOrderIndex();
                         String markColumnName = fragmentOmr.getMarkColumnName();
 
-                        if (markColumnName == null || markColumnName.trim().length() <= 0) {
+                        if (markColumnName == null || markColumnName.isBlank()) {
                             markColumnName =
                                 fieldName + Localizer.localize("UICDM", "MarkColumnNameSuffix");
                         }

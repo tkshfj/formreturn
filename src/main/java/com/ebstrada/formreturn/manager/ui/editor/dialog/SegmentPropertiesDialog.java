@@ -56,7 +56,7 @@ public class SegmentPropertiesDialog extends JDialog {
     }
 
     private void okButtonActionPerformed(ActionEvent e) {
-        if (Misc.validateFieldname(defaultFieldnamePrefixTextField.getText().trim()) == false) {
+        if (Misc.validateFieldname(defaultFieldnamePrefixTextField.getText().strip()) == false) {
             String msg = Localizer.localize("UI", "DocumentPropertiesInvalidFieldNameMessage");
             Misc.showErrorMsg(Main.getInstance(), msg);
             return;
@@ -65,13 +65,13 @@ public class SegmentPropertiesDialog extends JDialog {
         DocumentAttributes documentAttributes = selectedFrame.getDocumentAttributes();
         documentAttributes.setName(documentNameTextField.getText());
         documentAttributes
-            .setDefaultCapturedDataFieldname(defaultFieldnamePrefixTextField.getText().trim());
+            .setDefaultCapturedDataFieldname(defaultFieldnamePrefixTextField.getText().strip());
         documentAttributes.setDefaultCDFNIncrementor((Integer) fieldnameCounterSpinner.getValue());
         documentAttributes.setDescription(descriptionTextArea.getText());
-        documentAttributes.setComments(commentsTextField.getText().trim());
-        documentAttributes.setCompany(companyTextField.getText().trim());
-        documentAttributes.setAuthor(authorTextField.getText().trim());
-        documentAttributes.setCopyright(copyrightTextField.getText().trim());
+        documentAttributes.setComments(commentsTextField.getText().strip());
+        documentAttributes.setCompany(companyTextField.getText().strip());
+        documentAttributes.setAuthor(authorTextField.getText().strip());
+        documentAttributes.setCopyright(copyrightTextField.getText().strip());
 
         // set recognition settings
         PublicationRecognitionStructure prs =
@@ -84,7 +84,7 @@ public class SegmentPropertiesDialog extends JDialog {
 
         // restore the fieldname duplicate presets
         FieldnameDuplicatePresets fdp = documentAttributes.getFieldnameDuplicatePresets();
-        fdp.setFieldname(defaultFieldnamePrefixTextField.getText().trim());
+        fdp.setFieldname(defaultFieldnamePrefixTextField.getText().strip());
         fdp.setCounterStart((Integer) fieldnameCounterSpinner.getValue());
         fdp.setHorizontalDuplicates((Integer) horizontalDuplicatesSpinner.getValue());
         fdp.setVerticalDuplicates((Integer) verticalDuplicatesSpinner.getValue());

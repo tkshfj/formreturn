@@ -35,8 +35,8 @@ public class Java2d implements Plotter {
 
     public int drawDashedLine(Object graphicsContext, int lineWidth, int x1, int y1, int x2, int y2,
         int phase, float[] dashes, int dashPeriod) {
-        if (graphicsContext instanceof Graphics2D) {
-            return drawDashedLineG2D((Graphics2D) graphicsContext, lineWidth, phase, x1, y1, x2, y2,
+        if (graphicsContext instanceof Graphics2D g2d) {
+            return drawDashedLineG2D(g2d, lineWidth, phase, x1, y1, x2, y2,
                 dashes, dashPeriod);
         }
         Graphics g = (Graphics) graphicsContext;
@@ -112,8 +112,7 @@ public class Java2d implements Plotter {
 
     public void drawOval(Object graphicsContext, boolean filled, Color fillColor, Color lineColor,
         int lineWidth, boolean dashed, int x, int y, int w, int h) {
-        if (dashed && (graphicsContext instanceof Graphics2D)) {
-            Graphics2D g2d = (Graphics2D) graphicsContext;
+        if (dashed && (graphicsContext instanceof Graphics2D g2d)) {
             Stroke oldStroke = g2d.getStroke();
             float[] dash = {10.0f, 10.0f};
             Stroke stroke =

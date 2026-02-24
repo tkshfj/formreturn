@@ -65,50 +65,23 @@ public class FormReaderException extends Exception {
     }
 
     public String getErrorTitle() {
-
-        String title = "";
-
-        switch (error) {
-            case UNSPECIFIED:
-                title = Localizer.localize("UI", "UnspecifiedProcessingError");
-                break;
-            case MISSING_FORM_ID_BARCODE:
-                title = Localizer.localize("UI", "BarcodeReaderUnableToLocateFormIDMessage");
-                break;
-            case MISSING_SEGMENT_BARCODE:
-                title = Localizer.localize("UI", "SegmentBarcodeNotFound") + ": "
-                    + getMissingBarcodeData();
-                break;
-            case MISSING_CHECKBOX:
-                title = String
-                    .format(Localizer.localize("UI", "OMRMatrixCheckboxCountIncorrectMessage"),
-                        getCapturedDataFieldName());
-                break;
-            case RECONCILIATION_KEY_NOT_FOUND:
-                title =
-                    Localizer.localize("UI", "FormReaderUnableToIdentifyReconciliationKeyMessage");
-                break;
-            case FORM_PAGE_RECORD_MISSING:
-                title = Localizer.localize("UI", "FormReaderNoFormPageLoadedMessage");
-                break;
-            case INVALID_IMAGE_FORMAT:
-                title = Localizer.localize("Server", "InvalidImageFileFormatMessage");
-                break;
-            case FORM_ID_NOT_FOUND:
-                title = Localizer.localize("UI", "FormReaderInvalidFormPageBarcodeMessage");
-                break;
-            case INVALID_AGGREGATION_RULE:
-                title = Localizer.localize("UI", "InvalidAggreationRuleMessageText");
-                break;
-            case ERROR_CONDITION_MET:
-                title = Localizer.localize("UI", "ErrorFlagAggregationRuleMessageText");
-                break;
-            case FORM_PAGE_DUPLICATE_SCAN:
-                title = Localizer.localize("UI", "FormReaderErrorDuplicateScansMessage");
-                break;
-        }
-
-        return title;
+        return switch (error) {
+            case UNSPECIFIED -> Localizer.localize("UI", "UnspecifiedProcessingError");
+            case MISSING_FORM_ID_BARCODE -> Localizer.localize("UI", "BarcodeReaderUnableToLocateFormIDMessage");
+            case MISSING_SEGMENT_BARCODE -> Localizer.localize("UI", "SegmentBarcodeNotFound") + ": "
+                + getMissingBarcodeData();
+            case MISSING_CHECKBOX -> String.format(
+                Localizer.localize("UI", "OMRMatrixCheckboxCountIncorrectMessage"),
+                getCapturedDataFieldName());
+            case RECONCILIATION_KEY_NOT_FOUND -> Localizer.localize("UI", "FormReaderUnableToIdentifyReconciliationKeyMessage");
+            case FORM_PAGE_RECORD_MISSING -> Localizer.localize("UI", "FormReaderNoFormPageLoadedMessage");
+            case INVALID_IMAGE_FORMAT -> Localizer.localize("Server", "InvalidImageFileFormatMessage");
+            case FORM_ID_NOT_FOUND -> Localizer.localize("UI", "FormReaderInvalidFormPageBarcodeMessage");
+            case INVALID_AGGREGATION_RULE -> Localizer.localize("UI", "InvalidAggreationRuleMessageText");
+            case ERROR_CONDITION_MET -> Localizer.localize("UI", "ErrorFlagAggregationRuleMessageText");
+            case FORM_PAGE_DUPLICATE_SCAN -> Localizer.localize("UI", "FormReaderErrorDuplicateScansMessage");
+            default -> "";
+        };
     }
 
     public String getErrorMessage() {

@@ -287,7 +287,7 @@ public class JARPluginDialog extends JDialog {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public String getPluginDescription() {
-        return this.pluginDescriptionTextField.getText().trim();
+        return this.pluginDescriptionTextField.getText().strip();
     }
 
     public String getFileName() {

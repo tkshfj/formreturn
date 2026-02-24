@@ -164,8 +164,7 @@ public class SegmentFrame extends EditorFrame {
             Iterator<Fig> fit = figs.iterator();
             while (fit.hasNext()) {
                 Fig fig = fit.next();
-                if (fig instanceof FigBarcode) {
-                    FigBarcode figBarcode = (FigBarcode) fig;
+                if (fig instanceof FigBarcode figBarcode) {
                     if (figBarcode.getLocked()) {
                         removeBarcodes.add(figBarcode);
                     }
@@ -221,12 +220,10 @@ public class SegmentFrame extends EditorFrame {
 
             Object o = i.next();
 
-            if (o instanceof Fig) {
+            if (o instanceof Fig selectedFig) {
 
                 // clear the properties panel
                 getPropertiesPanelController().destroyPanels();
-
-                Fig selectedFig = (Fig) o;
 
                 getPropertiesPanelController().initFig(selectedFig);
 

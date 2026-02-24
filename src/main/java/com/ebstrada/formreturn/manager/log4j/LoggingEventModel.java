@@ -242,51 +242,25 @@ public class LoggingEventModel extends AbstractListModel<Object> implements Tabl
      */
     public Object getValueAt(int row, int column) {
         LoggingEvent loggingEvent = (LoggingEvent) objects.elementAt(row);
-        DateFormat df;
-        switch (column) {
-            case 0:
-                return loggingEvent.getLevel().toString();
-            case 1:
-                return loggingEvent.getRenderedMessage();
-            case 2:
-                return loggingEvent.getLoggerName();
-            case 3:
-                df = DateFormat.getDateInstance(DateFormat.DEFAULT);
-                return df.format(new Date(loggingEvent.timeStamp));
-            case 4:
-                df = DateFormat.getTimeInstance(DateFormat.DEFAULT);
-                return df.format(new Date(loggingEvent.timeStamp));
-            case 5:
-                df = DateFormat.getDateInstance(DateFormat.SHORT);
-                return df.format(new Date(loggingEvent.timeStamp));
-            case 6:
-                df = DateFormat.getTimeInstance(DateFormat.SHORT);
-                return df.format(new Date(loggingEvent.timeStamp));
-            case 7:
-                df = DateFormat.getDateInstance(DateFormat.LONG);
-                return df.format(new Date(loggingEvent.timeStamp));
-            case 8:
-                df = DateFormat.getTimeInstance(DateFormat.LONG);
-                return df.format(new Date(loggingEvent.timeStamp));
-            case 9:
-                df = DateFormat.getDateInstance(DateFormat.FULL);
-                return df.format(new Date(loggingEvent.timeStamp));
-            case 10:
-                df = DateFormat.getTimeInstance(DateFormat.FULL);
-                return df.format(new Date(loggingEvent.timeStamp));
-            case 11:
-                return loggingEvent.getThreadName();
-            case 12:
-                return loggingEvent.getNDC();
-            case 13:
-                return loggingEvent.getLocationInformation().getFileName();
-            case 14:
-                return loggingEvent.getLocationInformation().getLineNumber();
-            case 15:
-                return loggingEvent.getLocationInformation().getMethodName();
-            default:
-                return null;
-        }
+        return switch (column) {
+            case 0 -> loggingEvent.getLevel().toString();
+            case 1 -> loggingEvent.getRenderedMessage();
+            case 2 -> loggingEvent.getLoggerName();
+            case 3 -> DateFormat.getDateInstance(DateFormat.DEFAULT).format(new Date(loggingEvent.timeStamp));
+            case 4 -> DateFormat.getTimeInstance(DateFormat.DEFAULT).format(new Date(loggingEvent.timeStamp));
+            case 5 -> DateFormat.getDateInstance(DateFormat.SHORT).format(new Date(loggingEvent.timeStamp));
+            case 6 -> DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date(loggingEvent.timeStamp));
+            case 7 -> DateFormat.getDateInstance(DateFormat.LONG).format(new Date(loggingEvent.timeStamp));
+            case 8 -> DateFormat.getTimeInstance(DateFormat.LONG).format(new Date(loggingEvent.timeStamp));
+            case 9 -> DateFormat.getDateInstance(DateFormat.FULL).format(new Date(loggingEvent.timeStamp));
+            case 10 -> DateFormat.getTimeInstance(DateFormat.FULL).format(new Date(loggingEvent.timeStamp));
+            case 11 -> loggingEvent.getThreadName();
+            case 12 -> loggingEvent.getNDC();
+            case 13 -> loggingEvent.getLocationInformation().getFileName();
+            case 14 -> loggingEvent.getLocationInformation().getLineNumber();
+            case 15 -> loggingEvent.getLocationInformation().getMethodName();
+            default -> null;
+        };
     }
 
     /**

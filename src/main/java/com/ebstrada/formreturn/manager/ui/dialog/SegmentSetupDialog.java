@@ -125,7 +125,7 @@ public class SegmentSetupDialog extends javax.swing.JDialog {
         documentAttributes.setDocumentType(DocumentAttributes.SEGMENT);
         documentAttributes.setName(getReportName());
         documentAttributes
-            .setDefaultCapturedDataFieldname(defaultFieldnamePrefixTextField.getText().trim());
+            .setDefaultCapturedDataFieldname(defaultFieldnamePrefixTextField.getText().strip());
         documentAttributes.setDefaultCDFNIncrementor((Integer) fieldnameCounterSpinner.getValue());
 
         return documentAttributes;
@@ -662,7 +662,7 @@ public class SegmentSetupDialog extends javax.swing.JDialog {
 
     private void okButtonActionPerformed(ActionEvent e) {
 
-        if (Misc.validateFieldname(defaultFieldnamePrefixTextField.getText().trim()) == false) {
+        if (Misc.validateFieldname(defaultFieldnamePrefixTextField.getText().strip()) == false) {
             String msg = Localizer.localize("UI", "SegmentSetupInvalidFieldNameMessage");
             Misc.showErrorMsg(Main.getInstance(), msg);
             return;

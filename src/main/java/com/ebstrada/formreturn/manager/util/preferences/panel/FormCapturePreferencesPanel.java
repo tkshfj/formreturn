@@ -125,7 +125,7 @@ public class FormCapturePreferencesPanel extends JPanel {
 
         // restore the fieldname duplicate presets
         FieldnameDuplicatePresets fdp = PreferencesManager.getFieldnameDupliatePresets();
-        fdp.setFieldname(defaultFieldnamePrefixTextField.getText().trim());
+        fdp.setFieldname(defaultFieldnamePrefixTextField.getText().strip());
         fdp.setCounterStart((Integer) fieldnameCounterSpinner.getValue());
         fdp.setHorizontalDuplicates((Integer) horizontalDuplicatesSpinner.getValue());
         fdp.setVerticalDuplicates((Integer) verticalDuplicatesSpinner.getValue());

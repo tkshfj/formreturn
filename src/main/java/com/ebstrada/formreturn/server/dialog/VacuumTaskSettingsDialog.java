@@ -53,7 +53,7 @@ public class VacuumTaskSettingsDialog extends JDialog {
     }
 
     public String getCronExpression() {
-        return cronExpressionTriggerTextField.getText().trim();
+        return cronExpressionTriggerTextField.getText().strip();
     }
 
     public void setCronExpression(String cronExpression) {

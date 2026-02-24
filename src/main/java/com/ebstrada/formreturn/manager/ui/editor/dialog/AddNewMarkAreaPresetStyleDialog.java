@@ -164,6 +164,6 @@ public class AddNewMarkAreaPresetStyleDialog extends JDialog {
     }
 
     public String getStyleName() {
-        return presetStyleName.getText().trim();
+        return presetStyleName.getText().strip();
     }
 }

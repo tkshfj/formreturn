@@ -58,20 +58,12 @@ public class FigTextPanel extends EditorPanel {
 
         int fontFamilyIndex =
             ((DefaultComboBoxModel<String>) fontFamilyComboBox.getModel()).getIndexOf(localizedFontFamily);
-        String selectedFontStyleItem = null;
-        switch (fontStyle) {
-            case Font.BOLD:
-                selectedFontStyleItem = "Bold";
-                break;
-            case Font.ITALIC:
-                selectedFontStyleItem = "Italic";
-                break;
-            case Font.BOLD + Font.ITALIC:
-                selectedFontStyleItem = "Bold & Italic";
-                break;
-            default:
-                selectedFontStyleItem = "Plain";
-        }
+        var selectedFontStyleItem = switch (fontStyle) {
+            case Font.BOLD -> "Bold";
+            case Font.ITALIC -> "Italic";
+            case Font.BOLD + Font.ITALIC -> "Bold & Italic";
+            default -> "Plain";
+        };
 
         if (fontFamilyIndex >= 0 && fontFamilyComboBox.getSelectedIndex() < 0 || !initialized) {
             fontFamilyComboBox.setSelectedIndex(fontFamilyIndex);
@@ -171,8 +163,8 @@ public class FigTextPanel extends EditorPanel {
         float fontSize = 0.0f;
 
         if (fontSizeComboBox != null) {
-            if (fontSizeComboBox.getSelectedItem() instanceof String) {
-                fontSize = Float.parseFloat((String) fontSizeComboBox.getSelectedItem());
+            if (fontSizeComboBox.getSelectedItem() instanceof String str) {
+                fontSize = Float.parseFloat(str);
             } else {
                 fontSize = (Float) fontSizeComboBox.getSelectedItem();
             }

@@ -77,16 +77,14 @@ public class GroupAction extends UndoableAction {
         Enumeration<?> eachDE = selectedFigs.elements();
         while (eachDE.hasMoreElements()) {
             Object o = eachDE.nextElement();
-            if (o instanceof Fig) {
-                Fig f = (Fig) o;
+            if (o instanceof Fig f) {
                 _newItem.addFig(f);
             }
         }
         eachDE = selectedFigs.elements();
         while (eachDE.hasMoreElements()) {
             Object o = eachDE.nextElement();
-            if (o instanceof Fig) {
-                Fig f = (Fig) o;
+            if (o instanceof Fig f) {
                 ce.remove(f);
             }
         }

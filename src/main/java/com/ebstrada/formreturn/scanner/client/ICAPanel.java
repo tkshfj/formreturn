@@ -177,8 +177,7 @@ public class ICAPanel extends JPanel implements ICAListener, ScannerPanel {
         try {
             PrintService pservice = PrintServiceLookup.lookupDefaultPrintService();
             Object obj = pservice.getDefaultAttributeValue(Media.class);
-            if (obj instanceof MediaSizeName) {
-                MediaSizeName mediaSizeName = (MediaSizeName) obj;
+            if (obj instanceof MediaSizeName mediaSizeName) {
                 if (mediaSizeName.equals(MediaSizeName.ISO_A4)) {
                     return true;
                 } else {

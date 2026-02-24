@@ -126,11 +126,11 @@ public class FigCheckboxProperties extends JDialog {
             List<Fig> layerContents = figCheckbox.getGraph().getEditor().getLayerManager().getContents();
             for (int i = 0; i < layerContents.size(); i++) {
                 Fig fig = layerContents.get(i);
-                if (fig instanceof FigCheckbox) {
+                if (fig instanceof FigCheckbox figCheckbox2) {
                     if (fig == figCheckbox) {
                         continue;
                     }
-                    if (((FigCheckbox) fig).getFieldname().equalsIgnoreCase(newFieldName.trim())) {
+                    if (figCheckbox2.getFieldname().equalsIgnoreCase(newFieldName.strip())) {
                         return true;
                     }
                 }
@@ -153,7 +153,7 @@ public class FigCheckboxProperties extends JDialog {
 
     private boolean validateSettings() {
 
-        if (getFieldname().trim().equals(getMarkFieldname().trim())) {
+        if (getFieldname().strip().equals(getMarkFieldname().strip())) {
             String msg =
                 Localizer.localize("UI", "CheckboxPropertiesFieldnameAlreadyExistsMessage");
             Misc.showErrorMsg(Main.getInstance(), msg);
@@ -288,7 +288,7 @@ public class FigCheckboxProperties extends JDialog {
         MarkAreaPresetStyle selectedStyle = null;
 
         for (MarkAreaPresetStyle markAreaPresetStyle : markAreaPresetStyles) {
-            if (markAreaPresetStyle.getName().trim().equalsIgnoreCase(selectedStyleName)) {
+            if (markAreaPresetStyle.getName().strip().equalsIgnoreCase(selectedStyleName)) {
                 selectedStyle = markAreaPresetStyle;
                 break;
             }
@@ -374,7 +374,7 @@ public class FigCheckboxProperties extends JDialog {
         MarkAreaPresetStyle removeStyle = null;
 
         for (MarkAreaPresetStyle markAreaPresetStyle : markAreaPresetStyles) {
-            if (markAreaPresetStyle.getName().trim().equalsIgnoreCase(selectedStyleName)) {
+            if (markAreaPresetStyle.getName().strip().equalsIgnoreCase(selectedStyleName)) {
                 removeStyle = markAreaPresetStyle;
             }
         }
@@ -414,7 +414,7 @@ public class FigCheckboxProperties extends JDialog {
             markAreaPresetStyles = PreferencesManager.getMarkAreaPresetStyles();
 
             for (MarkAreaPresetStyle markAreaPresetStyle : markAreaPresetStyles) {
-                if (markAreaPresetStyle.getName().trim().equalsIgnoreCase(mapsd.getStyleName())) {
+                if (markAreaPresetStyle.getName().strip().equalsIgnoreCase(mapsd.getStyleName())) {
                     String msg =
                         Localizer.localize("UI", "CheckboxPropertiesStyleAlreadyExistsMessage");
                     Misc.showErrorMsg(Main.getInstance(), msg);
@@ -484,7 +484,7 @@ public class FigCheckboxProperties extends JDialog {
     }
 
     private String getFieldname() {
-        return fieldNameTextField.getText().trim();
+        return fieldNameTextField.getText().strip();
     }
 
     private void showTextCheckBoxItemStateChanged(ItemEvent e) {
@@ -1543,7 +1543,7 @@ public class FigCheckboxProperties extends JDialog {
     }
 
     private String getAggregationRule() {
-        return aggregationRuleTextField.getText().trim();
+        return aggregationRuleTextField.getText().strip();
     }
 
     private void setAggregationRule(String aggregationRule) {

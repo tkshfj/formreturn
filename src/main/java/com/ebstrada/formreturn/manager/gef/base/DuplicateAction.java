@@ -176,13 +176,13 @@ public class DuplicateAction extends UndoableAction {
                             cloneFig.setY(y + (((maxY - minY) + verticalSpacing) * i));
 
                             Object owner = cloneFig.getOwner();
-                            if (owner instanceof VetoableChangeEventSource
-                                && cloneFig instanceof VetoableChangeListener) {
-                                ((VetoableChangeEventSource) owner)
-                                    .addVetoableChangeListener((VetoableChangeListener) cloneFig);
+                            if (owner instanceof VetoableChangeEventSource vetoableChangeEventSource
+                                && cloneFig instanceof VetoableChangeListener vetoableChangeListener) {
+                                vetoableChangeEventSource
+                                    .addVetoableChangeListener(vetoableChangeListener);
                             }
-                            if (cloneFig instanceof FigCheckbox) {
-                                ((FigCheckbox) cloneFig)
+                            if (cloneFig instanceof FigCheckbox figCheckbox) {
+                                figCheckbox
                                     .setDefaultFieldname(fieldnamePrefix, counter, true);
                                 ++counter;
                             }
@@ -222,13 +222,13 @@ public class DuplicateAction extends UndoableAction {
                             cloneFig.setY(y + (((maxY - minY) + verticalSpacing) * j));
 
                             Object owner = cloneFig.getOwner();
-                            if (owner instanceof VetoableChangeEventSource
-                                && cloneFig instanceof VetoableChangeListener) {
-                                ((VetoableChangeEventSource) owner)
-                                    .addVetoableChangeListener((VetoableChangeListener) cloneFig);
+                            if (owner instanceof VetoableChangeEventSource vetoableChangeEventSource
+                                && cloneFig instanceof VetoableChangeListener vetoableChangeListener) {
+                                vetoableChangeEventSource
+                                    .addVetoableChangeListener(vetoableChangeListener);
                             }
-                            if (cloneFig instanceof FigCheckbox) {
-                                ((FigCheckbox) cloneFig)
+                            if (cloneFig instanceof FigCheckbox figCheckbox) {
+                                figCheckbox
                                     .setDefaultFieldname(fieldnamePrefix, counter, true);
                                 ++counter;
                             }

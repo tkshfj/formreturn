@@ -136,7 +136,7 @@ public class ServerFrame extends JFrame {
 
     private void saveDatabasePreferences() {
         DatabaseServerPreferences dsp = ServerPreferencesManager.getDatabaseServer();
-        dsp.setListeningAddresses(listeningAddressTextField.getText().trim());
+        dsp.setListeningAddresses(listeningAddressTextField.getText().strip());
 
         int portNumber = Misc.parseIntegerString(listeningPortTextField.getText());
         if (portNumber < 1 || portNumber >= 65535) {

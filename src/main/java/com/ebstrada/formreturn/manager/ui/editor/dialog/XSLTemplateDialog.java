@@ -307,7 +307,7 @@ public class XSLTemplateDialog extends JDialog {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public String getTemplateDescription() {
-        return this.templateDescriptionTextField.getText().trim();
+        return this.templateDescriptionTextField.getText().strip();
     }
 
     public String getFileName() {

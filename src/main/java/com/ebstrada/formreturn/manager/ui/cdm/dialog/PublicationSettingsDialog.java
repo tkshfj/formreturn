@@ -254,9 +254,7 @@ public class PublicationSettingsDialog extends JDialog {
             if (figs.size() > 0) {
                 for (Fig fig : figs) {
 
-                    if (fig instanceof FigSegment) {
-
-                        FigSegment figSegment = (FigSegment) fig;
+                    if (fig instanceof FigSegment figSegment) {
 
                         ArrayList<com.ebstrada.formreturn.manager.persistence.xstream.Document>
                             segments = figSegment.getSegmentContainer().getSegments();
@@ -282,13 +280,12 @@ public class PublicationSettingsDialog extends JDialog {
 
         for (Object obj : sortedData) {
 
-            if (obj instanceof FigCheckbox) {
+            if (obj instanceof FigCheckbox figCheckbox) {
 
-                FigCheckbox figCheckbox = (FigCheckbox) obj;
                 long orderIndex = figCheckbox.getFieldnameOrderIndex();
                 String fieldname = figCheckbox.getFieldname();
                 String markFieldname = figCheckbox.getMarkFieldname();
-                if (markFieldname == null || markFieldname.trim().length() <= 0) {
+                if (markFieldname == null || markFieldname.isBlank()) {
                     markFieldname = fieldname + Localizer.localize("UICDM", "MarkColumnNameSuffix");
                 }
                 long markOrderIndex = figCheckbox.getMarkFieldnameOrderIndex();
@@ -299,9 +296,8 @@ public class PublicationSettingsDialog extends JDialog {
                 dtm.addRow(new String[] {Localizer.localize("UICDM", "Score"), markFieldname,
                     markFieldname, markOrderIndex + "", markOrderIndex + "", "", ""});
 
-            } else if (obj instanceof FigBarcodeReader) {
+            } else if (obj instanceof FigBarcodeReader figBarcodeReader) {
 
-                FigBarcodeReader figBarcodeReader = (FigBarcodeReader) obj;
                 long orderIndex = figBarcodeReader.getFieldnameOrderIndex();
                 String fieldname = figBarcodeReader.getFieldname();
                 dtm.addRow(
@@ -867,9 +863,9 @@ public class PublicationSettingsDialog extends JDialog {
             for (int i = 0; i < formStructureTable.getRowCount(); i++) {
                 if (formStructureTable.getValueAt(i, TYPE_COLUMN)
                     .equals(Localizer.localize("Util", "Checkbox"))) {
-                    if (line[0].trim()
+                    if (line[0].strip()
                         .equals((String) formStructureTable.getValueAt(i, OLD_FIELD_NAME_COLUMN))) {
-                        formStructureTable.setValueAt(line[1].trim(), i, NEW_AGGREGATE_RULE_COLUMN);
+                        formStructureTable.setValueAt(line[1].strip(), i, NEW_AGGREGATE_RULE_COLUMN);
                     }
                 }
             }
@@ -1193,9 +1189,7 @@ public class PublicationSettingsDialog extends JDialog {
                 if (figs.size() > 0) {
                     for (Fig fig : figs) {
 
-                        if (fig instanceof FigSegment) {
-
-                            FigSegment figSegment = (FigSegment) fig;
+                        if (fig instanceof FigSegment figSegment) {
 
                             ArrayList<com.ebstrada.formreturn.manager.persistence.xstream.Document>
                                 segments = figSegment.getSegmentContainer().getSegments();
@@ -1205,10 +1199,7 @@ public class PublicationSettingsDialog extends JDialog {
                                     ArrayList<Fig> segmentFigs = segmentPage.getFigs();
 
                                     for (Fig segmentFig : segmentFigs) {
-                                        if (segmentFig instanceof FigBarcodeReader) {
-
-                                            FigBarcodeReader figBarcodeReader =
-                                                (FigBarcodeReader) segmentFig;
+                                        if (segmentFig instanceof FigBarcodeReader figBarcodeReader) {
 
                                             String fieldname = figBarcodeReader.getFieldname();
 
@@ -1220,14 +1211,12 @@ public class PublicationSettingsDialog extends JDialog {
                                             }
 
                                         }
-                                        if (segmentFig instanceof FigCheckbox) {
-
-                                            FigCheckbox figCheckbox = (FigCheckbox) segmentFig;
+                                        if (segmentFig instanceof FigCheckbox figCheckbox) {
 
                                             String fieldname = figCheckbox.getFieldname();
                                             String markFieldname = figCheckbox.getMarkFieldname();
                                             if (markFieldname == null
-                                                || markFieldname.trim().length() <= 0) {
+                                                || markFieldname.isBlank()) {
                                                 markFieldname = fieldname + Localizer
                                                     .localize("UICDM", "MarkColumnNameSuffix");
                                             }
@@ -1257,10 +1246,8 @@ public class PublicationSettingsDialog extends JDialog {
                                     }
 
                                     for (Fig segmentFig : segmentFigs) {
-                                        if (segmentFig instanceof FigBarcodeReader) {
+                                        if (segmentFig instanceof FigBarcodeReader figBarcodeReader) {
 
-                                            FigBarcodeReader figBarcodeReader =
-                                                (FigBarcodeReader) segmentFig;
                                             String fieldname = figBarcodeReader.getFieldname();
 
                                             // check fieldname
@@ -1269,14 +1256,12 @@ public class PublicationSettingsDialog extends JDialog {
                                                     fieldNameDifferences.get(fieldname)[1]);
                                             }
                                         }
-                                        if (segmentFig instanceof FigCheckbox) {
-
-                                            FigCheckbox figCheckbox = (FigCheckbox) segmentFig;
+                                        if (segmentFig instanceof FigCheckbox figCheckbox) {
 
                                             String fieldname = figCheckbox.getFieldname();
                                             String markFieldname = figCheckbox.getMarkFieldname();
                                             if (markFieldname == null
-                                                || markFieldname.trim().length() <= 0) {
+                                                || markFieldname.isBlank()) {
                                                 markFieldname = fieldname + Localizer
                                                     .localize("UICDM", "MarkColumnNameSuffix");
                                             }
@@ -1359,7 +1344,7 @@ public class PublicationSettingsDialog extends JDialog {
                                     String fieldname = fragmentOmr.getCapturedDataFieldName();
                                     String markFieldname = fragmentOmr.getMarkColumnName();
                                     if (markFieldname == null
-                                        || markFieldname.trim().length() <= 0) {
+                                        || markFieldname.isBlank()) {
                                         markFieldname = fieldname + Localizer
                                             .localize("UICDM", "MarkColumnNameSuffix");
                                     }
@@ -1392,7 +1377,7 @@ public class PublicationSettingsDialog extends JDialog {
                                     String fieldname = fragmentOmr.getCapturedDataFieldName();
                                     String markFieldname = fragmentOmr.getMarkColumnName();
                                     if (markFieldname == null
-                                        || markFieldname.trim().length() <= 0) {
+                                        || markFieldname.isBlank()) {
                                         markFieldname = fieldname + Localizer
                                             .localize("UICDM", "MarkColumnNameSuffix");
                                     }

@@ -183,7 +183,7 @@ public abstract class AbstractDataModel {
             } else {
                 if (searchFilter.getFieldType() == FIELD_TYPE_STRING) {
                     searchString =
-                        StringEscapeUtils.escapeSql(searchFilter.getSearchString().trim());
+                        StringEscapeUtils.escapeSql(searchFilter.getSearchString().strip());
                     if (searchString.length() <= 0) {
                         continue;
                     }

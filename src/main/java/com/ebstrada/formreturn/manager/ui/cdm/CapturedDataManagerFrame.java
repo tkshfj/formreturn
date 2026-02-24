@@ -233,7 +233,7 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
         publicationDataModel.setSelectedIds(selectedIds);
         if (selectedIds.length > 0) {
             formDataModel.setParentId(selectedIds[0]);
-            lastPublicationIds = java.util.Arrays.asList(ArrayUtils.toObject(selectedIds));
+            lastPublicationIds = List.of(ArrayUtils.toObject(selectedIds));
         } else {
             formDataModel.setParentId(-1);
         }
@@ -251,7 +251,7 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
         formDataModel.setSelectedIds(selectedIds);
         if (selectedIds.length > 0) {
             formPageDataModel.setParentId(selectedIds[0]);
-            lastFormIds = java.util.Arrays.asList(ArrayUtils.toObject(selectedIds));
+            lastFormIds = List.of(ArrayUtils.toObject(selectedIds));
         } else {
             formPageDataModel.setParentId(-1);
         }
@@ -355,9 +355,9 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
         if (selectedFormRows.length > 0) {
             selectedFormIds = new long[selectedFormRows.length];
             for (int i = 0; i < selectedFormRows.length; i++) {
-                if (formsTable.getValueAt(selectedFormRows[i], 0) instanceof String) {
+                if (formsTable.getValueAt(selectedFormRows[i], 0) instanceof String str) {
                     selectedFormIds[i] =
-                        Long.parseLong((String) formsTable.getValueAt(selectedFormRows[i], 0));
+                        Long.parseLong(str);
                 } else {
                     selectedFormIds[i] = (Long) formsTable.getValueAt(selectedFormRows[i], 0);
                 }
@@ -475,8 +475,8 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
             for (int i = 0; i < size; i++) {
                 Object idValue = tm.getValueAt(i, 0);
                 Long value = null;
-                if (idValue instanceof Long) {
-                    value = (Long) idValue;
+                if (idValue instanceof Long longVal) {
+                    value = longVal;
                 } else {
                     value = Long.parseLong((String) idValue);
                 }
@@ -497,8 +497,8 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
             for (int i = 0; i < size; i++) {
                 Object idValue = tm.getValueAt(i, 0);
                 Long value = null;
-                if (idValue instanceof Long) {
-                    value = (Long) idValue;
+                if (idValue instanceof Long longVal) {
+                    value = longVal;
                 } else {
                     value = Long.parseLong((String) idValue);
                 }
@@ -654,10 +654,10 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
                         for (int i = 0; i < selectedRows.length; i++) {
                             Object idObj = formsTable.getValueAt(selectedRows[i], 0);
                             long formID = -1;
-                            if (idObj instanceof String) {
-                                formID = Long.parseLong((String) idObj);
-                            } else if (idObj instanceof Long) {
-                                formID = (Long) idObj;
+                            if (idObj instanceof String str) {
+                                formID = Long.parseLong(str);
+                            } else if (idObj instanceof Long longVal) {
+                                formID = longVal;
                             }
                             if (formID <= 0) {
                                 return null;
@@ -1081,25 +1081,18 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
     }
 
     public char getQuoteCharacter(int quoteType) {
-        switch (quoteType) {
-            case CSVExportPreferences.NO_QUOTES:
-                return CSVWriter.NO_QUOTE_CHARACTER;
-            case CSVExportPreferences.SINGLE_QUOTES:
-                return "'".charAt(0);
-            case CSVExportPreferences.DOUBLE_QUOTES:
-            default:
-                return "\"".charAt(0);
-        }
+        return switch (quoteType) {
+            case CSVExportPreferences.NO_QUOTES -> CSVWriter.NO_QUOTE_CHARACTER;
+            case CSVExportPreferences.SINGLE_QUOTES -> '\'';
+            default -> '"';
+        };
     }
 
     public char getDelimiterCharacter(int delimiterType) {
-        switch (delimiterType) {
-            case CSVExportPreferences.TSV_DELIMITER:
-                return "\t".charAt(0);
-            case CSVExportPreferences.CSV_DELIMITER:
-            default:
-                return ",".charAt(0);
-        }
+        return switch (delimiterType) {
+            case CSVExportPreferences.TSV_DELIMITER -> '\t';
+            default -> ',';
+        };
     }
 
     public void createXSLReport(ArrayList<Long> publicationIds, byte[] xslData, String pdffile,
@@ -1578,10 +1571,10 @@ public class CapturedDataManagerFrame extends JPanel implements GenericDataViewe
                         for (int i = 0; i < selectedRows.length; i++) {
                             Object obj = formsTable.getValueAt(selectedRows[i], 0);
                             long formID = -1;
-                            if (obj instanceof Long) {
-                                formID = (Long) obj;
-                            } else if (obj instanceof String) {
-                                formID = Long.parseLong((String) obj);
+                            if (obj instanceof Long longVal) {
+                                formID = longVal;
+                            } else if (obj instanceof String str) {
+                                formID = Long.parseLong(str);
                             }
 
                             processingStatusDialog.setMessage(String

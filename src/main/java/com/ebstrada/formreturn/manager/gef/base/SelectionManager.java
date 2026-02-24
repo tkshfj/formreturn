@@ -648,8 +648,8 @@ public class SelectionManager
         // try to get the layer of the owning fig (if there is one) in case
         // layer is null.
         if (layer == null) {
-            if (_dragLeftMostFig.getOwner() instanceof Fig) {
-                layer = ((Fig) _dragLeftMostFig.getOwner()).getLayer();
+            if (_dragLeftMostFig.getOwner() instanceof Fig ownerFig) {
+                layer = ownerFig.getLayer();
             }
         }
 
@@ -758,23 +758,23 @@ public class SelectionManager
         for (Selection s : sels) {
             Fig f = s.getContent();
             Object o = f.getOwner();
-            if (o instanceof VetoableChangeEventSource) {
+            if (o instanceof VetoableChangeEventSource vetoableChangeEventSource) {
                 Vector<VetoableChangeListener> v =
-                    (Vector<VetoableChangeListener>) ((VetoableChangeEventSource) o).getVetoableChangeListeners().clone();
+                    (Vector<VetoableChangeListener>) vetoableChangeEventSource.getVetoableChangeListeners().clone();
                 Enumeration<?> vv = v.elements();
                 vv = v.elements();
                 Object firstElem = null;
                 boolean firstIteration = true;
                 while (vv.hasMoreElements()) {
                     Object elem = vv.nextElement();
-                    if (elem instanceof Fig) {
+                    if (elem instanceof Fig figElem) {
                         if (firstIteration) {
                             firstElem = elem;
                             firstIteration = false;
                             continue;
                         }
 
-                        ((Fig) elem).removeFromDiagram();
+                        figElem.removeFromDiagram();
                     }
                 }
 

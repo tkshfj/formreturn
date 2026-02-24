@@ -135,7 +135,7 @@ public class UnidentifiedImageDataModel extends AbstractDataModel {
             String countSql =
                 "SELECT COUNT(INCOMING_IMAGE.INCOMING_IMAGE_ID) FROM INCOMING_IMAGE WHERE INCOMING_IMAGE.MATCH_STATUS = -1";
             String countSearchSQL = getNativeSearchSQL();
-            if (countSearchSQL.trim().length() > 0) {
+            if (!countSearchSQL.isBlank()) {
                 countSql += " AND " + countSearchSQL;
             }
             Query query = entityManager.createNativeQuery(countSql);
@@ -147,7 +147,7 @@ public class UnidentifiedImageDataModel extends AbstractDataModel {
 
             // SEARCH FILTER
             String nativeSearchSQL = getNativeSearchSQL();
-            if (nativeSearchSQL.trim().length() > 0) {
+            if (!nativeSearchSQL.isBlank()) {
                 sql += " AND " + nativeSearchSQL;
             }
 

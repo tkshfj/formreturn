@@ -284,8 +284,8 @@ public class SimpleInternalFrame extends JPanel {
      */
     public void setContentPaneBorder(Border border) {
         Component content = getContent();
-        if (content instanceof JComponent) {
-            ((JComponent) content).setBorder(border);
+        if (content instanceof JComponent jComponent) {
+            jComponent.setBorder(border);
         }
     }
 

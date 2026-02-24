@@ -277,13 +277,13 @@ public class Localizer {
         ResourceBundle resource = (ResourceBundle) resources.get(binding);
         try {
             Object obj = resource.getObject(key);
-            if (obj instanceof KeyStroke) {
-                stroke = (KeyStroke) obj;
-            } else if (obj instanceof String) {
+            if (obj instanceof KeyStroke keyStroke) {
+                stroke = keyStroke;
+            } else if (obj instanceof String str) {
                 boolean hasShortcutModifier = false;
                 StringBuffer shortcutBuf = new StringBuffer();
 
-                StringTokenizer tokenizer = new StringTokenizer((String) obj);
+                StringTokenizer tokenizer = new StringTokenizer(str);
                 while (tokenizer.hasMoreTokens()) {
                     String token = tokenizer.nextToken();
 

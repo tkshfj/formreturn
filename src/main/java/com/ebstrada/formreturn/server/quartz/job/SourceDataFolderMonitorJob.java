@@ -74,7 +74,7 @@ public class SourceDataFolderMonitorJob extends FolderMonitorJob {
                                             files[i].length());
                                     String name = files[i].substring(0, files[i].lastIndexOf('.'));
 
-                                    if (dataFileWhitelist.contains(extension.trim())
+                                    if (dataFileWhitelist.contains(extension.strip())
                                         && isFileComplete(unprocessedFile, recentFileTimes)) {
 
                                         startTransaction(entityManager);

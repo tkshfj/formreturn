@@ -87,25 +87,18 @@ public class ExportJob extends TaskSchedulerJob {
     }
 
     public char getQuoteCharacter(int quoteType) {
-        switch (quoteType) {
-            case CSVExportPreferences.NO_QUOTES:
-                return CSVWriter.NO_QUOTE_CHARACTER;
-            case CSVExportPreferences.SINGLE_QUOTES:
-                return "'".charAt(0);
-            case CSVExportPreferences.DOUBLE_QUOTES:
-            default:
-                return "\"".charAt(0);
-        }
+        return switch (quoteType) {
+            case CSVExportPreferences.NO_QUOTES -> CSVWriter.NO_QUOTE_CHARACTER;
+            case CSVExportPreferences.SINGLE_QUOTES -> '\'';
+            default -> '"';
+        };
     }
 
     public char getDelimiterCharacter(int delimiterType) {
-        switch (delimiterType) {
-            case CSVExportPreferences.TSV_DELIMITER:
-                return "\t".charAt(0);
-            case CSVExportPreferences.CSV_DELIMITER:
-            default:
-                return ",".charAt(0);
-        }
+        return switch (delimiterType) {
+            case CSVExportPreferences.TSV_DELIMITER -> '\t';
+            default -> ',';
+        };
     }
 
     private void export(ExportOptions exportOptions) throws Exception {

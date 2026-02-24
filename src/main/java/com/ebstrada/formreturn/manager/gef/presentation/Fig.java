@@ -731,8 +731,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
     public String getId() {
         if (getGroup() != null) {
             String gID = getGroup().getId();
-            if (getGroup() instanceof FigGroup) {
-                return gID + "." + (((FigGroup) getGroup()).getFigs()).indexOf(this);
+            if (getGroup() instanceof FigGroup figGroup) {
+                return gID + "." + (figGroup.getFigs()).indexOf(this);
             } else {
                 return gID + ".0";
             }

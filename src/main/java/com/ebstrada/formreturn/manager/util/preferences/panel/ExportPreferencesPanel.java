@@ -172,7 +172,7 @@ public class ExportPreferencesPanel extends JPanel {
                 case ColumnOption.COLUMN_FORM_ID:
                 case ColumnOption.COLUMN_FORM_PASSWORD:
                 case ColumnOption.COLUMN_FORM_PAGE_IDS:
-                    if (col.getFieldName().trim().length() <= 0) {
+                    if (col.getFieldName().isBlank()) {
                         return false;
                     }
 
@@ -441,11 +441,11 @@ public class ExportPreferencesPanel extends JPanel {
         if (index < 0) {
             return;
         }
-        if (columnNameTextField.getText().trim().length() <= 0) {
+        if (columnNameTextField.getText().isBlank()) {
             return;
         }
         ColumnOption col = (ColumnOption) this.includedColumnsList.getModel().getElementAt(index);
-        col.setFieldName(columnNameTextField.getText().trim());
+        col.setFieldName(columnNameTextField.getText().strip());
     }
 
     private void columnNameTextFieldCaretUpdate(CaretEvent e) {

@@ -42,9 +42,9 @@ public class EditTableDialog extends JDialog {
     private void okButtonActionPerformed(ActionEvent e) {
         DataSetController dsc = new DataSetController();
 
-        int stringLength = dataSetNameTextField.getText().trim().length();
+        int stringLength = dataSetNameTextField.getText().strip().length();
         if (stringLength > 0 && stringLength < 255) {
-            dsc.renameDataSet(dataSetId, dataSetNameTextField.getText().trim());
+            dsc.renameDataSet(dataSetId, dataSetNameTextField.getText().strip());
             sourceDataManagerFrame.refresh();
             dispose();
         } else {

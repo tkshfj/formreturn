@@ -248,7 +248,7 @@ public class XMLExporter {
                 String name = segment.getName();
                 double segmentAggregate = segment.getAggregateMark();
                 Element segmentAggregateElement;
-                if (name != null && name.trim().length() > 0) {
+                if (name != null && !name.isBlank()) {
                     segmentAggregateElement =
                         document.createElement("segment_score_" + parseXMLString(name));
                 } else {

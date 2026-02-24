@@ -40,7 +40,7 @@ public class ModifyAggregationRuleDialog extends JDialog {
 
     private void saveThisFormOnlyButtonActionPerformed(ActionEvent e) {
         setDialogResult(JOptionPane.OK_OPTION);
-        setAggregationRule(aggregationRuleTextField.getText().trim());
+        setAggregationRule(aggregationRuleTextField.getText().strip());
         setSaveType(SAVE_FORM_ONLY);
         dispose();
     }
@@ -67,7 +67,7 @@ public class ModifyAggregationRuleDialog extends JDialog {
 
     private void saveForWholePublicationButtonActionPerformed(ActionEvent e) {
         setDialogResult(JOptionPane.OK_OPTION);
-        setAggregationRule(aggregationRuleTextField.getText().trim());
+        setAggregationRule(aggregationRuleTextField.getText().strip());
         setSaveType(SAVE_WHOLE_PUBLICATION);
         dispose();
     }

@@ -198,7 +198,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
     public void drawImage(Graphics g, Image _image, int x, int y, int width, int height,
         ImageObserver observer) {
-        if (g instanceof PDFGraphics2D) {
+        if (g instanceof PDFGraphics2D pdfGraphics2D) {
             AffineTransform at = new AffineTransform();
             at.translate(x, y);
             if (naturalImageSize != null) {
@@ -206,7 +206,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                 double heightScale = (double) height / naturalImageSize.getHeight();
                 at.scale(widthScale, heightScale);
             }
-            ((PDFGraphics2D) g).drawImage(_image, at, observer);
+            pdfGraphics2D.drawImage(_image, at, observer);
         } else {
             g.drawImage(_image, x, y, width, height, observer);
         }

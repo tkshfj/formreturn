@@ -230,9 +230,8 @@ public class ModeDragScroll extends FigModifyingModeImpl implements ActionListen
     }
 
     private final boolean doScroll(JComponent jComponent, int mouseX, int mouseY) {
-        if (jComponent != null && jComponent.getParent() instanceof JViewport) {
+        if (jComponent != null && jComponent.getParent() instanceof JViewport view) {
             Dimension componentSize = jComponent.getSize();
-            JViewport view = (JViewport) jComponent.getParent();
             Rectangle viewRect = view.getViewRect();
             int viewRight = viewRect.x + viewRect.width;
             int viewY = viewRect.y + viewRect.height;

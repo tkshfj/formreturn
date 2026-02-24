@@ -106,7 +106,7 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
                 if (tablesTable.getSelectedRow() != -1) {
                     tableDataModel.setSelectedIds(getSelectedDataSetIds());
                     selectedTableTextField.setText(getSelectedDataSetName());
-                    if (publicationNameTextField.getText().trim().length() <= 0) {
+                    if (publicationNameTextField.getText().isBlank()) {
                         publicationNameTextField.setText(getSelectedDataSetName());
                     }
                     long parentId = -1;
@@ -119,7 +119,7 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
                 } else {
                     tableDataModel.setSelectedIds(new long[] {});
                     selectedTableTextField.setText(getSelectedDataSetName());
-                    if (publicationNameTextField.getText().trim().length() <= 0) {
+                    if (publicationNameTextField.getText().isBlank()) {
                         publicationNameTextField.setText(getSelectedDataSetName());
                     }
                     publicationDataModel.setParentId(-1);
@@ -249,8 +249,7 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
             Page page = pageIterator.next();
             List<Fig> figs = page.getFigs();
             for (Fig fig : figs) {
-                if (fig instanceof FigSegment) {
-                    FigSegment figSegment = ((FigSegment) fig);
+                if (fig instanceof FigSegment figSegment) {
                     if (figSegment.getSegmentContainer() == null) {
                         removeEmptyAreas.add(figSegment);
                         continue;
@@ -281,8 +280,8 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
             Page page = pageIterator.next();
             List<Fig> figs = page.getFigs();
             for (Fig fig : figs) {
-                if (fig instanceof FigBarcode) {
-                    if (((FigBarcode) fig).getBarcodeType().equalsIgnoreCase("Form ID")) {
+                if (fig instanceof FigBarcode figBarcode) {
+                    if (figBarcode.getBarcodeType().equalsIgnoreCase("Form ID")) {
                         pageHasFormIDBarcode = true;
                     }
                 }
@@ -719,8 +718,8 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
             }
         }
 
-        if (publicationNameTextField.getText().trim().length() <= 0
-            || publicationNameTextField.getText().trim().length() > 255) {
+        if (publicationNameTextField.getText().isBlank()
+            || publicationNameTextField.getText().strip().length() > 255) {
             String msg = Localizer.localize("UI", "MustEnterPublicationNameMessage");
             Misc.showErrorMsg(Main.getInstance(), msg);
             return false;
@@ -758,7 +757,7 @@ public class PublishFormPanel extends JPanel implements GenericDataViewer {
     }
 
     private String getPublicationName() {
-        return publicationNameTextField.getText().trim();
+        return publicationNameTextField.getText().strip();
     }
 
     private void thisComponentResized(ComponentEvent e) {

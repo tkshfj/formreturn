@@ -78,8 +78,7 @@ public class UngroupAction extends UndoableAction {
         Enumeration<?> eachDE = selectedFigs.elements();
         while (eachDE.hasMoreElements()) {
             Object o = eachDE.nextElement();
-            if (o instanceof FigGroup) {
-                FigGroup fg = (FigGroup) o;
+            if (o instanceof FigGroup fg) {
                 Iterator<?> it = fg.getFigs().iterator();
                 while (it.hasNext()) {
                     Fig f = (Fig) it.next();

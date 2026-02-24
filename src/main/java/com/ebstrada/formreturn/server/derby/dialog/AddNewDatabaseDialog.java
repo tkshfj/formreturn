@@ -31,7 +31,7 @@ public class AddNewDatabaseDialog extends JDialog {
 
     private void createDatabaseActionPerformed(ActionEvent e) {
 
-        String databaseName = databaseNameTextField.getText().trim();
+        String databaseName = databaseNameTextField.getText().strip();
 
         if (!(Misc.validateSQL92Identifier(databaseName))) {
             Misc.showErrorMsg(this,

@@ -40,7 +40,7 @@ public class AddFieldDialog extends JDialog {
     private void saveButtonActionPerformed(ActionEvent e) {
         SourceFieldController sfc = new SourceFieldController();
 
-        String newFieldName = sourceFieldNameTextField.getText().trim();
+        String newFieldName = sourceFieldNameTextField.getText().strip();
         if (Misc.validateFieldname(newFieldName)) {
 
             List<SourceField> sourceFields =

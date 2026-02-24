@@ -117,8 +117,7 @@ public class PriorityListCellRenderer extends DefaultListCellRenderer {
      */
     @Override public Component getListCellRendererComponent(JList<?> list, Object value, int index,
         boolean isSelected, boolean cellHasFocus) {
-        if ((value instanceof LoggingEvent) && (appender != null)) {
-            LoggingEvent event = (LoggingEvent) value;
+        if ((value instanceof LoggingEvent event) && (appender != null)) {
             setComponentOrientation(list.getComponentOrientation());
             if (showPriorityColors) {
                 if (isSelected) {

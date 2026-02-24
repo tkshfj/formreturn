@@ -103,9 +103,7 @@ public class FigCheckboxMultiPanel extends EditorMultiPanel {
 
             for (Object o : selectedElements) {
 
-                if (o instanceof FigCheckbox) {
-
-                    FigCheckbox fig = (FigCheckbox) o;
+                if (o instanceof FigCheckbox fig) {
 
                     if (rmapsd.isRestoreBoxDesign()) {
                         fig.setBoxWidth(selectedStyle.getBoxWidth());
@@ -151,15 +149,14 @@ public class FigCheckboxMultiPanel extends EditorMultiPanel {
 
     private void aggregationRuleApplyButtonActionPerformed(ActionEvent e) {
 
-        if (this.aggregationRuleTextField.getText().trim()
+        if (this.aggregationRuleTextField.getText().strip()
             .equals(Localizer.localize("UI", "DiffersText"))) {
             return;
         }
 
         for (Object o : selectedElements) {
-            if (o instanceof FigCheckbox) {
-                FigCheckbox fig = (FigCheckbox) o;
-                fig.setAggregationRule(this.aggregationRuleTextField.getText().trim());
+            if (o instanceof FigCheckbox fig) {
+                fig.setAggregationRule(this.aggregationRuleTextField.getText().strip());
                 fig.damage();
             }
         }

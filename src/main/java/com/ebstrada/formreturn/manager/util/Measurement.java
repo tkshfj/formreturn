@@ -35,81 +35,40 @@ public class Measurement {
     }
 
     public double convert(double input) {
-
         // formula:
         // pixels = (mm * dpi) / 25.4
         // inches = pixels / 72
-
-        double output = 0.0d;
-        switch (this.from) {
-            case PIXELS:
-                switch (this.to) {
-                    case PIXELS:
-                        output = input;
-                        break;
-                    case MILLIMETERS:
-                        output = (input * MILLIMETERS_IN_AN_INCH) / DPI;
-                        break;
-                    case CENTIMETERS:
-                        output = ((input * MILLIMETERS_IN_AN_INCH) / DPI) / 10.0d;
-                        break;
-                    case INCHES:
-                        output = input / DPI;
-                        break;
-                }
-                break;
-            case MILLIMETERS:
-                switch (this.to) {
-                    case PIXELS:
-                        output = (input * DPI) / MILLIMETERS_IN_AN_INCH;
-                        break;
-                    case MILLIMETERS:
-                        output = input;
-                        break;
-                    case CENTIMETERS:
-                        output = input / 10.0d;
-                        break;
-                    case INCHES:
-                        output = input / MILLIMETERS_IN_AN_INCH;
-                        break;
-                }
-                break;
-            case CENTIMETERS:
-                switch (this.to) {
-                    case PIXELS:
-                        output = ((input * 10.0d) * DPI) / MILLIMETERS_IN_AN_INCH;
-                        break;
-                    case MILLIMETERS:
-                        output = input * 10.0d;
-                        break;
-                    case CENTIMETERS:
-                        output = input;
-                        break;
-                    case INCHES:
-                        output = (input * 10.0d) / MILLIMETERS_IN_AN_INCH;
-                        break;
-                }
-                break;
-            case INCHES:
-                switch (this.to) {
-                    case PIXELS:
-                        output = input * DPI;
-                        break;
-                    case MILLIMETERS:
-                        output = input * MILLIMETERS_IN_AN_INCH;
-                        break;
-                    case CENTIMETERS:
-                        output = (input * MILLIMETERS_IN_AN_INCH) / 10.0d;
-                        break;
-                    case INCHES:
-                        output = input;
-                        break;
-                }
-                break;
-        }
-
-        return output;
-
+        return switch (this.from) {
+            case PIXELS -> switch (this.to) {
+                case PIXELS -> input;
+                case MILLIMETERS -> (input * MILLIMETERS_IN_AN_INCH) / DPI;
+                case CENTIMETERS -> ((input * MILLIMETERS_IN_AN_INCH) / DPI) / 10.0d;
+                case INCHES -> input / DPI;
+                default -> 0.0d;
+            };
+            case MILLIMETERS -> switch (this.to) {
+                case PIXELS -> (input * DPI) / MILLIMETERS_IN_AN_INCH;
+                case MILLIMETERS -> input;
+                case CENTIMETERS -> input / 10.0d;
+                case INCHES -> input / MILLIMETERS_IN_AN_INCH;
+                default -> 0.0d;
+            };
+            case CENTIMETERS -> switch (this.to) {
+                case PIXELS -> ((input * 10.0d) * DPI) / MILLIMETERS_IN_AN_INCH;
+                case MILLIMETERS -> input * 10.0d;
+                case CENTIMETERS -> input;
+                case INCHES -> (input * 10.0d) / MILLIMETERS_IN_AN_INCH;
+                default -> 0.0d;
+            };
+            case INCHES -> switch (this.to) {
+                case PIXELS -> input * DPI;
+                case MILLIMETERS -> input * MILLIMETERS_IN_AN_INCH;
+                case CENTIMETERS -> (input * MILLIMETERS_IN_AN_INCH) / 10.0d;
+                case INCHES -> input;
+                default -> 0.0d;
+            };
+            default -> 0.0d;
+        };
     }
 
 }

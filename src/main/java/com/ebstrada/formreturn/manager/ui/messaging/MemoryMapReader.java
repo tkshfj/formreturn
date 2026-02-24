@@ -47,7 +47,7 @@ public class MemoryMapReader extends Thread {
                     CharsetDecoder decoder = charset.newDecoder();
                     CharBuffer charBuffer = decoder.decode(mem);
                     String filename = charBuffer.toString();
-                    Main.getInstance().open(new File(filename.trim()));
+                    Main.getInstance().open(new File(filename.strip()));
                     mem.clear();
                     raf.setLength(0);
                     mem = fc.map(FileChannel.MapMode.READ_WRITE, 0, 0);

@@ -102,7 +102,7 @@ public class SourceDataCSVImport {
 
             Query sourceFieldQuery =
                 entityManager.createNamedQuery("SourceField.findBySourceFieldName");
-            sourceFieldQuery.setParameter("sourceFieldName", columnNames[i].trim());
+            sourceFieldQuery.setParameter("sourceFieldName", columnNames[i].strip());
             sourceFieldQuery.setParameter("dataSetId", dataSet);
 
             List<?> resultList = sourceFieldQuery.getResultList();
@@ -111,7 +111,7 @@ public class SourceDataCSVImport {
             if (resultList.size() <= 0) {
                 sourceField = new SourceField();
                 sourceField.setDataSetId(dataSet);
-                sourceField.setSourceFieldName(columnNames[i].trim());
+                sourceField.setSourceFieldName(columnNames[i].strip());
                 sourceField.setOrderIndex(i + 1);
                 // TODO: this needs to be set when defining the field type
                 sourceField.setSourceFieldType("STRING");

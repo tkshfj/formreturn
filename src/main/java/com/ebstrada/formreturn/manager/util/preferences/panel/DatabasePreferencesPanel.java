@@ -94,8 +94,8 @@ public class DatabasePreferencesPanel extends JPanel {
             }
 
             String jdbcURL =
-                "jdbc:derby://" + remoteAddressTextField.getText().trim() + ":" + portNumber + "/"
-                    + databaseNameTextField.getText().trim();
+                "jdbc:derby://" + remoteAddressTextField.getText().strip() + ":" + portNumber + "/"
+                    + databaseNameTextField.getText().strip();
 
             conn = DriverManager.getConnection(jdbcURL, props);
 

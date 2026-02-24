@@ -63,12 +63,12 @@ public class FormPropertiesDialog extends JDialog {
         DocumentAttributes documentAttributes = selectedFrame.getDocumentAttributes();
         documentAttributes.setName(documentNameTextField.getText());
         documentAttributes.setDescription(descriptionTextArea.getText());
-        documentAttributes.setComments(commentsTextField.getText().trim());
-        documentAttributes.setCompany(companyTextField.getText().trim());
-        documentAttributes.setAuthor(authorTextField.getText().trim());
-        documentAttributes.setCopyright(copyrightTextField.getText().trim());
+        documentAttributes.setComments(commentsTextField.getText().strip());
+        documentAttributes.setCompany(companyTextField.getText().strip());
+        documentAttributes.setAuthor(authorTextField.getText().strip());
+        documentAttributes.setCopyright(copyrightTextField.getText().strip());
         documentAttributes
-            .setSourceDataTableFilterRegex(sourceDataTableFilterTextField.getText().trim());
+            .setSourceDataTableFilterRegex(sourceDataTableFilterTextField.getText().strip());
 
         // set recognition settings
         PublicationRecognitionStructure prs =

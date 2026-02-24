@@ -42,17 +42,13 @@ public class NudgeAction extends UndoableAction {
     }
 
     protected static String wordFor(int d) {
-        switch (d) {
-            case LEFT:
-                return "Left";
-            case RIGHT:
-                return "Right";
-            case UP:
-                return "Up";
-            case DOWN:
-                return "Down";
-        }
-        return "";
+        return switch (d) {
+            case LEFT -> "Left";
+            case RIGHT -> "Right";
+            case UP -> "Up";
+            case DOWN -> "Down";
+            default -> "";
+        };
     }
 
     /**

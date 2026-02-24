@@ -93,19 +93,19 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                     List<?> layerContents = graph.getEditor().getLayerManager().getContents();
                     for (int j = 0; j < layerContents.size(); j++) {
                         Fig fig = (Fig) layerContents.get(j);
-                        if (fig instanceof FigBarcodeReader) {
+                        if (fig instanceof FigBarcodeReader figBarcodeReader) {
                             if (skipThis == false && fig == this) {
                                 continue;
                             }
-                            if (((FigBarcodeReader) fig).getFieldname()
+                            if (figBarcodeReader.getFieldname()
                                 .equalsIgnoreCase(defaultFieldName)) {
                                 nomatch = false;
                             }
-                        } else if (fig instanceof FigCheckbox) {
+                        } else if (fig instanceof FigCheckbox figCheckbox) {
                             if (skipThis == false && fig == this) {
                                 continue;
                             }
-                            if (((FigCheckbox) fig).getFieldname()
+                            if (figCheckbox.getFieldname()
                                 .equalsIgnoreCase(defaultFieldName)) {
                                 nomatch = false;
                             }
@@ -137,13 +137,13 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
                 List<?> layerContents = graph.getEditor().getLayerManager().getContents();
                 for (int j = 0; j < layerContents.size(); j++) {
                     Fig fig = (Fig) layerContents.get(j);
-                    if (fig instanceof FigBarcodeReader) {
-                        if (((FigBarcodeReader) fig).getFieldnameOrderIndex() > maximumOrderIndex) {
-                            maximumOrderIndex = ((FigBarcodeReader) fig).getFieldnameOrderIndex();
+                    if (fig instanceof FigBarcodeReader figBarcodeReader2) {
+                        if (figBarcodeReader2.getFieldnameOrderIndex() > maximumOrderIndex) {
+                            maximumOrderIndex = figBarcodeReader2.getFieldnameOrderIndex();
                         }
-                    } else if (fig instanceof FigCheckbox) {
-                        if (((FigCheckbox) fig).getFieldnameOrderIndex() > maximumOrderIndex) {
-                            maximumOrderIndex = ((FigCheckbox) fig).getFieldnameOrderIndex();
+                    } else if (fig instanceof FigCheckbox figCheckbox2) {
+                        if (figCheckbox2.getFieldnameOrderIndex() > maximumOrderIndex) {
+                            maximumOrderIndex = figCheckbox2.getFieldnameOrderIndex();
                         }
                     }
                 }
@@ -230,8 +230,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
         /*
          * get a unique fieldname on paste
          */
-        if (obj instanceof FigBarcodeReader) {
-            ((FigBarcodeReader) obj).setDefaultFieldname();
+        if (obj instanceof FigBarcodeReader figBarcodeReader3) {
+            figBarcodeReader3.setDefaultFieldname();
         }
 
         return obj;

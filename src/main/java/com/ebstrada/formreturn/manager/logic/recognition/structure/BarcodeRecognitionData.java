@@ -116,22 +116,12 @@ public class BarcodeRecognitionData {
     }
 
     public String getTypeDescription() {
-        String description = "";
-        switch (type) {
-            case FORMID_BARCODE:
-                description =
-                    Localizer.localize("UI", "BarcodeRecognitionFormIDBarcodeDescription");
-                break;
-            case SEGMENT_BARCODE:
-                description =
-                    Localizer.localize("UI", "BarcodeRecognitionSegmentBarcodeDescription");
-                break;
-            case CODE128:
-                description =
-                    Localizer.localize("UI", "BarcodeRecognitionCode128BarcodeDescription");
-                break;
-        }
-        return description;
+        return switch (type) {
+            case FORMID_BARCODE -> Localizer.localize("UI", "BarcodeRecognitionFormIDBarcodeDescription");
+            case SEGMENT_BARCODE -> Localizer.localize("UI", "BarcodeRecognitionSegmentBarcodeDescription");
+            case CODE128 -> Localizer.localize("UI", "BarcodeRecognitionCode128BarcodeDescription");
+            default -> "";
+        };
     }
 
     public void setType(int type) {

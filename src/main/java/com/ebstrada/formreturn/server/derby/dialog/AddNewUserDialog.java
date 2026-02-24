@@ -35,9 +35,9 @@ public class AddNewUserDialog extends JDialog {
 
     private void addUserButtonActionPerformed(ActionEvent e) {
 
-        String username = usernameTextField.getText().trim();
-        String password = new String(passwordPasswordField.getPassword()).trim();
-        String confirmPassword = new String(confirmPasswordPasswordField.getPassword()).trim();
+        String username = usernameTextField.getText().strip();
+        String password = new String(passwordPasswordField.getPassword()).strip();
+        String confirmPassword = new String(confirmPasswordPasswordField.getPassword()).strip();
 
         if (!(Misc.validateSQL92Identifier(username))) {
             Misc.showErrorMsg(this,

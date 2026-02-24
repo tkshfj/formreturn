@@ -790,8 +790,8 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         if (visibleComponent.isFocusable()) {
             visibleComponent.requestFocus();
             return true;
-        } else if (visibleComponent instanceof JComponent) {
-            if (((JComponent) visibleComponent).requestFocusInWindow()) {
+        } else if (visibleComponent instanceof JComponent jComponent) {
+            if (jComponent.requestFocusInWindow()) {
                 return true;
             }
         }
@@ -916,8 +916,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
 
-            if (pane != null && (pane.getUI() instanceof CloseTabPaneUI)) {
-                CloseTabPaneUI ui = (CloseTabPaneUI) pane.getUI();
+            if (pane != null && (pane.getUI() instanceof CloseTabPaneUI ui)) {
                 String command = e.getActionCommand();
 
                 if (command != null && command.length() > 0) {
@@ -940,10 +939,10 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = null;
             Object src = e.getSource();
-            if (src instanceof JTabbedPane) {
-                pane = (JTabbedPane) src;
-            } else if (src instanceof ScrollableTabButton) {
-                pane = (JTabbedPane) ((ScrollableTabButton) src).getParent();
+            if (src instanceof JTabbedPane jTabbedPane) {
+                pane = jTabbedPane;
+            } else if (src instanceof ScrollableTabButton scrollableTabButton) {
+                pane = (JTabbedPane) scrollableTabButton.getParent();
             } else {
                 return; // shouldn't happen
             }
@@ -958,10 +957,10 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = null;
             Object src = e.getSource();
-            if (src instanceof JTabbedPane) {
-                pane = (JTabbedPane) src;
-            } else if (src instanceof ScrollableTabButton) {
-                pane = (JTabbedPane) ((ScrollableTabButton) src).getParent();
+            if (src instanceof JTabbedPane jTabbedPane) {
+                pane = jTabbedPane;
+            } else if (src instanceof ScrollableTabButton scrollableTabButton) {
+                pane = (JTabbedPane) scrollableTabButton.getParent();
             } else {
                 return; // shouldn't happen
             }
@@ -1049,8 +1048,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
                     for (int i = 0; i < numChildren; i++) {
                         Component child = tabPane.getComponent(i);
 
-                        if (child instanceof ScrollableTabViewport) {
-                            JViewport viewport = (JViewport) child;
+                        if (child instanceof ScrollableTabViewport viewport) {
                             Rectangle viewRect = viewport.getViewRect();
                             int vw = tw;
                             int vh = th;
@@ -1071,8 +1069,7 @@ public class CloseTabPaneUI extends BasicTabbedPaneUI {
 
                             child.setBounds(tx, ty, vw, vh);
 
-                        } else if (child instanceof ScrollableTabButton) {
-                            ScrollableTabButton scrollbutton = (ScrollableTabButton) child;
+                        } else if (child instanceof ScrollableTabButton scrollbutton) {
                             Dimension bsize = scrollbutton.getPreferredSize();
                             int bx = 0;
                             int by = 0;

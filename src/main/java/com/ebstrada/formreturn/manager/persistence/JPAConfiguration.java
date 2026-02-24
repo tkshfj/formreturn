@@ -49,7 +49,7 @@ public class JPAConfiguration {
         }
 
         String serverIP = cdp.getServerIPAddress();
-        if (serverIP.trim().equals("0.0.0.0")) {
+        if (serverIP.strip().equals("0.0.0.0")) {
             serverIP = "127.0.0.1";
         }
 
@@ -59,7 +59,7 @@ public class JPAConfiguration {
         // setConnectionDriverName("org.apache.derby.jdbc.ClientDriver");
         setConnectionDriverName("org.apache.commons.dbcp.BasicDataSource");
         setConnectionUserName(cdp.getUsername());
-        if (cdp.getPassword() == null || cdp.getPassword().trim().length() <= 0) {
+        if (cdp.getPassword() == null || cdp.getPassword().isBlank()) {
             setConnectionPassword(PreferencesManager.getSystemPassword());
         } else {
             setConnectionPassword(cdp.getPassword());

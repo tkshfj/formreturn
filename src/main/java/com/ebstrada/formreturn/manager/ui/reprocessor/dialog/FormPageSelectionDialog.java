@@ -100,7 +100,7 @@ public class FormPageSelectionDialog extends JDialog {
         long formPageId = 0;
         long formPassword = 0;
 
-        String barcodeValue = searchTextField.getText().trim();
+        String barcodeValue = searchTextField.getText().strip();
 
         boolean isFormIDBarcode = false;
 
@@ -118,8 +118,8 @@ public class FormPageSelectionDialog extends JDialog {
             // form page id
             String[] parts = barcodeValue.split("-");
             if (parts.length == 2) {
-                formPageId = Misc.parseLongString(parts[0].trim());
-                formPassword = Misc.parseLongString(parts[1].trim());
+                formPageId = Misc.parseLongString(parts[0].strip());
+                formPassword = Misc.parseLongString(parts[1].strip());
             }
         } else {
             formPageId = Misc.parseLongString(barcodeValue);

@@ -59,8 +59,7 @@ public class ShowGridAction extends UndoableAction {
     @Override public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
         Editor ce = Globals.curEditor();
-        if (event.getSource() instanceof JCheckBoxMenuItem) {
-            JCheckBoxMenuItem menuItem = (JCheckBoxMenuItem) event.getSource();
+        if (event.getSource() instanceof JCheckBoxMenuItem menuItem) {
             if (menuItem.isSelected()) {
                 ce.setGridHidden(false);
             } else {
